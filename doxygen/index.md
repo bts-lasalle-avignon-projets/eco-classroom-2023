@@ -1,49 +1,14 @@
-\mainpage BTS SNIR 2023
-
-\tableofcontents
-
-\section section_tdm Table des matières
-- \ref page_README
-- \ref page_about
-- \ref page_licence
-
-\section section_infos Informations
+\mainpage A propos
 
 \author Baptiste Cochet <<cochet.baptiste.pro@gmail.com>>
 \author Célian Subirana <<celian.subirana.pro@gmail.com>>
 \author Jérémy Mercklen <<mercklenjeremy@gmail.com>>
 \date 2023
 \version 0.1
-\see https://github.com/btssn-lasalle-84/xxx
+\see https://github.com/btssn-lasalle-84/eco-classroom-2023
 
 
-\page page_README README
-
-[TOC]
-
-# Projet eco-classroom
-
-...
-
-\author Baptiste Cochet <<cochet.baptiste.pro@gmail.com>>
-\author Célian Subirana <<celian.subirana.pro@gmail.com>>
-\author Jérémy Mercklen <<mercklenjeremy@gmail.com>>
-\date 2023
-\version 0.1
-\see https://github.com/btssn-lasalle-84/xxx
-
-
-\page page_about A propos
-
-\author Baptiste Cochet <<cochet.baptiste.pro@gmail.com>>
-\author Célian Subirana <<celian.subirana.pro@gmail.com>>
-\author Jérémy Mercklen <<mercklenjeremy@gmail.com>>
-\date 2023
-\version 0.1
-\see https://github.com/btssn-lasalle-84/xxx
-
-
-\page page_licence Licence GPL
+\license{This project is released under the GNU Public License
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -58,3 +23,4 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+}
