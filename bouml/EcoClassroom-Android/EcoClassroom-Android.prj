@@ -1,7 +1,7 @@
 format 224
-"EcoClassroom(android)"
-  revision 4
-  modified_by 5 "mercklen"
+"EcoClassroom-Android"
+  revision 5
+  modified_by 42 "tv"
 
 
   
@@ -67,7 +67,7 @@ format 224
      end
     usecasediagram 128005 "Diagramme des cas d'utilisations"
       usecasediagramsettings end
-      size A4
+      size A0
     end
 
     class 128005 "Personnel"
@@ -253,7 +253,7 @@ format 224
       
     end
 
-    classdiagram 141061 "diagramme de classe (android)"
+    classdiagram 141061 "diagramme de classes"
       classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes member_max_width 0 end
       size A0
     end

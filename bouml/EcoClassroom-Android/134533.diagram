@@ -8,96 +8,116 @@ classinstance 128645 class_ref 134661 // Sonde
   drawing_mode actor  name ""   xyz 703 6 2000 life_line_z 2000
 classinstance 128773 class_ref 134789 // Détection
   name ""   xyz 817 4 2000 life_line_z 2000
+durationcanvas 128042 classinstance_ref 128261 // :Personnel
+  xyzwh 89 865 2010 11 40
+end
+durationcanvas 128170 classinstance_ref 128389 // :EcoClassroom
+  xyzwh 464 865 2010 11 38
+  overlappingdurationcanvas 128426
+    xyzwh 470 872 2020 11 25
+  end
+end
 durationcanvas 128901 classinstance_ref 128645 // :Sonde
-  xyzwh 722 109 2010 11 32
+  xyzwh 746 109 2010 11 32
 end
 durationcanvas 129029 classinstance_ref 128389 // :EcoClassroom
-  xyzwh 414 113 2010 11 161
+  xyzwh 464 113 2010 11 161
   overlappingdurationcanvas 129285
-    xyzwh 420 132 2020 11 25
+    xyzwh 470 132 2020 11 25
   end
   overlappingdurationcanvas 130309
-    xyzwh 420 172 2020 11 25
+    xyzwh 470 172 2020 11 25
   end
   overlappingdurationcanvas 130565
-    xyzwh 420 219 2020 11 25
+    xyzwh 470 219 2020 11 25
   end
 end
 durationcanvas 129925 classinstance_ref 128773 // :Détection
-  xyzwh 848 297 2010 11 31
+  xyzwh 879 297 2010 11 31
 end
 durationcanvas 130053 classinstance_ref 128389 // :EcoClassroom
-  xyzwh 414 300 2010 11 41
+  xyzwh 464 300 2010 11 41
 end
 durationcanvas 130821 classinstance_ref 128261 // :Personnel
-  xyzwh 55 394 2010 11 104
+  xyzwh 89 394 2010 11 104
 end
 durationcanvas 130949 classinstance_ref 128389 // :EcoClassroom
-  xyzwh 414 398 2010 11 87
+  xyzwh 464 398 2010 11 87
   overlappingdurationcanvas 131205
-    xyzwh 420 407 2020 11 25
+    xyzwh 470 407 2020 11 25
   end
   overlappingdurationcanvas 131461
-    xyzwh 420 443 2020 11 25
+    xyzwh 470 443 2020 11 25
   end
 end
 durationcanvas 131717 classinstance_ref 128261 // :Personnel
-  xyzwh 55 561 2010 11 223
+  xyzwh 89 561 2010 11 223
 end
 durationcanvas 131845 classinstance_ref 128389 // :EcoClassroom
-  xyzwh 414 557 2010 11 204
+  xyzwh 464 557 2010 11 204
   overlappingdurationcanvas 132357
-    xyzwh 420 566 2020 11 25
+    xyzwh 470 566 2020 11 25
   end
   overlappingdurationcanvas 132613
-    xyzwh 420 603 2020 11 25
+    xyzwh 470 603 2020 11 25
   end
   overlappingdurationcanvas 132869
-    xyzwh 420 645 2020 11 25
+    xyzwh 470 645 2020 11 25
   end
   overlappingdurationcanvas 133125
-    xyzwh 420 679 2020 11 25
+    xyzwh 470 679 2020 11 25
   end
   overlappingdurationcanvas 133381
-    xyzwh 420 716 2020 11 25
+    xyzwh 470 716 2020 11 25
   end
 end
 durationcanvas 133637 classinstance_ref 128261 // :Personnel
-  xyzwh 55 806 2010 11 67
+  xyzwh 89 952 2010 11 67
 end
 durationcanvas 133765 classinstance_ref 128389 // :EcoClassroom
-  xyzwh 414 805 2010 11 42
+  xyzwh 464 951 2010 11 42
   overlappingdurationcanvas 134021
-    xyzwh 420 816 2020 11 25
+    xyzwh 470 962 2020 11 25
   end
 end
 durationcanvas 134277 classinstance_ref 128261 // :Personnel
-  xyzwh 55 901 2010 11 61
+  xyzwh 89 1047 2010 11 61
 end
 durationcanvas 134405 classinstance_ref 128389 // :EcoClassroom
-  xyzwh 414 903 2010 11 45
+  xyzwh 464 1049 2010 11 45
   overlappingdurationcanvas 134661
-    xyzwh 420 917 2020 11 25
+    xyzwh 470 1063 2020 11 25
   end
 end
 durationcanvas 134917 classinstance_ref 128261 // :Personnel
-  xyzwh 55 993 2010 11 47
+  xyzwh 89 1139 2010 11 47
 end
 durationcanvas 135045 classinstance_ref 128389 // :EcoClassroom
-  xyzwh 414 993 2010 11 39
+  xyzwh 464 1139 2010 11 39
   overlappingdurationcanvas 135301
-    xyzwh 420 1001 2020 11 25
+    xyzwh 470 1147 2020 11 25
   end
 end
 durationcanvas 135557 classinstance_ref 128261 // :Personnel
-  xyzwh 55 1069 2010 11 45
+  xyzwh 89 1215 2010 11 45
 end
 durationcanvas 135685 classinstance_ref 128389 // :EcoClassroom
-  xyzwh 414 1067 2010 11 42
+  xyzwh 464 1213 2010 11 42
   overlappingdurationcanvas 135941
-    xyzwh 420 1078 2020 11 25
+    xyzwh 470 1224 2020 11 25
   end
 end
+msg 128298 asynchronous
+  from durationcanvas_ref 128042
+  to durationcanvas_ref 128170
+  yz 865 2015 explicitmsg "éditer les informations d'une salle"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 65 835
+reflexivemsg 128554 synchronous
+  to durationcanvas_ref 128426
+  yz 872 3005 explicitmsg "afficher les informations d'une salle"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 262 842
 msg 129157 asynchronous
   from durationcanvas_ref 128901
   to durationcanvas_ref 129029
@@ -106,9 +126,9 @@ msg 129157 asynchronous
   label_xy 444 96
 reflexivemsg 129413 synchronous
   to durationcanvas_ref 129285
-  yz 132 2025 explicitmsg "calculeTHI()"
+  yz 132 2025 explicitmsg "calculerTHI()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 450 130
+  label_xy 506 129
 msg 130181 asynchronous
   from durationcanvas_ref 129925
   to durationcanvas_ref 130053
@@ -117,14 +137,14 @@ msg 130181 asynchronous
   label_xy 488 285
 reflexivemsg 130437 synchronous
   to durationcanvas_ref 130309
-  yz 172 2025 explicitmsg "calculeIADI()"
+  yz 172 2025 explicitmsg "calculerIADI()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 451 169
+  label_xy 505 167
 reflexivemsg 130693 synchronous
   to durationcanvas_ref 130565
-  yz 219 2025 explicitmsg "calculICONE()"
+  yz 219 2025 explicitmsg "calculerICONE()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 451 216
+  label_xy 504 207
 msg 131077 asynchronous
   from durationcanvas_ref 130821
   to durationcanvas_ref 130949
@@ -144,7 +164,7 @@ reflexivemsg 131589 synchronous
 msg 131973 asynchronous
   from durationcanvas_ref 131717
   to durationcanvas_ref 131845
-  yz 564 2015 explicitmsg "regarder une salle"
+  yz 564 2015 explicitmsg "visualiser une salle"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 179 547
 reflexivemsg 132485 synchronous
@@ -175,45 +195,45 @@ reflexivemsg 133509 synchronous
 msg 133893 asynchronous
   from durationcanvas_ref 133637
   to durationcanvas_ref 133765
-  yz 807 2015 explicitmsg "modifier le nom d'une salle"
+  yz 953 2015 explicitmsg "modifier le nom d'une salle"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 148 790
+  label_xy 126 936
 reflexivemsg 134149 synchronous
   to durationcanvas_ref 134021
-  yz 816 2025 explicitmsg "setNom(string nom)"
+  yz 962 2025 explicitmsg "setNom(string nom)"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 451 812
+  label_xy 429 958
 msg 134533 asynchronous
   from durationcanvas_ref 134277
   to durationcanvas_ref 134405
-  yz 903 2015 explicitmsg "modifier la superficie d'une salle"
+  yz 1049 2015 explicitmsg "modifier la superficie d'une salle"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 130 886
+  label_xy 108 1032
 reflexivemsg 134789 synchronous
   to durationcanvas_ref 134661
-  yz 917 2025 explicitmsg "setSuperficie(int superficie)"
+  yz 1063 2025 explicitmsg "setSuperficie(int superficie)"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 451 913
+  label_xy 429 1059
 msg 135173 asynchronous
   from durationcanvas_ref 134917
   to durationcanvas_ref 135045
-  yz 993 2015 explicitmsg "ajouter une salle"
+  yz 1139 2015 explicitmsg "ajouter une salle"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 182 976
+  label_xy 160 1122
 reflexivemsg 135429 synchronous
   to durationcanvas_ref 135301
-  yz 1001 2025 explicitmsg "ajouterSalle(int superficie, string nom)"
+  yz 1147 2025 explicitmsg "ajouterSalle(int superficie, string nom)"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 450 997
+  label_xy 428 1143
 msg 135813 asynchronous
   from durationcanvas_ref 135557
   to durationcanvas_ref 135685
-  yz 1069 2015 explicitmsg "supprimer une salle"
+  yz 1215 2015 explicitmsg "supprimer une salle"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 172 1052
+  label_xy 150 1198
 reflexivemsg 136069 synchronous
   to durationcanvas_ref 135941
-  yz 1078 2025 explicitmsg "supprimerSalle()"
+  yz 1224 2025 explicitmsg "supprimerSalle()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 450 1074
+  label_xy 428 1220
 end
