@@ -1,0 +1,27 @@
+format 224
+
+classcanvas 128002 class_ref 128002 // IHMEcoClassroom
+  classdiagramsettings member_max_width 0 end
+  xyz 335 69 2000
+end
+classcanvas 128130 class_ref 128130 // BaseDeDonnees
+  classdiagramsettings member_max_width 0 end
+  xyz 77 70 2000
+end
+classcanvas 128258 class_ref 128258 // CommunicationMQTT
+  classdiagramsettings member_max_width 0 end
+  xyz 637 62 2000
+end
+classcanvas 128386 class_ref 128386 // Salle
+  classdiagramsettings member_max_width 0 end
+  xyz 126 473 2000
+end
+classcanvas 128514 class_ref 128514 // Mesures
+  classdiagramsettings member_max_width 0 end
+  xyz 391 456 2000
+end
+classcanvas 128642 class_ref 128642 // Etat
+  classdiagramsettings member_max_width 0 end
+  xyz 688 470 2000
+end
+end
