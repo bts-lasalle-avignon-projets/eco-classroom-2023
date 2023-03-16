@@ -7,6 +7,7 @@ class BaseDeDonnees
 public:
     BaseDeDonnees();
     ~BaseDeDonnees();
+    
 };
 
 #endif // BASEDEDONNEES_H
