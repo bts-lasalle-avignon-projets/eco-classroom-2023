@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ecoClassroom w;
-    w.show();
+    EcoClassroom ecoClassroom;
+    ecoClassroom.show();
     return a.exec();
 }

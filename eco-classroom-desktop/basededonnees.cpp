@@ -5,7 +5,7 @@ BaseDeDonnees::BaseDeDonnees()
 
 }
 
- BaseDeDonnees::~BaseDeDonnees()
- {
+BaseDeDonnees::~BaseDeDonnees()
+{
 
- }
+}
