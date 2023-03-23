@@ -4,11 +4,12 @@
 
 class Salle
 {
-private:
-    QString nom;
+  private:
+    QString      nom;
     unsigned int superficie;
-    QString description;
-public:
+    QString      description;
+
+  public:
     Salle();
     Salle(QString nom, unsigned int superficie, QString description);
 };
