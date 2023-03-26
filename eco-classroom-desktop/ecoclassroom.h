@@ -1,21 +1,31 @@
 #ifndef ECOCLASSROOM_H
 #define ECOCLASSROOM_H
 
-#include <QWidget>
-#include <QPushButton>
-#include <QGridLayout>
-#include <QLabel>
+/**
+ * @file ecoclassroom.h
+ * @brief Déclaration de la classe EcoClassroom
+ */
 
-QT_BEGIN_NAMESPACE
-namespace Ui
-{
-class EcoClassroom;
-}
-QT_END_NAMESPACE
+#include <QtWidgets>
 
-class EcoClassroom : public QWidget
+/**
+ * @class EcoClassroom
+ * @brief Déclaration de la classe EcoClassroom
+ * @details La GUI de l'application
+ */
+class EcoClassroom : public QMainWindow
 {
     Q_OBJECT
+
+    /**
+     * @enum Fenetre
+     * @brief Les différentes fenêtres de l'application
+     */
+    enum Fenetre
+    {
+        Accueil,
+        NbFenetres
+    };
 
   public:
     EcoClassroom(QWidget* parent = nullptr);
@@ -32,16 +42,18 @@ class EcoClassroom : public QWidget
     void afficherGraphiques();
 
   private:
-    Ui::EcoClassroom* ui;
-    QWidget*          affichageGlobaleSalles;
-    QPushButton*      boutonB11;
-    QPushButton*      boutonB20;
-    QPushButton*      boutonB21;
-    QLabel*           texteIADI;
-    QLabel*           texteICONE;
-    QLabel*           texteLumiere;
-    QLabel*           textePresence;
-    QLabel*           texteFenetre;
+    QStringList     nomColonnesTable;  //!< Le nom des colonnes de la table
+    QWidget*        gui;               //!< Le widget central
+    QStackedWidget* fenetres;          //!< Pile de fenêtres
+    QTableWidget*   tableWidgetSalles; //!< Affichage sous forme de table
+
+    void instancierWidgets();
+    void initialiserTable();
+    void initialiserGUI();
+
+  public slots:
+    void afficherFenetre(EcoClassroom::Fenetre fenetre);
+    void afficherFenetreAcceuil();
 };
 
 #endif // ECOCLASSROOM_H
