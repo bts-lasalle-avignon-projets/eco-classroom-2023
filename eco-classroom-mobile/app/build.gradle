@@ -4,11 +4,11 @@ plugins {
 
 android {
     namespace 'com.lasalle.eco_classroom_mobile'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.lasalle.eco_classroom_mobile"
-        minSdk 22
+        minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
