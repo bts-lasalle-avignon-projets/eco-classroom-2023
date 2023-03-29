@@ -1,7 +1,7 @@
 format 224
 "EcoClassroom-Android"
-  revision 6
-  modified_by 2 "btssn2"
+  revision 7
+  modified_by 42 "tv"
 
 
   
@@ -309,9 +309,10 @@ format 224
 
       operation 129157 "ajouterSalle"
 	public explicit_return_type "void"
-	nparams 2
-	  param in name "nom" explicit_type "string"
+	nparams 3
+	  param in name "nom" explicit_type "String"
 	  param in name "superficie" explicit_type "double"
+	  param in name "description" explicit_type "String"
 	
 	
 	
@@ -324,7 +325,7 @@ format 224
 	  stereotype "vector"
 	  a role_name "salles" multiplicity "0..*" private
 	    classrelation_ref 128002 // salles (<unidirectional association>)
-	  b parent class_ref 148101 // Classe
+	  b parent class_ref 148101 // Salle
       end
     end
 
@@ -387,14 +388,6 @@ format 224
 	
       end
 
-      classrelation 128005 // <association>
-	relation 128005 ----
-	  a role_name "" private
-	    classrelation_ref 128005 // <association>
-	  b role_name "" private
-	    classrelation_ref 128133 // <association>
-      end
-
       classrelation 128261 // <association>
 	relation 128133 ----
 	  a role_name "" private
@@ -408,7 +401,7 @@ format 224
 	  stereotype "vector"
 	  a role_name "salles" multiplicity "0..*" init_value "0" private
 	    classrelation_ref 128517 // salles (<unidirectional association>)
-	  b parent class_ref 148101 // Classe
+	  b parent class_ref 148101 // Salle
       end
     end
 
@@ -429,31 +422,16 @@ ${members}};
       
     end
 
-    class 147973 "Salle"
+    class 148101 "Salle"
       visibility package 
-      cpp_decl ""
-      java_decl ""
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-      classrelation 128133 // <association>
-	relation_ref 128005 // <association>
-      end
-    end
-
-    class 148101 "Classe"
-      visibility package stereotype "struct"
-      cpp_decl "${comment}${template}struct ${name}${inherit} {
+      cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
 ${inlines}
 "
       java_decl ""
       php_decl ""
       python_2_2 python_decl ""
-      idl_decl "${comment}struct ${name} {
+      idl_decl "${comment}${abstract}${custom}valuetype ${name}${inherit} {
 ${members}};
 "
       explicit_switch_type ""
@@ -464,7 +442,7 @@ ${members}};
       end
 
       attribute 128389 "nom"
-	public explicit_type "string"
+	private explicit_type "string"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -475,7 +453,7 @@ ${members}};
       end
 
       attribute 128517 "superficie"
-	public explicit_type "double"
+	private explicit_type "double"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
