@@ -8,8 +8,8 @@ public class Salle
 
     public Salle()
     {
-        this.nom = "";
+        this.nom         = "";
         this.description = "";
-        this.superficie = 0.0;
+        this.superficie  = 0.0;
     }
 }
