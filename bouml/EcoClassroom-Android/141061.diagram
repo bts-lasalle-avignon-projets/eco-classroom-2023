@@ -1,16 +1,16 @@
 format 224
 
-classcanvas 128005 class_ref 141317 // IHM
-  classdiagramsettings show_members_stereotype yes member_max_width 0 end
-  xyz 35 29 2000
+classcanvas 128002 class_ref 134533 // EcoClassroom
+  classdiagramsettings member_max_width 0 end
+  xyz 29 45 2000
 end
 classcanvas 128517 class_ref 148101 // Classe
   classdiagramsettings member_max_width 0 end
-  xyz 572 94 2000
+  xyz 570 88 2000
 end
-relationcanvas 128773 relation_ref 128261 // <unidirectional association>
-  from ref 128005 z 2001 stereotype "<<vector>>" xyz 463 140 3000 to ref 128517
-  role_a_pos 524 119 3000 no_role_b
-  multiplicity_a_pos 539 149 3000 no_multiplicity_b
+relationcanvas 128386 relation_ref 128002 // <unidirectional association>
+  from ref 128002 z 2001 stereotype "<<vector>>" xyz 455.5 137.5 3000 to ref 128517
+  role_a_pos 522 118 3000 no_role_b
+  multiplicity_a_pos 538 145 3000 no_multiplicity_b
 end
 end

@@ -1,7 +1,7 @@
 format 224
 "EcoClassroom-Android"
-  revision 5
-  modified_by 42 "tv"
+  revision 6
+  modified_by 2 "btssn2"
 
 
   
@@ -227,6 +227,105 @@ format 224
       explicit_switch_type ""
       mysql_decl ""
       
+      operation 128002 "EcoClassroom"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128005 "afficherSalles"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128133 "afficherMesures"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128261 "afficherEtats"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128389 "afficherUneSalle"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128645 "afficherIADI"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128517 "afficherTHI"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128773 "afficherICONE"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129157 "ajouterSalle"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "nom" explicit_type "string"
+	  param in name "superficie" explicit_type "double"
+	
+	
+	
+	
+	
+      end
+
+      classrelation 128002 // salles (<unidirectional association>)
+	relation 128002 --->
+	  stereotype "vector"
+	  a role_name "salles" multiplicity "0..*" private
+	    classrelation_ref 128002 // salles (<unidirectional association>)
+	  b parent class_ref 148101 // Classe
+      end
     end
 
     class 134661 "Sonde"
@@ -288,76 +387,6 @@ format 224
 	
       end
 
-      operation 128005 "afficherSalles"
-	public explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 128133 "afficherMesures"
-	public explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 128261 "afficherEtats"
-	public explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 128389 "afficherUneSalle"
-	public explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 128517 "afficherTHI"
-	public explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 128645 "afficherIADI"
-	public explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 128773 "afficherICONE"
-	public explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
       classrelation 128005 // <association>
 	relation 128005 ----
 	  a role_name "" private
@@ -380,18 +409,6 @@ format 224
 	  a role_name "salles" multiplicity "0..*" init_value "0" private
 	    classrelation_ref 128517 // salles (<unidirectional association>)
 	  b parent class_ref 148101 // Classe
-      end
-
-      operation 129157 "ajouterSalle"
-	public explicit_return_type "void"
-	nparams 2
-	  param in name "nom" explicit_type "string"
-	  param in name "superficie" explicit_type "double"
-	
-	
-	
-	
-	
       end
     end
 
@@ -459,6 +476,17 @@ ${members}};
 
       attribute 128517 "superficie"
 	public explicit_type "double"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128002 "description"
+	private explicit_type "string"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
