@@ -1,18 +1,34 @@
 #ifndef ECOCLASSROOM_H
 #define ECOCLASSROOM_H
 
-#include <QWidget>
+/**
+ * @file ecoclassroom.h
+ * @brief Déclaration de la classe EcoClassroom
+ */
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class EcoClassroom; }
-QT_END_NAMESPACE
+#include <QtWidgets>
 
-class EcoClassroom : public QWidget
+/**
+ * @class EcoClassroom
+ * @brief Déclaration de la classe EcoClassroom
+ * @details La GUI de l'application
+ */
+class EcoClassroom : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    EcoClassroom(QWidget *parent = nullptr);
+    /**
+     * @enum Fenetre
+     * @brief Les différentes fenêtres de l'application
+     */
+    enum Fenetre
+    {
+        Accueil,
+        NbFenetres
+    };
+
+  public:
+    EcoClassroom(QWidget* parent = nullptr);
     ~EcoClassroom();
     void afficherSalles();
     void afficherUneSalle();
@@ -25,8 +41,19 @@ public:
     void afficherDetailsSalles();
     void afficherGraphiques();
 
-private:
-    Ui::EcoClassroom *ui;
+  private:
+    QStringList     nomColonnesTable;  //!< Le nom des colonnes de la table
+    QWidget*        gui;               //!< Le widget central
+    QStackedWidget* fenetres;          //!< Pile de fenêtres
+    QTableWidget*   tableWidgetSalles; //!< Affichage sous forme de table
+
+    void instancierWidgets();
+    void initialiserTable();
+    void initialiserGUI();
+
+  public slots:
+    void afficherFenetre(EcoClassroom::Fenetre fenetre);
+    void afficherFenetreAcceuil();
 };
 
 #endif // ECOCLASSROOM_H

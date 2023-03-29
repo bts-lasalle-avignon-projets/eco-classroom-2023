@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,5 +23,7 @@ HEADERS += \
     mesures.h \
     salle.h
 
-FORMS += \
-    ecoclassroom.ui
+RESOURCES += \
+    ressources.qrc
+
+CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT
