@@ -1,5 +1,6 @@
 #ifndef ECOCLASSROOM_H
 #define ECOCLASSROOM_H
+#include "salle.h"
 
 /**
  * @file ecoclassroom.h
@@ -46,6 +47,7 @@ class EcoClassroom : public QMainWindow
     QWidget*        gui;               //!< Le widget central
     QStackedWidget* fenetres;          //!< Pile de fenêtres
     QTableWidget*   tableWidgetSalles; //!< Affichage sous forme de table
+    int             nbLignesSalles;
 
     void instancierWidgets();
     void initialiserTable();

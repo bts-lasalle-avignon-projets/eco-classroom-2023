@@ -8,3 +8,7 @@ Salle::Salle(QString nom, unsigned int superficie, QString description) :
     nom(nom), superficie(superficie), description(description)
 {
 }
+
+void Salle::afficherSallesTables(Salle salles)
+{
+}

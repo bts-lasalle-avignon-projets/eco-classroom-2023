@@ -1,26 +1,24 @@
 #include "etatsalle.h"
 
-EtatSalle::EtatSalle()
+EtatsSalle::EtatsSalle()
 {
-
 }
 
-EtatSalle::~EtatSalle()
+EtatsSalle::~EtatsSalle()
 {
-
 }
 
-bool EtatSalle::getLumiere()
+bool EtatsSalle::getLumiere()
 {
     return false;
 }
 
-bool EtatSalle::getFenetre()
+bool EtatsSalle::getFenetre()
 {
     return false;
 }
 
-bool EtatSalle::getOccupation()
+bool EtatsSalle::getOccupation()
 {
     return false;
 }

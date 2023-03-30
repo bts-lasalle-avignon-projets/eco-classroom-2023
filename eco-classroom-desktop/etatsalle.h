@@ -2,11 +2,11 @@
 #define ETATSALLE_H
 
 
-class EtatSalle
+class EtatsSalle
 {
 public:
-    EtatSalle();
-    ~EtatSalle();
+    EtatsSalle();
+    ~EtatsSalle();
     bool getLumiere();
     bool getFenetre();
     bool getOccupation();
