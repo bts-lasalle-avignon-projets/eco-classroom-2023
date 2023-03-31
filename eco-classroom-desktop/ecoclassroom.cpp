@@ -135,7 +135,59 @@ void EcoClassroom::afficherFenetreAcceuil()
     afficherFenetre(EcoClassroom::Fenetre::Accueil);
 }
 
-void EcoClassroom::afficherSalles()
+void EcoClassroom::chargerSalles()
+{
+    effacerTableSalles();
+    QStringList salle;
+    // Exemple simple (si pas de base de données)
+    salle << "B11"
+          << "Confort thermique"
+          << "Qualité de l'air"
+          << "1"
+          << "1"
+          << "1";
+    afficherSallesTable(salle);
+
+    // Exemple avec une base de données SQLite
+    /*QString requete = "SELECT * FROM Salle";
+    bool    retour;
+
+    retour = baseDeDonnees->recuperer(requete, Salle);
+    if(retour)
+    {
+        qDebug() << Q_FUNC_INFO << utilisateurs;
+        for(int i = 0; i < salles.size(); ++i)
+            afficherSalleTable(salles.at(i));
+    }
+    else
+    {
+        QMessageBox::critical(0, "Erreur BDD", "Aucun utilisateur chargé !");
+    }*/
+}
+
+void EcoClassroom::effacerTableau(int ligne, int colonne)
+{
+    Q_UNUSED(ligne)
+    Q_UNUSED(colonne)
+    // on réinitialise la table
+    int nb = tableWidgetSalles->rowCount();
+    if(nb != 0)
+    {
+        // on les efface
+        for(int n = 0; n < nb; n++)
+            tableWidgetSalles->removeRow(0);
+    }
+}
+
+void EcoClassroom::effacerTableSalles()
+{
+    qDebug() << Q_FUNC_INFO;
+    salles.clear();
+    effacerTableau(0, 0);
+    nbLignesSalles = 0;
+}
+
+void EcoClassroom::afficherSallesTable(QStringList salle)
 {
 }
 
