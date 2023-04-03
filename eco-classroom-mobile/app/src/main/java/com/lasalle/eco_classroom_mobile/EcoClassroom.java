@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.Arrays;
+import java.util.Vector;
+
 /**
  * @class EcoClassroom
  * @brief L'activité principale
@@ -20,13 +23,12 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * Constantes
      */
-    private static final String TAG =
-      "_EcoClassroom_"; //!< TAG pour les logs (cf. Logcat)
+    private static final String TAG = "_EcoClassroom_"; //!< TAG pour les logs (cf. Logcat)
 
     /**
      * Attributs
      */
-    private Salle[] Salles;
+    private Vector<Salle> salles = null;
 
     /**
      * Ressources GUI
@@ -35,18 +37,23 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * @brief Méthode appelée à la création de l'activité
      */
-    @Override protected void onCreate(Bundle savedInstanceState)
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate()");
+
+        chargerSalles();
+        afficherSalles();
     }
 
     /**
      * @brief Méthode appelée au démarrage après le onCreate() ou un restart
      * après un onStop()
      */
-    @Override protected void onStart()
+    @Override
+    protected void onStart()
     {
         super.onStart();
         Log.d(TAG, "onStart()");
@@ -55,7 +62,8 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * @brief Méthode appelée après onStart() ou après onPause()
      */
-    @Override protected void onResume()
+    @Override
+    protected void onResume()
     {
         super.onResume();
         Log.d(TAG, "onResume()");
@@ -65,7 +73,8 @@ public class EcoClassroom extends AppCompatActivity
      * @brief Méthode appelée après qu'une boîte de dialogue s'est affichée (on
      * reprend sur un onResume()) ou avant onStop() (activité plus visible)
      */
-    @Override protected void onPause()
+    @Override
+    protected void onPause()
     {
         super.onPause();
         Log.d(TAG, "onPause()");
@@ -74,7 +83,8 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * @brief Méthode appelée lorsque l'activité n'est plus visible
      */
-    @Override protected void onStop()
+    @Override
+    protected void onStop()
     {
         super.onStop();
         Log.d(TAG, "onStop()");
@@ -84,7 +94,8 @@ public class EcoClassroom extends AppCompatActivity
      * @brief Méthode appelée à la destruction de l'application (après onStop()
      * et détruite par le système Android)
      */
-    @Override protected void onDestroy()
+    @Override
+    protected void onDestroy()
     {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
@@ -92,6 +103,10 @@ public class EcoClassroom extends AppCompatActivity
 
     public void afficherSalles()
     {
+        for(int i = 0; i < salles.size(); i++)
+        {
+            Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
+        }
     }
 
     public void afficherMesures()
@@ -120,5 +135,14 @@ public class EcoClassroom extends AppCompatActivity
 
     public void ajouterSalle(String nom, String description, double superficie)
     {
+        salles.add(new Salle(nom, superficie, description));
+    }
+
+    public void chargerSalles()
+    {
+        salles = new Vector<Salle>();
+        ajouterSalle("B11", "Salle de cours", 18);
+        ajouterSalle("B20", "Salle de TP", 65);
+        ajouterSalle("B21", "Salle de Physiques", 40);
     }
 }
