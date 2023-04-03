@@ -1,7 +1,8 @@
 format 224
 "EcoClassroom-Desktop"
-  revision 3
-  modified_by 2 "btssn2"
+  revision 4
+  modified_by 42 "tv"
+  cpp_root_dir "../../"
 
 
   
@@ -37,7 +38,7 @@ format 224
   class_color yellow duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color transparent parameterpin_color white generalization_color black 
   dpi 96
   font_size 11
-  diagram_format A4
+  diagram_format A0
 
   image_root_dir ""
 
@@ -596,4 +597,6 @@ ${members}};
       end
     end
   end
+
+  package_ref 134570 // eco-classroom-desktop
 end

@@ -1,41 +1,17 @@
-/**
- * @file ecoclassroom.cpp
- * @brief Définition de la classe EcoClassroom
- */
-
-#include "ecoclassroom.h"
-#include "salle.h"
-
-/**
- * @fn EcoClassroom::EcoClassroom
- * @brief Constructeur de la classe EcoClassroom
- * @param parent nullptr pour en faire la fenêtre principale de l'application
- */
-EcoClassroom::EcoClassroom(QWidget* parent) : QMainWindow(parent)
-{
+class EcoClassroom
+!!!136490.cpp!!!	EcoClassroom(inout parent : QWidget = nullptr)
     qDebug() << Q_FUNC_INFO;
     instancierWidgets();
     initialiserGUI();
 
     chargerSalles();
-}
-
-/**
- * @fn EcoClassroom::~EcoClassroom
- * @brief Destructeur de la classe EcoClassroom
- * @details Libère les ressources de l'application
- */
-EcoClassroom::~EcoClassroom()
-{
+!!!136618.cpp!!!	~EcoClassroom()
     qDebug() << Q_FUNC_INFO;
-}
-
-/**
- * @fn EcoClassroom::instancierWidgets
- * @brief Instancie les différents widgets de l'application
- */
-void EcoClassroom::instancierWidgets()
-{
+!!!136746.cpp!!!	afficherSalleTable(in salle : Salle) : void
+    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
+             << salle.getTemperature() << "occupation" << salle.getOccupation()
+             << "...";
+!!!138026.cpp!!!	instancierWidgets() : void
     // Le widget principal
     gui = new QWidget(this);
     // La pile de fenêtres
@@ -62,14 +38,7 @@ void EcoClassroom::instancierWidgets()
     layoutPrincipal->addWidget(fenetres);
     gui->setLayout(layoutPrincipal);
     setCentralWidget(gui);
-}
-
-/**
- * @fn EcoClassroom::initialiserTable
- * @brief Initialise le QTableWidget qui permet l'affichage de l'état des salles
- */
-void EcoClassroom::initialiserTable()
-{
+!!!138154.cpp!!!	initialiserTable() : void
     tableWidgetSalles = new QTableWidget(this);
 
     // Les colonnes
@@ -103,40 +72,12 @@ void EcoClassroom::initialiserTable()
     // Pas de scroll
     tableWidgetSalles->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tableWidgetSalles->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-}
-
-/**
- * @fn EcoClassroom::initialiserGUI
- * @brief Initialise et affiche la GUI
- */
-void EcoClassroom::initialiserGUI()
-{
+!!!138282.cpp!!!	initialiserGUI() : void
     setFixedSize(qApp->desktop()->availableGeometry(this).width(),
                  qApp->desktop()->availableGeometry(this).height());
     // showMaximized();
     afficherFenetreAcceuil();
-}
-
-/**
- * @fn EcoClassroom::afficherFenetre(EcoClassroom::Fenetre fenetre)
- * @brief Selectionne la fenêtre à afficher
- */
-void EcoClassroom::afficherFenetre(EcoClassroom::Fenetre fenetre)
-{
-    fenetres->setCurrentIndex(fenetre);
-}
-
-/**
- * @fn EcoClassroom::afficherFenetreAcceuil
- * @brief Affiche la fenêtre d'accueil
- */
-void EcoClassroom::afficherFenetreAcceuil()
-{
-    afficherFenetre(EcoClassroom::Fenetre::Accueil);
-}
-
-void EcoClassroom::chargerSalles()
-{
+!!!138410.cpp!!!	chargerSalles() : void
     qDebug() << Q_FUNC_INFO;
     salles.clear();
 
@@ -169,10 +110,7 @@ void EcoClassroom::chargerSalles()
     {
         afficherSalleTable(salles.at(i));
     }
-}
-
-void EcoClassroom::effacerTableau(int ligne, int colonne)
-{
+!!!138538.cpp!!!	effacerTableau(in ligne : int, in colonne : int) : void
     Q_UNUSED(ligne)
     Q_UNUSED(colonne)
     // on réinitialise la table
@@ -183,55 +121,12 @@ void EcoClassroom::effacerTableau(int ligne, int colonne)
         for(int n = 0; n < nb; n++)
             tableWidgetSalles->removeRow(0);
     }
-}
-
-void EcoClassroom::effacerTableSalles()
-{
+!!!138666.cpp!!!	effacerTableSalles() : void
     qDebug() << Q_FUNC_INFO;
 
     effacerTableau(0, 0);
     nbLignesSalles = 0;
-}
-
-void EcoClassroom::afficherSalleTable(Salle salle)
-{
-    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
-             << salle.getTemperature() << "occupation" << salle.getOccupation()
-             << "...";
-}
-
-void EcoClassroom::afficherUneSalle()
-{
-}
-
-void EcoClassroom::afficherMesures()
-{
-}
-
-void EcoClassroom::afficherEtats()
-{
-}
-
-void EcoClassroom::afficherTHI()
-{
-}
-
-void EcoClassroom::afficherIADI()
-{
-}
-
-void EcoClassroom::afficherICONE()
-{
-}
-
-void EcoClassroom::filtrerSalles()
-{
-}
-
-void EcoClassroom::afficherDetailsSalles()
-{
-}
-
-void EcoClassroom::afficherGraphiques()
-{
-}
+!!!138794.cpp!!!	afficherFenetre(in fenetre : EcoClassroom::Fenetre) : void
+    fenetres->setCurrentIndex(fenetre);
+!!!138922.cpp!!!	afficherFenetreAcceuil() : void
+    afficherFenetre(EcoClassroom::Fenetre::Accueil);

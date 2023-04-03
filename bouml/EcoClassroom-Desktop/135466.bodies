@@ -1,0 +1,7 @@
+class EtatsSalle
+!!!139306.cpp!!!	getLumiere() : bool
+    return false;
+!!!139434.cpp!!!	getFenetre() : bool
+    return false;
+!!!139562.cpp!!!	getOccupation() : bool
+    return false;

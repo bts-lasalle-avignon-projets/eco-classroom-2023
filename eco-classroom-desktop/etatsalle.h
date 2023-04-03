@@ -1,15 +1,18 @@
 #ifndef ETATSALLE_H
 #define ETATSALLE_H
 
-
 class EtatsSalle
 {
-public:
+  private:
+    /**
+     * @todo Les attributs ?
+     */
+  public:
     EtatsSalle();
     ~EtatsSalle();
-    bool getLumiere();
-    bool getFenetre();
-    bool getOccupation();
+    bool getLumiere() const;
+    bool getFenetre() const;
+    bool getOccupation() const;
 };
 
 #endif // ETATSALLE_H

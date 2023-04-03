@@ -31,7 +31,7 @@ class EcoClassroom : public QMainWindow
   public:
     EcoClassroom(QWidget* parent = nullptr);
     ~EcoClassroom();
-    void afficherSallesTable(QStringList salle);
+    void afficherSalleTable(Salle salle);
     void afficherUneSalle();
     void afficherMesures();
     void afficherEtats();
@@ -47,8 +47,8 @@ class EcoClassroom : public QMainWindow
     QWidget*        gui;               //!< Le widget central
     QStackedWidget* fenetres;          //!< Pile de fenêtres
     QTableWidget*   tableWidgetSalles; //!< Affichage sous forme de table
-    int             nbLignesSalles;
-    QList<Salle>    salles;
+    int             nbLignesSalles;    //!< Nombre de salles dans la table
+    QList<Salle>    salles;            //!< Les salles
 
     void instancierWidgets();
     void initialiserTable();

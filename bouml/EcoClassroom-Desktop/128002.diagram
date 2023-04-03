@@ -26,27 +26,27 @@ classcanvas 128642 class_ref 128642 // Etat
 end
 relationcanvas 129538 relation_ref 134914 // <directional composition>
   from ref 128386 z 2001 to ref 128514
-  role_a_pos 389 547 3000 no_role_b
+  role_a_pos 556 584 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129666 relation_ref 135042 // <directional composition>
   from ref 128386 z 2001 to ref 128642
-  role_a_pos 863 564 3000 no_role_b
+  role_a_pos 834 556 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129794 relation_ref 135170 // <unidirectional association>
   from ref 128002 z 2001 to ref 128386
-  role_a_pos 657 397 3000 no_role_b
-  multiplicity_a_pos 616 397 3000 no_multiplicity_b
+  role_a_pos 664 440 3000 no_role_b
+  multiplicity_a_pos 697 495 3000 no_multiplicity_b
 end
 relationcanvas 129922 relation_ref 135298 // <unidirectional association>
   from ref 128002 z 2001 to ref 128130
-  role_a_pos 322 141 3000 no_role_b
-  multiplicity_a_pos 322 168 3000 no_multiplicity_b
+  role_a_pos 468 172 3000 no_role_b
+  multiplicity_a_pos 468 227 3000 no_multiplicity_b
 end
 relationcanvas 130050 relation_ref 135426 // <unidirectional association>
   from ref 128002 z 2001 to ref 128258
-  role_a_pos 850 137 3000 no_role_b
-  multiplicity_a_pos 950 164 3000 no_multiplicity_b
+  role_a_pos 742 171 3000 no_role_b
+  multiplicity_a_pos 942 226 3000 no_multiplicity_b
 end
 end

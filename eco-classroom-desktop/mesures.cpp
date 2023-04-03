@@ -1,46 +1,49 @@
 #include "mesures.h"
 
-Mesures::Mesures(): temperature(0.), humidite(0), CO2(0), luminosite(0)
+Mesures::Mesures() : temperature(0.), humidite(0), co2(0), luminosite(0)
 {
-
 }
 
 Mesures::~Mesures()
 {
-
 }
 
-void Mesures::calculerTHI()
+double Mesures::getTemperature() const
 {
-
+    return temperature;
 }
 
-void Mesures::calculerIADI()
+unsigned int Mesures::getHumidite() const
 {
-
+    return humidite;
 }
 
-void Mesures::calculerICONE()
+unsigned int Mesures::getCO2() const
 {
-
+    return co2;
 }
 
-double Mesures::getTemperature()
+unsigned int Mesures::getLuminosite() const
 {
-    return 0.;
+    return luminosite;
 }
 
-unsigned int Mesures::getHumidite()
+void Mesures::setTemperature(double temperature)
 {
-    return 0;
+    this->temperature = temperature;
 }
 
-unsigned int Mesures::getCO2()
+void Mesures::setHumidite(unsigned int humidite)
 {
-    return 0;
+    this->humidite = humidite;
 }
 
-unsigned int Mesures::getLuminosite()
+void Mesures::setCO2(unsigned int co2)
 {
-    return 0;
+    this->co2 = co2;
+}
+
+void Mesures::setLuminosite(unsigned int luminosite)
+{
+    this->luminosite = luminosite;
 }

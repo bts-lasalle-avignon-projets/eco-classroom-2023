@@ -8,17 +8,17 @@ EtatsSalle::~EtatsSalle()
 {
 }
 
-bool EtatsSalle::getLumiere()
+bool EtatsSalle::getLumiere() const
 {
     return false;
 }
 
-bool EtatsSalle::getFenetre()
+bool EtatsSalle::getFenetre() const
 {
     return false;
 }
 
-bool EtatsSalle::getOccupation()
+bool EtatsSalle::getOccupation() const
 {
     return false;
 }
