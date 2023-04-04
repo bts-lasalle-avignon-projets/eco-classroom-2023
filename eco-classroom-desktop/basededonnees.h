@@ -32,17 +32,17 @@
  * @def USERNAME
  * @brief Définit le nom d'utilisateur par défaut
  */
-#define USERNAME "justfeed"
+#define USERNAME "ecoclassroom"
 /**
  * @def PASSWORD
  * @brief Définit le mot de passe par défaut
  */
-#define PASSWORD "justfeed"
+#define PASSWORD "ecoclassroom"
 /**
  * @def DATABASENAME
  * @brief Définit le nom de la base de données par défaut
  */
-#define DATABASENAME "justfeed"
+#define DATABASENAME "ecoclassroom"
 
 /**
  * @class BaseDeDonnees
