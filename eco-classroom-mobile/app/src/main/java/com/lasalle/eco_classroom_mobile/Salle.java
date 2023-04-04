@@ -15,8 +15,8 @@ public class Salle
      */
     public Salle()
     {
-        this.nom         = "";
-        this.description = "";
+        this.nom         = ""; //!< le nom de la salle
+        this.description = ""; //!< le type de salle
         this.superficie  = 0.0; //!< la superficie en m2
     }
 

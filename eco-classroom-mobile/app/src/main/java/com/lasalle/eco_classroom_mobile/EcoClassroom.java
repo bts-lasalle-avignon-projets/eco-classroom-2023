@@ -7,6 +7,8 @@
 package com.lasalle.eco_classroom_mobile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +35,9 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * Ressources GUI
      */
+    private RecyclerView recyclerView; // la vue
+    private RecyclerView.Adapter adapter; // l'adaptateur
+    private RecyclerView.LayoutManager layoutManager; // le gestionnaire de mise en page
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -43,6 +48,10 @@ public class EcoClassroom extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate()");
+
+        /**
+         * @todo Rajouter l'utilisation de RecyclerView
+         */
 
         chargerSalles();
         afficherSalles();
@@ -107,30 +116,6 @@ public class EcoClassroom extends AppCompatActivity
         {
             Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
         }
-    }
-
-    public void afficherMesures()
-    {
-    }
-
-    public void afficherEtats()
-    {
-    }
-
-    public void afficherUneSalle()
-    {
-    }
-
-    public void afficherTHI()
-    {
-    }
-
-    public void afficherIADI()
-    {
-    }
-
-    public void afficherICONE()
-    {
     }
 
     public void ajouterSalle(String nom, String description, double superficie)
