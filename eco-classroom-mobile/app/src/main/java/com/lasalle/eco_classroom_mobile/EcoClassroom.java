@@ -35,9 +35,9 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * Ressources GUI
      */
-    private RecyclerView recyclerView; // la vue
-    private RecyclerView.Adapter adapter; // l'adaptateur
-    private RecyclerView.LayoutManager layoutManager; // le gestionnaire de mise en page
+    private RecyclerView vueSalles; // la vue
+    private RecyclerView.Adapter adaptateurSalle; // l'adaptateur
+    private RecyclerView.LayoutManager layoutVueSalles; // le gestionnaire de mise en page
 
     /**
      * @brief Méthode appelée à la création de l'activité
