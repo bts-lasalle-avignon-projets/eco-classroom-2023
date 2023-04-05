@@ -5,9 +5,8 @@
 
 /**
  * @fn Salle::Salle
- * @brief Constructeur de la classe Salle
+ * @brief Constructeur par défaut de la classe Salle
  */
-
 Salle::Salle() :
     nom(""), superficie(0), description(""), mesures(new Mesures),
     etats(new EtatsSalle)
@@ -19,7 +18,6 @@ Salle::Salle() :
  * @fn Salle::~Salle
  * @brief Destructeur de la classe Salle
  */
-
 Salle::Salle(QString nom, unsigned int superficie, QString description) :
     nom(nom), superficie(superficie), description(description),
     mesures(new Mesures), etats(new EtatsSalle)
@@ -32,7 +30,6 @@ Salle::Salle(QString nom, unsigned int superficie, QString description) :
  * @fn Salle::getNom
  * @brief Getter de l'attribut nom
  */
-
 QString Salle::getNom() const
 {
     return nom;
@@ -42,7 +39,6 @@ QString Salle::getNom() const
  * @fn Salle::getTemperature
  * @brief Getter qui récupère la temperature si mesures est différent de nullptr
  */
-
 unsigned int Salle::getTemperature() const
 {
     if(mesures != nullptr)
@@ -54,7 +50,6 @@ unsigned int Salle::getTemperature() const
  * @fn Salle::getHumidite
  * @brief Getter qui récupère l'humidite si mesures est différent de nullptr
  */
-
 unsigned int Salle::getHumidite() const
 {
     if(mesures != nullptr)
@@ -66,7 +61,6 @@ unsigned int Salle::getHumidite() const
  * @fn Salle::getCO2
  * @brief Getter qui récupère le CO2 si mesures est différent de nullptr
  */
-
 unsigned int Salle::getCO2() const
 {
     if(mesures != nullptr)
@@ -79,7 +73,6 @@ unsigned int Salle::getCO2() const
  * @brief Getter qui récupère l'etat de la lumiere si mesures est différent de
  * nullptr
  */
-
 bool Salle::getLumiere() const
 {
     if(etats != nullptr)
@@ -92,7 +85,6 @@ bool Salle::getLumiere() const
  * @brief Getter qui récupère l'etat de la fenetre si mesures est différent de
  * nullptr
  */
-
 bool Salle::getFenetre() const
 {
     if(etats != nullptr)
@@ -105,7 +97,6 @@ bool Salle::getFenetre() const
  * @brief Getter qui récupère l'etat de l'occupation de la salle si mesures est
  * différent de nullptr
  */
-
 bool Salle::getOccupation() const
 {
     if(etats != nullptr)
