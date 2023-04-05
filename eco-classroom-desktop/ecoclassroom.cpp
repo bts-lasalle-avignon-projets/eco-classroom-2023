@@ -196,42 +196,8 @@ void EcoClassroom::effacerTableSalles()
 void EcoClassroom::afficherSalleTable(Salle salle)
 {
     qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
-             << salle.getTemperature() << "occupation" << salle.getOccupation()
-             << "...";
-}
-
-void EcoClassroom::afficherUneSalle()
-{
-}
-
-void EcoClassroom::afficherMesures()
-{
-}
-
-void EcoClassroom::afficherEtats()
-{
-}
-
-void EcoClassroom::afficherTHI()
-{
-}
-
-void EcoClassroom::afficherIADI()
-{
-}
-
-void EcoClassroom::afficherICONE()
-{
-}
-
-void EcoClassroom::filtrerSalles()
-{
-}
-
-void EcoClassroom::afficherDetailsSalles()
-{
-}
-
-void EcoClassroom::afficherGraphiques()
-{
+             << salle.getTemperature() << "humidite" << salle.getHumidite()
+             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
+             << "fenetre" << salle.getFenetre() << "occupation"
+             << salle.getOccupation();
 }

@@ -4,9 +4,10 @@
 class EtatsSalle
 {
   private:
-    /**
-     * @todo Les attributs ?
-     */
+    bool lumiere;
+    bool fenetre;
+    bool occupation;
+
   public:
     EtatsSalle();
     ~EtatsSalle();

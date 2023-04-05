@@ -14,7 +14,7 @@ classcanvas 128258 class_ref 128258 // CommunicationMQTT
 end
 classcanvas 128386 class_ref 128386 // Salle
   classdiagramsettings member_max_width 0 end
-  xyz 543 418 2000
+  xyz 542 418 2000
 end
 classcanvas 128514 class_ref 128514 // Mesures
   classdiagramsettings member_max_width 0 end
@@ -26,18 +26,18 @@ classcanvas 128642 class_ref 128642 // Etat
 end
 relationcanvas 129538 relation_ref 134914 // <directional composition>
   from ref 128386 z 2001 to ref 128514
-  role_a_pos 556 584 3000 no_role_b
+  role_a_pos 400 559 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129666 relation_ref 135042 // <directional composition>
   from ref 128386 z 2001 to ref 128642
-  role_a_pos 834 556 3000 no_role_b
+  role_a_pos 850 578 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129794 relation_ref 135170 // <unidirectional association>
   from ref 128002 z 2001 to ref 128386
-  role_a_pos 664 440 3000 no_role_b
-  multiplicity_a_pos 697 495 3000 no_multiplicity_b
+  role_a_pos 656 397 3000 no_role_b
+  multiplicity_a_pos 615 397 3000 no_multiplicity_b
 end
 relationcanvas 129922 relation_ref 135298 // <unidirectional association>
   from ref 128002 z 2001 to ref 128130

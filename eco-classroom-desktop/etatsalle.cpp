@@ -1,6 +1,6 @@
 #include "etatsalle.h"
 
-EtatsSalle::EtatsSalle()
+EtatsSalle::EtatsSalle() : lumiere(false), fenetre(true), occupation(false)
 {
 }
 
@@ -10,15 +10,15 @@ EtatsSalle::~EtatsSalle()
 
 bool EtatsSalle::getLumiere() const
 {
-    return false;
+    return lumiere;
 }
 
 bool EtatsSalle::getFenetre() const
 {
-    return false;
+    return fenetre;
 }
 
 bool EtatsSalle::getOccupation() const
 {
-    return false;
+    return occupation;
 }

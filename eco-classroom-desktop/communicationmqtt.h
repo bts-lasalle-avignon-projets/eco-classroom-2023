@@ -1,11 +1,14 @@
 #ifndef COMMUNICATIONMQTT_H
 #define COMMUNICATIONMQTT_H
 
+#include <QtMqtt/QMqttClient>
+#include <QtMqtt/QMqttSubscription>
+
 class CommunicationMQTT
 {
-public:
+  public:
     CommunicationMQTT();
-   ~CommunicationMQTT();
+    ~CommunicationMQTT();
 };
 
 #endif // COMMUNICATIONMQTT_H
