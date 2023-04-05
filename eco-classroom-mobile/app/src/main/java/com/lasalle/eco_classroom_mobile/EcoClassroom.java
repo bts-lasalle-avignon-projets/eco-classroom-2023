@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -35,9 +36,9 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * Ressources GUI
      */
-    private RecyclerView vueSalles; // la vue
-    private RecyclerView.Adapter adaptateurSalle; // l'adaptateur
-    private RecyclerView.LayoutManager layoutVueSalles; // le gestionnaire de mise en page
+    private RecyclerView               vueSalles;       //!< la vue
+    private RecyclerView.Adapter       adaptateurSalle; //!< l'adaptateur
+    private RecyclerView.LayoutManager layoutVueSalles; //!< le gestionnaire de mise en page
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -49,9 +50,7 @@ public class EcoClassroom extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate()");
 
-        /**
-         * @todo Rajouter l'utilisation de RecyclerView
-         */
+        initialiserVueSalles();
 
         chargerSalles();
         afficherSalles();
@@ -110,11 +109,25 @@ public class EcoClassroom extends AppCompatActivity
         Log.d(TAG, "onDestroy()");
     }
 
+    public void initialiserVueSalles()
+    {
+        vueSalles = (RecyclerView)findViewById(R.id.listeSalles);
+        vueSalles.setHasFixedSize(true);
+
+        layoutVueSalles = new LinearLayoutManager(this);
+        vueSalles.setLayoutManager(layoutVueSalles);
+
+        chargerSalles();
+        vueSalles.setAdapter(adaptateurSalle);
+    }
+
     public void afficherSalles()
     {
+        SalleViewHolder affichageIHM = null;
         for(int i = 0; i < salles.size(); i++)
         {
             Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
+            // affichageIHM.afficher(salles.elementAt(i)); fait crash l'appli
         }
     }
 
