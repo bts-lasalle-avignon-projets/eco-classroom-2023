@@ -51,6 +51,7 @@ class EcoClassroom : public QMainWindow
   public slots:
     void afficherFenetre(EcoClassroom::Fenetre fenetre);
     void afficherFenetreAcceuil();
+    void signalerConfinement(const Salle& salle);
 };
 
 #endif // ECOCLASSROOM_H

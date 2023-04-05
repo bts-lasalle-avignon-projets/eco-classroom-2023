@@ -1,8 +1,8 @@
 #ifndef COMMUNICATIONMQTT_H
 #define COMMUNICATIONMQTT_H
 
-#include <QtMqtt/QMqttClient>
-#include <QtMqtt/QMqttSubscription>
+//#include <QtMqtt/QMqttClient>
+//#include <QtMqtt/QMqttSubscription>
 
 class CommunicationMQTT
 {
