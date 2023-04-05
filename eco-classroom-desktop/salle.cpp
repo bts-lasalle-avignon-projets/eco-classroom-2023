@@ -44,6 +44,20 @@ unsigned int Salle::getCO2() const
     return 0;
 }
 
+bool Salle::getLumiere() const
+{
+    if(etats != nullptr)
+        return etats->getLumiere();
+    return false;
+}
+
+bool Salle::getFenetre() const
+{
+    if(etats != nullptr)
+        return etats->getFenetre();
+    return false;
+}
+
 bool Salle::getOccupation() const
 {
     if(etats != nullptr)

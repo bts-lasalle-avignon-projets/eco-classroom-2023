@@ -32,15 +32,6 @@ class EcoClassroom : public QMainWindow
     EcoClassroom(QWidget* parent = nullptr);
     ~EcoClassroom();
     void afficherSalleTable(Salle salle);
-    void afficherUneSalle();
-    void afficherMesures();
-    void afficherEtats();
-    void afficherTHI();
-    void afficherIADI();
-    void afficherICONE();
-    void filtrerSalles();
-    void afficherDetailsSalles();
-    void afficherGraphiques();
 
   private:
     QStringList     nomColonnesTable;  //!< Le nom des colonnes de la table

@@ -1,5 +1,5 @@
 class CommunicationMQTT
 !!!136234.cpp!!!	CommunicationMQTT()
-
+    qDebug() << Q_FUNC_INFO;
 !!!136362.cpp!!!	~CommunicationMQTT()
-
+    qDebug() << Q_FUNC_INFO;

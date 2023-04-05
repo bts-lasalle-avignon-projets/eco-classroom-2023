@@ -9,8 +9,14 @@ class EcoClassroom
     qDebug() << Q_FUNC_INFO;
 !!!136746.cpp!!!	afficherSalleTable(in salle : Salle) : void
     qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
-             << salle.getTemperature() << "occupation" << salle.getOccupation()
-             << "...";
+             << salle.getTemperature() << "humidite" << salle.getHumidite()
+             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
+             << "fenetre" << salle.getFenetre() << "occupation"
+             << salle.getOccupation();
+!!!138794.cpp!!!	afficherFenetre(in fenetre : EcoClassroom::Fenetre) : void
+    fenetres->setCurrentIndex(fenetre);
+!!!138922.cpp!!!	afficherFenetreAcceuil() : void
+    afficherFenetre(EcoClassroom::Fenetre::Accueil);
 !!!138026.cpp!!!	instancierWidgets() : void
     // Le widget principal
     gui = new QWidget(this);
@@ -126,7 +132,3 @@ class EcoClassroom
 
     effacerTableau(0, 0);
     nbLignesSalles = 0;
-!!!138794.cpp!!!	afficherFenetre(in fenetre : EcoClassroom::Fenetre) : void
-    fenetres->setCurrentIndex(fenetre);
-!!!138922.cpp!!!	afficherFenetreAcceuil() : void
-    afficherFenetre(EcoClassroom::Fenetre::Accueil);

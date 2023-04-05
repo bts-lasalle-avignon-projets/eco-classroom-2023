@@ -1,7 +1,7 @@
 format 224
 "EcoClassroom-Desktop"
-  revision 4
-  modified_by 42 "tv"
+  revision 7
+  modified_by 2 "btssn2"
   cpp_root_dir "../../"
 
 
@@ -66,7 +66,7 @@ format 224
     activitydiagramsettings
      end
     classdiagram 128002 "EcoClassroom"
-      classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+      classdiagramsettings draw_all_relations yes show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 end
       size A0
     end
 
@@ -210,31 +210,6 @@ ${members}};
 	
 	
       end
-
-      classrelation 128130 // <association>
-	relation_ref 128002 // <association>
-      end
-
-      classrelation 135298 // salles (<unidirectional association>)
-	relation 135170 --->
-	  a role_name "salles" multiplicity "1..*" private
-	    classrelation_ref 135298 // salles (<unidirectional association>)
-	  b parent class_ref 128386 // Salle
-      end
-
-      classrelation 135426 // baseDeDonnees (<unidirectional association>)
-	relation 135298 --->
-	  a role_name "baseDeDonnees" multiplicity "1" private
-	    classrelation_ref 135426 // baseDeDonnees (<unidirectional association>)
-	  b parent class_ref 128130 // BaseDeDonnees
-      end
-
-      classrelation 135554 // connexionMQTT (<unidirectional association>)
-	relation 135426 --->
-	  a role_name "connexionMQTT" multiplicity "1" private
-	    classrelation_ref 135554 // connexionMQTT (<unidirectional association>)
-	  b parent class_ref 128258 // CommunicationMQTT
-      end
     end
 
     class 128130 "BaseDeDonnees"
@@ -265,14 +240,6 @@ ${members}};
 	
 	
 	
-      end
-
-      classrelation 128002 // <association>
-	relation 128002 ----
-	  a role_name "" private
-	    classrelation_ref 128002 // <association>
-	  b role_name "" private
-	    classrelation_ref 128130 // <association>
       end
 
       classrelation 128258 // <unidirectional association>
@@ -322,15 +289,15 @@ ${members}};
     end
 
     class 128386 "Salle"
-      visibility package stereotype "struct"
-      cpp_decl "${comment}${template}struct ${name}${inherit} {
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
 ${inlines}
 "
       java_decl ""
       php_decl ""
       python_2_2 python_decl ""
-      idl_decl "${comment}struct ${name} {
+      idl_decl "${comment}${abstract}${custom}valuetype ${name}${inherit} {
 ${members}};
 "
       explicit_switch_type ""
@@ -389,6 +356,7 @@ ${members}};
 	    classrelation_ref 135170 // etats (<directional composition>)
 	  b parent class_ref 128642 // Etat
       end
+
     end
 
     class 128514 "Mesures"

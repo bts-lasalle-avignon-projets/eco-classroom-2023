@@ -1,7 +1,19 @@
 class EtatsSalle
+!!!139050.cpp!!!	EtatsSalle()
+    qDebug() << Q_FUNC_INFO;
+!!!138498.cpp!!!	EtatsSalle(in lumiere : bool, in fenetre : bool, in occupation : bool)
+    qDebug() << Q_FUNC_INFO;
+!!!139178.cpp!!!	~EtatsSalle()
+    qDebug() << Q_FUNC_INFO;
 !!!139306.cpp!!!	getLumiere() : bool
-    return false;
+    return lumiere;
 !!!139434.cpp!!!	getFenetre() : bool
-    return false;
+    return fenetre;
 !!!139562.cpp!!!	getOccupation() : bool
-    return false;
+    return occupation;
+!!!138626.cpp!!!	setLumiere(in lumiere : bool) : void
+    this->lumiere = lumiere;
+!!!138754.cpp!!!	setFenetre(in fenetre : bool) : void
+    this->fenetre = fenetre;
+!!!138882.cpp!!!	setOccupation(in occupation : bool) : void
+    this->occupation = occupation;

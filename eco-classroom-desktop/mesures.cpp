@@ -1,4 +1,5 @@
 #include "mesures.h"
+#include <QDebug>
 
 Mesures::Mesures() : temperature(0.), humidite(0), co2(0), luminosite(0)
 {

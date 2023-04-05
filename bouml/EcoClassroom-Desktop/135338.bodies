@@ -18,6 +18,14 @@ class Salle
     if(mesures != nullptr)
         return mesures->getCO2();
     return 0;
+!!!139010.cpp!!!	getLumiere() : bool
+    if(etats != nullptr)
+        return etats->getLumiere();
+    return false;
+!!!139138.cpp!!!	getFenetre() : bool
+    if(etats != nullptr)
+        return etats->getFenetre();
+    return false;
 !!!141738.cpp!!!	getOccupation() : bool
     if(etats != nullptr)
         return etats->getOccupation();
