@@ -1,25 +1,26 @@
 #ifndef MESURES_H
 #define MESURES_H
 
-
 class Mesures
 {
-private:
-    double temperature;
+  private:
+    double       temperature;
     unsigned int humidite;
-    unsigned int CO2;
+    unsigned int co2;
     unsigned int luminosite;
 
-public:
+  public:
     Mesures();
     ~Mesures();
-    void calculerTHI();
-    void calculerIADI();
-    void calculerICONE();
-    double getTemperature();
-    unsigned int getHumidite();
-    unsigned int getCO2();
-    unsigned int getLuminosite();
+
+    double       getTemperature() const;
+    unsigned int getHumidite() const;
+    unsigned int getCO2() const;
+    unsigned int getLuminosite() const;
+    void         setTemperature(double temperature);
+    void         setHumidite(unsigned int humidite);
+    void         setCO2(unsigned int co2);
+    void         setLuminosite(unsigned int luminosite);
 };
 
 #endif // MESURES_H

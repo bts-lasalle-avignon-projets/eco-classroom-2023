@@ -1,27 +1,50 @@
 format 224
 
-classcanvas 128002 class_ref 128002 // IHMEcoClassroom
-  classdiagramsettings member_max_width 0 end
-  xyz 335 69 2000
-end
-classcanvas 128130 class_ref 128130 // BaseDeDonnees
-  classdiagramsettings member_max_width 0 end
-  xyz 77 70 2000
-end
 classcanvas 128258 class_ref 128258 // CommunicationMQTT
   classdiagramsettings member_max_width 0 end
-  xyz 637 62 2000
+  xyz 1845 169.2 2000
 end
-classcanvas 128386 class_ref 128386 // Salle
+classcanvas 130178 class_ref 134570 // BaseDeDonnees
   classdiagramsettings member_max_width 0 end
-  xyz 126 473 2000
+  color lightgray
+  xyz 140.1 56.9 2000
 end
-classcanvas 128514 class_ref 128514 // Mesures
+classcanvas 131842 class_ref 134954 // EcoClassroom
   classdiagramsettings member_max_width 0 end
-  xyz 391 456 2000
+  xyz 1031.2 151 2000
 end
-classcanvas 128642 class_ref 128642 // Etat
+classcanvas 131970 class_ref 135338 // Salle
   classdiagramsettings member_max_width 0 end
-  xyz 688 470 2000
+  xyz 998 689 3005
+end
+classcanvas 132226 class_ref 135466 // EtatsSalle
+  classdiagramsettings member_max_width 0 end
+  xyz 347 937.2 3011
+end
+classcanvas 132482 class_ref 135594 // Mesures
+  classdiagramsettings member_max_width 0 end
+  xyz 1692 945.2 3011
+end
+relationcanvas 131458 relation_ref 134698 // <unidirectional association>
+  from ref 130178 z 2001 to point 92 44
+  line 131586 z 2001 to point 92 94
+  line 131714 z 2001 to ref 130178
+  role_a_pos 15 90 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132098 relation_ref 134954 // <directional composition>
+  from ref 131842 z 3006 stereotype "<<QList>>" xyz 1186.5 566.5 3006 to ref 131970
+  role_a_pos 1238 655 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132354 relation_ref 135210 // <unidirectional association>
+  from ref 131970 z 3012 to ref 132226
+  role_a_pos 816 945 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132610 relation_ref 135082 // <unidirectional association>
+  from ref 131970 z 3012 to ref 132482
+  role_a_pos 1619 995 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
 end
 end

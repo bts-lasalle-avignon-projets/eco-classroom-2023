@@ -1,26 +1,48 @@
 #include "etatsalle.h"
+#include <QDebug>
 
-EtatSalle::EtatSalle()
+EtatsSalle::EtatsSalle() : lumiere(false), fenetre(false), occupation(false)
 {
-
+    qDebug() << Q_FUNC_INFO;
 }
 
-EtatSalle::~EtatSalle()
+EtatsSalle::EtatsSalle(bool lumiere, bool fenetre, bool occupation) :
+    lumiere(lumiere), fenetre(fenetre), occupation(occupation)
 {
-
+    qDebug() << Q_FUNC_INFO;
 }
 
-bool EtatSalle::getLumiere()
+EtatsSalle::~EtatsSalle()
 {
-    return false;
+    qDebug() << Q_FUNC_INFO;
 }
 
-bool EtatSalle::getFenetre()
+bool EtatsSalle::getLumiere() const
 {
-    return false;
+    return lumiere;
 }
 
-bool EtatSalle::getOccupation()
+bool EtatsSalle::getFenetre() const
 {
-    return false;
+    return fenetre;
+}
+
+bool EtatsSalle::getOccupation() const
+{
+    return occupation;
+}
+
+void EtatsSalle::setLumiere(bool lumiere)
+{
+    this->lumiere = lumiere;
+}
+
+void EtatsSalle::setFenetre(bool fenetre)
+{
+    this->fenetre = fenetre;
+}
+
+void EtatsSalle::setOccupation(bool occupation)
+{
+    this->occupation = occupation;
 }

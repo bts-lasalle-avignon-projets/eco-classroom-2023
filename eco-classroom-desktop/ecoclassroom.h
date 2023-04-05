@@ -1,5 +1,6 @@
 #ifndef ECOCLASSROOM_H
 #define ECOCLASSROOM_H
+#include "salle.h"
 
 /**
  * @file ecoclassroom.h
@@ -30,26 +31,22 @@ class EcoClassroom : public QMainWindow
   public:
     EcoClassroom(QWidget* parent = nullptr);
     ~EcoClassroom();
-    void afficherSalles();
-    void afficherUneSalle();
-    void afficherMesures();
-    void afficherEtats();
-    void afficherTHI();
-    void afficherIADI();
-    void afficherICONE();
-    void filtrerSalles();
-    void afficherDetailsSalles();
-    void afficherGraphiques();
+    void afficherSalleTable(Salle salle);
 
   private:
     QStringList     nomColonnesTable;  //!< Le nom des colonnes de la table
     QWidget*        gui;               //!< Le widget central
     QStackedWidget* fenetres;          //!< Pile de fenêtres
     QTableWidget*   tableWidgetSalles; //!< Affichage sous forme de table
+    int             nbLignesSalles;    //!< Nombre de salles dans la table
+    QList<Salle>    salles;            //!< Les salles
 
     void instancierWidgets();
     void initialiserTable();
     void initialiserGUI();
+    void chargerSalles();
+    void effacerTableau(int ligne, int colonne);
+    void effacerTableSalles();
 
   public slots:
     void afficherFenetre(EcoClassroom::Fenetre fenetre);
