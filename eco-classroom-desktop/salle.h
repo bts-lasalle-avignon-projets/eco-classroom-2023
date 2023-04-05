@@ -9,11 +9,13 @@ class EtatsSalle;
 class Salle
 {
   private:
-    QString      nom;
-    unsigned int superficie;
-    QString      description;
-    Mesures*     mesures;
-    EtatsSalle*  etats;
+    QString      nom;         //!< Nom de la salle
+    unsigned int superficie;  //!< Superficie de la salle
+    QString      description; //!< Description de la salle
+    Mesures*
+      mesures; //!<  Relation entre la classe Salle et Mesures (agrégation)
+    EtatsSalle*
+      etats; //!< Relation entre la classe Salle et EtatsSalle (agrégation)
 
   public:
     Salle();

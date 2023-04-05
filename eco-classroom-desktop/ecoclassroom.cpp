@@ -135,6 +135,11 @@ void EcoClassroom::afficherFenetreAcceuil()
     afficherFenetre(EcoClassroom::Fenetre::Accueil);
 }
 
+/**
+ * @fn EcoClassroom::chargerSalles
+ * @brief Charger les salles dans le tableau
+ */
+
 void EcoClassroom::chargerSalles()
 {
     qDebug() << Q_FUNC_INFO;
@@ -171,6 +176,11 @@ void EcoClassroom::chargerSalles()
     }
 }
 
+/**
+ * @fn EcoClassroom::effacerTableau
+ * @brief Effacer le tableau
+ */
+
 void EcoClassroom::effacerTableau(int ligne, int colonne)
 {
     Q_UNUSED(ligne)
@@ -185,6 +195,11 @@ void EcoClassroom::effacerTableau(int ligne, int colonne)
     }
 }
 
+/**
+ * @fn EcoClassroom::effacerTableSalles
+ * @brief Effacer les lignes du tableau
+ */
+
 void EcoClassroom::effacerTableSalles()
 {
     qDebug() << Q_FUNC_INFO;
@@ -192,6 +207,11 @@ void EcoClassroom::effacerTableSalles()
     effacerTableau(0, 0);
     nbLignesSalles = 0;
 }
+
+/**
+ * @fn EcoClassroom::afficheSalleTable
+ * @brief Affiche les lignes du tableau pour les salles
+ */
 
 void EcoClassroom::afficherSalleTable(Salle salle)
 {

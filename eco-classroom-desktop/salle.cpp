@@ -3,12 +3,22 @@
 #include "etatsalle.h"
 #include <QDebug>
 
+/**
+ * @fn Salle::Salle
+ * @brief Constructeur de la classe Salle
+ */
+
 Salle::Salle() :
     nom(""), superficie(0), description(""), mesures(new Mesures),
     etats(new EtatsSalle)
 {
     qDebug() << Q_FUNC_INFO;
 }
+
+/**
+ * @fn Salle::~Salle
+ * @brief Destructeur de la classe Salle
+ */
 
 Salle::Salle(QString nom, unsigned int superficie, QString description) :
     nom(nom), superficie(superficie), description(description),
@@ -18,10 +28,20 @@ Salle::Salle(QString nom, unsigned int superficie, QString description) :
              << "description" << description;
 }
 
+/**
+ * @fn Salle::getNom
+ * @brief Getter de l'attribut nom
+ */
+
 QString Salle::getNom() const
 {
     return nom;
 }
+
+/**
+ * @fn Salle::getTemperature
+ * @brief Getter qui récupère la temperature si mesures est différent de nullptr
+ */
 
 unsigned int Salle::getTemperature() const
 {
@@ -30,12 +50,22 @@ unsigned int Salle::getTemperature() const
     return 0;
 }
 
+/**
+ * @fn Salle::getHumidite
+ * @brief Getter qui récupère l'humidite si mesures est différent de nullptr
+ */
+
 unsigned int Salle::getHumidite() const
 {
     if(mesures != nullptr)
         return mesures->getHumidite();
     return 0;
 }
+
+/**
+ * @fn Salle::getCO2
+ * @brief Getter qui récupère le CO2 si mesures est différent de nullptr
+ */
 
 unsigned int Salle::getCO2() const
 {
@@ -44,12 +74,24 @@ unsigned int Salle::getCO2() const
     return 0;
 }
 
+/**
+ * @fn Salle::getLumiere
+ * @brief Getter qui récupère l'etat de la lumiere si mesures est différent de
+ * nullptr
+ */
+
 bool Salle::getLumiere() const
 {
     if(etats != nullptr)
         return etats->getLumiere();
     return false;
 }
+
+/**
+ * @fn Salle::getFenetre
+ * @brief Getter qui récupère l'etat de la fenetre si mesures est différent de
+ * nullptr
+ */
 
 bool Salle::getFenetre() const
 {
@@ -58,21 +100,15 @@ bool Salle::getFenetre() const
     return false;
 }
 
+/**
+ * @fn Salle::getOccupation
+ * @brief Getter qui récupère l'etat de l'occupation de la salle si mesures est
+ * différent de nullptr
+ */
+
 bool Salle::getOccupation() const
 {
     if(etats != nullptr)
         return etats->getOccupation();
     return false;
-}
-
-void Salle::calculerTHI()
-{
-}
-
-void Salle::calculerIADI()
-{
-}
-
-void Salle::calculerICONE()
-{
 }
