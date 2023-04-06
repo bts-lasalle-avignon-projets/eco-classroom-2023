@@ -1,11 +1,18 @@
 #ifndef SALLE_H
 #define SALLE_H
 
+/**
+ * @file mesures.h
+ */
 #include <QString>
 
 class Mesures;
 class EtatsSalle;
 
+/**
+ * @class EcoClassroom
+ * @brief Déclaration de la classe Mesures
+ */
 class Salle
 {
   private:

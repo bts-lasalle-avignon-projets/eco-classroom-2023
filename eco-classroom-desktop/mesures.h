@@ -1,6 +1,15 @@
 #ifndef MESURES_H
 #define MESURES_H
 
+/**
+ * @file mesures.h
+ * @brief Déclaration de la classe Mesures
+ */
+
+/**
+ * @class Mesures
+ * @brief Classe permettant de gérer les mesures d'une salle
+ */
 class Mesures
 {
   private:

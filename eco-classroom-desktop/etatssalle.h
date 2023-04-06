@@ -1,6 +1,11 @@
 #ifndef ETATSALLE_H
 #define ETATSALLE_H
 
+/**
+ * @file etatssalle.h
+ * @brief Déclaration de la classe EtatsSalle
+ */
+
 class EtatsSalle
 {
   private:
