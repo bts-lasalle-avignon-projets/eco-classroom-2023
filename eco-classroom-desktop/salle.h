@@ -19,6 +19,9 @@ class Salle
     Salle();
     Salle(QString nom, unsigned int superficie, QString description);
     QString      getNom() const;
+    unsigned int getSuperficie() const;
+    QString      getDescription() const;
+    void         afficherInformationsSalle(const Salle& salle);
     unsigned int getTemperature() const;
     unsigned int getHumidite() const;
     unsigned int getCO2() const;

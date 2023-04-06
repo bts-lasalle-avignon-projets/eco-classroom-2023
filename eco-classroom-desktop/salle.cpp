@@ -23,6 +23,23 @@ QString Salle::getNom() const
     return nom;
 }
 
+unsigned int Salle::getSuperficie() const
+{
+    return superficie;
+}
+
+QString Salle::getDescription() const
+{
+    return description;
+}
+
+void Salle::afficherInformationsSalle(const Salle& salle)
+{
+    qInfo() << "Nom : " << salle.getNom() << "\n"
+            << "Superficie : " << salle.getSuperficie() << "\n"
+            << "Description : " << salle.getDescription() << "\n";
+}
+
 unsigned int Salle::getTemperature() const
 {
     if(mesures != nullptr)
