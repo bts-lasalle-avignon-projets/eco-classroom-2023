@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Vector;
 
 /**
@@ -47,7 +45,7 @@ public class EcoClassroom extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.ecoclassroom);
         Log.d(TAG, "onCreate()");
 
         chargerSalles();
@@ -117,7 +115,7 @@ public class EcoClassroom extends AppCompatActivity
         layoutVueSalles = new LinearLayoutManager(this);
         vueSalles.setLayoutManager(layoutVueSalles);
 
-        adaptateurSalle = new SalleAdapter(salles);
+        adaptateurSalle = new AdaptateurSalle(salles);
         vueSalles.setAdapter(adaptateurSalle);
     }
 

@@ -31,38 +31,44 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
                 android:text="Nom" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
                 android:text="Qualité de l'air" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
                 android:text="Confort thermique" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
                 android:text="Fenêtre" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
                 android:text="Lumière" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
                 android:text="Presence" />
         </TableRow>

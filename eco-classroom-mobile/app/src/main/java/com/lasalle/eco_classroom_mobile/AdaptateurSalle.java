@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Vector;
 
-public class SalleAdapter extends RecyclerView.Adapter<SalleViewHolder>
+public class AdaptateurSalle extends RecyclerView.Adapter<VueSalle>
 {
     /**
      * Constantes
@@ -22,7 +22,7 @@ public class SalleAdapter extends RecyclerView.Adapter<SalleViewHolder>
     /**
      * @brief Constructeur d'initialisation
      */
-    public SalleAdapter(Vector<Salle> salles)
+    public AdaptateurSalle(Vector<Salle> salles)
     {
         Log.d(TAG, "SalleAdapter(Vector<Salle> salles)");
         if(salles != null)
@@ -33,15 +33,15 @@ public class SalleAdapter extends RecyclerView.Adapter<SalleViewHolder>
 
     @NonNull
     @Override
-    public SalleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public VueSalle onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.salle, parent, false);
-        return new SalleViewHolder(view);
+        View           view     = inflater.inflate(R.layout.salle, parent, false);
+        return new VueSalle(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SalleViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull VueSalle holder, int position)
     {
         Salle salle = salles.get(position);
         holder.afficher(salle);
