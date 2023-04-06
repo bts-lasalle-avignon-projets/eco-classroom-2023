@@ -1,8 +1,16 @@
+/**
+ * @file main.cpp
+ * @brief Définition du main
+ */
+#include <QApplication>
 #include "ecoclassroom.h"
 
-#include <QApplication>
-
-int main(int argc, char *argv[])
+/**
+ * @fn main
+ * @brief Programme principal
+ * @details Crée et affiche la fenêtre principale de l'application
+ */
+int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
     EcoClassroom ecoClassroom;

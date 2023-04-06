@@ -1,13 +1,17 @@
-#ifndef BASEDEDONNEES_H
-#define BASEDEDONNEES_H
-
 /**
  * @file basededonnees.h
  * @brief Déclaration de la classe BaseDeDonnees
  * @author Thierry VAIRA
  * @version 0.1
  */
+ 
+#ifndef BASEDEDONNEES_H
+#define BASEDEDONNEES_H
 
+#ifndef BASEDEDONNEE_H
+#define BASEDEDONNEE_H
+
+#include <QObject>
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 

@@ -1,12 +1,20 @@
+/**
+ * @file etatsalle.h
+ * @brief Déclaration de la classe EtatsSalle
+ */
 #ifndef ETATSALLE_H
 #define ETATSALLE_H
 
+/**
+ * @class EtatsSalle
+ * @brief Classe permettant de gérer les etats d'une salle
+ */
 class EtatsSalle
 {
   private:
-    bool lumiere;
-    bool fenetre;
-    bool occupation;
+    bool lumiere;    //!< Lumiere allumée ou éteinte dans la salle
+    bool fenetre;    //!< Fenetre de la salle ouverte ou fermée
+    bool occupation; //!< Des personnes ou pas dans la salle
 
   public:
     EtatsSalle();

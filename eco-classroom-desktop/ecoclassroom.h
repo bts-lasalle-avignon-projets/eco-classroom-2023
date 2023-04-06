@@ -1,17 +1,17 @@
-#ifndef ECOCLASSROOM_H
-#define ECOCLASSROOM_H
-#include "salle.h"
-
 /**
  * @file ecoclassroom.h
  * @brief Déclaration de la classe EcoClassroom
  */
 
+#ifndef ECOCLASSROOM_H
+#define ECOCLASSROOM_H
+
 #include <QtWidgets>
+#include "salle.h"
 
 /**
  * @class EcoClassroom
- * @brief Déclaration de la classe EcoClassroom
+ * @brief Classe permettant de faire l'IHM du projet Eco classroom
  * @details La GUI de l'application
  */
 class EcoClassroom : public QMainWindow

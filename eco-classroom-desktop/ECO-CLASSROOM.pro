@@ -8,7 +8,7 @@ SOURCES += \
     basededonnees.cpp \
     communicationmqtt.cpp \
     ecoclassroom.cpp \
-    etatsalle.cpp \
+    etatssalle.cpp \
     mesures.cpp \
     salle.cpp \
     main.cpp
@@ -17,7 +17,7 @@ HEADERS += \
     basededonnees.h \
     communicationmqtt.h \
     ecoclassroom.h \
-    etatsalle.h \
+    etatssalle.h \
     mesures.h \
     salle.h
 

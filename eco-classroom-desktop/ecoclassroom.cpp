@@ -2,7 +2,6 @@
  * @file ecoclassroom.cpp
  * @brief Définition de la classe EcoClassroom
  */
-
 #include "ecoclassroom.h"
 #include "salle.h"
 
@@ -118,8 +117,9 @@ void EcoClassroom::initialiserGUI()
 }
 
 /**
- * @fn EcoClassroom::afficherFenetre(EcoClassroom::Fenetre fenetre)
+ * @fn EcoClassroom::afficherFenetre
  * @brief Selectionne la fenêtre à afficher
+ * @param[in] fenetre la fenêtre à afficher
  */
 void EcoClassroom::afficherFenetre(EcoClassroom::Fenetre fenetre)
 {
@@ -135,6 +135,10 @@ void EcoClassroom::afficherFenetreAcceuil()
     afficherFenetre(EcoClassroom::Fenetre::Accueil);
 }
 
+/**
+ * @fn EcoClassroom::chargerSalles
+ * @brief Charger les salles
+ */
 void EcoClassroom::chargerSalles()
 {
     qDebug() << Q_FUNC_INFO;
@@ -171,6 +175,12 @@ void EcoClassroom::chargerSalles()
     }
 }
 
+/**
+ * @fn EcoClassroom::effacerTableau
+ * @brief Effacer le tableau
+ * @param ligne numéro de ligne dans le tableau
+ * @param colonne numéro de colonne dans le tableau
+ */
 void EcoClassroom::effacerTableau(int ligne, int colonne)
 {
     Q_UNUSED(ligne)
@@ -185,6 +195,10 @@ void EcoClassroom::effacerTableau(int ligne, int colonne)
     }
 }
 
+/**
+ * @fn EcoClassroom::effacerTableSalles
+ * @brief Effacer les lignes du tableau
+ */
 void EcoClassroom::effacerTableSalles()
 {
     qDebug() << Q_FUNC_INFO;
@@ -193,6 +207,11 @@ void EcoClassroom::effacerTableSalles()
     nbLignesSalles = 0;
 }
 
+/**
+ * @fn EcoClassroom::afficheSalleTable
+ * @brief Affiche une salle dans le tableau
+ * @param salle l'objet Salle à afficher dans le tableau
+ */
 void EcoClassroom::afficherSalleTable(Salle salle)
 {
     qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
