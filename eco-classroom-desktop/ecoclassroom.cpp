@@ -208,13 +208,3 @@ void EcoClassroom::afficherSalleTable(Salle salle)
              << "fenetre" << salle.getFenetre() << "occupation"
              << salle.getOccupation();
 }
-
-/**
- * @fn EcoClassroom::signalerConfinement(const Salle& salle)
- * @brief Signale le confinement d'une salle
- */
-
-void EcoClassroom::signalerConfinement(const Salle& salle)
-{
-    qInfo() << "La Salle : " << salle.getNom() << " est confinée !";
-}
