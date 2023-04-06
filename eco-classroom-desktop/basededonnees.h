@@ -1,94 +1,88 @@
 /**
  * @file basededonnees.h
  * @brief Déclaration de la classe BaseDeDonnees
+ * @author Thierry VAIRA
+ * @version 0.1
  */
+ 
+#ifndef BASEDEDONNEES_H
+#define BASEDEDONNEES_H
+
 #ifndef BASEDEDONNEE_H
 #define BASEDEDONNEE_H
 
 #include <QObject>
 #include <QtSql/QtSql>
-#include <QSqlDatabase>
-#include <QMutex>
-#include <QString>
+#include <QtSql/QSqlDatabase>
+
+//#define DEBUG_BDD
 
 /**
- * @def TYPE_BDD
- * @brief Définit le type de base de données QSQLITE ou QMYSQL
+ * @def INTERNET_BDD
+ * @brief À définir pour l'accès distant à la base de données
  */
-#define TYPE_BDD ""
-//#define TYPE_BDD "QMYSQL"
-//#define TYPE_BDD "QSQLITE"
+#define INTERNET_BDD
+
+/**
+ * @def HOSTNAME
+ * @brief Définit l'adresse du serveur MySQL
+ */
+#ifdef INTERNET_BDD
+#define HOSTNAME "www.db4free.net"
+#else
+#define HOSTNAME "192.168.52.7"
+#endif
+/**
+ * @def USERNAME
+ * @brief Définit le nom d'utilisateur par défaut
+ */
+#define USERNAME "ecoclassroom"
+/**
+ * @def PASSWORD
+ * @brief Définit le mot de passe par défaut
+ */
+#define PASSWORD "ecoclassroom"
+/**
+ * @def DATABASENAME
+ * @brief Définit le nom de la base de données par défaut
+ */
+#define DATABASENAME "ecoclassroom"
 
 /**
  * @class BaseDeDonnees
- * @brief Classe permettant de s'interfacer avec la base de données
+ * @brief Déclaration de la classe permettant l'accès à la base de données MySQL
+ * @see https://fr.wikipedia.org/wiki/Singleton_(patron_de_conception)
+ * @author Thierry VAIRA
+ * @version 0.1
  */
-class BaseDeDonnees : public QObject
+class BaseDeDonnees
 {
-    Q_OBJECT
-  private:
-    static BaseDeDonnees* baseDeDonnees; //!< objet base de données
-    static QString typeBase; //!< type de base de données (MySQL, SQLite, ...)
-    static int nbAcces; //!< le nombre d'accès en cours à la base de données
-    QSqlDatabase db;    //!< connexion avec la base de données
-    QMutex       mutex; //!< protection multi-thread
-
-    BaseDeDonnees(QString type);
-    ~BaseDeDonnees();
-
   public:
-    static BaseDeDonnees* getInstance(QString type = TYPE_BDD);
+    static BaseDeDonnees* getInstance();
     static void           detruireInstance();
 
-    // MySQL
-    bool connecter(QString nomBase,
-                   QString username,
-                   QString password,
-                   QString serveur);
-    bool estConnecte();
-    // SQLite
-    bool ouvrir(QString fichierBase);
-    bool estOuvert();
+    bool connecter(QString nomBase  = DATABASENAME,
+                   QString username = USERNAME,
+                   QString password = PASSWORD,
+                   QString serveur  = HOSTNAME);
+    bool estConnectee();
 
-    /**
-     * @brief Exécuter une requête de type INSERT, UPDATE ou DELETE
-     * @param requete
-     * @return bool
-     */
+    /* uniquement pour les requêtes UPDATE, INSERT et DELETE */
     bool executer(QString requete);
 
-    /**
-     * @brief Récuperer un champ d'un enregistrement
-     * @param requete SELECT
-     * @param donnees
-     * @return bool
-     */
-    bool recuperer(QString requete, QString& donnees);
-    /**
-     * @brief Récuperer plusieurs champs d'un enregistrement
-     * @param requete SELECT
-     * @param donnees
-     * @return bool
-     */
-    bool recuperer(QString requete, QStringList& donnees);
-    /**
-     * @brief Récuperer un champs de plusieurs enregistrements
-     * @param requete SELECT
-     * @param donnees
-     * @return bool
-     */
-    bool recuperer(QString requete, QVector<QString>& donnees);
-    /**
-     * @brief Récuperer plusieurs champs de plusieurs enregistrements
-     * @param requete SELECT
-     * @param donnees
-     * @return bool
-     */
-    bool recuperer(QString requete, QVector<QStringList>& donnees);
+    /* uniquement pour les requêtes SELECT */
+    bool recuperer(QString requete, QString& donnees);          // 1 -> 1
+    bool recuperer(QString requete, QStringList& donnees);      // 1 -> 1..*
+    bool recuperer(QString requete, QVector<QString>& donnees); // 1..* -> 1
+    bool recuperer(QString               requete,
+                   QVector<QStringList>& donnees); // 1..* -> 1..*
 
-  signals:
-
-  public slots:
+  private:
+    BaseDeDonnees();
+    ~BaseDeDonnees();
+    QSqlDatabase db; //!< pour la connexion à la base de données MySQL
+    static BaseDeDonnees* bdd; //!< pointeur sur l'instance unique
+    static int nbAcces; //!< compte le nombre d'accès à l'instance unique
 };
 
-#endif // BASEDEDONNEE_H
+#endif // BASEDEDONNEES_H
