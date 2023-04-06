@@ -55,6 +55,5 @@ public class SalleViewHolder extends RecyclerView.ViewHolder
         etatFenetre.setText(Boolean.toString(salle.getEtatFenetre()));
         etatLumiere.setText(Boolean.toString(salle.getEtatLumiere()));
         estOccupe.setText(Boolean.toString(salle.getEstOccupe()));
-        estOccupe.setText(Boolean.toString(salle.getEstOccupe()));
     }
 }

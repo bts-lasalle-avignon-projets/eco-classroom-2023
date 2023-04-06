@@ -50,10 +50,10 @@ public class EcoClassroom extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate()");
 
-        initialiserVueSalles();
-
         chargerSalles();
         afficherSalles();
+
+        initialiserVueSalles();
     }
 
     /**
@@ -117,17 +117,15 @@ public class EcoClassroom extends AppCompatActivity
         layoutVueSalles = new LinearLayoutManager(this);
         vueSalles.setLayoutManager(layoutVueSalles);
 
-        chargerSalles();
+        adaptateurSalle = new SalleAdapter(salles);
         vueSalles.setAdapter(adaptateurSalle);
     }
 
     public void afficherSalles()
     {
-        SalleViewHolder affichageIHM = null;
         for(int i = 0; i < salles.size(); i++)
         {
             Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
-            // affichageIHM.afficher(salles.elementAt(i)); fait crash l'appli
         }
     }
 
