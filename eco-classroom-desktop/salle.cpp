@@ -17,17 +17,28 @@ Salle::Salle(QString nom, unsigned int superficie, QString description) :
     qDebug() << Q_FUNC_INFO << "nom" << nom << "superficie" << superficie
              << "description" << description;
 }
-
+/**
+ * @fn EcoClassroom::getNom
+ * @brief Retourne l'attribut nom sous forme de QString
+ */
 QString Salle::getNom() const
 {
     return nom;
 }
 
+/**
+ * @fn EcoClassroom::getSuperficie
+ * @brief Retourne l'attribut superficie sous forme d'un entier positif
+ */
 unsigned int Salle::getSuperficie() const
 {
     return superficie;
 }
 
+/**
+ * @fn EcoClassroom::getDescription
+ * @brief Retourne l'attribut description sous forme de QString
+ */
 QString Salle::getDescription() const
 {
     return description;
