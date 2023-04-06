@@ -2,7 +2,6 @@
  * @file basededonnees.h
  * @brief Déclaration de la classe BaseDeDonnees
  */
-
 #ifndef BASEDEDONNEE_H
 #define BASEDEDONNEE_H
 

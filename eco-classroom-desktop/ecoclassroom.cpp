@@ -2,7 +2,6 @@
  * @file ecoclassroom.cpp
  * @brief Définition de la classe EcoClassroom
  */
-
 #include "ecoclassroom.h"
 #include "salle.h"
 

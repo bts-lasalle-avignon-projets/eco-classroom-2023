@@ -1,11 +1,11 @@
-#include "salle.h"
-#include "mesures.h"
-#include "etatssalle.h"
-
 /**
  * @file salle.cpp
  * @brief Définition de la classe Salle
  */
+#include "salle.h"
+#include "mesures.h"
+#include "etatssalle.h"
+
 #include <QDebug>
 
 /**

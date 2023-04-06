@@ -6,7 +6,6 @@
  * @file ecoclassroom.h
  * @brief Déclaration de la classe EcoClassroom
  */
-
 #include <QtWidgets>
 
 /**

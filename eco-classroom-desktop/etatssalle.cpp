@@ -1,8 +1,8 @@
-#include "etatssalle.h"
 /**
  * @file etatsalle.cpp
  * @brief Définition de la classe EtatsSalle
  */
+#include "etatssalle.h"
 
 #include <QDebug>
 
