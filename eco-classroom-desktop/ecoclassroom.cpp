@@ -193,6 +193,13 @@ void EcoClassroom::effacerTableSalles()
     nbLignesSalles = 0;
 }
 
+void EcoClassroom::afficherInformationsSalle(const Salle& salle)
+{
+    qInfo() << "Nom : " << salle.getNom() << "\n"
+            << "Superficie : " << salle.getSuperficie() << "\n"
+            << "Description : " << salle.getDescription() << "\n";
+}
+
 void EcoClassroom::afficherSalleTable(Salle salle)
 {
     qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"

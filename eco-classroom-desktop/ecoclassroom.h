@@ -47,6 +47,7 @@ class EcoClassroom : public QMainWindow
     void chargerSalles();
     void effacerTableau(int ligne, int colonne);
     void effacerTableSalles();
+    void afficherInformationsSalle(const Salle& salle);
 
   public slots:
     void afficherFenetre(EcoClassroom::Fenetre fenetre);
