@@ -5,7 +5,6 @@
 #include "salle.h"
 #include "mesures.h"
 #include "etatssalle.h"
-
 #include <QDebug>
 
 /**
@@ -47,8 +46,58 @@ QString Salle::getNom() const
 }
 
 /**
+ * @fn Salle::getSuperficie
+ * @brief Getter de l'attribut superficie
+ * @return unsigned int la superficie de la salle
+ */
+unsigned int Salle::getSuperficie() const
+{
+    return superficie;
+}
+
+/**
+ * @fn Salle::getDescription
+ * @brief Getter de l'attribut description
+ * @return string la description de la salle
+ */
+QString Salle::getDescription() const
+{
+    return description;
+}
+
+/**
+ * @fn Salle::setNom
+ * @brief Setter de l'attribut nom
+ * @param nom
+ */
+void Salle::setNom(QString nom)
+{
+    this->nom = nom;
+}
+
+/**
+ * @fn Salle::setSuperficie
+ * @brief Setter de l'attribut superficie
+ * @param superficie
+ */
+void Salle::setSuperficie(unsigned int superficie)
+{
+    this->superficie = superficie;
+}
+
+/**
+ * @fn Salle::setDescription
+ * @brief Setter de l'attribut description
+ * @param description
+ */
+void Salle::setDescription(QString description)
+{
+    this->description = description;
+}
+
+/**
  * @fn Salle::getTemperature
- * @brief Getter qui récupère la temperature si mesures est différent de nullptr
+ * @brief Getter qui récupère la temperature
  */
 unsigned int Salle::getTemperature() const
 {
@@ -59,7 +108,7 @@ unsigned int Salle::getTemperature() const
 
 /**
  * @fn Salle::getHumidite
- * @brief Getter qui récupère l'humidite si mesures est différent de nullptr
+ * @brief Getter qui récupère l'humidite
  */
 unsigned int Salle::getHumidite() const
 {
@@ -70,7 +119,7 @@ unsigned int Salle::getHumidite() const
 
 /**
  * @fn Salle::getCO2
- * @brief Getter qui récupère le CO2 si mesures est différent de nullptr
+ * @brief Getter qui récupère le CO2
  */
 unsigned int Salle::getCO2() const
 {
@@ -81,8 +130,7 @@ unsigned int Salle::getCO2() const
 
 /**
  * @fn Salle::getLumiere
- * @brief Getter qui récupère l'etat de la lumiere si mesures est différent de
- * nullptr
+ * @brief Getter qui récupère l'etat de la lumiere
  */
 bool Salle::getLumiere() const
 {
@@ -93,8 +141,7 @@ bool Salle::getLumiere() const
 
 /**
  * @fn Salle::getFenetre
- * @brief Getter qui récupère l'etat de la fenetre si mesures est différent de
- * nullptr
+ * @brief Getter qui récupère l'etat de la fenetre
  */
 bool Salle::getFenetre() const
 {
@@ -105,8 +152,7 @@ bool Salle::getFenetre() const
 
 /**
  * @fn Salle::getOccupation
- * @brief Getter qui récupère l'etat de l'occupation de la salle si mesures est
- * différent de nullptr
+ * @brief Getter qui récupère l'etat de l'occupation de la salle
  */
 bool Salle::getOccupation() const
 {

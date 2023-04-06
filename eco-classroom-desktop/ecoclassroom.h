@@ -1,12 +1,13 @@
-#ifndef ECOCLASSROOM_H
-#define ECOCLASSROOM_H
-#include "salle.h"
-
 /**
  * @file ecoclassroom.h
  * @brief Déclaration de la classe EcoClassroom
  */
+
+#ifndef ECOCLASSROOM_H
+#define ECOCLASSROOM_H
+
 #include <QtWidgets>
+#include "salle.h"
 
 /**
  * @class EcoClassroom

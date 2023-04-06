@@ -178,6 +178,8 @@ void EcoClassroom::chargerSalles()
 /**
  * @fn EcoClassroom::effacerTableau
  * @brief Effacer le tableau
+ * @param ligne numéro de ligne dans le tableau
+ * @param colonne numéro de colonne dans le tableau
  */
 void EcoClassroom::effacerTableau(int ligne, int colonne)
 {
@@ -208,6 +210,7 @@ void EcoClassroom::effacerTableSalles()
 /**
  * @fn EcoClassroom::afficheSalleTable
  * @brief Affiche une salle dans le tableau
+ * @param salle l'objet Salle à afficher dans le tableau
  */
 void EcoClassroom::afficherSalleTable(Salle salle)
 {

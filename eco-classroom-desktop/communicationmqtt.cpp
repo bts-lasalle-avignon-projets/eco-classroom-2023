@@ -7,7 +7,7 @@
 
 /**
  * @fn Communication::CommunicationMQTT
- * @brief Constructeur de la classe CommunicationMQTT
+ * @brief Constructeur par défaut de la classe CommunicationMQTT
  */
 CommunicationMQTT::CommunicationMQTT()
 {

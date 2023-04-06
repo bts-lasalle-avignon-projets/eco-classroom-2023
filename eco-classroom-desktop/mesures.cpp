@@ -19,7 +19,6 @@ Mesures::Mesures() : temperature(0.), humidite(0), co2(0)
 /**
  * @fn Mesures::~Mesures
  * @brief Destructeur de la classe Mesures
- * @details Libère les ressources de l'application
  */
 Mesures::~Mesures()
 {
@@ -58,6 +57,7 @@ unsigned int Mesures::getCO2() const
 /**
  * @fn Mesures::setTemperature
  * @brief Setter de l'attribut temperature
+ * @param temperature mesure de la temperature dans la salle
  */
 void Mesures::setTemperature(double temperature)
 {
@@ -67,6 +67,7 @@ void Mesures::setTemperature(double temperature)
 /**
  * @fn Mesures::setHumidite
  * @brief Setter de l'attribut humidite
+ * @param humidite mesure de l'humidite dans la salle
  */
 void Mesures::setHumidite(unsigned int humidite)
 {
@@ -76,6 +77,7 @@ void Mesures::setHumidite(unsigned int humidite)
 /**
  * @fn Mesures::setCO2
  * @brief Setter de l'attribut co2
+ * @param co2 mesure du co2 dans la salle
  */
 void Mesures::setCO2(unsigned int co2)
 {
