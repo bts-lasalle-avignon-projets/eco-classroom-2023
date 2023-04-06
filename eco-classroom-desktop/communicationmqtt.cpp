@@ -1,3 +1,7 @@
+/**
+ * @file communicationmqtt.cpp
+ * @brief Définition de la classe CommunicationMQTT
+ */
 #include "communicationmqtt.h"
 #include <QDebug>
 

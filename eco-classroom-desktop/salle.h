@@ -3,6 +3,7 @@
 
 /**
  * @file mesures.h
+ * @brief Déclaration de la classe Mesures
  */
 #include <QString>
 
@@ -11,7 +12,7 @@ class EtatsSalle;
 
 /**
  * @class EcoClassroom
- * @brief Déclaration de la classe Mesures
+ * @brief Classe permettant de gérer une salle
  */
 class Salle
 {

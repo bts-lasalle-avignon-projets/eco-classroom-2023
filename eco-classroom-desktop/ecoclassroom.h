@@ -11,7 +11,7 @@
 
 /**
  * @class EcoClassroom
- * @brief Déclaration de la classe EcoClassroom
+ * @brief Classe permettant de faire l'IHM du projet Eco classroom
  * @details La GUI de l'application
  */
 class EcoClassroom : public QMainWindow

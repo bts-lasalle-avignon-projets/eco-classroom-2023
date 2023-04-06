@@ -1,11 +1,21 @@
 #include "salle.h"
 #include "mesures.h"
 #include "etatssalle.h"
+
+/**
+ * @file salle.cpp
+ * @brief Définition de la classe Salle
+ */
 #include <QDebug>
 
 /**
  * @fn Salle::Salle
  * @brief Constructeur par défaut de la classe Salle
+ * @param nom données d'information sur le nom de la salle
+ * @param superficie données d'information sur la superficie de la salle
+ * @param description données d'information sur la descrption de la salle
+ * @param mesures construction d'un objet mesures de la classe Mesures
+ * @param etats construction d'un objet etats de la classe EtatsSalle
  */
 Salle::Salle() :
     nom(""), superficie(0), description(""), mesures(new Mesures),
@@ -29,6 +39,7 @@ Salle::Salle(QString nom, unsigned int superficie, QString description) :
 /**
  * @fn Salle::getNom
  * @brief Getter de l'attribut nom
+ * @return string le nom de la salle
  */
 QString Salle::getNom() const
 {
