@@ -1,4 +1,13 @@
+<<<<<<< HEAD:eco-classroom-desktop/etatssalle.cpp
 #include "etatssalle.h"
+=======
+/**
+ * @file etatsalle.cpp
+ * @brief Définition de la classe EtatsSalle
+ */
+
+#include "etatsalle.h"
+>>>>>>> 89131f2eb499b7830a36b46c1ac1a86225fb4f19:eco-classroom-desktop/etatsalle.cpp
 #include <QDebug>
 
 /**
@@ -14,6 +23,9 @@ EtatsSalle::EtatsSalle() : lumiere(false), fenetre(false), occupation(false)
 /**
  * @fn EtatsSalle::EtatsSalle
  * @brief Constructeur d'initialisation de la classe EtatsSalle
+ * @param lumiere l'état de la lumière dans la salle (true : allumée)
+ * @param fenetre l'état d'ouverture des fenêtres de la salle (true : ouverte)
+ * @param occupation l'état d'occupation de la salle (true : occupée)
  */
 EtatsSalle::EtatsSalle(bool lumiere, bool fenetre, bool occupation) :
     lumiere(lumiere), fenetre(fenetre), occupation(occupation)
@@ -34,7 +46,11 @@ EtatsSalle::~EtatsSalle()
 /**
  * @fn EtatsSalle::getLumiere
  * @brief Getter de l'attribut lumiere
+<<<<<<< HEAD:eco-classroom-desktop/etatssalle.cpp
  * @return Retourne l'attribut lumiere
+=======
+ * @return bool l'état de la lumière dans la salle (true : allumée)
+>>>>>>> 89131f2eb499b7830a36b46c1ac1a86225fb4f19:eco-classroom-desktop/etatsalle.cpp
  */
 bool EtatsSalle::getLumiere() const
 {

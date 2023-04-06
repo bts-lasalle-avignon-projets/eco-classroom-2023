@@ -1,11 +1,22 @@
+/**
+ * @file etatsalle.h
+ * @brief Déclaration de la classe EtatsSalle
+ */
+
 #ifndef ETATSALLE_H
 #define ETATSALLE_H
 
 /**
+<<<<<<< HEAD:eco-classroom-desktop/etatssalle.h
  * @file etatssalle.h
  * @brief Déclaration de la classe EtatsSalle
  */
 
+=======
+ * @class EtatsSalle
+ * @brief
+ */
+>>>>>>> 89131f2eb499b7830a36b46c1ac1a86225fb4f19:eco-classroom-desktop/etatsalle.h
 class EtatsSalle
 {
   private:

@@ -1,10 +1,16 @@
+/**
+ * @file mesures.cpp
+ * @brief Définition de la classe Mesures
+ */
 #include "mesures.h"
 #include <QDebug>
 
 /**
  * @fn Mesures::Mesures
  * @brief Constructeur de la classe Mesures
- * @param attributs initialisés à 0 par défaut
+ * @param temperature mesure de la temperature dans la salle
+ * @param humidite mesure de l'humidite dans la salle
+ * @param co2 mesure du co2 dans la salle
  */
 Mesures::Mesures() : temperature(0.), humidite(0), co2(0)
 {
@@ -22,7 +28,7 @@ Mesures::~Mesures()
 /**
  * @fn Mesures::getTemperature
  * @brief Getter de l'attribut temperature
- * @return Retourne l'attribut temperature
+ * @return int la valeur de la temperature (C°)
  */
 double Mesures::getTemperature() const
 {
@@ -32,7 +38,7 @@ double Mesures::getTemperature() const
 /**
  * @fn Mesures::getHumidite
  * @brief Getter de l'attribut humidite
- * @return Retourne l'attribut humidite
+ * @return int la valeur de l'humidité (%)
  */
 unsigned int Mesures::getHumidite() const
 {
@@ -42,7 +48,7 @@ unsigned int Mesures::getHumidite() const
 /**
  * @fn Mesures::getCO2
  * @brief Getter de l'attribut co2
- * @return Retourne l'attribut co2
+ * @return int la valeur du co2 (ppm)
  */
 unsigned int Mesures::getCO2() const
 {

@@ -5,7 +5,7 @@
 
 /**
  * @fn Salle::Salle
- * @brief Constructeur de la classe Salle
+ * @brief Constructeur par défaut de la classe Salle
  */
 Salle::Salle() :
     nom(""), superficie(0), description(""), mesures(new Mesures),
