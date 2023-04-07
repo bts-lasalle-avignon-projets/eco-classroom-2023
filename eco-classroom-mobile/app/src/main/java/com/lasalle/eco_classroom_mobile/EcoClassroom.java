@@ -107,6 +107,9 @@ public class EcoClassroom extends AppCompatActivity
         Log.d(TAG, "onDestroy()");
     }
 
+    /**
+     * @brief Méthode permettant d'initialiser les attributs pour RecyclerView
+     */
     public void initialiserVueSalles()
     {
         vueSalles = (RecyclerView)findViewById(R.id.listeSalles);
@@ -119,6 +122,9 @@ public class EcoClassroom extends AppCompatActivity
         vueSalles.setAdapter(adaptateurSalle);
     }
 
+    /**
+     * @brief Méthode permettant d'afficher les salles dans les logs
+     */
     public void afficherSalles()
     {
         for(int i = 0; i < salles.size(); i++)
@@ -127,11 +133,17 @@ public class EcoClassroom extends AppCompatActivity
         }
     }
 
+    /**
+     * @brief Méthode permettant d'ajouter une salle dans l'attribut salles
+     */
     public void ajouterSalle(String nom, String description, double superficie)
     {
         salles.add(new Salle(nom, superficie, description));
     }
 
+    /**
+     * @brief Méthode permettant de simuler un ajout de plusieurs salles
+     */
     public void chargerSalles()
     {
         salles = new Vector<Salle>();

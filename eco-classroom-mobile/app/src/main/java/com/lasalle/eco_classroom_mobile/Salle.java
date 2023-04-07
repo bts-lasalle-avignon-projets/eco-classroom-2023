@@ -6,14 +6,14 @@ package com.lasalle.eco_classroom_mobile;
  */
 public class Salle
 {
-    private String  nom;              //!< le nom de la salle
-    private String  description;      //!< le type de salle
+    private String  nom;              //!< le nom
+    private String  description;      //!< le type
     private double  superficie;       //!< la superficie en m2
-    private int     qualiteAir;       //!< la qualité de l'air de la salle
-    private int     confortThermique; //!< le confort de la salle
-    private boolean etatFenetre;      //!< l'état des fenêtres de la salle
-    private boolean etatLumiere;      //!< l'état des lumières de la salle
-    private boolean estOccupe;        //!<
+    private int     qualiteAir;       //!< la qualité de l'air
+    private int     confortThermique; //!< l'indice de confort thermique
+    private boolean etatFenetre;      //!< l'état des fenêtres (ouvertes/fermées)
+    private boolean etatLumiere;      //!< l'état des lumières (allumées/éteintes)
+    private boolean estOccupe;        //!< indique l'occupation (oui/non)
 
     /**
      * @brief Constructeur par défaut
@@ -23,8 +23,8 @@ public class Salle
         this.nom              = "";
         this.description      = "";
         this.superficie       = 0.0;
-        this.qualiteAir       = -1;
-        this.confortThermique = 100;
+        this.qualiteAir       = 0;
+        this.confortThermique = -4;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;

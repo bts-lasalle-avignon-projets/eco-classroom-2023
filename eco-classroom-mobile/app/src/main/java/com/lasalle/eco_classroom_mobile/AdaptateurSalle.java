@@ -10,13 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Vector;
 
+/**
+ * @class AdaptateurSalle
+ * @brief Lien entre les données et les vues (RecyclerView)
+ */
 public class AdaptateurSalle extends RecyclerView.Adapter<VueSalle>
 {
     /**
      * Constantes
      */
-    private static final String TAG = "_SalleAdapter_";
+    private static final String TAG = "_SalleAdapter_"; //!< TAG pour les logs (cf. Logcat)
 
+    /**
+     * Attributs
+     */
     private Vector<Salle> salles = null;
 
     /**
@@ -31,6 +38,9 @@ public class AdaptateurSalle extends RecyclerView.Adapter<VueSalle>
         }
     }
 
+    /**
+     * @brief Méthode appelée à la création de l'activité
+     */
     @NonNull
     @Override
     public VueSalle onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
