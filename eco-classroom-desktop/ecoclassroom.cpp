@@ -141,9 +141,9 @@ void EcoClassroom::chargerSalles()
     salles.clear();
 
     // Exemple simple (si pas de base de données)
-    salles.push_back(Salle("B11", 18, "Salle de cours"));
-    salles.push_back(Salle("B20", 65, "Salle de TP"));
-    salles.push_back(Salle("B21", 35, "Salle de Physiques"));
+    salles.push_back(Salle("B11", 18, "Confortable"));
+    salles.push_back(Salle("B20", 65, "Confortable"));
+    salles.push_back(Salle("B21", 35, "Pas Confortable"));
     // Exemple avec une base de données SQLite
     /*
     QVector<QStringList> sallesBDD;
@@ -207,4 +207,41 @@ void EcoClassroom::afficherSalleTable(Salle salle)
              << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
              << "fenetre" << salle.getFenetre() << "occupation"
              << salle.getOccupation();
+
+    // créer des élements de cellule
+    QTableWidgetItem *elementNom, *elementTHI, *elementCO2;
+    QLabel *          elementLumiere, *elementFenetre, *elementOccupation;
+
+    elementNom = new QTableWidgetItem(salle.getNom());
+    elementTHI = new QTableWidgetItem(QString::number(salle.getTemperature()));
+    elementCO2 = new QTableWidgetItem(QString::number(salle.getCO2()));
+    elementLumiere    = new QLabel(this);
+    elementFenetre    = new QLabel(this);
+    elementOccupation = new QLabel(this);
+
+    // personnaliser les éléments
+    elementNom->setFlags(Qt::ItemIsEnabled);
+    elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementTHI->setFlags(Qt::ItemIsEnabled);
+    elementTHI->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementCO2->setFlags(Qt::ItemIsEnabled);
+    elementCO2->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    // ajouter une ligne
+    int nb = tableWidgetSalles->rowCount();
+    ++nb;
+    tableWidgetSalles->setRowCount(nb);
+
+    // insérer les éléments de cellule
+    tableWidgetSalles->setItem(nb - 1, 0, elementNom);
+    tableWidgetSalles->setItem(nb - 1, 1, elementTHI);
+    tableWidgetSalles->setItem(nb - 1, 2, elementCO2);
+    tableWidgetSalles->setCellWidget(nb - 1, 3, elementLumiere);
+    tableWidgetSalles->setCellWidget(nb - 1, 4, elementFenetre);
+    tableWidgetSalles->setCellWidget(nb - 1, 5, elementOccupation);
+
+    // redimensionner la hauteur de la table
+    tableWidgetSalles->setFixedHeight(
+      tableWidgetSalles->verticalHeader()->length() +
+      tableWidgetSalles->horizontalHeader()->height());
 }
