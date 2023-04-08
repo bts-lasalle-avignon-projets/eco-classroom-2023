@@ -1,7 +1,8 @@
 format 224
 "EcoClassroom-Android"
-  revision 7
+  revision 9
   modified_by 42 "tv"
+  java_root_dir "../../"
 
 
   
@@ -44,6 +45,7 @@ format 224
 
   mark_for_import
   
+  java_package "com.lasalle"
   usecaseview 128005 "EcoCLassroom"
     
     usecasediagramsettings end
@@ -475,4 +477,8 @@ ${members}};
       end
     end
   end
+
+  package_ref 134570 // eco_classroom_mobile
+
+  package_ref 134698 // unknown
 end

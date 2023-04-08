@@ -1,0 +1,58 @@
+class VueSalle
+!!!138666.java!!!	VueSalle(in vueSalle : View)
+        super(vueSalle);
+        Log.d(TAG, "VueSalle(final View vueSalle)");
+
+        initialiserWidgets(vueSalle);
+        configurerElementsTexte();
+        configurerElementsImage();
+!!!138794.java!!!	initialiserWidgets(in vueSalle : View) : void
+        this.nom              = ((TextView)vueSalle.findViewById(R.id.nom));
+        this.qualiteAir       = ((TextView)vueSalle.findViewById(R.id.qualiteAir));
+        this.confortThermique = ((TextView)vueSalle.findViewById(R.id.confortThermique));
+        this.etatFenetre      = ((ImageView)vueSalle.findViewById(R.id.fenetre));
+        this.etatLumiere      = ((ImageView)vueSalle.findViewById(R.id.lumiere));
+        this.estOccupe        = ((ImageView)vueSalle.findViewById(R.id.presence));
+!!!138922.java!!!	configurerElementsTexte() : void
+        configurerElementTexte(this.nom);
+        configurerElementTexte(this.qualiteAir);
+        configurerElementTexte(this.confortThermique);
+!!!139050.java!!!	configurerElementsImage() : void
+        configurerElementImage(this.etatFenetre);
+        configurerElementImage(this.etatLumiere);
+        configurerElementImage(this.estOccupe);
+!!!139178.java!!!	configurerElementTexte(inout elementTexte : TextView) : void
+        elementTexte.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+        elementTexte.setLayoutParams(
+          new LinearLayout.LayoutParams(0,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                                        ESPACE_ETIREMENT));
+!!!139306.java!!!	configurerElementImage(inout elementImage : ImageView) : void
+        elementImage.setLayoutParams(
+                new LinearLayout.LayoutParams(0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        ESPACE_ETIREMENT));
+!!!139434.java!!!	afficher(inout salle : Salle) : void
+        Log.d(TAG, "afficher(Salle salle) nom = " + salle.getNom());
+        this.salle = salle;
+        nom.setText(salle.getNom());
+        if(salle.getQualiteAir() >= Salle.INDICE_QUALITE_AIR_MIN)
+            qualiteAir.setText(Integer.toString(salle.getQualiteAir()));
+        else
+            qualiteAir.setText("Inconnue");
+        if(salle.getConfortThermique() >= Salle.INDICE_CONFORT_THERMIQUE_MIN)
+            confortThermique.setText(Integer.toString(salle.getConfortThermique()));
+        else
+            confortThermique.setText("Inconnu");
+        if(salle.getEtatFenetre())
+            etatFenetre.setImageResource(R.drawable.led_rouge);
+        else
+            etatFenetre.setImageResource(R.drawable.led_verte);
+        if(salle.getEtatLumiere())
+            etatLumiere.setImageResource(R.drawable.led_rouge);
+        else
+            etatLumiere.setImageResource(R.drawable.led_verte);
+        if(salle.getEstOccupe())
+            estOccupe.setImageResource(R.drawable.led_rouge);
+        else
+            estOccupe.setImageResource(R.drawable.led_verte);

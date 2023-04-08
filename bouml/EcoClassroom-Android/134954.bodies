@@ -1,0 +1,60 @@
+class Salle
+!!!136362.java!!!	Salle()
+        this.nom              = "";
+        this.description      = "";
+        this.superficie       = 0.0;
+        this.qualiteAir       = 0;
+        this.confortThermique = -4;
+        this.etatFenetre      = false;
+        this.etatLumiere      = false;
+        this.estOccupe        = false;
+!!!136490.java!!!	Salle(in nom : String, in superficie : double, in description : String)
+        Log.d(TAG, "Salle("+nom+", "+superficie+", "+description+")");
+        this.nom              = nom;
+        this.description      = description;
+        this.superficie       = superficie;
+        this.qualiteAir       = 0;
+        this.confortThermique = -4;
+        this.etatFenetre      = false;
+        this.etatLumiere      = false;
+        this.estOccupe        = false;
+!!!136618.java!!!	getNom() : String
+        return this.nom;
+!!!136746.java!!!	getDescription() : String
+        return this.description;
+!!!136874.java!!!	getSuperficie() : double
+        return this.superficie;
+!!!137002.java!!!	getQualiteAir() : int
+        return this.qualiteAir;
+!!!137130.java!!!	getConfortThermique() : int
+        return this.confortThermique;
+!!!137258.java!!!	getEtatFenetre() : boolean
+        return this.etatFenetre;
+!!!137386.java!!!	getEtatLumiere() : boolean
+        return this.etatLumiere;
+!!!137514.java!!!	getEstOccupe() : boolean
+        return this.estOccupe;
+!!!137642.java!!!	setNom(in nom : String) : void
+        this.nom = nom;
+!!!137770.java!!!	setDescription(in description : String) : void
+        this.description = description;
+!!!137898.java!!!	setSuperficie(in superficie : double) : void
+        this.superficie = superficie;
+!!!138026.java!!!	setQualiteAir(in qualiteAir : int) : void
+        /**
+         * @todo Vérifier indice qualiteAir max
+         */
+        if(qualiteAir >= INDICE_QUALITE_AIR_MIN)
+            this.qualiteAir = qualiteAir;
+!!!138154.java!!!	setConfortThermique(in confortThermique : int) : void
+        /**
+         * @todo Vérifier indice confortThermique max
+         */
+        if(confortThermique >= INDICE_CONFORT_THERMIQUE_MIN)
+            this.confortThermique = confortThermique;
+!!!138282.java!!!	setEtatFenetre(inout etatFenetre : boolean) : void
+        this.etatFenetre = etatFenetre;
+!!!138410.java!!!	setEtatLumiere(inout etatLumiere : boolean) : void
+        this.etatLumiere = etatLumiere;
+!!!138538.java!!!	setEstOccupe(inout estOccupe : Boolean) : void
+        this.estOccupe = estOccupe;

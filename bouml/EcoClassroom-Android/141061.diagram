@@ -9,7 +9,7 @@ classcanvas 128517 class_ref 148101 // Salle
   xyz 1305 371 2000
 end
 relationcanvas 128386 relation_ref 128002 // <unidirectional association>
-  from ref 128002 z 2001 stereotype "<<vector>>" xyz 947.5 409 3000 to ref 128517
+  from ref 128002 z 2001 stereotype "<<vector>>" xyz 947 409 3000 to ref 128517
   role_a_pos 1219 406 3000 no_role_b
   multiplicity_a_pos 1252 461 3000 no_multiplicity_b
 end

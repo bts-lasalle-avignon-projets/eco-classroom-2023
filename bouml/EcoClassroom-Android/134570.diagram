@@ -1,0 +1,43 @@
+format 224
+
+classcanvas 128042 class_ref 135082 // EcoClassroom
+  classdiagramsettings member_max_width 0 end
+  xyz 151 251 2000
+end
+classcanvas 128170 class_ref 135210 // AppCompatActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 538 99 2006
+end
+classcanvas 128426 class_ref 134570 // AdaptateurSalle
+  classdiagramsettings member_max_width 0 end
+  xyz 933 1175 2000
+end
+classcanvas 128554 class_ref 134698 // VueSalle
+  classdiagramsettings member_max_width 0 end
+  xyz 2004 1175 2005
+end
+classcanvas 128682 class_ref 134954 // Salle
+  classdiagramsettings member_max_width 0 end
+  xyz 1507 28 3005
+end
+relationcanvas 128298 relation_ref 134826 // <generalisation>
+  from ref 128042 z 2007 to ref 128170
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128810 relation_ref 134954 // <unidirectional association>
+  from ref 128042 z 3006 stereotype "<<Vector>>" xyz 1282 504.5 3006 to ref 128682
+  role_a_pos 1411 466 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128938 relation_ref 135210 // <unidirectional association>
+  from ref 128554 z 3006 to ref 128682
+  role_a_pos 2230 1013 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129066 relation_ref 134698 // <unidirectional association>
+  from ref 128426 z 3006 stereotype "<<Vector>>" xyz 1492 1086 3006 to ref 128682
+  role_a_pos 1625 1013 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end
