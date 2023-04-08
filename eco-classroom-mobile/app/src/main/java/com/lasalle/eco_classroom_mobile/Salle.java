@@ -54,9 +54,9 @@ public class Salle
     public Salle(String nom, double superficie, String description)
     {
         Log.d(TAG, "Salle("+nom+", "+superficie+", "+description+")");
-        this.nom         = nom;
-        this.description = description;
-        this.superficie  = superficie;
+        this.nom              = nom;
+        this.description      = description;
+        this.superficie       = superficie;
         this.qualiteAir       = 0;
         this.confortThermique = -4;
         this.etatFenetre      = false;
@@ -70,6 +70,22 @@ public class Salle
     public String getNom()
     {
         return this.nom;
+    }
+
+    /**
+     * @brief Accesseur de l'attribut description
+     */
+    public String getDescription()
+    {
+        return this.description;
+    }
+
+    /**
+     * @brief Accesseur de l'attribut superficie
+     */
+    public double getSuperficie()
+    {
+        return this.superficie;
     }
 
     /**
@@ -113,14 +129,66 @@ public class Salle
     }
 
     /**
+     * @brief Mutateur de l'attribut nom
+     */
+    public void setNom(String nom)
+    {
+        this.nom = nom;
+    }
+
+    /**
+     * @brief Mutateur de l'attribut description
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    /**
+     * @brief Mutateur de l'attribut superficie
+     */
+    public void setSuperficie(double superficie)
+    {
+        this.superficie = superficie;
+    }
+
+    /**
+     * @brief Mutateur de l'attribut qualiteAir
+     */
+    public void setQualiteAir(int qualiteAir)
+    {
+        this.qualiteAir = qualiteAir;
+    }
+
+    /**
+     * @brief Mutateur de l'attribut confortThermique
+     */
+    public void setConfortThermique(int confortThermique)
+    {
+        this.confortThermique = confortThermique;
+    }
+
+    /**
+     * @brief Mutateur de l'attribut etatFenetre
+     */
+    public void setEtatFenetre(boolean etatFenetre)
+    {
+        this.etatFenetre = etatFenetre;
+    }
+
+    /**
+     * @brief Mutateur de l'attribut etatLumiere
+     */
+    public void setEtatLumiere(boolean etatLumiere)
+    {
+        this.etatLumiere = etatLumiere;
+    }
+
+    /**
      * @brief Mutateur de l'attribut estOccupe
      */
     public void setEstOccupe(Boolean estOccupe)
     {
         this.estOccupe = estOccupe;
     }
-
-    /**
-     * @todo Ajouter mutateurs
-     */
 }
