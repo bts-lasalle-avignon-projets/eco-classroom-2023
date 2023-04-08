@@ -18,6 +18,9 @@ public class Salle
      * Constantes
      */
     private static final String TAG = "_Salle_"; //!< TAG pour les logs (cf. Logcat)
+    /**
+     * @todo Créer les constantes max pour les indices
+     */
     public static final int INDICE_QUALITE_AIR_MIN = 1; //!< l'indice de qualité de l'air minimum
     public static final int INDICE_CONFORT_THERMIQUE_MIN = -3; //!< l'indice de confort thermique minimum
 
@@ -157,7 +160,11 @@ public class Salle
      */
     public void setQualiteAir(int qualiteAir)
     {
-        this.qualiteAir = qualiteAir;
+        /**
+         * @todo Vérifier indice qualiteAir max
+         */
+        if(qualiteAir >= INDICE_QUALITE_AIR_MIN)
+            this.qualiteAir = qualiteAir;
     }
 
     /**
@@ -165,7 +172,11 @@ public class Salle
      */
     public void setConfortThermique(int confortThermique)
     {
-        this.confortThermique = confortThermique;
+        /**
+         * @todo Vérifier indice confortThermique max
+         */
+        if(confortThermique >= INDICE_CONFORT_THERMIQUE_MIN)
+            this.confortThermique = confortThermique;
     }
 
     /**
