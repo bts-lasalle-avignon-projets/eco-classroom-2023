@@ -1,7 +1,7 @@
 format 224
 "EcoClassroom-Desktop"
-  revision 7
-  modified_by 2 "btssn2"
+  revision 8
+  modified_by 42 "tv"
   cpp_root_dir "../../"
 
 
@@ -356,7 +356,6 @@ ${members}};
 	    classrelation_ref 135170 // etats (<directional composition>)
 	  b parent class_ref 128642 // Etat
       end
-
     end
 
     class 128514 "Mesures"

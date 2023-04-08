@@ -5,13 +5,9 @@ class Mesures
     return humidite;
 !!!140202.cpp!!!	getCO2() : uint
     return co2;
-!!!140330.cpp!!!	getLuminosite() : uint
-    return luminosite;
 !!!140458.cpp!!!	setTemperature(in temperature : double) : void
     this->temperature = temperature;
 !!!140586.cpp!!!	setHumidite(in humidite : uint) : void
     this->humidite = humidite;
 !!!140714.cpp!!!	setCO2(in co2 : uint) : void
     this->co2 = co2;
-!!!140842.cpp!!!	setLuminosite(in luminosite : uint) : void
-    this->luminosite = luminosite;
