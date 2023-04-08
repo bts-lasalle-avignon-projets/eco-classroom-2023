@@ -4,9 +4,6 @@
  * @author Thierry VAIRA
  * @version 0.1
  */
- 
-#ifndef BASEDEDONNEES_H
-#define BASEDEDONNEES_H
 
 #ifndef BASEDEDONNEE_H
 #define BASEDEDONNEE_H

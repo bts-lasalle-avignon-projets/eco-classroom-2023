@@ -8,7 +8,8 @@
 
 #include <QtWidgets>
 #include <QMap>
-#include "salle.h"
+
+class Salle;
 
 /**
  * @class EcoClassroom
