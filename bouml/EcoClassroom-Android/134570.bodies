@@ -1,0 +1,18 @@
+class AdaptateurSalle
+!!!134570.java!!!	AdaptateurSalle(inout salles : Vector<Salle>)
+        Log.d(TAG, "AdaptateurSalle(Vector<Salle> salles)");
+        if(salles != null)
+        {
+            this.salles = salles;
+        }
+!!!134698.java!!!	onCreateViewHolder(inout parent : ViewGroup, in viewType : int) : VueSalle
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View           view     = inflater.inflate(R.layout.salle, parent, false);
+        return new VueSalle(view);
+!!!134826.java!!!	onBindViewHolder(inout holder : VueSalle, in position : int) : void
+        Salle salle = salles.get(position);
+        holder.afficher(salle);
+!!!134954.java!!!	getItemCount() : int
+        if(salles != null)
+            return salles.size();
+        return 0;

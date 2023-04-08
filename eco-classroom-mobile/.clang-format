@@ -24,6 +24,7 @@ BinPackParameters: 'false'
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: AfterColon
 BreakInheritanceList: AfterColon
+ColumnLimit: 100
 ConstructorInitializerAllOnOneLineOrOnePerLine: 'false'
 ConstructorInitializerIndentWidth: '4'
 IncludeBlocks: Merge
@@ -52,5 +53,5 @@ SpacesInParentheses: 'false'
 SpacesInSquareBrackets: 'false'
 TabWidth: '4'
 UseTab: Never
-
-...
+BreakStringLiterals: "true"
+BreakAfterJavaFieldAnnotations: "true"
