@@ -15,7 +15,7 @@ EcoClassroom::EcoClassroom(QWidget* parent) : QMainWindow(parent)
     qDebug() << Q_FUNC_INFO;
     instancierWidgets();
     initialiserGUI();
-
+    installerGestionEvenements();
     chargerSalles();
 }
 
@@ -28,6 +28,195 @@ EcoClassroom::~EcoClassroom()
 {
     qDebug() << Q_FUNC_INFO;
 }
+
+// Méthodes publiques
+
+// Slots
+
+/**
+ * @fn EcoClassroom::afficherFenetre
+ * @brief Selectionne la fenêtre à afficher
+ * @param[in] fenetre la fenêtre à afficher
+ */
+void EcoClassroom::afficherFenetre(EcoClassroom::Fenetre fenetre)
+{
+    fenetres->setCurrentIndex(fenetre);
+}
+
+/**
+ * @fn EcoClassroom::afficherFenetreAcceuil
+ * @brief Affiche la fenêtre d'accueil
+ */
+void EcoClassroom::afficherFenetreAcceuil()
+{
+    afficherFenetre(EcoClassroom::Fenetre::Accueil);
+}
+
+/**
+ * @fn EcoClassroom::selectionnerSalle
+ * @brief Sélectionne la salle à afficher
+ * @param ligne le numéro de ligne dans le tableau
+ * @param colonne le numéro de colonne dans le tableau (non utilisé)
+ */
+void EcoClassroom::selectionnerSalle(int ligne, int colonne)
+{
+    Q_UNUSED(colonne)
+    QTableWidgetItem* salle;
+    salle = tableWidgetSalles->item(ligne, COLONNE_SALLE_NOM);
+    // qDebug() << Q_FUNC_INFO << salle->data(0).toString();
+    qDebug() << Q_FUNC_INFO << "Salle"
+             << salles[salle->data(0).toString()]->getNom();
+}
+
+/**
+ * @fn EcoClassroom::chargerSalles
+ * @brief Charger les salles
+ */
+void EcoClassroom::chargerSalles()
+{
+    qDebug() << Q_FUNC_INFO;
+    salles.clear();
+
+    // Pour les tests
+    // Exemple simple (si pas de base de données)
+    salles["B11"] = new Salle("B11", 18, "Salle de TD");
+    salles["B20"] = new Salle("B20", 65, "Atelier");
+    salles["B21"] = new Salle("B21", 35, "Salle de TP");
+    salles["B22"] = new Salle("B22", 80, "Salle de cours");
+
+    // Exemple avec une base de données SQLite
+    /*
+    QVector<QStringList> sallesBDD;
+    QString requete = "SELECT * FROM Salle";
+    bool    retour;
+
+    retour = baseDeDonnees->recuperer(requete, sallesBDD);
+    if(retour)
+    {
+        qDebug() << Q_FUNC_INFO << sallesBDD;
+        for(int i = 0; i < sallesBDD.size(); ++i)
+            qDebug() << Q_FUNC_INFO << sallesBDD[i];
+    }
+    else
+    {
+        QMessageBox::critical(0, "Erreur BDD", "Aucune salle chargée !");
+    }*/
+
+    effacerSalles();
+
+    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
+    QMapIterator<QString, Salle*> salle(salles);
+    while(salle.hasNext())
+    {
+        salle.next();
+        qDebug() << Q_FUNC_INFO << "Salle" << salle.key();
+        afficherSalleTable(*salle.value());
+    }
+}
+
+/**
+ * @fn EcoClassroom::afficheSalleTable
+ * @brief Affiche une salle dans le tableau
+ * @param salle La salle à afficher dans le tableau
+ */
+void EcoClassroom::afficherSalleTable(Salle salle)
+{
+    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
+             << salle.getTemperature() << "humidite" << salle.getHumidite()
+             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
+             << "fenetre" << salle.getFenetre() << "occupation"
+             << salle.getOccupation();
+
+    // créer des élements de cellule
+    QTableWidgetItem *elementNom, *elementTHI, *elementCO2;
+    QLabel *          elementLumiere, *elementFenetre, *elementOccupation;
+
+    elementNom     = new QTableWidgetItem(salle.getNom());
+    elementTHI     = new QTableWidgetItem(QString("Inconnu"));
+    elementCO2     = new QTableWidgetItem(QString::number(0));
+    elementLumiere = new QLabel(this);
+    if(salle.getLumiere())
+        elementLumiere->setPixmap(QPixmap(":/images/led-rouge"));
+    else
+        elementLumiere->setPixmap(QPixmap(":/images/led-verte"));
+    elementFenetre = new QLabel(this);
+    if(salle.getFenetre())
+        elementFenetre->setPixmap(QPixmap(":/images/led-rouge"));
+    else
+        elementFenetre->setPixmap(QPixmap(":/images/led-verte"));
+    elementOccupation = new QLabel(this);
+    if(salle.getOccupation())
+        elementOccupation->setPixmap(QPixmap(":/images/led-rouge"));
+    else
+        elementOccupation->setPixmap(QPixmap(":/images/led-verte"));
+
+    // personnaliser les éléments
+    elementNom->setFlags(Qt::ItemIsEnabled);
+    elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementTHI->setFlags(Qt::ItemIsEnabled);
+    elementTHI->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementCO2->setFlags(Qt::ItemIsEnabled);
+    elementCO2->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementLumiere->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementFenetre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementOccupation->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    // ajouter une ligne
+    int nb = tableWidgetSalles->rowCount();
+    ++nb;
+    tableWidgetSalles->setRowCount(nb);
+
+    // insérer les éléments de cellule
+    tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_NOM, elementNom);
+    tableWidgetSalles->setItem(nb - 1,
+                               COLONNE_SALLE_CONFORT_THERMIQUE,
+                               elementTHI);
+    tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_QUALITE_AIR, elementCO2);
+    tableWidgetSalles->setCellWidget(nb - 1,
+                                     COLONNE_SALLE_LUMIERES,
+                                     elementLumiere);
+    tableWidgetSalles->setCellWidget(nb - 1,
+                                     COLONNE_SALLE_FENETRES,
+                                     elementFenetre);
+    tableWidgetSalles->setCellWidget(nb - 1,
+                                     COLONNE_SALLE_OCCUPATION,
+                                     elementOccupation);
+
+    // redimensionner la hauteur de la table
+    tableWidgetSalles->setFixedHeight(
+      tableWidgetSalles->verticalHeader()->length() +
+      tableWidgetSalles->horizontalHeader()->height());
+}
+
+/**
+ * @fn EcoClassroom::effacerTableauSalles
+ * @brief Effacer le tableau des salles
+ */
+void EcoClassroom::effacerTableauSalles()
+{
+    // on réinitialise la tableau
+    int nb = tableWidgetSalles->rowCount();
+    if(nb != 0)
+    {
+        // on les efface
+        for(int n = 0; n < nb; n++)
+            tableWidgetSalles->removeRow(0);
+    }
+}
+
+/**
+ * @fn EcoClassroom::effacerSalles
+ * @brief Effacer les salles
+ */
+void EcoClassroom::effacerSalles()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    effacerTableauSalles();
+    nbLignesSalles = 0;
+}
+
+// Méthodes privées
 
 /**
  * @fn EcoClassroom::instancierWidgets
@@ -76,8 +265,8 @@ void EcoClassroom::initialiserTable()
                      << "Confort thermique"
                      << "Qualité air"
                      << "Lumières"
-                     << "Présence"
-                     << "État fenêtres";
+                     << "Occupée"
+                     << "Fenêtres";
     tableWidgetSalles->setColumnCount(nomColonnesTable.count());
     tableWidgetSalles->setHorizontalHeaderLabels(nomColonnesTable);
     // Vide (pas de lignes donc pas d'utilisateurs dans la table)
@@ -117,106 +306,13 @@ void EcoClassroom::initialiserGUI()
 }
 
 /**
- * @fn EcoClassroom::afficherFenetre
- * @brief Selectionne la fenêtre à afficher
- * @param[in] fenetre la fenêtre à afficher
+ * @fn EcoClassroom::gererEvenements
+ * @brief Installe les gestionnaire d'évènements (signal/slot)
  */
-void EcoClassroom::afficherFenetre(EcoClassroom::Fenetre fenetre)
+void EcoClassroom::installerGestionEvenements()
 {
-    fenetres->setCurrentIndex(fenetre);
-}
-
-/**
- * @fn EcoClassroom::afficherFenetreAcceuil
- * @brief Affiche la fenêtre d'accueil
- */
-void EcoClassroom::afficherFenetreAcceuil()
-{
-    afficherFenetre(EcoClassroom::Fenetre::Accueil);
-}
-
-/**
- * @fn EcoClassroom::chargerSalles
- * @brief Charger les salles
- */
-void EcoClassroom::chargerSalles()
-{
-    qDebug() << Q_FUNC_INFO;
-    salles.clear();
-
-    // Exemple simple (si pas de base de données)
-    salles.push_back(Salle("B11", 18, "Salle de cours"));
-    salles.push_back(Salle("B20", 65, "Salle de TP"));
-    salles.push_back(Salle("B21", 35, "Salle de Physiques"));
-    // Exemple avec une base de données SQLite
-    /*
-    QVector<QStringList> sallesBDD;
-    QString requete = "SELECT * FROM Salle";
-    bool    retour;
-
-    retour = baseDeDonnees->recuperer(requete, sallesBDD);
-    if(retour)
-    {
-        qDebug() << Q_FUNC_INFO << sallesBDD;
-        for(int i = 0; i < sallesBDD.size(); ++i)
-            qDebug() << Q_FUNC_INFO << sallesBDD[i];
-    }
-    else
-    {
-        QMessageBox::critical(0, "Erreur BDD", "Aucune salle chargée !");
-    }*/
-
-    effacerTableSalles();
-
-    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
-    for(int i = 0; i < salles.size(); ++i)
-    {
-        afficherSalleTable(salles.at(i));
-    }
-}
-
-/**
- * @fn EcoClassroom::effacerTableau
- * @brief Effacer le tableau
- * @param ligne numéro de ligne dans le tableau
- * @param colonne numéro de colonne dans le tableau
- */
-void EcoClassroom::effacerTableau(int ligne, int colonne)
-{
-    Q_UNUSED(ligne)
-    Q_UNUSED(colonne)
-    // on réinitialise la table
-    int nb = tableWidgetSalles->rowCount();
-    if(nb != 0)
-    {
-        // on les efface
-        for(int n = 0; n < nb; n++)
-            tableWidgetSalles->removeRow(0);
-    }
-}
-
-/**
- * @fn EcoClassroom::effacerTableSalles
- * @brief Effacer les lignes du tableau
- */
-void EcoClassroom::effacerTableSalles()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    effacerTableau(0, 0);
-    nbLignesSalles = 0;
-}
-
-/**
- * @fn EcoClassroom::afficheSalleTable
- * @brief Affiche une salle dans le tableau
- * @param salle l'objet Salle à afficher dans le tableau
- */
-void EcoClassroom::afficherSalleTable(Salle salle)
-{
-    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
-             << salle.getTemperature() << "humidite" << salle.getHumidite()
-             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
-             << "fenetre" << salle.getFenetre() << "occupation"
-             << salle.getOccupation();
+    connect(tableWidgetSalles,
+            SIGNAL(cellClicked(int, int)),
+            this,
+            SLOT(selectionnerSalle(int, int)));
 }
