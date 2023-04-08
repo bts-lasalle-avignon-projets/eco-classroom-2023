@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/images">
-        <file>./images/led-verte.png</file>
-        <file>./images/led-rouge.png</file>
+        <file alias="led-verte">images/led-verte.png</file>
+        <file alias="led-rouge">images/led-rouge.png</file>
     </qresource>
 </RCC>

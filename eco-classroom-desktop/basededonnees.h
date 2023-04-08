@@ -1,6 +1,3 @@
-#ifndef BASEDEDONNEES_H
-#define BASEDEDONNEES_H
-
 /**
  * @file basededonnees.h
  * @brief Déclaration de la classe BaseDeDonnees
@@ -8,6 +5,10 @@
  * @version 0.1
  */
 
+#ifndef BASEDEDONNEE_H
+#define BASEDEDONNEE_H
+
+#include <QObject>
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 
