@@ -1,10 +1,11 @@
-#ifndef SALLE_H
-#define SALLE_H
-
 /**
  * @file mesures.h
  * @brief Déclaration de la classe Mesures
  */
+
+#ifndef SALLE_H
+#define SALLE_H
+
 #include <QString>
 
 class Mesures;
@@ -29,6 +30,11 @@ class Salle
     Salle();
     Salle(QString nom, unsigned int superficie, QString description);
     QString      getNom() const;
+    unsigned int getSuperficie() const;
+    QString      getDescription() const;
+    void         setNom(QString nom);
+    void         setSuperficie(unsigned int superficie);
+    void         setDescription(QString description);
     unsigned int getTemperature() const;
     unsigned int getHumidite() const;
     unsigned int getCO2() const;

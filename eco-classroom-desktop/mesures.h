@@ -1,10 +1,9 @@
-#ifndef MESURES_H
-#define MESURES_H
-
 /**
  * @file mesures.h
  * @brief Déclaration de la classe Mesures
  */
+#ifndef MESURES_H
+#define MESURES_H
 
 /**
  * @class Mesures

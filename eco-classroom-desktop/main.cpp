@@ -2,13 +2,13 @@
  * @file main.cpp
  * @brief Définition du main
  */
-#include "ecoclassroom.h"
-
 #include <QApplication>
+#include "ecoclassroom.h"
 
 /**
  * @fn main
- * @brief Méthode principale du programme
+ * @brief Programme principal
+ * @details Crée et affiche la fenêtre principale de l'application
  */
 int main(int argc, char* argv[])
 {

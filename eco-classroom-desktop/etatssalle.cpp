@@ -34,7 +34,6 @@ EtatsSalle::EtatsSalle(bool lumiere, bool fenetre, bool occupation) :
 /**
  * @fn EtatsSalle::~EtatsSalle
  * @brief Destructeur de la clase EtatsSalle
- * @details Libère les ressources de l'application
  */
 EtatsSalle::~EtatsSalle()
 {
@@ -74,6 +73,7 @@ bool EtatsSalle::getOccupation() const
 /**
  * @fn EtatsSalle::setLumiere
  * @brief Setter de l'attribut lumiere
+ * @param lumiere l'état de la lumière dans la salle (true : allumée)
  */
 void EtatsSalle::setLumiere(bool lumiere)
 {
@@ -83,6 +83,7 @@ void EtatsSalle::setLumiere(bool lumiere)
 /**
  * @fn EtatsSalle::setFenetre
  * @brief Setter de l'attribut fenetre
+ * @param fenetre l'état d'ouverture des fenêtres dans la salle (true : ouverte)
  */
 void EtatsSalle::setFenetre(bool fenetre)
 {
@@ -92,6 +93,7 @@ void EtatsSalle::setFenetre(bool fenetre)
 /**
  * @fn EtatsSalle::setOccupation
  * @brief Setter de l'attribut occupation
+ * @param occupation l'état d'occupation de la salle (true : occupée)
  */
 void EtatsSalle::setOccupation(bool occupation)
 {
