@@ -27,6 +27,7 @@ class EcoClassroom : public QMainWindow
     enum Fenetre
     {
         Accueil,
+        InformationSalle,
         NbFenetres
     };
 
@@ -50,25 +51,32 @@ class EcoClassroom : public QMainWindow
     ~EcoClassroom();
 
   private:
+    int                   nbLignesSalles;   //!< Nombre de salles dans la table
+    QMap<QString, Salle*> salles;           //!< Les salles
     QStringList           nomColonnesTable; //!< Le nom des colonnes de la table
-    QWidget*              gui;              //!< Le widget central
-    QStackedWidget*       fenetres;         //!< Pile de fenêtres
-    QTableWidget*         tableWidgetSalles; //!< Affichage sous forme de table
-    int                   nbLignesSalles;    //!< Nombre de salles dans la table
-    QMap<QString, Salle*> salles;            //!< Les salles
+    // Widgets
+    QWidget*        gui;                 //!< Le widget central
+    QStackedWidget* fenetres;            //!< Pile de fenêtres
+    QTableWidget*   tableWidgetSalles;   //!< Affichage sous forme de table
+    QLabel*         labelNomSalle;       //!< Le label pour le nom de la salle
+    QLabel*         nomSalle;            //!< Le nom de salle
+    QPushButton*    boutonRetourAccueil; //!< Bouton de retour
 
     void instancierWidgets();
     void initialiserTable();
+    void initialiserFenetreInformations();
     void initialiserGUI();
     void installerGestionEvenements();
     void chargerSalles();
     void afficherSalleTable(Salle salle);
+    void afficherInformationsSalle(const Salle& salle);
     void effacerTableauSalles();
     void effacerSalles();
 
   public slots:
     void afficherFenetre(EcoClassroom::Fenetre fenetre);
     void afficherFenetreAcceuil();
+    void afficherFenetreInformations();
     void selectionnerSalle(int ligne, int colonne);
 };
 

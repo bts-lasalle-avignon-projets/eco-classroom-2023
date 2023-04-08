@@ -53,6 +53,15 @@ void EcoClassroom::afficherFenetreAcceuil()
 }
 
 /**
+ * @fn EcoClassroom::afficherFenetreInformations
+ * @brief Affiche la fenêtre d'informations
+ */
+void EcoClassroom::afficherFenetreInformations()
+{
+    afficherFenetre(EcoClassroom::Fenetre::InformationSalle);
+}
+
+/**
  * @fn EcoClassroom::selectionnerSalle
  * @brief Sélectionne la salle à afficher
  * @param ligne le numéro de ligne dans le tableau
@@ -66,6 +75,139 @@ void EcoClassroom::selectionnerSalle(int ligne, int colonne)
     // qDebug() << Q_FUNC_INFO << salle->data(0).toString();
     qDebug() << Q_FUNC_INFO << "Salle"
              << salles[salle->data(0).toString()]->getNom();
+    afficherInformationsSalle(*salles[salle->data(0).toString()]);
+}
+
+// Méthodes privées
+
+/**
+ * @fn EcoClassroom::instancierWidgets
+ * @brief Instancie les différents widgets de l'application
+ */
+void EcoClassroom::instancierWidgets()
+{
+    // Le widget principal
+    gui = new QWidget(this);
+    // La pile de fenêtres
+    fenetres                = new QStackedWidget(this);
+    QWidget* fenetreAccueil = new QWidget(this);
+    fenetres->addWidget(fenetreAccueil);
+    QWidget* fenetreInformations = new QWidget(this);
+    fenetres->addWidget(fenetreInformations);
+
+    initialiserTable();
+    initialiserFenetreInformations();
+
+    // Les layouts
+    QVBoxLayout* layoutPrincipal      = new QVBoxLayout();
+    QVBoxLayout* layoutF1Principal    = new QVBoxLayout();
+    QHBoxLayout* layoutF1Table        = new QHBoxLayout();
+    QVBoxLayout* layoutF2Principal    = new QVBoxLayout();
+    QHBoxLayout* layoutF2Informations = new QHBoxLayout();
+    QHBoxLayout* layoutF2Boutons      = new QHBoxLayout();
+
+    // Positionnement
+    // La fenêtre accueil
+    layoutF1Table->addWidget(tableWidgetSalles);
+    layoutF1Principal->addLayout(layoutF1Table);
+    layoutF1Principal->addStretch();
+    fenetreAccueil->setLayout(layoutF1Principal);
+    // La fenêtre d'informations sur une salle
+    layoutF2Informations->addWidget(labelNomSalle);
+    layoutF2Informations->addWidget(nomSalle);
+    layoutF2Informations->addStretch();
+    layoutF2Boutons->addStretch();
+    layoutF2Boutons->addWidget(boutonRetourAccueil);
+    layoutF2Principal->addLayout(layoutF2Informations);
+    layoutF2Principal->addLayout(layoutF2Boutons);
+    layoutF2Principal->addStretch();
+    fenetreInformations->setLayout(layoutF2Principal);
+
+    // La GUI
+    layoutPrincipal->addWidget(fenetres);
+    gui->setLayout(layoutPrincipal);
+    setCentralWidget(gui);
+}
+
+/**
+ * @fn EcoClassroom::initialiserTable
+ * @brief Initialise le QTableWidget qui permet l'affichage de l'état des salles
+ */
+void EcoClassroom::initialiserTable()
+{
+    tableWidgetSalles = new QTableWidget(this);
+
+    // Les colonnes
+    nomColonnesTable << "Salle"
+                     << "Confort thermique"
+                     << "Qualité air"
+                     << "Lumières"
+                     << "Occupée"
+                     << "Fenêtres";
+    tableWidgetSalles->setColumnCount(nomColonnesTable.count());
+    tableWidgetSalles->setHorizontalHeaderLabels(nomColonnesTable);
+    // Vide (pas de lignes donc pas d'utilisateurs dans la table)
+    tableWidgetSalles->setRowCount(0);
+    // Redimensionnement automatique (inutile)
+    // tableWidgetSalles->resizeColumnsToContents();
+    // Pas d'étiquettes numérotées sur le côté gauche
+    tableWidgetSalles->verticalHeader()->setHidden(true);
+    // Taille
+    // tableWidgetSalles->setMinimumSize(QSize(0, 0));
+    // Prend toute la largeur
+    tableWidgetSalles->setMinimumWidth(gui->width());
+    // Hauteur fixe ?
+    // tableWidgetSalles->setMinimumHeight(gui->height());
+    /*cf. setFixedSize()*/
+    tableWidgetSalles->setFixedHeight(
+      tableWidgetSalles->verticalHeader()->length() +
+      tableWidgetSalles->horizontalHeader()->height());
+    // Largeur automatique des colonnes sur toute la largeur
+    QHeaderView* headerView = tableWidgetSalles->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
+    // Pas de scroll
+    tableWidgetSalles->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    tableWidgetSalles->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+}
+
+/**
+ * @fn EcoClassroom::initialiserFenetreInformations
+ * @brief Initialise les widgets de la fenêtre Informations
+ */
+void EcoClassroom::initialiserFenetreInformations()
+{
+    labelNomSalle = new QLabel(this);
+    labelNomSalle->setText("Nom :");
+    nomSalle            = new QLabel(this);
+    boutonRetourAccueil = new QPushButton("Ok", this);
+}
+
+/**
+ * @fn EcoClassroom::initialiserGUI
+ * @brief Initialise et affiche la GUI
+ */
+void EcoClassroom::initialiserGUI()
+{
+    setFixedSize(qApp->desktop()->availableGeometry(this).width(),
+                 qApp->desktop()->availableGeometry(this).height());
+    // showMaximized();
+    afficherFenetreAcceuil();
+}
+
+/**
+ * @fn EcoClassroom::gererEvenements
+ * @brief Installe les gestionnaire d'évènements (signal/slot)
+ */
+void EcoClassroom::installerGestionEvenements()
+{
+    connect(tableWidgetSalles,
+            SIGNAL(cellClicked(int, int)),
+            this,
+            SLOT(selectionnerSalle(int, int)));
+    connect(boutonRetourAccueil,
+            SIGNAL(clicked(bool)),
+            this,
+            SLOT(afficherFenetreAcceuil()));
 }
 
 /**
@@ -189,6 +331,19 @@ void EcoClassroom::afficherSalleTable(Salle salle)
 }
 
 /**
+ * @fn EcoClassroom::afficherInformationsSalle(const Salle& salle)
+ * @brief Affiche les informations d'une salle
+ */
+void EcoClassroom::afficherInformationsSalle(const Salle& salle)
+{
+    qInfo() << " Nom : " << salle.getNom() << "\n"
+            << "Superficie : " << salle.getSuperficie() << "\n"
+            << "Description : " << salle.getDescription();
+    nomSalle->setText(salle.getNom());
+    afficherFenetreInformations();
+}
+
+/**
  * @fn EcoClassroom::effacerTableauSalles
  * @brief Effacer le tableau des salles
  */
@@ -214,105 +369,4 @@ void EcoClassroom::effacerSalles()
 
     effacerTableauSalles();
     nbLignesSalles = 0;
-}
-
-// Méthodes privées
-
-/**
- * @fn EcoClassroom::instancierWidgets
- * @brief Instancie les différents widgets de l'application
- */
-void EcoClassroom::instancierWidgets()
-{
-    // Le widget principal
-    gui = new QWidget(this);
-    // La pile de fenêtres
-    fenetres                = new QStackedWidget(this);
-    QWidget* fenetreAccueil = new QWidget(this);
-    fenetres->addWidget(fenetreAccueil);
-
-    // La table
-    initialiserTable();
-
-    // Les layouts
-    QVBoxLayout* layoutPrincipal   = new QVBoxLayout();
-    QVBoxLayout* layoutF1Principal = new QVBoxLayout();
-    QHBoxLayout* layoutF1Table     = new QHBoxLayout();
-
-    // Positionnement
-    // La fenêtre accueil
-    layoutF1Table->addWidget(tableWidgetSalles);
-    layoutF1Principal->addLayout(layoutF1Table);
-    layoutF1Principal->addStretch();
-    fenetreAccueil->setLayout(layoutF1Principal);
-
-    // La GUI
-    layoutPrincipal->addWidget(fenetres);
-    gui->setLayout(layoutPrincipal);
-    setCentralWidget(gui);
-}
-
-/**
- * @fn EcoClassroom::initialiserTable
- * @brief Initialise le QTableWidget qui permet l'affichage de l'état des salles
- */
-void EcoClassroom::initialiserTable()
-{
-    tableWidgetSalles = new QTableWidget(this);
-
-    // Les colonnes
-    nomColonnesTable << "Salle"
-                     << "Confort thermique"
-                     << "Qualité air"
-                     << "Lumières"
-                     << "Occupée"
-                     << "Fenêtres";
-    tableWidgetSalles->setColumnCount(nomColonnesTable.count());
-    tableWidgetSalles->setHorizontalHeaderLabels(nomColonnesTable);
-    // Vide (pas de lignes donc pas d'utilisateurs dans la table)
-    tableWidgetSalles->setRowCount(0);
-    // Redimensionnement automatique (inutile)
-    // tableWidgetSalles->resizeColumnsToContents();
-    // Pas d'étiquettes numérotées sur le côté gauche
-    tableWidgetSalles->verticalHeader()->setHidden(true);
-    // Taille
-    // tableWidgetSalles->setMinimumSize(QSize(0, 0));
-    // Prend toute la largeur
-    tableWidgetSalles->setMinimumWidth(gui->width());
-    // Hauteur fixe ?
-    // tableWidgetSalles->setMinimumHeight(gui->height());
-    /*cf. setFixedSize()*/
-    tableWidgetSalles->setFixedHeight(
-      tableWidgetSalles->verticalHeader()->length() +
-      tableWidgetSalles->horizontalHeader()->height());
-    // Largeur automatique des colonnes sur toute la largeur
-    QHeaderView* headerView = tableWidgetSalles->horizontalHeader();
-    headerView->setSectionResizeMode(QHeaderView::Stretch);
-    // Pas de scroll
-    tableWidgetSalles->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    tableWidgetSalles->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-}
-
-/**
- * @fn EcoClassroom::initialiserGUI
- * @brief Initialise et affiche la GUI
- */
-void EcoClassroom::initialiserGUI()
-{
-    setFixedSize(qApp->desktop()->availableGeometry(this).width(),
-                 qApp->desktop()->availableGeometry(this).height());
-    // showMaximized();
-    afficherFenetreAcceuil();
-}
-
-/**
- * @fn EcoClassroom::gererEvenements
- * @brief Installe les gestionnaire d'évènements (signal/slot)
- */
-void EcoClassroom::installerGestionEvenements()
-{
-    connect(tableWidgetSalles,
-            SIGNAL(cellClicked(int, int)),
-            this,
-            SLOT(selectionnerSalle(int, int)));
 }

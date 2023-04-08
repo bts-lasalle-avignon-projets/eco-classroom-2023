@@ -1,7 +1,7 @@
 format 224
 "eco-classroom-desktop" // eco-classroom-desktop
-  revision 3
-  modified_by 2 "btssn2"
+  revision 4
+  modified_by 42 "tv"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -67,131 +67,25 @@ ${members}};
       explicit_switch_type ""
       mysql_decl ""
       
-      comment "#define TYPE_BDD \"QMYSQL\"
-#define TYPE_BDD \"QSQLITE\"
-
-@class BaseDeDonnees
-@brief Classe permettant de s'interfacer avec la base de données
+      comment "@class BaseDeDonnees
+@brief Déclaration de la classe permettant l'accès à la base de données MySQL
+@see https://fr.wikipedia.org/wiki/Singleton_(patron_de_conception)
+@author Thierry VAIRA
+@version 0.1
 "
-      classrelation 134570 // <generalisation>
-	relation 134570 ---|>
-	  a public
-	    cpp default "${type}"
-	    classrelation_ref 134570 // <generalisation>
-	  b parent class_ref 134698 // typedef1
-      end
-
-      extra_member 134570 "Q_OBJECT"
-	
-	cpp "  Q_OBJECT" ""
-	java ""
-	php ""
-	python ""
-	idl ""
-	mysql ""
-      end
-
-      classrelation 134698 // baseDeDonnees (<unidirectional association>)
-	relation 134698 --->
-	  a role_name "baseDeDonnees" init_value "= nullptr" class_relation private
-	    comment "!< objet base de données"
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
-"
-	    classrelation_ref 134698 // baseDeDonnees (<unidirectional association>)
-	  b parent class_ref 134570 // BaseDeDonnees
-      end
-
-      attribute 134570 "typeBase"
-	class_attribute private explicit_type "QString"
-	init_value "= TYPE_BDD"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< type de base de données (MySQL, SQLite, ...)"
-      end
-
-      attribute 134698 "nbAcces"
-	class_attribute private explicit_type "int"
-	init_value "= 0"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< le nombre d'accès en cours à la base de données"
-      end
-
-      attribute 134826 "db"
-	private explicit_type "QSqlDatabase"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< connexion avec la base de données"
-      end
-
-      attribute 134954 "mutex"
-	private explicit_type "QMutex"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< protection multi-thread"
-      end
-
-      operation 134570 "BaseDeDonnees"
-	preserve_cpp_body_indent private explicit_return_type ""
-	nparams 1
-	  param in name "type" explicit_type "QString"
-	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)}${throw}{
-${body}}
-"
-	
-	
-	
-	
-      end
-
-      operation 134698 "~BaseDeDonnees"
-	preserve_cpp_body_indent private explicit_return_type ""
-	nparams 0
-	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
-${body}}
-"
-	
-	
-	
-	
-      end
-
       operation 134826 "getInstance"
 	class_operation preserve_cpp_body_indent public return_type class_ref 134570 // BaseDeDonnees
-	nparams 1
-	  param in name "type" explicit_type "QString"
-	    defaultvalue "TYPE_BDD"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@brief Définition méthode getInstance()
+//@fn BaseDeDonnees::getInstance
+//@details Permet l'instanciation d'un objet BaseDeDonnees en vérifiant qu'il
+//n'en existe pas déja un
+//@return BaseDeDonnees l'instance unique
+//
+
+${inline}${typeprefix}${type} * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -205,7 +99,13 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@brief Définition méthode detruireInstance()
+//@fn BaseDeDonnees::detruireInstance
+//@details Détruit l'instance de la BaseDeDonnees si elle existe et si personne
+//l'utilise
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -218,57 +118,46 @@ ${body}}
 	preserve_cpp_body_indent public explicit_return_type "bool"
 	nparams 4
 	  param in name "nomBase" explicit_type "QString"
+	    defaultvalue "DATABASENAME"
 	  param in name "username" explicit_type "QString"
+	    defaultvalue "USERNAME"
 	  param in name "password" explicit_type "QString"
+	    defaultvalue "PASSWORD"
 	  param in name "serveur" explicit_type "QString"
+	    defaultvalue "HOSTNAME"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${const}${throw}${staticnl}{
+	cpp_def "//@brief Définition méthode connecter()
+//@fn BaseDeDonnees::connecter
+//@details Permet de se connecter à la base de données
+//@param[in] nomBase le nom de la base de données MySQL
+//@param[in] username l'identifiant d'accès à la base de données
+//@param[in] password le mot de passe d'accès à la base de données
+//@param[in] serveur l'adresse du serveur MySQL
+//@return bool
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${const}${throw}${staticnl}{
 ${body}}
 "
 	
 	
 	
 	
-	comment " MySQL"
       end
 
-      operation 135210 "estConnecte"
+      operation 148650 "estConnectee"
 	preserve_cpp_body_indent public explicit_return_type "bool"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
-      end
+	cpp_def "//@brief Retourne l'état de connexion à la base de données
+//@fn BaseDeDonnees::estConnectee
+//@details Retourne l'état de connexion à la base de données
+//@return bool true si la base de données est connectée sinon false
+//
 
-      operation 135338 "ouvrir"
-	preserve_cpp_body_indent public explicit_return_type "bool"
-	nparams 1
-	  param in name "fichierBase" explicit_type "QString"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
-	comment " SQLite"
-      end
-
-      operation 135466 "estOuvert"
-	preserve_cpp_body_indent public explicit_return_type "bool"
-	nparams 0
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -283,17 +172,21 @@ ${body}}
 	  param in name "requete" explicit_type "QString"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@brief Exécute une requête SQL de type UPDATE, INSERT et DELETE
+//@fn bool BaseDeDonnees::executer(QString requete)
+//@details Exécute une requête SQL de type UPDATE, INSERT et DELETE
+//@param[in] requete une requête SQL de type UPDATE, INSERT et DELETE
+//@return bool true si la requête a été exécutée avec succès sinon false
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
 	
 	
 	
-	comment "@brief Exécuter une requête de type INSERT, UPDATE ou DELETE
-@param requete
-@return bool
-"
+	comment " uniquement pour les requêtes UPDATE, INSERT et DELETE "
       end
 
       operation 135722 "recuperer"
@@ -303,18 +196,22 @@ ${body}}
 	  param inout name "donnees" explicit_type "QString"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@brief Exécute une requête SQL de type SELECT et récupère un champ d'un seul
+//enregistrement
+//@fn bool BaseDeDonnees::recuperer(QString requete, QString &donnees)
+//@param[in] requete une requête SQL de type SELECT
+//@param[out] donnees le champ QString récupéré
+//@return bool true si la requête a été exécutée avec succès sinon false
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
 	
 	
 	
-	comment "@brief Récuperer un champ d'un enregistrement
-@param requete SELECT
-@param donnees
-@return bool
-"
+	comment " uniquement pour les requêtes SELECT "
       end
 
       operation 135850 "recuperer"
@@ -324,18 +221,23 @@ ${body}}
 	  param inout name "donnees" explicit_type "QStringList"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@brief Exécute une requête SQL de type SELECT et récupère plusieurs champs
+//d'un seul enregistrement
+//@fn bool BaseDeDonnees::recuperer(QString requete, QStringList &donnees)
+//@param[in] requete une requête SQL de type SELECT
+//@param[out] donnees plusieurs champs d'un seul enregistrement dans un
+//QStringList
+//@return bool true si la requête a été exécutée avec succès sinon false
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
 	
 	
 	
-	comment "@brief Récuperer plusieurs champs d'un enregistrement
-@param requete SELECT
-@param donnees
-@return bool
-"
+	comment " 1 -> 1"
       end
 
       operation 135978 "recuperer"
@@ -345,18 +247,23 @@ ${body}}
 	  param inout name "donnees" explicit_type "QVector<QString>"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@brief Exécute une requête SQL de type SELECT et récupère un seul champ de
+//plusieurs enregistrements
+//@fn bool BaseDeDonnees::recuperer(QString requete, QVector<QString> &donnees)
+//@param[in] requete une requête SQL de type SELECT
+//@param[out] donnees un seul champ de plusieurs enregistrements dans un
+//QVector de QString
+//@return bool true si la requête a été exécutée avec succès sinon false
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
 	
 	
 	
-	comment "@brief Récuperer un champs de plusieurs enregistrements
-@param requete SELECT
-@param donnees
-@return bool
-"
+	comment " 1 -> 1..*"
       end
 
       operation 136106 "recuperer"
@@ -366,39 +273,100 @@ ${body}}
 	  param inout name "donnees" explicit_type "QVector<QStringList>"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@brief Exécute une requête SQL de type SELECT et récupère plusieurs champs de
+//plusieurs enregistrements
+//@param[in] requete une requête SQL de type SELECT
+//@param[out] donnees : plusieurs champs de plusieurs enregistrements dans un
+//QVector de QStringList
+//@return bool true si la requête a été exécutée avec succès sinon false
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
 	
 	
 	
-	comment "@brief Récuperer plusieurs champs de plusieurs enregistrements
-@param requete SELECT
-@param donnees
-@return bool
+	comment " 1..* -> 1"
+      end
+
+      operation 134570 "BaseDeDonnees"
+	preserve_cpp_body_indent private explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
 "
+	cpp_def "//@brief Définition du constructeur par défaut de la classe BaseDeDonnees
+//@fn BaseDeDonnees::BaseDeDonnees
+//@details Initialise le type MySQL pour la connexion à la base de données
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment " 1..* -> 1..*"
       end
 
-      extra_member 134698 "signals"
+      operation 134698 "~BaseDeDonnees"
+	preserve_cpp_body_indent private explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Définition du destructeur de la classe BaseDeDonnees
+//@fn BaseDeDonnees::~BaseDeDonnees
+//@details Destructeur de la classe BaseDeDonnees
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
 	
-	cpp "  signals:" ""
-	java ""
-	php ""
-	python ""
-	idl ""
-	mysql ""
+	
+	
+	
       end
 
-      extra_member 134826 "slots"
-	
-	cpp "  public slots:" ""
-	java ""
-	php ""
-	python ""
-	idl ""
-	mysql ""
+      attribute 134826 "db"
+	private explicit_type "QSqlDatabase"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< pour la connexion à la base de données MySQL"
       end
+
+      classrelation 141738 // bdd (<unidirectional association>)
+	relation 141738 --->
+	  a role_name "bdd" init_value "= nullptr" class_relation private
+	    comment "!< pointeur sur l'instance unique"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 141738 // bdd (<unidirectional association>)
+	  b parent class_ref 134570 // BaseDeDonnees
+      end
+
+      attribute 134698 "nbAcces"
+	class_attribute private explicit_type "int"
+	init_value "= 0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< compte le nombre d'accès à l'instance unique"
+      end
+
     end
 
     class 134698 "typedef1"
@@ -427,12 +395,19 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      comment "@class communiquationmqtt.h
+@brief Classe permettant de gérer la communication MQTT
+"
       operation 136234 "CommunicationMQTT"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 0
 	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+	cpp_def "//@fn Communication::CommunicationMQTT
+//@brief Constructeur par défaut de la classe CommunicationMQTT
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
 	
@@ -446,7 +421,11 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+	cpp_def "//@fn Communication::CommunicationMQTT
+//@brief Destructeur de la classe CommunicationMQTT
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
 	
@@ -470,7 +449,7 @@ ${inlines}
       mysql_decl ""
       
       comment "@class EcoClassroom
-@brief Déclaration de la classe EcoClassroom
+@brief Classe permettant de faire l'IHM du projet Eco classroom
 @details La GUI de l'application
 "
       classrelation 134826 // <generalisation>
@@ -514,8 +493,109 @@ ${items}};
 	  MysqlColumn
 	end
 
+	attribute 143274 "InformationSalle"
+	  public type class_ref 135210 // Fenetre
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
 	attribute 135210 "NbFenetres"
 	  public type class_ref 135210 // Fenetre
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
+      class 142122 "ColonneTableau"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 143402 "COLONNE_SALLE_NOM"
+	  public type class_ref 142122 // ColonneTableau
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 143530 "COLONNE_SALLE_CONFORT_THERMIQUE"
+	  public type class_ref 142122 // ColonneTableau
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 143658 "COLONNE_SALLE_QUALITE_AIR"
+	  public type class_ref 142122 // ColonneTableau
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 143786 "COLONNE_SALLE_FENETRES"
+	  public type class_ref 142122 // ColonneTableau
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 143914 "COLONNE_SALLE_LUMIERES"
+	  public type class_ref 142122 // ColonneTableau
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 144042 "COLONNE_SALLE_OCCUPATION"
+	  public type class_ref 142122 // ColonneTableau
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 144170 "NB_COLONNES_TABLEAU"
+	  public type class_ref 142122 // ColonneTableau
 	  cpp_decl "  ${name}${value},${comment}"
 	  java_decl ""
 	  php_decl ""
@@ -567,58 +647,28 @@ ${body}}
 	
       end
 
-      operation 136746 "afficherSalleTable"
-	preserve_cpp_body_indent public explicit_return_type "void"
-	nparams 1
-	  param in name "salle" type class_ref 135338 // Salle
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+      attribute 135850 "nbLignesSalles"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Nombre de salles dans la table"
       end
 
-      operation 138794 "afficherFenetre"
-	stereotype "slots"
-	preserve_cpp_body_indent public explicit_return_type "void"
-	nparams 1
-	  param in name "fenetre" type class_ref 135210 // Fenetre
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+      classrelation 134954 // salles (<directional composition>)
+	relation 134954 *-->
+	  stereotype "QMap"
+	  a role_name "salles" private
+	    comment "!< Les salles"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<QString,${type}*> ${name}${value};
 "
-	cpp_def "//@fn EcoClassroom::afficherFenetre(EcoClassroom::Fenetre fenetre)
-//@brief Selectionne la fenêtre à afficher
-//
-
-${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
-      end
-
-      operation 138922 "afficherFenetreAcceuil"
-	stereotype "slots"
-	preserve_cpp_body_indent public explicit_return_type "void"
-	nparams 0
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "//@fn EcoClassroom::afficherFenetreAcceuil
-//@brief Affiche la fenêtre d'accueil
-//
-
-${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
+	    classrelation_ref 134954 // salles (<directional composition>)
+	  b parent class_ref 135338 // Salle
       end
 
       attribute 135338 "nomColonnesTable"
@@ -644,7 +694,8 @@ ${body}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< Le widget central"
+	comment " Widgets
+!< Le widget central"
       end
 
       attribute 135594 "fenetres"
@@ -673,9 +724,9 @@ ${body}}
 	comment "!< Affichage sous forme de table"
       end
 
-      attribute 135850 "nbLignesSalles"
-	private explicit_type "int"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+      attribute 144298 "labelNomSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	java_decl ""
 	php_decl ""
@@ -683,18 +734,33 @@ ${body}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< Nombre de salles dans la table"
+	comment "!< Le label pour le nom de la salle"
       end
 
-      classrelation 134954 // salles (<directional composition>)
-	relation 134954 *-->
-	  stereotype "QList"
-	  a role_name "salles" private
-	    comment "!< Les salles"
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+      attribute 144426 "nomSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
-	    classrelation_ref 134954 // salles (<directional composition>)
-	  b parent class_ref 135338 // Salle
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le nom de salle"
+      end
+
+      attribute 144554 "boutonRetourAccueil"
+	private explicit_type "QPushButton"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Bouton de retour"
       end
 
       operation 138026 "instancierWidgets"
@@ -702,7 +768,9 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn EcoClassroom::instancierWidgets
+	cpp_def "// Méthodes privées
+//
+//@fn EcoClassroom::instancierWidgets
 //@brief Instancie les différents widgets de l'application
 //
 
@@ -733,6 +801,24 @@ ${body}}
 	
       end
 
+      operation 148778 "initialiserFenetreInformations"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::initialiserFenetreInformations
+//@brief Initialise les widgets de la fenêtre Informations
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 138282 "initialiserGUI"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
@@ -751,12 +837,34 @@ ${body}}
 	
       end
 
+      operation 148906 "installerGestionEvenements"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::gererEvenements
+//@brief Installe les gestionnaire d'évènements (signal/slot)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 138410 "chargerSalles"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn EcoClassroom::chargerSalles
+//@brief Charger les salles
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -765,14 +873,18 @@ ${body}}
 	
       end
 
-      operation 138538 "effacerTableau"
+      operation 136746 "afficherSalleTable"
 	preserve_cpp_body_indent private explicit_return_type "void"
-	nparams 2
-	  param in name "ligne" explicit_type "int"
-	  param in name "colonne" explicit_type "int"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+	nparams 1
+	  param in name "salle" type class_ref 135338 // Salle
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn EcoClassroom::afficheSalleTable
+//@brief Affiche une salle dans le tableau
+//@param salle La salle à afficher dans le tableau
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -781,12 +893,53 @@ ${body}}
 	
       end
 
-      operation 138666 "effacerTableSalles"
+      operation 149034 "afficherInformationsSalle"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "salle" type class_ref 135338 // Salle
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::afficherInformationsSalle(const Salle& salle)
+//@brief Affiche les informations d'une salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 149162 "effacerTableauSalles"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn EcoClassroom::effacerTableauSalles
+//@brief Effacer le tableau des salles
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 149290 "effacerSalles"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::effacerSalles
+//@brief Effacer les salles
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -803,6 +956,89 @@ ${body}}
 	python ""
 	idl ""
 	mysql ""
+      end
+
+      operation 138794 "afficherFenetre"
+	stereotype "slots"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "fenetre" type class_ref 135210 // Fenetre
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Méthodes publiques
+// Slots
+//
+//@fn EcoClassroom::afficherFenetre
+//@brief Selectionne la fenêtre à afficher
+//@param[in] fenetre la fenêtre à afficher
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 138922 "afficherFenetreAcceuil"
+	stereotype "slots"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::afficherFenetreAcceuil
+//@brief Affiche la fenêtre d'accueil
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 149418 "afficherFenetreInformations"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::afficherFenetreInformations
+//@brief Affiche la fenêtre d'informations
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 149546 "selectionnerSalle"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::selectionnerSalle
+//@brief Sélectionne la salle à afficher
+//@param ligne le numéro de ligne dans le tableau
+//@param colonne le numéro de colonne dans le tableau (non utilisé)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
       end
 
     end
@@ -833,6 +1069,9 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      comment "@class EcoClassroom
+@brief Classe permettant de gérer une salle
+"
       attribute 136490 "nom"
 	private explicit_type "QString"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
@@ -843,6 +1082,7 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Nom de la salle"
       end
 
       attribute 136618 "superficie"
@@ -855,6 +1095,7 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Superficie de la salle"
       end
 
       attribute 136746 "description"
@@ -867,11 +1108,13 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Description de la salle"
       end
 
       classrelation 135082 // mesures (<unidirectional association>)
 	relation 135082 --->
 	  a role_name "mesures" private
+	    comment "!<  Relation entre la classe Salle et Mesures (agrégation)"
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	    classrelation_ref 135082 // mesures (<unidirectional association>)
@@ -881,6 +1124,7 @@ ${inlines}
       classrelation 135210 // etats (<unidirectional association>)
 	relation 135210 --->
 	  a role_name "etats" private
+	    comment "!< Relation entre la classe Salle et EtatsSalle (agrégation)"
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	    classrelation_ref 135210 // etats (<unidirectional association>)
@@ -892,7 +1136,16 @@ ${inlines}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)} :
+	cpp_def "//@fn Salle::Salle
+//@brief Constructeur par défaut de la classe Salle
+//@param nom données d'information sur le nom de la salle
+//@param superficie données d'information sur la superficie de la salle
+//@param description données d'information sur la descrption de la salle
+//@param mesures construction d'un objet mesures de la classe Mesures
+//@param etats construction d'un objet etats de la classe EtatsSalle
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} :
     nom(\"\"), superficie(0), description(\"\"), mesures(new Mesures),
     etats(new EtatsSalle)
 ${throw}{
@@ -912,7 +1165,11 @@ ${body}}
 	  param in name "description" explicit_type "QString"
 	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
+	cpp_def "//@fn Salle::~Salle
+//@brief Destructeur de la classe Salle
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
     nom(nom), superficie(superficie), description(description),
     mesures(new Mesures), etats(new EtatsSalle)
 ${throw}{
@@ -929,7 +1186,110 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Salle::getNom
+//@brief Getter de l'attribut nom
+//@return string le nom de la salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 149674 "getSuperficie"
+	preserve_cpp_body_indent const public explicit_return_type "uint"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Salle::getSuperficie
+//@brief Getter de l'attribut superficie
+//@return unsigned int la superficie de la salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 149802 "getDescription"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Salle::getDescription
+//@brief Getter de l'attribut description
+//@return string la description de la salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 149930 "setNom"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "nom" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Salle::setNom
+//@brief Setter de l'attribut nom
+//@param nom
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 150058 "setSuperficie"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "superficie" explicit_type "uint"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Salle::setSuperficie
+//@brief Setter de l'attribut superficie
+//@param superficie
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 150186 "setDescription"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "description" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Salle::setDescription
+//@brief Setter de l'attribut description
+//@param description
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -943,7 +1303,11 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Salle::getTemperature
+//@brief Getter qui récupère la temperature
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -957,7 +1321,11 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Salle::getHumidite
+//@brief Getter qui récupère l'humidite
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -971,7 +1339,11 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Salle::getCO2
+//@brief Getter qui récupère le CO2
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -985,8 +1357,12 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "//@fn Salle::getLumiere
+//@brief Getter qui récupère l'etat de la lumiere
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -999,8 +1375,12 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "//@fn Salle::getFenetre
+//@brief Getter qui récupère l'etat de la fenetre
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1013,7 +1393,11 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Salle::getOccupation
+//@brief Getter qui récupère l'etat de l'occupation de la salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1027,9 +1411,6 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
 	
 	
 	
@@ -1041,9 +1422,6 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
 	
 	
 	
@@ -1054,9 +1432,6 @@ ${body}}
 	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
 "
 	
 	
@@ -1078,6 +1453,9 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      comment "@class EtatsSalle
+@brief Classe permettant de gérer les etats d'une salle
+"
       attribute 135298 "lumiere"
 	private explicit_type "bool"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
@@ -1088,6 +1466,7 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Lumiere allumée ou éteinte dans la salle"
       end
 
       attribute 135426 "fenetre"
@@ -1100,6 +1479,7 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Fenetre de la salle ouverte ou fermée"
       end
 
       attribute 135554 "occupation"
@@ -1112,6 +1492,7 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Des personnes ou pas dans la salle"
       end
 
       operation 139050 "EtatsSalle"
@@ -1119,7 +1500,14 @@ ${inlines}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)} : lumiere(false), fenetre(false), occupation(false)
+	cpp_def "//@fn EtatsSalle::EtatsSalle
+//@brief Constructeur par defaut de la classe EtatsSalle
+//@param lumiere l'état de la lumière dans la salle
+//@param fenetre l'état d'ouverture des fenêtres de la salle
+//@param occupation l'état d'occupation de la salle
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} : lumiere(false), fenetre(false), occupation(false)
 ${throw}{
 ${body}}
 "
@@ -1137,7 +1525,14 @@ ${body}}
 	  param in name "occupation" explicit_type "bool"
 	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
+	cpp_def "//@fn EtatsSalle::EtatsSalle
+//@brief Constructeur d'initialisation de la classe EtatsSalle
+//@param lumiere l'état de la lumière dans la salle (true : allumée)
+//@param fenetre l'état d'ouverture des fenêtres de la salle (true : ouverte)
+//@param occupation l'état d'occupation de la salle (true : occupée)
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
     lumiere(lumiere), fenetre(fenetre), occupation(occupation)
 ${throw}{
 ${body}}
@@ -1153,7 +1548,11 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+	cpp_def "//@fn EtatsSalle::~EtatsSalle
+//@brief Destructeur de la clase EtatsSalle
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
 	
@@ -1167,7 +1566,12 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn EtatsSalle::getLumiere
+//@brief Getter de l'attribut lumiere
+//@return bool l'état de la lumière dans la salle (true : allumée)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1181,7 +1585,12 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn EtatsSalle::getFenetre
+//@brief Getter de l'attribut fenetre
+//@return bool l'état d'une fenetre dans la salle (true : ouverte)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1195,7 +1604,12 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn EtatsSalle::getOccupation
+//@brief Getter de l'attribut occupation
+//@return bool l'état de l'occupation dans la salle (true : Occupé)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1210,8 +1624,13 @@ ${body}}
 	  param in name "lumiere" explicit_type "bool"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "//@fn EtatsSalle::setLumiere
+//@brief Setter de l'attribut lumiere
+//@param lumiere l'état de la lumière dans la salle (true : allumée)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1225,8 +1644,13 @@ ${body}}
 	  param in name "fenetre" explicit_type "bool"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "//@fn EtatsSalle::setFenetre
+//@brief Setter de l'attribut fenetre
+//@param fenetre l'état d'ouverture des fenêtres dans la salle (true : ouverte)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1240,8 +1664,13 @@ ${body}}
 	  param in name "occupation" explicit_type "bool"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "//@fn EtatsSalle::setOccupation
+//@brief Setter de l'attribut occupation
+//@param occupation l'état d'occupation de la salle (true : occupée)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1263,6 +1692,9 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      comment "@class Mesures
+@brief Classe permettant de gérer les mesures d'une salle
+"
       attribute 135978 "temperature"
 	private explicit_type "double"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
@@ -1273,6 +1705,7 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Temperature dans la salle"
       end
 
       attribute 136106 "humidite"
@@ -1285,6 +1718,7 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Humidite dans la salle"
       end
 
       attribute 136234 "co2"
@@ -1297,18 +1731,7 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-      end
-
-      attribute 136362 "luminosite"
-	private explicit_type "uint"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
+	comment "!< Taux de CO2 dans la salle"
       end
 
       operation 139690 "Mesures"
@@ -1316,7 +1739,14 @@ ${inlines}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)} : temperature(0.), humidite(0), co2(0), luminosite(0)
+	cpp_def "//@fn Mesures::Mesures
+//@brief Constructeur de la classe Mesures
+//@param temperature mesure de la temperature dans la salle
+//@param humidite mesure de l'humidite dans la salle
+//@param co2 mesure du co2 dans la salle
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} : temperature(0.), humidite(0), co2(0)
 ${throw}{
 ${body}}
 "
@@ -1331,7 +1761,11 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+	cpp_def "//@fn Mesures::~Mesures
+//@brief Destructeur de la classe Mesures
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
 	
@@ -1345,7 +1779,12 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Mesures::getTemperature
+//@brief Getter de l'attribut temperature
+//@return int la valeur de la temperature (C°)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1359,7 +1798,12 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Mesures::getHumidite
+//@brief Getter de l'attribut humidite
+//@return int la valeur de l'humidité (%)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1373,21 +1817,12 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
-      end
+	cpp_def "//@fn Mesures::getCO2
+//@brief Getter de l'attribut co2
+//@return int la valeur du co2 (ppm)
+//
 
-      operation 140330 "getLuminosite"
-	preserve_cpp_body_indent const public explicit_return_type "uint"
-	nparams 0
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1402,7 +1837,12 @@ ${body}}
 	  param in name "temperature" explicit_type "double"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Mesures::setTemperature
+//@brief Setter de l'attribut temperature
+//@param temperature mesure de la temperature dans la salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1417,7 +1857,12 @@ ${body}}
 	  param in name "humidite" explicit_type "uint"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Mesures::setHumidite
+//@brief Setter de l'attribut humidite
+//@param humidite mesure de l'humidite dans la salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1432,7 +1877,12 @@ ${body}}
 	  param in name "co2" explicit_type "uint"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "//@fn Mesures::setCO2
+//@brief Setter de l'attribut co2
+//@param co2 mesure du co2 dans la salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1441,20 +1891,6 @@ ${body}}
 	
       end
 
-      operation 140842 "setLuminosite"
-	preserve_cpp_body_indent public explicit_return_type "void"
-	nparams 1
-	  param in name "luminosite" explicit_type "uint"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
-      end
     end
 
     classdiagram 134570 "diagramme classes"
@@ -1490,6 +1926,16 @@ ${includes}
 ${namespace_start}
 ${members}
 ${namespace_end}"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
       associated_elems
 	class_ref 134570 // BaseDeDonnees
       end
@@ -1541,29 +1987,6 @@ ${namespace_end}"
       end
     end
 
-    artifact 134954 "etatsalle"
-      stereotype "source"
-      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
-#define ${NAMESPACE}_${NAME}_H
-
-${comment}
-${includes}
-${declarations}
-${namespace_start}
-${definition}
-${namespace_end}
-#endif
-"
-      cpp_src "${comment}
-${includes}
-${namespace_start}
-${members}
-${namespace_end}"
-      associated_elems
-	class_ref 135466 // EtatsSalle
-      end
-    end
-
     artifact 135082 "mesures"
       stereotype "source"
       cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
@@ -1612,7 +2035,13 @@ ${namespace_end}"
 
     artifact 135338 "main"
       stereotype "source"
-      cpp_src "int main(int argc, char *argv[])
+      cpp_src "//
+//@fn main
+//@brief Programme principal
+//@details Crée et affiche la fenêtre principale de l'application
+//
+
+int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
     EcoClassroom ecoClassroom;
