@@ -1,4 +1,12 @@
+/**
+ * @file Salle.java
+ * @brief Le concept de Salle
+ * @author Mercklen Jérémy
+ */
+
 package com.lasalle.eco_classroom_mobile;
+
+import android.util.Log;
 
 /**
  * @class Salle
@@ -6,6 +14,16 @@ package com.lasalle.eco_classroom_mobile;
  */
 public class Salle
 {
+    /**
+     * Constantes
+     */
+    private static final String TAG = "_Salle_"; //!< TAG pour les logs (cf. Logcat)
+    public static final int INDICE_QUALITE_AIR_MIN = 1; //!< l'indice de qualité de l'air minimum
+    public static final int INDICE_CONFORT_THERMIQUE_MIN = -3; //!< l'indice de confort thermique minimum
+
+    /**
+     * Attributs
+     */
     private String  nom;              //!< le nom
     private String  description;      //!< le type
     private double  superficie;       //!< la superficie en m2
@@ -35,9 +53,15 @@ public class Salle
      */
     public Salle(String nom, double superficie, String description)
     {
+        Log.d(TAG, "Salle("+nom+", "+superficie+", "+description+")");
         this.nom         = nom;
         this.description = description;
         this.superficie  = superficie;
+        this.qualiteAir       = 0;
+        this.confortThermique = -4;
+        this.etatFenetre      = false;
+        this.etatLumiere      = false;
+        this.estOccupe        = false;
     }
 
     /**
@@ -59,7 +83,7 @@ public class Salle
     /**
      * @brief Accesseur de l'attribut confortThermique
      */
-    public int getconfortThermique()
+    public int getConfortThermique()
     {
         return this.confortThermique;
     }
@@ -87,4 +111,16 @@ public class Salle
     {
         return this.estOccupe;
     }
+
+    /**
+     * @brief Mutateur de l'attribut estOccupe
+     */
+    public void setEstOccupe(Boolean estOccupe)
+    {
+        this.estOccupe = estOccupe;
+    }
+
+    /**
+     * @todo Ajouter mutateurs
+     */
 }

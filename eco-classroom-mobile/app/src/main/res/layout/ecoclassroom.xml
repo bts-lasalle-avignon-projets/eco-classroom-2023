@@ -11,7 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Eco Classroom"
+        android:padding="15dp"
+        android:text="Salles"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
@@ -35,6 +38,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Nom" />
 
             <TextView
@@ -42,6 +47,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Qualité de l'air" />
 
             <TextView
@@ -49,6 +56,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Confort thermique" />
 
             <TextView
@@ -56,6 +65,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Fenêtre" />
 
             <TextView
@@ -63,6 +74,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Lumière" />
 
             <TextView
@@ -70,7 +83,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_weight="4"
-                android:text="Presence" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Présence" />
         </TableRow>
 
         <TableRow

@@ -150,5 +150,12 @@ public class EcoClassroom extends AppCompatActivity
         ajouterSalle("B11", "Salle de cours", 18);
         ajouterSalle("B20", "Salle de TP", 65);
         ajouterSalle("B21", "Salle de Physiques", 40);
+
+        // Pour les tests
+        for(int i = 0; i < salles.size(); i++)
+        {
+            if(i%2 == 0)
+                salles.get(i).setEstOccupe(true);
+        }
     }
 }

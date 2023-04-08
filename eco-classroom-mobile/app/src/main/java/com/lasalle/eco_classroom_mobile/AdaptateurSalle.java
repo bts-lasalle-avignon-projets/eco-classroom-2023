@@ -1,3 +1,9 @@
+/**
+ * @file AdaptateurSalle.java
+ * @brief Lien entre les données et les vues (RecyclerView)
+ * @author Mercklen Jérémy
+ */
+
 package com.lasalle.eco_classroom_mobile;
 
 import android.util.Log;
@@ -19,7 +25,7 @@ public class AdaptateurSalle extends RecyclerView.Adapter<VueSalle>
     /**
      * Constantes
      */
-    private static final String TAG = "_SalleAdapter_"; //!< TAG pour les logs (cf. Logcat)
+    private static final String TAG = "_AdaptateurSalle_"; //!< TAG pour les logs (cf. Logcat)
 
     /**
      * Attributs
@@ -31,7 +37,7 @@ public class AdaptateurSalle extends RecyclerView.Adapter<VueSalle>
      */
     public AdaptateurSalle(Vector<Salle> salles)
     {
-        Log.d(TAG, "SalleAdapter(Vector<Salle> salles)");
+        Log.d(TAG, "AdaptateurSalle(Vector<Salle> salles)");
         if(salles != null)
         {
             this.salles = salles;

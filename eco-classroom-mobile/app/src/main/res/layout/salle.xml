@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="4dp"
     android:layout_width="match_parent"
@@ -14,34 +15,43 @@
             android:id="@+id/nom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"/>
+            android:layout_weight="4"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/qualiteAir"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:layout_weight="4" />
+            android:layout_weight="4"
+            android:textSize="16sp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/confortThermique"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"/>
-        <TextView
+            android:layout_weight="4"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <ImageView
             android:id="@+id/fenetre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"/>
-        <TextView
+            android:layout_weight="4"
+            app:srcCompat="@drawable/led_rouge" />
+        <ImageView
             android:id="@+id/lumiere"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"/>
-        <TextView
+            android:layout_weight="4"
+            app:srcCompat="@drawable/led_rouge" />
+
+        <ImageView
             android:id="@+id/presence"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"/>
+            android:layout_weight="4"
+            app:srcCompat="@drawable/led_rouge" />
     </LinearLayout>
 
 </LinearLayout>
