@@ -1,0 +1,34 @@
+format 224
+
+classcanvas 128042 class_ref 134954 // EcoClassroom
+  classdiagramsettings member_max_width 0 end
+  xyz 38 23 2000
+end
+classcanvas 128170 class_ref 135338 // Salle
+  classdiagramsettings member_max_width 0 end
+  xyz 1430 215 2006
+end
+classcanvas 128426 class_ref 135466 // EtatsSalle
+  classdiagramsettings member_max_width 0 end
+  xyz 1476 857 2012
+end
+classcanvas 128682 class_ref 135594 // Mesures
+  classdiagramsettings member_max_width 0 end
+  xyz 1898 857 3005
+end
+relationcanvas 128298 relation_ref 134954 // <directional composition>
+  from ref 128042 z 2007 stereotype "<<QList>>" xyz 1009.5 444 2007 to ref 128170
+  role_a_pos 1334 404 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128554 relation_ref 135210 // <unidirectional association>
+  from ref 128170 z 2013 to ref 128426
+  role_a_pos 1704 816 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128810 relation_ref 135082 // <unidirectional association>
+  from ref 128170 z 3006 to ref 128682
+  role_a_pos 2096 816 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

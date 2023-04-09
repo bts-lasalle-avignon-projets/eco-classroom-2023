@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet eco-classroom:  Fichier source de ecoclassroom.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet eco-classroom
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('ecoclassroom_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">ecoclassroom.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ecoclassroom_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef ECOCLASSROOM_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define ECOCLASSROOM_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QtWidgets&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QMap&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="class_salle.html">Salle</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_eco_classroom.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_eco_classroom.html">EcoClassroom</a> : <span class="keyword">public</span> <a class="code" href="class_q_main_window.html">QMainWindow</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996">   27</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996">Fenetre</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a625638fa556c0b765f57002baf65e26f">   29</a></span>&#160;        <a class="code" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a625638fa556c0b765f57002baf65e26f">Accueil</a>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a021429e73f38fad6f54fc27f5929b964">   30</a></span>&#160;        <a class="code" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a021429e73f38fad6f54fc27f5929b964">InformationSalle</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a0f4ce2a6d238737a140d89a670c18f17">NbFenetres</a></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a0f4ce2a6d238737a140d89a670c18f17">   32</a></span>&#160;    };</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11c">   38</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11c">ColonneTableau</a></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11caaa95ee29e023233da1ff1bb735598f41">   40</a></span>&#160;        <a class="code" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11caaa95ee29e023233da1ff1bb735598f41">COLONNE_SALLE_NOM</a>,               </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11cac37447450456d604331115759d0ceedc">   41</a></span>&#160;        <a class="code" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11cac37447450456d604331115759d0ceedc">COLONNE_SALLE_CONFORT_THERMIQUE</a>, </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca44ac5e61cfd93ee1f2e951c317782d57">   42</a></span>&#160;        <a class="code" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca44ac5e61cfd93ee1f2e951c317782d57">COLONNE_SALLE_QUALITE_AIR</a>,       </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca550a5397d33e2718aeebc35b02f4ac97">   43</a></span>&#160;        <a class="code" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca550a5397d33e2718aeebc35b02f4ac97">COLONNE_SALLE_FENETRES</a>,          </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11cacc15ea0d3e9a1acf03657adb739b9d85">   44</a></span>&#160;        <a class="code" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11cacc15ea0d3e9a1acf03657adb739b9d85">COLONNE_SALLE_LUMIERES</a>,          </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca6f8d2a9375e46add28679dfca17b0ee3">   45</a></span>&#160;        <a class="code" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca6f8d2a9375e46add28679dfca17b0ee3">COLONNE_SALLE_OCCUPATION</a>,        </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca8e6dfb584593591802b2f84baf7b5870">NB_COLONNES_TABLEAU</a></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca8e6dfb584593591802b2f84baf7b5870">   47</a></span>&#160;    };</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_eco_classroom.html#a1e5388a69dbcbc05a0fa02461e330b18">EcoClassroom</a>(QWidget* parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_eco_classroom.html#af5c927831b4afe8a57e270fa816fbfdc">~EcoClassroom</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a74e36bcef4b02f99096440aa2f51d8a0">   54</a></span>&#160;    <span class="keywordtype">int</span>                   <a class="code" href="class_eco_classroom.html#a74e36bcef4b02f99096440aa2f51d8a0">nbLignesSalles</a>;   </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#acccb330a47221642360138e67cedeadc">   55</a></span>&#160;    QMap&lt;QString, Salle*&gt; <a class="code" href="class_eco_classroom.html#acccb330a47221642360138e67cedeadc">salles</a>;           </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a9b9a1c1f55035de0246955a4c2ae2977">   56</a></span>&#160;    QStringList           <a class="code" href="class_eco_classroom.html#a9b9a1c1f55035de0246955a4c2ae2977">nomColonnesTable</a>; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// Widgets</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a9ff76057c2154d4af71f84a107b614f0">   58</a></span>&#160;    QWidget*        <a class="code" href="class_eco_classroom.html#a9ff76057c2154d4af71f84a107b614f0">gui</a>;                 </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#ac37247ebd3fae06f25553fdfc96a100a">   59</a></span>&#160;    QStackedWidget* <a class="code" href="class_eco_classroom.html#ac37247ebd3fae06f25553fdfc96a100a">fenetres</a>;            </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#ac4ecdfd2411efdf649afe464572e5d60">   60</a></span>&#160;    QTableWidget*   <a class="code" href="class_eco_classroom.html#ac4ecdfd2411efdf649afe464572e5d60">tableWidgetSalles</a>;   </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a600fb603d26fe0a51b625746bf0353fe">   61</a></span>&#160;    QLabel*         <a class="code" href="class_eco_classroom.html#a600fb603d26fe0a51b625746bf0353fe">labelNomSalle</a>;       </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a5cf98d0d5086a1038f2be96628faabff">   62</a></span>&#160;    QLabel*         <a class="code" href="class_eco_classroom.html#a5cf98d0d5086a1038f2be96628faabff">nomSalle</a>;            </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_eco_classroom.html#a54a1c9d8aab69d04bccd1aaa1174ef87">   63</a></span>&#160;    QPushButton*    <a class="code" href="class_eco_classroom.html#a54a1c9d8aab69d04bccd1aaa1174ef87">boutonRetourAccueil</a>; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#acc910ea6a9a7a5f055f9ee67cebbe7f4">instancierWidgets</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a12a0119129135f8407bfef87dffc375e">initialiserTable</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#af6c941b62c224401d7cdbd6d9782143b">initialiserFenetreInformations</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a2b89b9a96c8bec69d565608da23bd7fc">initialiserGUI</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a213a38cecb1a12a1dff6655586fa63f1">installerGestionEvenements</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a4ed720d5e5f5eb570973fd2979f74600">chargerSalles</a>();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a4bd2c76fb0762bb2ced65da7c1139c17">afficherSalleTable</a>(<a class="code" href="class_salle.html">Salle</a> salle);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a21d6124160dfe86724bdf522bfcd703b">afficherInformationsSalle</a>(<span class="keyword">const</span> <a class="code" href="class_salle.html">Salle</a>&amp; salle);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#ae16556db78a2a0c75434e1cf34d927d2">effacerTableauSalles</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a52a65283c9dc06dd2fc433b1e13f0db1">effacerSalles</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a897dd46dea2826706f16a13f910218ef">afficherFenetre</a>(<a class="code" href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996">EcoClassroom::Fenetre</a> fenetre);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a49393498d1e91f28038e814516bbac15">afficherFenetreAcceuil</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a76885b772d26d3ab992640e66d19935c">afficherFenetreInformations</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_eco_classroom.html#a21e3febf07b09a89f7e9902ddb0d85b8">selectionnerSalle</a>(<span class="keywordtype">int</span> ligne, <span class="keywordtype">int</span> colonne);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// ECOCLASSROOM_H</span></div>
+<div class="ttc" id="aclass_eco_classroom_html"><div class="ttname"><a href="class_eco_classroom.html">EcoClassroom</a></div><div class="ttdoc">Classe permettant de faire l'IHM du projet Eco classroom.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00019">ecoclassroom.h:20</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a12a0119129135f8407bfef87dffc375e"><div class="ttname"><a href="class_eco_classroom.html#a12a0119129135f8407bfef87dffc375e">EcoClassroom::initialiserTable</a></div><div class="ttdeci">void initialiserTable()</div><div class="ttdoc">Initialise le QTableWidget qui permet l'affichage de l'état des salles.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00136">ecoclassroom.cpp:136</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a1e5388a69dbcbc05a0fa02461e330b18"><div class="ttname"><a href="class_eco_classroom.html#a1e5388a69dbcbc05a0fa02461e330b18">EcoClassroom::EcoClassroom</a></div><div class="ttdeci">EcoClassroom(QWidget *parent=nullptr)</div><div class="ttdoc">Constructeur de la classe EcoClassroom.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00013">ecoclassroom.cpp:13</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a213a38cecb1a12a1dff6655586fa63f1"><div class="ttname"><a href="class_eco_classroom.html#a213a38cecb1a12a1dff6655586fa63f1">EcoClassroom::installerGestionEvenements</a></div><div class="ttdeci">void installerGestionEvenements()</div><div class="ttdoc">Installe les gestionnaire d'évènements (signal/slot)</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00201">ecoclassroom.cpp:201</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a21d6124160dfe86724bdf522bfcd703b"><div class="ttname"><a href="class_eco_classroom.html#a21d6124160dfe86724bdf522bfcd703b">EcoClassroom::afficherInformationsSalle</a></div><div class="ttdeci">void afficherInformationsSalle(const Salle &amp;salle)</div><div class="ttdoc">Affiche les informations d'une salle.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00337">ecoclassroom.cpp:337</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a21e3febf07b09a89f7e9902ddb0d85b8"><div class="ttname"><a href="class_eco_classroom.html#a21e3febf07b09a89f7e9902ddb0d85b8">EcoClassroom::selectionnerSalle</a></div><div class="ttdeci">void selectionnerSalle(int ligne, int colonne)</div><div class="ttdoc">Sélectionne la salle à afficher.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00070">ecoclassroom.cpp:70</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a230901c498c09cb6e3a7b3c24f7ea11c"><div class="ttname"><a href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11c">EcoClassroom::ColonneTableau</a></div><div class="ttdeci">ColonneTableau</div><div class="ttdoc">Définit les différentes colonne du tableau.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00038">ecoclassroom.h:39</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a230901c498c09cb6e3a7b3c24f7ea11ca44ac5e61cfd93ee1f2e951c317782d57"><div class="ttname"><a href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca44ac5e61cfd93ee1f2e951c317782d57">EcoClassroom::COLONNE_SALLE_QUALITE_AIR</a></div><div class="ttdeci">@ COLONNE_SALLE_QUALITE_AIR</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00042">ecoclassroom.h:42</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a230901c498c09cb6e3a7b3c24f7ea11ca550a5397d33e2718aeebc35b02f4ac97"><div class="ttname"><a href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca550a5397d33e2718aeebc35b02f4ac97">EcoClassroom::COLONNE_SALLE_FENETRES</a></div><div class="ttdeci">@ COLONNE_SALLE_FENETRES</div><div class="ttdoc">L'état des fenétres.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00043">ecoclassroom.h:43</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a230901c498c09cb6e3a7b3c24f7ea11ca6f8d2a9375e46add28679dfca17b0ee3"><div class="ttname"><a href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca6f8d2a9375e46add28679dfca17b0ee3">EcoClassroom::COLONNE_SALLE_OCCUPATION</a></div><div class="ttdeci">@ COLONNE_SALLE_OCCUPATION</div><div class="ttdoc">L'état d'occupation.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00045">ecoclassroom.h:45</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a230901c498c09cb6e3a7b3c24f7ea11ca8e6dfb584593591802b2f84baf7b5870"><div class="ttname"><a href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca8e6dfb584593591802b2f84baf7b5870">EcoClassroom::NB_COLONNES_TABLEAU</a></div><div class="ttdeci">@ NB_COLONNES_TABLEAU</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00047">ecoclassroom.h:46</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a230901c498c09cb6e3a7b3c24f7ea11caaa95ee29e023233da1ff1bb735598f41"><div class="ttname"><a href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11caaa95ee29e023233da1ff1bb735598f41">EcoClassroom::COLONNE_SALLE_NOM</a></div><div class="ttdeci">@ COLONNE_SALLE_NOM</div><div class="ttdoc">Le nom de la salle.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00040">ecoclassroom.h:40</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a230901c498c09cb6e3a7b3c24f7ea11cac37447450456d604331115759d0ceedc"><div class="ttname"><a href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11cac37447450456d604331115759d0ceedc">EcoClassroom::COLONNE_SALLE_CONFORT_THERMIQUE</a></div><div class="ttdeci">@ COLONNE_SALLE_CONFORT_THERMIQUE</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00041">ecoclassroom.h:41</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a230901c498c09cb6e3a7b3c24f7ea11cacc15ea0d3e9a1acf03657adb739b9d85"><div class="ttname"><a href="class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11cacc15ea0d3e9a1acf03657adb739b9d85">EcoClassroom::COLONNE_SALLE_LUMIERES</a></div><div class="ttdeci">@ COLONNE_SALLE_LUMIERES</div><div class="ttdoc">L'état des lumières.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00044">ecoclassroom.h:44</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a2b89b9a96c8bec69d565608da23bd7fc"><div class="ttname"><a href="class_eco_classroom.html#a2b89b9a96c8bec69d565608da23bd7fc">EcoClassroom::initialiserGUI</a></div><div class="ttdeci">void initialiserGUI()</div><div class="ttdoc">Initialise et affiche la GUI.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00189">ecoclassroom.cpp:189</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a49393498d1e91f28038e814516bbac15"><div class="ttname"><a href="class_eco_classroom.html#a49393498d1e91f28038e814516bbac15">EcoClassroom::afficherFenetreAcceuil</a></div><div class="ttdeci">void afficherFenetreAcceuil()</div><div class="ttdoc">Affiche la fenêtre d'accueil.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00050">ecoclassroom.cpp:50</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a4bd2c76fb0762bb2ced65da7c1139c17"><div class="ttname"><a href="class_eco_classroom.html#a4bd2c76fb0762bb2ced65da7c1139c17">EcoClassroom::afficherSalleTable</a></div><div class="ttdeci">void afficherSalleTable(Salle salle)</div><div class="ttdoc">Affiche une salle dans le tableau.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00264">ecoclassroom.cpp:264</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a4ed720d5e5f5eb570973fd2979f74600"><div class="ttname"><a href="class_eco_classroom.html#a4ed720d5e5f5eb570973fd2979f74600">EcoClassroom::chargerSalles</a></div><div class="ttdeci">void chargerSalles()</div><div class="ttdoc">Charger les salles.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00217">ecoclassroom.cpp:217</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a52a65283c9dc06dd2fc433b1e13f0db1"><div class="ttname"><a href="class_eco_classroom.html#a52a65283c9dc06dd2fc433b1e13f0db1">EcoClassroom::effacerSalles</a></div><div class="ttdeci">void effacerSalles()</div><div class="ttdoc">Effacer les salles.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00366">ecoclassroom.cpp:366</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a54a1c9d8aab69d04bccd1aaa1174ef87"><div class="ttname"><a href="class_eco_classroom.html#a54a1c9d8aab69d04bccd1aaa1174ef87">EcoClassroom::boutonRetourAccueil</a></div><div class="ttdeci">QPushButton * boutonRetourAccueil</div><div class="ttdoc">Bouton de retour.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00063">ecoclassroom.h:63</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a572cd6878afabdd8218c7c09bda30996"><div class="ttname"><a href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996">EcoClassroom::Fenetre</a></div><div class="ttdeci">Fenetre</div><div class="ttdoc">Les différentes fenêtres de l'application.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00027">ecoclassroom.h:28</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a572cd6878afabdd8218c7c09bda30996a021429e73f38fad6f54fc27f5929b964"><div class="ttname"><a href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a021429e73f38fad6f54fc27f5929b964">EcoClassroom::InformationSalle</a></div><div class="ttdeci">@ InformationSalle</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00030">ecoclassroom.h:30</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a572cd6878afabdd8218c7c09bda30996a0f4ce2a6d238737a140d89a670c18f17"><div class="ttname"><a href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a0f4ce2a6d238737a140d89a670c18f17">EcoClassroom::NbFenetres</a></div><div class="ttdeci">@ NbFenetres</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00032">ecoclassroom.h:31</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a572cd6878afabdd8218c7c09bda30996a625638fa556c0b765f57002baf65e26f"><div class="ttname"><a href="class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a625638fa556c0b765f57002baf65e26f">EcoClassroom::Accueil</a></div><div class="ttdeci">@ Accueil</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00029">ecoclassroom.h:29</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a5cf98d0d5086a1038f2be96628faabff"><div class="ttname"><a href="class_eco_classroom.html#a5cf98d0d5086a1038f2be96628faabff">EcoClassroom::nomSalle</a></div><div class="ttdeci">QLabel * nomSalle</div><div class="ttdoc">Le nom de salle.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00062">ecoclassroom.h:62</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a600fb603d26fe0a51b625746bf0353fe"><div class="ttname"><a href="class_eco_classroom.html#a600fb603d26fe0a51b625746bf0353fe">EcoClassroom::labelNomSalle</a></div><div class="ttdeci">QLabel * labelNomSalle</div><div class="ttdoc">Le label pour le nom de la salle.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00061">ecoclassroom.h:61</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a74e36bcef4b02f99096440aa2f51d8a0"><div class="ttname"><a href="class_eco_classroom.html#a74e36bcef4b02f99096440aa2f51d8a0">EcoClassroom::nbLignesSalles</a></div><div class="ttdeci">int nbLignesSalles</div><div class="ttdoc">Nombre de salles dans la table.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00054">ecoclassroom.h:54</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a76885b772d26d3ab992640e66d19935c"><div class="ttname"><a href="class_eco_classroom.html#a76885b772d26d3ab992640e66d19935c">EcoClassroom::afficherFenetreInformations</a></div><div class="ttdeci">void afficherFenetreInformations()</div><div class="ttdoc">Affiche la fenêtre d'informations.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00059">ecoclassroom.cpp:59</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a897dd46dea2826706f16a13f910218ef"><div class="ttname"><a href="class_eco_classroom.html#a897dd46dea2826706f16a13f910218ef">EcoClassroom::afficherFenetre</a></div><div class="ttdeci">void afficherFenetre(EcoClassroom::Fenetre fenetre)</div><div class="ttdoc">Selectionne la fenêtre à afficher.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00041">ecoclassroom.cpp:41</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a9b9a1c1f55035de0246955a4c2ae2977"><div class="ttname"><a href="class_eco_classroom.html#a9b9a1c1f55035de0246955a4c2ae2977">EcoClassroom::nomColonnesTable</a></div><div class="ttdeci">QStringList nomColonnesTable</div><div class="ttdoc">Le nom des colonnes de la table.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00056">ecoclassroom.h:56</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_a9ff76057c2154d4af71f84a107b614f0"><div class="ttname"><a href="class_eco_classroom.html#a9ff76057c2154d4af71f84a107b614f0">EcoClassroom::gui</a></div><div class="ttdeci">QWidget * gui</div><div class="ttdoc">Le widget central.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00058">ecoclassroom.h:58</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_ac37247ebd3fae06f25553fdfc96a100a"><div class="ttname"><a href="class_eco_classroom.html#ac37247ebd3fae06f25553fdfc96a100a">EcoClassroom::fenetres</a></div><div class="ttdeci">QStackedWidget * fenetres</div><div class="ttdoc">Pile de fenêtres.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00059">ecoclassroom.h:59</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_ac4ecdfd2411efdf649afe464572e5d60"><div class="ttname"><a href="class_eco_classroom.html#ac4ecdfd2411efdf649afe464572e5d60">EcoClassroom::tableWidgetSalles</a></div><div class="ttdeci">QTableWidget * tableWidgetSalles</div><div class="ttdoc">Affichage sous forme de table.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00060">ecoclassroom.h:60</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_acc910ea6a9a7a5f055f9ee67cebbe7f4"><div class="ttname"><a href="class_eco_classroom.html#acc910ea6a9a7a5f055f9ee67cebbe7f4">EcoClassroom::instancierWidgets</a></div><div class="ttdeci">void instancierWidgets()</div><div class="ttdoc">Instancie les différents widgets de l'application.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00087">ecoclassroom.cpp:87</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_acccb330a47221642360138e67cedeadc"><div class="ttname"><a href="class_eco_classroom.html#acccb330a47221642360138e67cedeadc">EcoClassroom::salles</a></div><div class="ttdeci">QMap&lt; QString, Salle * &gt; salles</div><div class="ttdoc">Les salles.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8h_source.html#l00055">ecoclassroom.h:55</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_ae16556db78a2a0c75434e1cf34d927d2"><div class="ttname"><a href="class_eco_classroom.html#ae16556db78a2a0c75434e1cf34d927d2">EcoClassroom::effacerTableauSalles</a></div><div class="ttdeci">void effacerTableauSalles()</div><div class="ttdoc">Effacer le tableau des salles.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00350">ecoclassroom.cpp:350</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_af5c927831b4afe8a57e270fa816fbfdc"><div class="ttname"><a href="class_eco_classroom.html#af5c927831b4afe8a57e270fa816fbfdc">EcoClassroom::~EcoClassroom</a></div><div class="ttdeci">~EcoClassroom()</div><div class="ttdoc">Destructeur de la classe EcoClassroom.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00027">ecoclassroom.cpp:27</a></div></div>
+<div class="ttc" id="aclass_eco_classroom_html_af6c941b62c224401d7cdbd6d9782143b"><div class="ttname"><a href="class_eco_classroom.html#af6c941b62c224401d7cdbd6d9782143b">EcoClassroom::initialiserFenetreInformations</a></div><div class="ttdeci">void initialiserFenetreInformations()</div><div class="ttdoc">Initialise les widgets de la fenêtre Informations.</div><div class="ttdef"><b>Definition:</b> <a href="ecoclassroom_8cpp_source.html#l00177">ecoclassroom.cpp:177</a></div></div>
+<div class="ttc" id="aclass_q_main_window_html"><div class="ttname"><a href="class_q_main_window.html">QMainWindow</a></div></div>
+<div class="ttc" id="aclass_salle_html"><div class="ttname"><a href="class_salle.html">Salle</a></div><div class="ttdef"><b>Definition:</b> <a href="salle_8h_source.html#l00018">salle.h:19</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_bc7f3c21278e60441a8650a1b23bb4dd.html">eco-classroom-desktop</a></li><li class="navelem"><a class="el" href="ecoclassroom_8h.html">ecoclassroom.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 22:04:22 pour Projet eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

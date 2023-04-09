@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet eco-classroom:  Fichier source de salle.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet eco-classroom
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('salle_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">salle.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="salle_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="salle_8h.html">salle.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mesures_8h.html">mesures.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="etatssalle_8h.html">etatssalle.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_salle.html#a4cb05b76fb2b5430ac2bf903b8f75906">   19</a></span>&#160;<a class="code" href="class_salle.html#a4cb05b76fb2b5430ac2bf903b8f75906">Salle::Salle</a>() :</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    nom(<span class="stringliteral">&quot;&quot;</span>), superficie(0), description(<span class="stringliteral">&quot;&quot;</span>), mesures(new <a class="code" href="class_mesures.html">Mesures</a>),</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    etats(new <a class="code" href="class_etats_salle.html">EtatsSalle</a>)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_salle.html#ade056f44c8fc75c5da56ee75eb2291af">   30</a></span>&#160;<a class="code" href="class_salle.html#a4cb05b76fb2b5430ac2bf903b8f75906">Salle::Salle</a>(QString nom, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> superficie, QString description) :</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    nom(nom), superficie(superficie), description(description),</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    mesures(new <a class="code" href="class_mesures.html">Mesures</a>), etats(new <a class="code" href="class_etats_salle.html">EtatsSalle</a>)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;nom&quot;</span> &lt;&lt; <a class="code" href="class_salle.html#a591507e1d5a858ece870275f612e9e26">nom</a> &lt;&lt; <span class="stringliteral">&quot;superficie&quot;</span> &lt;&lt; <a class="code" href="class_salle.html#a6530e05a22bacd4a2d5048a8aae644af">superficie</a></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;             &lt;&lt; <span class="stringliteral">&quot;description&quot;</span> &lt;&lt; <a class="code" href="class_salle.html#a9092d0e935c5535a95131465c7aab3ce">description</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_salle.html#a1f7660202a3d41158770f3411ab86f59">   42</a></span>&#160;QString <a class="code" href="class_salle.html#a1f7660202a3d41158770f3411ab86f59">Salle::getNom</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_salle.html#a591507e1d5a858ece870275f612e9e26">nom</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_salle.html#a5db7cabc69dec0642da5fb0a0d6b81e7">   51</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_salle.html#a5db7cabc69dec0642da5fb0a0d6b81e7">Salle::getSuperficie</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_salle.html#a6530e05a22bacd4a2d5048a8aae644af">superficie</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_salle.html#a24ee6382d9a0c25211ab576ab6ce4a1d">   60</a></span>&#160;QString <a class="code" href="class_salle.html#a24ee6382d9a0c25211ab576ab6ce4a1d">Salle::getDescription</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_salle.html#a9092d0e935c5535a95131465c7aab3ce">description</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_salle.html#a9640a07eaa76b4e280b3f6d4c900f17c">   69</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_salle.html#a9640a07eaa76b4e280b3f6d4c900f17c">Salle::setNom</a>(QString nom)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    this-&gt;nom = <a class="code" href="class_salle.html#a591507e1d5a858ece870275f612e9e26">nom</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_salle.html#aff2ba088d51acf6f82649898a8662baf">   78</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_salle.html#aff2ba088d51acf6f82649898a8662baf">Salle::setSuperficie</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> superficie)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    this-&gt;superficie = <a class="code" href="class_salle.html#a6530e05a22bacd4a2d5048a8aae644af">superficie</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_salle.html#ab72ef4bfcfe50c6f04f691311c1bbe28">   87</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_salle.html#ab72ef4bfcfe50c6f04f691311c1bbe28">Salle::setDescription</a>(QString description)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    this-&gt;description = <a class="code" href="class_salle.html#a9092d0e935c5535a95131465c7aab3ce">description</a>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="class_salle.html#a01d0cd328d66db3162e0f81a8186eb76">   95</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_salle.html#a01d0cd328d66db3162e0f81a8186eb76">Salle::getTemperature</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_salle.html#a86d11362e8a9d5970f11fd81325f4f7f">mesures</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_salle.html#a86d11362e8a9d5970f11fd81325f4f7f">mesures</a>-&gt;<a class="code" href="class_mesures.html#a38f36883f3abd9e00b86825330e8564e">getTemperature</a>();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="class_salle.html#a41062541db89e8b6e5f13a26553b0c13">  105</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_salle.html#a41062541db89e8b6e5f13a26553b0c13">Salle::getHumidite</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_salle.html#a86d11362e8a9d5970f11fd81325f4f7f">mesures</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_salle.html#a86d11362e8a9d5970f11fd81325f4f7f">mesures</a>-&gt;<a class="code" href="class_mesures.html#aa2dfd2bef81f5cc6be1bbd77f704a2e5">getHumidite</a>();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="class_salle.html#a73304c00e15c61643ab603ca6e1be3e7">  115</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_salle.html#a73304c00e15c61643ab603ca6e1be3e7">Salle::getCO2</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_salle.html#a86d11362e8a9d5970f11fd81325f4f7f">mesures</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_salle.html#a86d11362e8a9d5970f11fd81325f4f7f">mesures</a>-&gt;<a class="code" href="class_mesures.html#a64d21412e2f682f67e494bd0d9c60f4e">getCO2</a>();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="class_salle.html#ab9788caa3624b9e548382fac0222cc6e">  125</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_salle.html#ab9788caa3624b9e548382fac0222cc6e">Salle::getLumiere</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_salle.html#af9cc6846dfdf47905a02c2e6a8231233">etats</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_salle.html#af9cc6846dfdf47905a02c2e6a8231233">etats</a>-&gt;<a class="code" href="class_etats_salle.html#a50b018b56f584c291f74f8f7da5411a4">getLumiere</a>();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="class_salle.html#ae2c66520fb7f7865086e5d9b94b8b286">  135</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_salle.html#ae2c66520fb7f7865086e5d9b94b8b286">Salle::getFenetre</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_salle.html#af9cc6846dfdf47905a02c2e6a8231233">etats</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_salle.html#af9cc6846dfdf47905a02c2e6a8231233">etats</a>-&gt;<a class="code" href="class_etats_salle.html#a4989a8900d08559072fd1d90f7eced67">getFenetre</a>();</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="class_salle.html#a3c2bd67f09e408c24c5ed537a1d1a0f5">  145</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_salle.html#a3c2bd67f09e408c24c5ed537a1d1a0f5">Salle::getOccupation</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_salle.html#af9cc6846dfdf47905a02c2e6a8231233">etats</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_salle.html#af9cc6846dfdf47905a02c2e6a8231233">etats</a>-&gt;<a class="code" href="class_etats_salle.html#a0e6027f16193ec7a987f4e15e2aaa378">getOccupation</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+<div class="ttc" id="aclass_etats_salle_html"><div class="ttname"><a href="class_etats_salle.html">EtatsSalle</a></div><div class="ttdoc">Classe permettant de gérer les etats d'une salle.</div><div class="ttdef"><b>Definition:</b> <a href="etatssalle_8h_source.html#l00012">etatssalle.h:13</a></div></div>
+<div class="ttc" id="aclass_etats_salle_html_a0e6027f16193ec7a987f4e15e2aaa378"><div class="ttname"><a href="class_etats_salle.html#a0e6027f16193ec7a987f4e15e2aaa378">EtatsSalle::getOccupation</a></div><div class="ttdeci">bool getOccupation() const</div><div class="ttdoc">Getter de l'attribut occupation.</div><div class="ttdef"><b>Definition:</b> <a href="etatssalle_8cpp_source.html#l00068">etatssalle.cpp:68</a></div></div>
+<div class="ttc" id="aclass_etats_salle_html_a4989a8900d08559072fd1d90f7eced67"><div class="ttname"><a href="class_etats_salle.html#a4989a8900d08559072fd1d90f7eced67">EtatsSalle::getFenetre</a></div><div class="ttdeci">bool getFenetre() const</div><div class="ttdoc">Getter de l'attribut fenetre.</div><div class="ttdef"><b>Definition:</b> <a href="etatssalle_8cpp_source.html#l00058">etatssalle.cpp:58</a></div></div>
+<div class="ttc" id="aclass_etats_salle_html_a50b018b56f584c291f74f8f7da5411a4"><div class="ttname"><a href="class_etats_salle.html#a50b018b56f584c291f74f8f7da5411a4">EtatsSalle::getLumiere</a></div><div class="ttdeci">bool getLumiere() const</div><div class="ttdoc">Getter de l'attribut lumiere.</div><div class="ttdef"><b>Definition:</b> <a href="etatssalle_8cpp_source.html#l00048">etatssalle.cpp:48</a></div></div>
+<div class="ttc" id="aclass_mesures_html"><div class="ttname"><a href="class_mesures.html">Mesures</a></div><div class="ttdoc">Classe permettant de gérer les mesures d'une salle.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8h_source.html#l00012">mesures.h:13</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a38f36883f3abd9e00b86825330e8564e"><div class="ttname"><a href="class_mesures.html#a38f36883f3abd9e00b86825330e8564e">Mesures::getTemperature</a></div><div class="ttdeci">double getTemperature() const</div><div class="ttdoc">Getter de l'attribut temperature.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00032">mesures.cpp:32</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a64d21412e2f682f67e494bd0d9c60f4e"><div class="ttname"><a href="class_mesures.html#a64d21412e2f682f67e494bd0d9c60f4e">Mesures::getCO2</a></div><div class="ttdeci">unsigned int getCO2() const</div><div class="ttdoc">Getter de l'attribut co2.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00052">mesures.cpp:52</a></div></div>
+<div class="ttc" id="aclass_mesures_html_aa2dfd2bef81f5cc6be1bbd77f704a2e5"><div class="ttname"><a href="class_mesures.html#aa2dfd2bef81f5cc6be1bbd77f704a2e5">Mesures::getHumidite</a></div><div class="ttdeci">unsigned int getHumidite() const</div><div class="ttdoc">Getter de l'attribut humidite.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00042">mesures.cpp:42</a></div></div>
+<div class="ttc" id="aclass_salle_html_a01d0cd328d66db3162e0f81a8186eb76"><div class="ttname"><a href="class_salle.html#a01d0cd328d66db3162e0f81a8186eb76">Salle::getTemperature</a></div><div class="ttdeci">unsigned int getTemperature() const</div><div class="ttdoc">Getter qui récupère la temperature.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00095">salle.cpp:95</a></div></div>
+<div class="ttc" id="aclass_salle_html_a1f7660202a3d41158770f3411ab86f59"><div class="ttname"><a href="class_salle.html#a1f7660202a3d41158770f3411ab86f59">Salle::getNom</a></div><div class="ttdeci">QString getNom() const</div><div class="ttdoc">Getter de l'attribut nom.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00042">salle.cpp:42</a></div></div>
+<div class="ttc" id="aclass_salle_html_a24ee6382d9a0c25211ab576ab6ce4a1d"><div class="ttname"><a href="class_salle.html#a24ee6382d9a0c25211ab576ab6ce4a1d">Salle::getDescription</a></div><div class="ttdeci">QString getDescription() const</div><div class="ttdoc">Getter de l'attribut description.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00060">salle.cpp:60</a></div></div>
+<div class="ttc" id="aclass_salle_html_a3c2bd67f09e408c24c5ed537a1d1a0f5"><div class="ttname"><a href="class_salle.html#a3c2bd67f09e408c24c5ed537a1d1a0f5">Salle::getOccupation</a></div><div class="ttdeci">bool getOccupation() const</div><div class="ttdoc">Getter qui récupère l'etat de l'occupation de la salle.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00145">salle.cpp:145</a></div></div>
+<div class="ttc" id="aclass_salle_html_a41062541db89e8b6e5f13a26553b0c13"><div class="ttname"><a href="class_salle.html#a41062541db89e8b6e5f13a26553b0c13">Salle::getHumidite</a></div><div class="ttdeci">unsigned int getHumidite() const</div><div class="ttdoc">Getter qui récupère l'humidite.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00105">salle.cpp:105</a></div></div>
+<div class="ttc" id="aclass_salle_html_a4cb05b76fb2b5430ac2bf903b8f75906"><div class="ttname"><a href="class_salle.html#a4cb05b76fb2b5430ac2bf903b8f75906">Salle::Salle</a></div><div class="ttdeci">Salle()</div><div class="ttdoc">Constructeur par défaut de la classe Salle.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00019">salle.cpp:19</a></div></div>
+<div class="ttc" id="aclass_salle_html_a591507e1d5a858ece870275f612e9e26"><div class="ttname"><a href="class_salle.html#a591507e1d5a858ece870275f612e9e26">Salle::nom</a></div><div class="ttdeci">QString nom</div><div class="ttdoc">Nom de la salle.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8h_source.html#l00021">salle.h:21</a></div></div>
+<div class="ttc" id="aclass_salle_html_a5db7cabc69dec0642da5fb0a0d6b81e7"><div class="ttname"><a href="class_salle.html#a5db7cabc69dec0642da5fb0a0d6b81e7">Salle::getSuperficie</a></div><div class="ttdeci">unsigned int getSuperficie() const</div><div class="ttdoc">Getter de l'attribut superficie.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00051">salle.cpp:51</a></div></div>
+<div class="ttc" id="aclass_salle_html_a6530e05a22bacd4a2d5048a8aae644af"><div class="ttname"><a href="class_salle.html#a6530e05a22bacd4a2d5048a8aae644af">Salle::superficie</a></div><div class="ttdeci">unsigned int superficie</div><div class="ttdoc">Superficie de la salle.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8h_source.html#l00022">salle.h:22</a></div></div>
+<div class="ttc" id="aclass_salle_html_a73304c00e15c61643ab603ca6e1be3e7"><div class="ttname"><a href="class_salle.html#a73304c00e15c61643ab603ca6e1be3e7">Salle::getCO2</a></div><div class="ttdeci">unsigned int getCO2() const</div><div class="ttdoc">Getter qui récupère le CO2.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00115">salle.cpp:115</a></div></div>
+<div class="ttc" id="aclass_salle_html_a86d11362e8a9d5970f11fd81325f4f7f"><div class="ttname"><a href="class_salle.html#a86d11362e8a9d5970f11fd81325f4f7f">Salle::mesures</a></div><div class="ttdeci">Mesures * mesures</div><div class="ttdoc">Relation entre la classe Salle et Mesures (agrégation)</div><div class="ttdef"><b>Definition:</b> <a href="salle_8h_source.html#l00025">salle.h:25</a></div></div>
+<div class="ttc" id="aclass_salle_html_a9092d0e935c5535a95131465c7aab3ce"><div class="ttname"><a href="class_salle.html#a9092d0e935c5535a95131465c7aab3ce">Salle::description</a></div><div class="ttdeci">QString description</div><div class="ttdoc">Description de la salle.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8h_source.html#l00023">salle.h:23</a></div></div>
+<div class="ttc" id="aclass_salle_html_a9640a07eaa76b4e280b3f6d4c900f17c"><div class="ttname"><a href="class_salle.html#a9640a07eaa76b4e280b3f6d4c900f17c">Salle::setNom</a></div><div class="ttdeci">void setNom(QString nom)</div><div class="ttdoc">Setter de l'attribut nom.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00069">salle.cpp:69</a></div></div>
+<div class="ttc" id="aclass_salle_html_ab72ef4bfcfe50c6f04f691311c1bbe28"><div class="ttname"><a href="class_salle.html#ab72ef4bfcfe50c6f04f691311c1bbe28">Salle::setDescription</a></div><div class="ttdeci">void setDescription(QString description)</div><div class="ttdoc">Setter de l'attribut description.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00087">salle.cpp:87</a></div></div>
+<div class="ttc" id="aclass_salle_html_ab9788caa3624b9e548382fac0222cc6e"><div class="ttname"><a href="class_salle.html#ab9788caa3624b9e548382fac0222cc6e">Salle::getLumiere</a></div><div class="ttdeci">bool getLumiere() const</div><div class="ttdoc">Getter qui récupère l'etat de la lumiere.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00125">salle.cpp:125</a></div></div>
+<div class="ttc" id="aclass_salle_html_ae2c66520fb7f7865086e5d9b94b8b286"><div class="ttname"><a href="class_salle.html#ae2c66520fb7f7865086e5d9b94b8b286">Salle::getFenetre</a></div><div class="ttdeci">bool getFenetre() const</div><div class="ttdoc">Getter qui récupère l'etat de la fenetre.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00135">salle.cpp:135</a></div></div>
+<div class="ttc" id="aclass_salle_html_af9cc6846dfdf47905a02c2e6a8231233"><div class="ttname"><a href="class_salle.html#af9cc6846dfdf47905a02c2e6a8231233">Salle::etats</a></div><div class="ttdeci">EtatsSalle * etats</div><div class="ttdoc">Relation entre la classe Salle et EtatsSalle (agrégation)</div><div class="ttdef"><b>Definition:</b> <a href="salle_8h_source.html#l00027">salle.h:27</a></div></div>
+<div class="ttc" id="aclass_salle_html_aff2ba088d51acf6f82649898a8662baf"><div class="ttname"><a href="class_salle.html#aff2ba088d51acf6f82649898a8662baf">Salle::setSuperficie</a></div><div class="ttdeci">void setSuperficie(unsigned int superficie)</div><div class="ttdoc">Setter de l'attribut superficie.</div><div class="ttdef"><b>Definition:</b> <a href="salle_8cpp_source.html#l00078">salle.cpp:78</a></div></div>
+<div class="ttc" id="aetatssalle_8h_html"><div class="ttname"><a href="etatssalle_8h.html">etatssalle.h</a></div><div class="ttdoc">Déclaration de la classe EtatsSalle.</div></div>
+<div class="ttc" id="amesures_8h_html"><div class="ttname"><a href="mesures_8h.html">mesures.h</a></div><div class="ttdoc">Déclaration de la classe Mesures.</div></div>
+<div class="ttc" id="asalle_8h_html"><div class="ttname"><a href="salle_8h.html">salle.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_bc7f3c21278e60441a8650a1b23bb4dd.html">eco-classroom-desktop</a></li><li class="navelem"><a class="el" href="salle_8cpp.html">salle.cpp</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 22:04:22 pour Projet eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+class EcoClassroom
+!!!135082.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.ecoclassroom);
+        Log.d(TAG, "onCreate()");
+
+        chargerSalles();
+        afficherSalles();
+
+        initialiserVueSalles();
+!!!135210.java!!!	onStart() : void
+        super.onStart();
+        Log.d(TAG, "onStart()");
+!!!135338.java!!!	onResume() : void
+        super.onResume();
+        Log.d(TAG, "onResume()");
+!!!135466.java!!!	onPause() : void
+        super.onPause();
+        Log.d(TAG, "onPause()");
+!!!135594.java!!!	onStop() : void
+        super.onStop();
+        Log.d(TAG, "onStop()");
+!!!135722.java!!!	onDestroy() : void
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
+!!!135850.java!!!	initialiserVueSalles() : void
+        vueSalles = (RecyclerView)findViewById(R.id.listeSalles);
+        vueSalles.setHasFixedSize(true);
+
+        layoutVueSalles = new LinearLayoutManager(this);
+        vueSalles.setLayoutManager(layoutVueSalles);
+
+        adaptateurSalle = new AdaptateurSalle(salles);
+        vueSalles.setAdapter(adaptateurSalle);
+!!!135978.java!!!	afficherSalles() : void
+        for(int i = 0; i < salles.size(); i++)
+        {
+            Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
+        }
+!!!136106.java!!!	ajouterSalle(in nom : String, in description : String, in superficie : double) : void
+        salles.add(new Salle(nom, superficie, description));
+!!!136234.java!!!	chargerSalles() : void
+        salles = new Vector<Salle>();
+        ajouterSalle("B11", "Salle de cours", 18);
+        ajouterSalle("B20", "Salle de TP", 65);
+        ajouterSalle("B21", "Salle de Physiques", 40);
+
+        // Pour les tests
+        for(int i = 0; i < salles.size(); i++)
+        {
+            if(i%2 == 0)
+                salles.get(i).setEstOccupe(true);
+        }

@@ -1,0 +1,351 @@
+class BaseDeDonnees
+!!!134826.cpp!!!	getInstance() : BaseDeDonnees
+    if(bdd == nullptr)
+        bdd = new BaseDeDonnees();
+    nbAcces++;
+#ifdef DEBUG_BDD
+    qDebug() << Q_FUNC_INFO << "nbAcces" << nbAcces;
+#endif
+
+    return bdd;
+!!!134954.cpp!!!	detruireInstance() : void
+    if(bdd != nullptr)
+    {
+        nbAcces--;
+#ifdef DEBUG_BDD
+        qDebug() << Q_FUNC_INFO << "nbAcces" << nbAcces;
+#endif
+        if(nbAcces == 0)
+            delete bdd;
+    }
+!!!135082.cpp!!!	connecter(in nomBase : QString = DATABASENAME, in username : QString = USERNAME, in password : QString = PASSWORD, in serveur : QString = HOSTNAME) : bool
+    if(!db.isOpen())
+    {
+        db.setHostName(serveur);
+        db.setUserName(username);
+        db.setPassword(password);
+        db.setDatabaseName(nomBase);
+
+#ifdef DEBUG_BDD
+        qDebug() << Q_FUNC_INFO << "HostName" << db.hostName();
+        qDebug() << Q_FUNC_INFO << "UserName" << db.userName();
+        qDebug() << Q_FUNC_INFO << "DatabaseName" << db.databaseName();
+#endif
+        if(db.open())
+        {
+#ifdef DEBUG_BDD
+            qDebug()
+              << Q_FUNC_INFO
+              << QString::fromUtf8("connexion réussie à %1").arg(db.hostName());
+#endif
+
+            return true;
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Erreur : impossible de se connecter "
+                                          "à la base de données !");
+            QMessageBox::critical(
+              nullptr,
+              QString::fromUtf8("BaseDeDonnees"),
+              QString::fromUtf8(
+                "Impossible de se connecter à la base de données !"));
+            return false;
+        }
+    }
+    else
+        return true;
+!!!148650.cpp!!!	estConnectee() : bool
+    return db.isOpen();
+!!!135594.cpp!!!	executer(in requete : QString) : bool
+    QSqlQuery r;
+    bool      retour;
+
+    if(db.isOpen())
+    {
+        if(requete.contains("UPDATE") || requete.contains("INSERT") ||
+           requete.contains("DELETE"))
+        {
+            retour = r.exec(requete);
+#ifdef DEBUG_BDD
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Retour %1 pour la requete : %2")
+                          .arg(QString::number(retour))
+                          .arg(requete);
+#endif
+            if(retour)
+            {
+                return true;
+            }
+            else
+            {
+                qDebug() << Q_FUNC_INFO
+                         << QString::fromUtf8("Erreur : %1 pour la requête %2")
+                              .arg(r.lastError().text())
+                              .arg(requete);
+                return false;
+            }
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
+                          .arg(requete);
+            return false;
+        }
+    }
+    else
+        return false;
+!!!135722.cpp!!!	recuperer(in requete : QString, inout donnees : QString) : bool
+    QSqlQuery r;
+    bool      retour;
+
+    if(db.isOpen())
+    {
+        if(requete.contains("SELECT"))
+        {
+            retour = r.exec(requete);
+#ifdef DEBUG_BDD
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Retour %1 pour la requete : %2")
+                          .arg(QString::number(retour))
+                          .arg(requete);
+#endif
+            if(retour)
+            {
+                // on se positionne sur l'enregistrement
+                r.first();
+
+                // on vérifie l'état de l'enregistrement retourné
+                if(!r.isValid())
+                {
+#ifdef DEBUG_BDD
+                    qDebug() << Q_FUNC_INFO
+                             << QString::fromUtf8("Résultat non valide !");
+#endif
+                    return false;
+                }
+
+                // on récupère sous forme de QString la valeur du champ
+                if(r.isNull(0))
+                {
+#ifdef DEBUG_BDD
+                    qDebug()
+                      << Q_FUNC_INFO << QString::fromUtf8("Aucun résultat !");
+#endif
+                    return false;
+                }
+                donnees = r.value(0).toString();
+#ifdef DEBUG_BDD
+                qDebug() << Q_FUNC_INFO << "Enregistrement -> " << donnees;
+#endif
+                return true;
+            }
+            else
+            {
+                qDebug() << Q_FUNC_INFO
+                         << QString::fromUtf8("Erreur : %1 pour la requête %2")
+                              .arg(r.lastError().text())
+                              .arg(requete);
+                return false;
+            }
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
+                          .arg(requete);
+            return false;
+        }
+    }
+    else
+        return false;
+!!!135850.cpp!!!	recuperer(in requete : QString, inout donnees : QStringList) : bool
+    QSqlQuery r;
+    bool      retour;
+
+    if(db.isOpen())
+    {
+        if(requete.contains("SELECT"))
+        {
+            retour = r.exec(requete);
+#ifdef DEBUG_BDD
+            qDebug() << QString::fromUtf8("Retour %1 pour la requete : %2")
+                          .arg(QString::number(retour))
+                          .arg(requete);
+#endif
+            if(retour)
+            {
+                // on se positionne sur l'enregistrement
+                r.first();
+
+                // on vérifie l'état de l'enregistrement retourné
+                if(!r.isValid())
+                {
+#ifdef DEBUG_BDD
+                    qDebug() << Q_FUNC_INFO
+                             << QString::fromUtf8("Résultat non valide !");
+#endif
+                    return false;
+                }
+
+                // on récupère sous forme de QString la valeur de tous les
+                // champs sélectionnés et on les stocke dans une liste de
+                // QString
+                for(int i = 0; i < r.record().count(); i++)
+                    if(!r.isNull(i))
+                        donnees << r.value(i).toString();
+#ifdef DEBUG_BDD
+                qDebug() << Q_FUNC_INFO << "Enregistrement -> " << donnees;
+#endif
+                return true;
+            }
+            else
+            {
+                qDebug() << Q_FUNC_INFO
+                         << QString::fromUtf8("Erreur : %1 pour la requête %2")
+                              .arg(r.lastError().text())
+                              .arg(requete);
+                return false;
+            }
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
+                          .arg(requete);
+            return false;
+        }
+    }
+    else
+        return false;
+!!!135978.cpp!!!	recuperer(in requete : QString, inout donnees : QVector<QString>) : bool
+    QSqlQuery r;
+    bool      retour;
+    QString   data;
+
+    if(db.isOpen())
+    {
+        if(requete.contains("SELECT"))
+        {
+            retour = r.exec(requete);
+#ifdef DEBUG_BDD
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Retour %1 pour la requete : %2")
+                          .arg(QString::number(retour))
+                          .arg(requete);
+#endif
+            if(retour)
+            {
+                // pour chaque enregistrement
+                while(r.next())
+                {
+                    // on récupère sous forme de QString la valeur du champs
+                    // sélectionné
+                    data = r.value(0).toString();
+
+#ifdef DEBUG_BDD
+// qDebug() << Q_FUNC_INFO << "Enregistrement -> " << data;
+#endif
+
+                    // on stocke l'enregistrement dans le QVector
+                    donnees.push_back(data);
+                }
+#ifdef DEBUG_BDD
+                qDebug() << Q_FUNC_INFO << "Enregistrement -> " << donnees;
+#endif
+                return true;
+            }
+            else
+            {
+                qDebug() << Q_FUNC_INFO
+                         << QString::fromUtf8("Erreur : %1 pour la requête %2")
+                              .arg(r.lastError().text())
+                              .arg(requete);
+                return false;
+            }
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
+                          .arg(requete);
+            return false;
+        }
+    }
+    else
+        return false;
+!!!136106.cpp!!!	recuperer(in requete : QString, inout donnees : QVector<QStringList>) : bool
+    QSqlQuery   r;
+    bool        retour;
+    QStringList data;
+
+    if(db.isOpen())
+    {
+        if(requete.contains("SELECT"))
+        {
+            retour = r.exec(requete);
+#ifdef DEBUG_BDD
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Retour %1 pour la requete : %2")
+                          .arg(QString::number(retour))
+                          .arg(requete);
+#endif
+            if(retour)
+            {
+                // pour chaque enregistrement
+                while(r.next())
+                {
+                    // on récupère sous forme de QString la valeur de tous les
+                    // champs sélectionnés et on les stocke dans une liste de
+                    // QString
+                    for(int i = 0; i < r.record().count(); i++)
+                        data << r.value(i).toString();
+
+#ifdef DEBUG_BDD
+// qDebug() << Q_FUNC_INFO << "Enregistrement -> " << data;
+/*for(int i=0;i<r.record().count();i++)
+    qDebug() << r.value(i).toString();*/
+#endif
+
+                    // on stocke l'enregistrement dans le QVector
+                    donnees.push_back(data);
+
+                    // on efface la liste de QString pour le prochain
+                    // enregistrement
+                    data.clear();
+                }
+#ifdef DEBUG_BDD
+                qDebug() << Q_FUNC_INFO << "Enregistrement -> " << donnees;
+#endif
+                return true;
+            }
+            else
+            {
+                qDebug() << Q_FUNC_INFO
+                         << QString::fromUtf8("Erreur : %1 pour la requête %2")
+                              .arg(r.lastError().text())
+                              .arg(requete);
+                return false;
+            }
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
+                          .arg(requete);
+            return false;
+        }
+    }
+    else
+        return false;
+!!!134570.cpp!!!	BaseDeDonnees()
+#ifdef DEBUG_BDD
+    qDebug() << Q_FUNC_INFO;
+#endif
+    db = QSqlDatabase::addDatabase("QMYSQL");
+!!!134698.cpp!!!	~BaseDeDonnees()
+#ifdef DEBUG_BDD
+    qDebug() << Q_FUNC_INFO;
+#endif

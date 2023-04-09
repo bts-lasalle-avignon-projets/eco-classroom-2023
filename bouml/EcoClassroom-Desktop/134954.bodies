@@ -1,0 +1,243 @@
+class EcoClassroom
+!!!136490.cpp!!!	EcoClassroom(inout parent : QWidget = nullptr)
+    qDebug() << Q_FUNC_INFO;
+    instancierWidgets();
+    initialiserGUI();
+    installerGestionEvenements();
+    chargerSalles();
+!!!136618.cpp!!!	~EcoClassroom()
+    qDebug() << Q_FUNC_INFO;
+!!!138026.cpp!!!	instancierWidgets() : void
+    // Le widget principal
+    gui = new QWidget(this);
+    // La pile de fenêtres
+    fenetres                = new QStackedWidget(this);
+    QWidget* fenetreAccueil = new QWidget(this);
+    fenetres->addWidget(fenetreAccueil);
+    QWidget* fenetreInformations = new QWidget(this);
+    fenetres->addWidget(fenetreInformations);
+
+    initialiserTable();
+    initialiserFenetreInformations();
+
+    // Les layouts
+    QVBoxLayout* layoutPrincipal      = new QVBoxLayout();
+    QVBoxLayout* layoutF1Principal    = new QVBoxLayout();
+    QHBoxLayout* layoutF1Table        = new QHBoxLayout();
+    QVBoxLayout* layoutF2Principal    = new QVBoxLayout();
+    QHBoxLayout* layoutF2Informations = new QHBoxLayout();
+    QHBoxLayout* layoutF2Boutons      = new QHBoxLayout();
+
+    // Positionnement
+    // La fenêtre accueil
+    layoutF1Table->addWidget(tableWidgetSalles);
+    layoutF1Principal->addLayout(layoutF1Table);
+    layoutF1Principal->addStretch();
+    fenetreAccueil->setLayout(layoutF1Principal);
+    // La fenêtre d'informations sur une salle
+    layoutF2Informations->addWidget(labelNomSalle);
+    layoutF2Informations->addWidget(nomSalle);
+    layoutF2Informations->addStretch();
+    layoutF2Boutons->addStretch();
+    layoutF2Boutons->addWidget(boutonRetourAccueil);
+    layoutF2Principal->addLayout(layoutF2Informations);
+    layoutF2Principal->addLayout(layoutF2Boutons);
+    layoutF2Principal->addStretch();
+    fenetreInformations->setLayout(layoutF2Principal);
+
+    // La GUI
+    layoutPrincipal->addWidget(fenetres);
+    gui->setLayout(layoutPrincipal);
+    setCentralWidget(gui);
+!!!138154.cpp!!!	initialiserTable() : void
+    tableWidgetSalles = new QTableWidget(this);
+
+    // Les colonnes
+    nomColonnesTable << "Salle"
+                     << "Confort thermique"
+                     << "Qualité air"
+                     << "Lumières"
+                     << "Occupée"
+                     << "Fenêtres";
+    tableWidgetSalles->setColumnCount(nomColonnesTable.count());
+    tableWidgetSalles->setHorizontalHeaderLabels(nomColonnesTable);
+    // Vide (pas de lignes donc pas d'utilisateurs dans la table)
+    tableWidgetSalles->setRowCount(0);
+    // Redimensionnement automatique (inutile)
+    // tableWidgetSalles->resizeColumnsToContents();
+    // Pas d'étiquettes numérotées sur le côté gauche
+    tableWidgetSalles->verticalHeader()->setHidden(true);
+    // Taille
+    // tableWidgetSalles->setMinimumSize(QSize(0, 0));
+    // Prend toute la largeur
+    tableWidgetSalles->setMinimumWidth(gui->width());
+    // Hauteur fixe ?
+    // tableWidgetSalles->setMinimumHeight(gui->height());
+    /*cf. setFixedSize()*/
+    tableWidgetSalles->setFixedHeight(
+      tableWidgetSalles->verticalHeader()->length() +
+      tableWidgetSalles->horizontalHeader()->height());
+    // Largeur automatique des colonnes sur toute la largeur
+    QHeaderView* headerView = tableWidgetSalles->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
+    // Pas de scroll
+    tableWidgetSalles->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    tableWidgetSalles->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+!!!148778.cpp!!!	initialiserFenetreInformations() : void
+    labelNomSalle = new QLabel(this);
+    labelNomSalle->setText("Nom :");
+    nomSalle            = new QLabel(this);
+    boutonRetourAccueil = new QPushButton("Ok", this);
+!!!138282.cpp!!!	initialiserGUI() : void
+    setFixedSize(qApp->desktop()->availableGeometry(this).width(),
+                 qApp->desktop()->availableGeometry(this).height());
+    // showMaximized();
+    afficherFenetreAcceuil();
+!!!148906.cpp!!!	installerGestionEvenements() : void
+    connect(tableWidgetSalles,
+            SIGNAL(cellClicked(int, int)),
+            this,
+            SLOT(selectionnerSalle(int, int)));
+    connect(boutonRetourAccueil,
+            SIGNAL(clicked(bool)),
+            this,
+            SLOT(afficherFenetreAcceuil()));
+!!!138410.cpp!!!	chargerSalles() : void
+    qDebug() << Q_FUNC_INFO;
+    salles.clear();
+
+    // Pour les tests
+    // Exemple simple (si pas de base de données)
+    salles["B11"] = new Salle("B11", 18, "Salle de TD");
+    salles["B20"] = new Salle("B20", 65, "Atelier");
+    salles["B21"] = new Salle("B21", 35, "Salle de TP");
+    salles["B22"] = new Salle("B22", 80, "Salle de cours");
+
+    // Exemple avec une base de données SQLite
+    /*
+    QVector<QStringList> sallesBDD;
+    QString requete = "SELECT * FROM Salle";
+    bool    retour;
+
+    retour = baseDeDonnees->recuperer(requete, sallesBDD);
+    if(retour)
+    {
+        qDebug() << Q_FUNC_INFO << sallesBDD;
+        for(int i = 0; i < sallesBDD.size(); ++i)
+            qDebug() << Q_FUNC_INFO << sallesBDD[i];
+    }
+    else
+    {
+        QMessageBox::critical(0, "Erreur BDD", "Aucune salle chargée !");
+    }*/
+
+    effacerSalles();
+
+    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
+    QMapIterator<QString, Salle*> salle(salles);
+    while(salle.hasNext())
+    {
+        salle.next();
+        qDebug() << Q_FUNC_INFO << "Salle" << salle.key();
+        afficherSalleTable(*salle.value());
+    }
+!!!136746.cpp!!!	afficherSalleTable(in salle : Salle) : void
+    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
+             << salle.getTemperature() << "humidite" << salle.getHumidite()
+             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
+             << "fenetre" << salle.getFenetre() << "occupation"
+             << salle.getOccupation();
+
+    // créer des élements de cellule
+    QTableWidgetItem *elementNom, *elementTHI, *elementCO2;
+    QLabel *          elementLumiere, *elementFenetre, *elementOccupation;
+
+    elementNom     = new QTableWidgetItem(salle.getNom());
+    elementTHI     = new QTableWidgetItem(QString("Inconnu"));
+    elementCO2     = new QTableWidgetItem(QString::number(0));
+    elementLumiere = new QLabel(this);
+    if(salle.getLumiere())
+        elementLumiere->setPixmap(QPixmap(":/images/led-rouge"));
+    else
+        elementLumiere->setPixmap(QPixmap(":/images/led-verte"));
+    elementFenetre = new QLabel(this);
+    if(salle.getFenetre())
+        elementFenetre->setPixmap(QPixmap(":/images/led-rouge"));
+    else
+        elementFenetre->setPixmap(QPixmap(":/images/led-verte"));
+    elementOccupation = new QLabel(this);
+    if(salle.getOccupation())
+        elementOccupation->setPixmap(QPixmap(":/images/led-rouge"));
+    else
+        elementOccupation->setPixmap(QPixmap(":/images/led-verte"));
+
+    // personnaliser les éléments
+    elementNom->setFlags(Qt::ItemIsEnabled);
+    elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementTHI->setFlags(Qt::ItemIsEnabled);
+    elementTHI->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementCO2->setFlags(Qt::ItemIsEnabled);
+    elementCO2->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementLumiere->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementFenetre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementOccupation->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    // ajouter une ligne
+    int nb = tableWidgetSalles->rowCount();
+    ++nb;
+    tableWidgetSalles->setRowCount(nb);
+
+    // insérer les éléments de cellule
+    tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_NOM, elementNom);
+    tableWidgetSalles->setItem(nb - 1,
+                               COLONNE_SALLE_CONFORT_THERMIQUE,
+                               elementTHI);
+    tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_QUALITE_AIR, elementCO2);
+    tableWidgetSalles->setCellWidget(nb - 1,
+                                     COLONNE_SALLE_LUMIERES,
+                                     elementLumiere);
+    tableWidgetSalles->setCellWidget(nb - 1,
+                                     COLONNE_SALLE_FENETRES,
+                                     elementFenetre);
+    tableWidgetSalles->setCellWidget(nb - 1,
+                                     COLONNE_SALLE_OCCUPATION,
+                                     elementOccupation);
+
+    // redimensionner la hauteur de la table
+    tableWidgetSalles->setFixedHeight(
+      tableWidgetSalles->verticalHeader()->length() +
+      tableWidgetSalles->horizontalHeader()->height());
+!!!149034.cpp!!!	afficherInformationsSalle(in salle : Salle) : void
+    qInfo() << " Nom : " << salle.getNom() << "\n"
+            << "Superficie : " << salle.getSuperficie() << "\n"
+            << "Description : " << salle.getDescription();
+    nomSalle->setText(salle.getNom());
+    afficherFenetreInformations();
+!!!149162.cpp!!!	effacerTableauSalles() : void
+    // on réinitialise la tableau
+    int nb = tableWidgetSalles->rowCount();
+    if(nb != 0)
+    {
+        // on les efface
+        for(int n = 0; n < nb; n++)
+            tableWidgetSalles->removeRow(0);
+    }
+!!!149290.cpp!!!	effacerSalles() : void
+    qDebug() << Q_FUNC_INFO;
+
+    effacerTableauSalles();
+    nbLignesSalles = 0;
+!!!138794.cpp!!!	afficherFenetre(in fenetre : EcoClassroom::Fenetre) : void
+    fenetres->setCurrentIndex(fenetre);
+!!!138922.cpp!!!	afficherFenetreAcceuil() : void
+    afficherFenetre(EcoClassroom::Fenetre::Accueil);
+!!!149418.cpp!!!	afficherFenetreInformations() : void
+    afficherFenetre(EcoClassroom::Fenetre::InformationSalle);
+!!!149546.cpp!!!	selectionnerSalle(in ligne : int, in colonne : int) : void
+    Q_UNUSED(colonne)
+    QTableWidgetItem* salle;
+    salle = tableWidgetSalles->item(ligne, COLONNE_SALLE_NOM);
+    // qDebug() << Q_FUNC_INFO << salle->data(0).toString();
+    qDebug() << Q_FUNC_INFO << "Salle"
+             << salles[salle->data(0).toString()]->getNom();
+    afficherInformationsSalle(*salles[salle->data(0).toString()]);
