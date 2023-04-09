@@ -1,4 +1,5 @@
-QT       += core gui widgets sql mqtt
+QT       += core gui widgets sql
+#QT       += mqtt
 
 CONFIG += c++11
 
