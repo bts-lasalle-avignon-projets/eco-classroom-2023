@@ -93,6 +93,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <h1>Le projet eco-classroom-2023</h1>
 <ul>
 <li><a href="#le-projet-eco-classroom-2023">Le projet eco-classroom-2023</a><ul>
+<li><a href="#documentation-du-code">Documentation du code</a></li>
+<li><a href="#base-de-données">Base de données</a></li>
 <li><a href="#mqtt">MQTT</a><ul>
 <li><a href="#qt-mqtt">Qt MQTT</a></li>
 <li><a href="#paho-mqtt-android">Paho MQTT (Android)</a></li>
@@ -102,9 +104,232 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 </li>
 </ul>
 <hr  />
-<p>Documentation du code : <a href="https://btssn-lasalle-84.github.io/eco-classroom-2023/">https://btssn-lasalle-84.github.io/eco-classroom-2023/</a></p>
-<hr  />
-<h2>MQTT</h2>
+<h2>Documentation du code</h2>
+<p><a href="https://btssn-lasalle-84.github.io/eco-classroom-2023/">https://btssn-lasalle-84.github.io/eco-classroom-2023/</a></p>
+<h2>Base de données</h2>
+<p>Base de données MySQL 8.0 <code>ecoclassroom</code> hébergée sur www.db4free.net (pour les tests) :</p>
+<p><img src="sql/eco-classroom-v0.1.png" alt="" class="inline"/></p>
+<div class="fragment"><div class="line"><span class="comment">--- LDD (langage de définition de données)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">DROP</span> DATABASE <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> `ecoclassroom`;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> DATABASE <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `ecoclassroom` <span class="keywordtype">CHARACTER</span> <span class="keyword">SET</span> utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Base de données : `ecoclassroom`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line">USE ecoclassroom;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> SeuilsAlerte;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> MesureCo2;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> MesureLuminosite;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> MesureHumidite;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> MesureTemperature;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> BrokerMQTT;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> IndiceQualiteAir;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> IndiceConfinement;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> IndiceInconfortIADI;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> IndiceConfortTHI;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Salle;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `IndiceConfortTHI` (</div>
+<div class="line">    `idIndiceConfortTHI`    <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `libelle`   <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>)</div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `IndiceConfortTHI`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (`idIndiceConfortTHI`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> IndiceConfortTHI(idIndiceConfortTHI,libelle) <span class="keyword">VALUES</span></div>
+<div class="line">(-4,<span class="stringliteral">&#39;inconnu&#39;</span>),</div>
+<div class="line">(-3,<span class="stringliteral">&#39;froid&#39;</span>),</div>
+<div class="line">(-2,<span class="stringliteral">&#39;frais&#39;</span>),</div>
+<div class="line">(-1,<span class="stringliteral">&#39;légèrement frais&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">0</span>,<span class="stringliteral">&#39;neutre&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">1</span>,<span class="stringliteral">&#39;légèrement tiède&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">2</span>,<span class="stringliteral">&#39;tiède&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">3</span>,<span class="stringliteral">&#39;chaud&#39;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `IndiceInconfortIADI` (</div>
+<div class="line">    `idIndiceInconfortIADI` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `libelle`   <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>)</div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `IndiceInconfortIADI`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (`idIndiceInconfortIADI`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> IndiceInconfortIADI(idIndiceInconfortIADI,libelle) <span class="keyword">VALUES</span></div>
+<div class="line">(<span class="stringliteral">0</span>,<span class="stringliteral">&#39;aucun&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">1</span>,<span class="stringliteral">&#39;gêne&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">2</span>,<span class="stringliteral">&#39;mal être&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">3</span>,<span class="stringliteral">&#39;inconfort&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">4</span>,<span class="stringliteral">&#39;stress intense&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">5</span>,<span class="stringliteral">&#39;urgence médicale&#39;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `IndiceConfinement` (</div>
+<div class="line">    `idIndiceConfinement`   <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `libelle`   <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>)</div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `IndiceConfinement`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (`idIndiceConfinement`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> IndiceConfinement(idIndiceConfinement,libelle) <span class="keyword">VALUES</span></div>
+<div class="line">(<span class="stringliteral">0</span>, <span class="stringliteral">&#39;nul&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">1</span>, <span class="stringliteral">&#39;faible&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">2</span>, <span class="stringliteral">&#39;moyen&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">3</span>, <span class="stringliteral">&#39;élevé&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">4</span>, <span class="stringliteral">&#39;très élevé&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">5</span>, <span class="stringliteral">&#39;extrême&#39;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `IndiceQualiteAir` (</div>
+<div class="line">    `idIndiceQualiteAir`    <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `libelle`   <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>)</div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `IndiceQualiteAir`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (`idIndiceQualiteAir`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> IndiceQualiteAir(idIndiceQualiteAir,libelle) <span class="keyword">VALUES</span></div>
+<div class="line">(<span class="stringliteral">0</span>,<span class="stringliteral">&#39;inconnu&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">1</span>,<span class="stringliteral">&#39;excellent&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">2</span>,<span class="stringliteral">&#39;très bien&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">3</span>,<span class="stringliteral">&#39;modéré&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">4</span>,<span class="stringliteral">&#39;mauvais&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">5</span>,<span class="stringliteral">&#39;très mauvais&#39;</span>),</div>
+<div class="line">(<span class="stringliteral">6</span>,<span class="stringliteral">&#39;sévère&#39;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `Salle` (</div>
+<div class="line">    `idSalle`   <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">    `nom`   <span class="keywordtype">varchar</span>(<span class="stringliteral">32</span>),</div>
+<div class="line">    `description`   <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>),</div>
+<div class="line">    `superficie`    <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">    `idIndiceConfortTHI`    <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;-4&#39;</span>,</div>
+<div class="line">    `idIndiceInconfortIADI` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">    `idIndiceQualiteAir`    <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">    `idIndiceConfinement`   <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">    `etatFenetres`  <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">    `etatLumieres`  <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">    `estOccupe` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">    `estFavori` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Salle`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `nom` (`nom`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Salle`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Salle_fk_1` <span class="keyword">FOREIGN</span> KEY (`idIndiceConfortTHI`) <span class="keyword">REFERENCES</span> `IndiceConfortTHI` (`idIndiceConfortTHI`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Salle_fk_2` <span class="keyword">FOREIGN</span> KEY (`idIndiceInconfortIADI`) <span class="keyword">REFERENCES</span> `IndiceInconfortIADI` (`idIndiceInconfortIADI`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Salle_fk_3` <span class="keyword">FOREIGN</span> KEY (`idIndiceQualiteAir`) <span class="keyword">REFERENCES</span> `IndiceQualiteAir` (`idIndiceQualiteAir`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Salle_fk_4` <span class="keyword">FOREIGN</span> KEY (`idIndiceConfinement`) <span class="keyword">REFERENCES</span> `IndiceConfinement` (`idIndiceConfinement`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `BrokerMQTT` (</div>
+<div class="line">    `idBrokerMQTT`  <span class="keywordtype">int</span>,</div>
+<div class="line">    `hostname`  <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `port`  <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;1883&#39;</span>,</div>
+<div class="line">    `username`  <span class="keywordtype">varchar</span>(<span class="stringliteral">64</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `password`  <span class="keywordtype">varchar</span>(<span class="stringliteral">64</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `estActif`  <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `BrokerMQTT`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (`idBrokerMQTT`);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `MesureTemperature` (</div>
+<div class="line">    `idMesureTemperature`   <span class="keywordtype">int</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">    `idSalle`   <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `temperature`   <span class="keywordtype">DECIMAL</span>(<span class="stringliteral">3</span>, <span class="stringliteral">1</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `horodatage`    DATETIME <span class="keyword">NOT</span> <span class="stringliteral">NULL</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `MesureTemperature`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `horodatage` (`horodatage`),</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `MesureTemperature_fk_1` (`idSalle`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `MesureTemperature`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `MesureTemperature_fk_1` <span class="keyword">FOREIGN</span> KEY (`idSalle`) <span class="keyword">REFERENCES</span> `Salle` (`idSalle`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `MesureHumidite` (</div>
+<div class="line">    `idMesureHumidite`  <span class="keywordtype">int</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">    `idSalle`   <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `humidite`  TINYINT UNSIGNED <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `horodatage`    DATETIME <span class="keyword">NOT</span> <span class="stringliteral">NULL</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `MesureHumidite`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `horodatage` (`horodatage`),</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `MesureHumidite_fk_1` (`idSalle`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `MesureHumidite`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `MesureHumidite_fk_1` <span class="keyword">FOREIGN</span> KEY (`idSalle`) <span class="keyword">REFERENCES</span> `Salle` (`idSalle`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `MesureLuminosite` (</div>
+<div class="line">    `idMesureLuminosite`    <span class="keywordtype">int</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">    `idSalle`   <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `luminosite`    <span class="keywordtype">SMALLINT</span> UNSIGNED <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `horodatage`    DATETIME <span class="keyword">NOT</span> <span class="stringliteral">NULL</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `MesureLuminosite`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `horodatage` (`horodatage`),</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `MesureLuminosite_fk_1` (`idSalle`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `MesureLuminosite`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `MesureLuminosite_fk_1` <span class="keyword">FOREIGN</span> KEY (`idSalle`) <span class="keyword">REFERENCES</span> `Salle` (`idSalle`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `MesureCo2` (</div>
+<div class="line">    `idMesureCo2`   <span class="keywordtype">int</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">    `idSalle`   <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `co2`   <span class="keywordtype">SMALLINT</span> UNSIGNED <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `horodatage`    DATETIME <span class="keyword">NOT</span> <span class="stringliteral">NULL</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `MesureCo2`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `horodatage` (`horodatage`),</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `MesureCo2_fk_1` (`idSalle`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `MesureCo2`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `MesureCo2_fk_1` <span class="keyword">FOREIGN</span> KEY (`idSalle`) <span class="keyword">REFERENCES</span> `Salle` (`idSalle`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- Pour chaque salle ou pour toutes ?</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `SeuilsAlerte` (</div>
+<div class="line">    `idSalle`   <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">    `temperatureMin`    <span class="keywordtype">double</span>,</div>
+<div class="line">    `temperatureMax`    <span class="keywordtype">double</span>,</div>
+<div class="line">    `luminositeMin` <span class="keywordtype">int</span>,</div>
+<div class="line">    `luminositeMax` <span class="keywordtype">int</span>,</div>
+<div class="line">    `humiditeMin`   <span class="keywordtype">int</span>,</div>
+<div class="line">    `humiditeMax`   <span class="keywordtype">int</span>,</div>
+<div class="line">    `co2Min`    <span class="keywordtype">int</span>,</div>
+<div class="line">    `co2Max`    <span class="keywordtype">int</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `SeuilsAlerte`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (`idSalle`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `SeuilsAlerte`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `SeuilsAlerte_fk_1` <span class="keyword">FOREIGN</span> KEY (`idSalle`) <span class="keyword">REFERENCES</span> `Salle` (`idSalle`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+</div><!-- fragment --><h2>MQTT</h2>
 <p>Voir aussi : modules-lora/README.md</p>
 <h3>Qt MQTT</h3>
 <p><a href="https://doc.qt.io/QtMQTT/index.html">Qt MQTT</a> fournit une implémentation conforme à la norme MQTT.</p>
@@ -183,7 +408,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">    implementation &#39;androidx.localbroadcastmanager:localbroadcastmanager:1.0.0&#39;</div>
 <div class="line">}</div>
 </div><!-- fragment --><ol type="1">
-<li>L’utilisation du protocole MQTT suppose que l’on ait un accès réseau. Pour cela, on va attribuer les permissions <code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>, <code>ACCESS_WIFI_STATE</code> et <code>WAKE_LOCK</code> à l’application Android dans son fichier <code>AndroidManifest.xml</code>. On ajoutera aussi le service <code>MqttService</code>.</li>
+<li>L’utilisation du protocole MQTT suppose que l’on ait un accès réseau. Pour cela, on va attribuer les permissions <code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>, <code>ACCESS_WIFI_STATE</code> et <code>WAKE_LOCK</code> à l’application Android dans son fichier <code><a class="el" href="_android_manifest_8xml.html">AndroidManifest.xml</a></code>. On ajoutera aussi le service <code>MqttService</code>.</li>
 </ol>
 <div class="fragment"><div class="line">&lt;?<span class="keyword">xml</span> <span class="keyword">version</span>=<span class="stringliteral">&quot;1.0&quot;</span> <span class="keyword">encoding</span>=<span class="stringliteral">&quot;utf-8&quot;</span>?&gt;</div>
 <div class="line">&lt;<span class="keywordtype">manifest</span> <span class="keyword">xmlns:android</span>=<span class="stringliteral">&quot;http://schemas.android.com/apk/res/android&quot;</span></div>
@@ -210,7 +435,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 3 Mars 2023 19:30:45 pour Projet eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 22:04:22 pour Projet eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

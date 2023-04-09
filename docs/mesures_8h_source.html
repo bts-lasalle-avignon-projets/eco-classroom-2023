@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet eco-classroom:  Fichier source de mesures.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet eco-classroom
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('mesures_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">mesures.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="mesures_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef MESURES_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define MESURES_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_mesures.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_mesures.html">Mesures</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_mesures.html#a2688d0da4acf9d91ea0befd6ed0bd140">   15</a></span>&#160;    <span class="keywordtype">double</span>       <a class="code" href="class_mesures.html#a2688d0da4acf9d91ea0befd6ed0bd140">temperature</a>; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_mesures.html#ac6de91e28c26697c50186d1d4c0ce0aa">   16</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_mesures.html#ac6de91e28c26697c50186d1d4c0ce0aa">humidite</a>;    </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_mesures.html#a6428c26aa7fa8f54be4d8d3a921d2ebc">   17</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_mesures.html#a6428c26aa7fa8f54be4d8d3a921d2ebc">co2</a>;         </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_mesures.html#a72e91c28750f75eb318cbda07acb6832">Mesures</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_mesures.html#a4bb192b80fbf2c0f9aea5911ce29c652">~Mesures</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">double</span>       <a class="code" href="class_mesures.html#a38f36883f3abd9e00b86825330e8564e">getTemperature</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_mesures.html#aa2dfd2bef81f5cc6be1bbd77f704a2e5">getHumidite</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_mesures.html#a64d21412e2f682f67e494bd0d9c60f4e">getCO2</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span>         <a class="code" href="class_mesures.html#a6370bd7152282bf33e106bf223d5d9c5">setTemperature</a>(<span class="keywordtype">double</span> <a class="code" href="class_mesures.html#a2688d0da4acf9d91ea0befd6ed0bd140">temperature</a>);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span>         <a class="code" href="class_mesures.html#aee61e9e7108b1a9b9057cc5a17b4516f">setHumidite</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_mesures.html#ac6de91e28c26697c50186d1d4c0ce0aa">humidite</a>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span>         <a class="code" href="class_mesures.html#a391717ce62d1db522c476c1282eb3e72">setCO2</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_mesures.html#a6428c26aa7fa8f54be4d8d3a921d2ebc">co2</a>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MESURES_H</span></div>
+<div class="ttc" id="aclass_mesures_html"><div class="ttname"><a href="class_mesures.html">Mesures</a></div><div class="ttdoc">Classe permettant de gérer les mesures d'une salle.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8h_source.html#l00012">mesures.h:13</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a2688d0da4acf9d91ea0befd6ed0bd140"><div class="ttname"><a href="class_mesures.html#a2688d0da4acf9d91ea0befd6ed0bd140">Mesures::temperature</a></div><div class="ttdeci">double temperature</div><div class="ttdoc">Temperature dans la salle.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8h_source.html#l00015">mesures.h:15</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a38f36883f3abd9e00b86825330e8564e"><div class="ttname"><a href="class_mesures.html#a38f36883f3abd9e00b86825330e8564e">Mesures::getTemperature</a></div><div class="ttdeci">double getTemperature() const</div><div class="ttdoc">Getter de l'attribut temperature.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00032">mesures.cpp:32</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a391717ce62d1db522c476c1282eb3e72"><div class="ttname"><a href="class_mesures.html#a391717ce62d1db522c476c1282eb3e72">Mesures::setCO2</a></div><div class="ttdeci">void setCO2(unsigned int co2)</div><div class="ttdoc">Setter de l'attribut co2.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00082">mesures.cpp:82</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a4bb192b80fbf2c0f9aea5911ce29c652"><div class="ttname"><a href="class_mesures.html#a4bb192b80fbf2c0f9aea5911ce29c652">Mesures::~Mesures</a></div><div class="ttdeci">~Mesures()</div><div class="ttdoc">Destructeur de la classe Mesures.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00023">mesures.cpp:23</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a6370bd7152282bf33e106bf223d5d9c5"><div class="ttname"><a href="class_mesures.html#a6370bd7152282bf33e106bf223d5d9c5">Mesures::setTemperature</a></div><div class="ttdeci">void setTemperature(double temperature)</div><div class="ttdoc">Setter de l'attribut temperature.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00062">mesures.cpp:62</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a6428c26aa7fa8f54be4d8d3a921d2ebc"><div class="ttname"><a href="class_mesures.html#a6428c26aa7fa8f54be4d8d3a921d2ebc">Mesures::co2</a></div><div class="ttdeci">unsigned int co2</div><div class="ttdoc">Taux de CO2 dans la salle.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8h_source.html#l00017">mesures.h:17</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a64d21412e2f682f67e494bd0d9c60f4e"><div class="ttname"><a href="class_mesures.html#a64d21412e2f682f67e494bd0d9c60f4e">Mesures::getCO2</a></div><div class="ttdeci">unsigned int getCO2() const</div><div class="ttdoc">Getter de l'attribut co2.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00052">mesures.cpp:52</a></div></div>
+<div class="ttc" id="aclass_mesures_html_a72e91c28750f75eb318cbda07acb6832"><div class="ttname"><a href="class_mesures.html#a72e91c28750f75eb318cbda07acb6832">Mesures::Mesures</a></div><div class="ttdeci">Mesures()</div><div class="ttdoc">Constructeur de la classe Mesures.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00015">mesures.cpp:15</a></div></div>
+<div class="ttc" id="aclass_mesures_html_aa2dfd2bef81f5cc6be1bbd77f704a2e5"><div class="ttname"><a href="class_mesures.html#aa2dfd2bef81f5cc6be1bbd77f704a2e5">Mesures::getHumidite</a></div><div class="ttdeci">unsigned int getHumidite() const</div><div class="ttdoc">Getter de l'attribut humidite.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00042">mesures.cpp:42</a></div></div>
+<div class="ttc" id="aclass_mesures_html_ac6de91e28c26697c50186d1d4c0ce0aa"><div class="ttname"><a href="class_mesures.html#ac6de91e28c26697c50186d1d4c0ce0aa">Mesures::humidite</a></div><div class="ttdeci">unsigned int humidite</div><div class="ttdoc">Humidite dans la salle.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8h_source.html#l00016">mesures.h:16</a></div></div>
+<div class="ttc" id="aclass_mesures_html_aee61e9e7108b1a9b9057cc5a17b4516f"><div class="ttname"><a href="class_mesures.html#aee61e9e7108b1a9b9057cc5a17b4516f">Mesures::setHumidite</a></div><div class="ttdeci">void setHumidite(unsigned int humidite)</div><div class="ttdoc">Setter de l'attribut humidite.</div><div class="ttdef"><b>Definition:</b> <a href="mesures_8cpp_source.html#l00072">mesures.cpp:72</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_bc7f3c21278e60441a8650a1b23bb4dd.html">eco-classroom-desktop</a></li><li class="navelem"><a class="el" href="mesures_8h.html">mesures.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 22:04:22 pour Projet eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="Salle" name="Salle">
+<area shape="rect" id="node1" title=" " alt="" coords="90,292,233,545"/>
+<area shape="rect" id="node2" href="$class_etats_salle.html" title="Classe permettant de gérer les etats d&#39;une salle." alt="" coords="5,5,147,229"/>
+<area shape="rect" id="node3" href="$class_mesures.html" title="Classe permettant de gérer les mesures d&#39;une salle." alt="" coords="171,13,322,222"/>
+</map>

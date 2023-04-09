@@ -1,0 +1,29 @@
+name: qt-build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: "5.12.8"
+          host: "linux"
+          target: "desktop"
+
+      - name: Run qmake
+        run: |
+          cd eco-classroom-desktop && qmake
+
+      - name: Run make
+        run: |
+          cd eco-classroom-desktop && make

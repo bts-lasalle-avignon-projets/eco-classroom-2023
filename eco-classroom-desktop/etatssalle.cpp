@@ -1,5 +1,5 @@
 /**
- * @file etatsalle.cpp
+ * @file etatssalle.cpp
  * @brief Définition de la classe EtatsSalle
  */
 #include "etatssalle.h"

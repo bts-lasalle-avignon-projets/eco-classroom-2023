@@ -1,17 +1,22 @@
-![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic) ![MQTT Badge](https://img.shields.io/badge/MQTT-606?logo=mqtt&logoColor=fff&style=plastic) ![](https://badgen.net/badge/Qt/5.12.8/green) ![Android Badge](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=fff&style=plastic)
+![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic) ![Android Badge](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=fff&style=plastic)
 
-[![pages-build-deployment](https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment)
+![](https://badgen.net/badge/Qt/5.12.8/green) [![qt-build](https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/make-qt.yml/badge.svg)](https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/make-qt.yml) [![android-build](https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/android-build.yml/badge.svg)](https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/android-build.yml) [![pages-build-deployment](https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment)
 
-# Le projet eco-classroom-2023
+# Le projet eco-classroom 2023
 
-- [Le projet eco-classroom-2023](#le-projet-eco-classroom-2023)
+- [Le projet eco-classroom 2023](#le-projet-eco-classroom-2023)
   - [Documentation du code](#documentation-du-code)
   - [Base de données](#base-de-données)
   - [MQTT](#mqtt)
     - [Qt MQTT](#qt-mqtt)
     - [Paho MQTT (Android)](#paho-mqtt-android)
+  - [Versions](#versions)
+    - [0.1](#01)
+  - [Auteurs](#auteurs)
 
 ---
+
+Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules connectés afin de détecter et mesurer l’état de celle-ci. Les informations seront accessibles à partir d’une tablette ou d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.
 
 ## Documentation du code
 
@@ -372,6 +377,28 @@ dependencies {
 
 </manifest>
 ```
+
+## Versions
+
+### 0.1
+
+![](images/jira-tickets-v0.1.png)
+
+- Android :
+
+![](images/screenshot-android-salles-v0.1.png)
+
+- PC Desktop Qt :
+
+![](images/screenshot-qt-salles-v0.1.png)
+
+## Auteurs
+
+Étudiants IR :
+
+- Jérémy MERCKLEN
+- Baptiste COCHET
+- Célian SUBIRANA
 
 ---
 ©️ LaSalle Avignon 2023

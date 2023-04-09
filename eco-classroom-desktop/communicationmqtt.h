@@ -1,5 +1,5 @@
 /**
- * @file communiquationmqtt.h
+ * @file communicationmqtt.h
  * @brief Déclaration de la classe CommunicationMQTT
  */
 
@@ -10,7 +10,7 @@
 //#include <QtMqtt/QMqttSubscription>
 
 /**
- * @class communiquationmqtt.h
+ * @class CommunicationMQTT
  * @brief Classe permettant de gérer la communication MQTT
  */
 class CommunicationMQTT

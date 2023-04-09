@@ -195,7 +195,7 @@ void EcoClassroom::initialiserGUI()
 }
 
 /**
- * @fn EcoClassroom::gererEvenements
+ * @fn EcoClassroom::installerGestionEvenements
  * @brief Installe les gestionnaire d'évènements (signal/slot)
  */
 void EcoClassroom::installerGestionEvenements()
@@ -257,7 +257,7 @@ void EcoClassroom::chargerSalles()
 }
 
 /**
- * @fn EcoClassroom::afficheSalleTable
+ * @fn EcoClassroom::afficherSalleTable
  * @brief Affiche une salle dans le tableau
  * @param salle La salle à afficher dans le tableau
  */

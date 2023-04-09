@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet eco-classroom:  Fichier source de EcoClassroom.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet eco-classroom
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_eco_classroom_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">EcoClassroom.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_eco_classroom_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">package </span>com.lasalle.eco_classroom_mobile;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> androidx.recyclerview.widget.LinearLayoutManager;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> androidx.recyclerview.widget.RecyclerView;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">import</span> android.os.Bundle;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">import</span> android.util.Log;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">import</span> java.util.Vector;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html">   22</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html">EcoClassroom</a> <span class="keyword">extends</span> AppCompatActivity</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">   27</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">TAG</a> = <span class="stringliteral">&quot;_EcoClassroom_&quot;</span>; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">   32</a></span>&#160;    <span class="keyword">private</span> Vector&lt;Salle&gt; <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">salles</a> = <span class="keyword">null</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ae57194cbf623360031f69fac21ccea11">   37</a></span>&#160;    <span class="keyword">private</span> RecyclerView               <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ae57194cbf623360031f69fac21ccea11">vueSalles</a>;       </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ab8bd7e69919992d2ca0f9f3263770a71">   38</a></span>&#160;    <span class="keyword">private</span> RecyclerView.Adapter       <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ab8bd7e69919992d2ca0f9f3263770a71">adaptateurSalle</a>; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac862a3e0e54d844d48163eab58e20f20">   39</a></span>&#160;    <span class="keyword">private</span> RecyclerView.LayoutManager <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac862a3e0e54d844d48163eab58e20f20">layoutVueSalles</a>; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    @Override</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8f6624adefb30169b64d06a35946f378">   45</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8f6624adefb30169b64d06a35946f378">onCreate</a>(Bundle savedInstanceState)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        super.onCreate(savedInstanceState);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        setContentView(R.layout.ecoclassroom);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        Log.d(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">TAG</a>, <span class="stringliteral">&quot;onCreate()&quot;</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8969226479c4b78e867d9f4413126723">chargerSalles</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a85dbb5ceeff7a00c28634cd6645a2c2e">afficherSalles</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5958f50aab2512f6a0d4b0861a149a77">initialiserVueSalles</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    @Override</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a7edde7f43ff9355604e2d7e57c9381ce">   62</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a7edde7f43ff9355604e2d7e57c9381ce">onStart</a>()</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        super.onStart();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        Log.d(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">TAG</a>, <span class="stringliteral">&quot;onStart()&quot;</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    @Override</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5cacf28f3daf2f28e2b37e8d0500d9d7">   72</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5cacf28f3daf2f28e2b37e8d0500d9d7">onResume</a>()</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        super.onResume();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        Log.d(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">TAG</a>, <span class="stringliteral">&quot;onResume()&quot;</span>);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    @Override</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac6063dce1a6ab47dab4b3be2ab0cf652">   83</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac6063dce1a6ab47dab4b3be2ab0cf652">onPause</a>()</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        super.onPause();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        Log.d(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">TAG</a>, <span class="stringliteral">&quot;onPause()&quot;</span>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    @Override</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a1d3377bb625ea8274784c428406583a7">   93</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a1d3377bb625ea8274784c428406583a7">onStop</a>()</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        super.onStop();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        Log.d(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">TAG</a>, <span class="stringliteral">&quot;onStop()&quot;</span>);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    @Override</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a36a9d74e45c8aaeafc5e85a2ac33927e">  104</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a36a9d74e45c8aaeafc5e85a2ac33927e">onDestroy</a>()</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        super.onDestroy();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        Log.d(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">TAG</a>, <span class="stringliteral">&quot;onDestroy()&quot;</span>);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5958f50aab2512f6a0d4b0861a149a77">  113</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5958f50aab2512f6a0d4b0861a149a77">initialiserVueSalles</a>()</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ae57194cbf623360031f69fac21ccea11">vueSalles</a> = (RecyclerView)findViewById(R.id.listeSalles);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ae57194cbf623360031f69fac21ccea11">vueSalles</a>.setHasFixedSize(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac862a3e0e54d844d48163eab58e20f20">layoutVueSalles</a> = <span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ae57194cbf623360031f69fac21ccea11">vueSalles</a>.setLayoutManager(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac862a3e0e54d844d48163eab58e20f20">layoutVueSalles</a>);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ab8bd7e69919992d2ca0f9f3263770a71">adaptateurSalle</a> = <span class="keyword">new</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle.html">AdaptateurSalle</a>(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">salles</a>);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ae57194cbf623360031f69fac21ccea11">vueSalles</a>.setAdapter(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ab8bd7e69919992d2ca0f9f3263770a71">adaptateurSalle</a>);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a85dbb5ceeff7a00c28634cd6645a2c2e">  128</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a85dbb5ceeff7a00c28634cd6645a2c2e">afficherSalles</a>()</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">salles</a>.size(); i++)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            Log.d(<a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">TAG</a>, <span class="stringliteral">&quot;afficherSalles() salle : nom = &quot;</span> + <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">salles</a>.get(i).getNom());</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#acdf0e523df458377f2aafafc3232cc89">  139</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#acdf0e523df458377f2aafafc3232cc89">ajouterSalle</a>(String nom, String description, <span class="keywordtype">double</span> superficie)</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">salles</a>.add(<span class="keyword">new</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html">Salle</a>(nom, superficie, description));</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8969226479c4b78e867d9f4413126723">  147</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8969226479c4b78e867d9f4413126723">chargerSalles</a>()</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">salles</a> = <span class="keyword">new</span> Vector&lt;Salle&gt;();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#acdf0e523df458377f2aafafc3232cc89">ajouterSalle</a>(<span class="stringliteral">&quot;B11&quot;</span>, <span class="stringliteral">&quot;Salle de cours&quot;</span>, 18);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#acdf0e523df458377f2aafafc3232cc89">ajouterSalle</a>(<span class="stringliteral">&quot;B20&quot;</span>, <span class="stringliteral">&quot;Salle de TP&quot;</span>, 65);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#acdf0e523df458377f2aafafc3232cc89">ajouterSalle</a>(<span class="stringliteral">&quot;B21&quot;</span>, <span class="stringliteral">&quot;Salle de Physiques&quot;</span>, 40);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="comment">// Pour les tests</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">salles</a>.size(); i++)</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">if</span>(i%2 == 0)</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <a class="code" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">salles</a>.get(i).setEstOccupe(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}</div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle_html"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle.html">com.lasalle.eco_classroom_mobile.AdaptateurSalle</a></div><div class="ttdoc">Lien entre les données et les vues (RecyclerView)</div><div class="ttdef"><b>Definition:</b> <a href="_adaptateur_salle_8java_source.html#l00023">AdaptateurSalle.java:24</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html">com.lasalle.eco_classroom_mobile.EcoClassroom</a></div><div class="ttdoc">L'activité principale.</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00022">EcoClassroom.java:23</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a02f219008563673b9103d80211719839"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">com.lasalle.eco_classroom_mobile.EcoClassroom.TAG</a></div><div class="ttdeci">static final String TAG</div><div class="ttdoc">TAG pour les logs (cf. Logcat)</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00027">EcoClassroom.java:27</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a1d3377bb625ea8274784c428406583a7"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a1d3377bb625ea8274784c428406583a7">com.lasalle.eco_classroom_mobile.EcoClassroom.onStop</a></div><div class="ttdeci">void onStop()</div><div class="ttdoc">Méthode appelée lorsque l'activité n'est plus visible.</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00093">EcoClassroom.java:93</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a26e51770d4ec6c3ef101334ef1f0382e"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a26e51770d4ec6c3ef101334ef1f0382e">com.lasalle.eco_classroom_mobile.EcoClassroom.salles</a></div><div class="ttdeci">Vector&lt; Salle &gt; salles</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00032">EcoClassroom.java:32</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a36a9d74e45c8aaeafc5e85a2ac33927e"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a36a9d74e45c8aaeafc5e85a2ac33927e">com.lasalle.eco_classroom_mobile.EcoClassroom.onDestroy</a></div><div class="ttdeci">void onDestroy()</div><div class="ttdoc">Méthode appelée à la destruction de l'application (après onStop() et détruite par le système Android)</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00104">EcoClassroom.java:104</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a5958f50aab2512f6a0d4b0861a149a77"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5958f50aab2512f6a0d4b0861a149a77">com.lasalle.eco_classroom_mobile.EcoClassroom.initialiserVueSalles</a></div><div class="ttdeci">void initialiserVueSalles()</div><div class="ttdoc">Méthode permettant d'initialiser les attributs pour RecyclerView.</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00113">EcoClassroom.java:113</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a5cacf28f3daf2f28e2b37e8d0500d9d7"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5cacf28f3daf2f28e2b37e8d0500d9d7">com.lasalle.eco_classroom_mobile.EcoClassroom.onResume</a></div><div class="ttdeci">void onResume()</div><div class="ttdoc">Méthode appelée après onStart() ou après onPause()</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00072">EcoClassroom.java:72</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a7edde7f43ff9355604e2d7e57c9381ce"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a7edde7f43ff9355604e2d7e57c9381ce">com.lasalle.eco_classroom_mobile.EcoClassroom.onStart</a></div><div class="ttdeci">void onStart()</div><div class="ttdoc">Méthode appelée au démarrage après le onCreate() ou un restart après un onStop()</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00062">EcoClassroom.java:62</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a85dbb5ceeff7a00c28634cd6645a2c2e"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a85dbb5ceeff7a00c28634cd6645a2c2e">com.lasalle.eco_classroom_mobile.EcoClassroom.afficherSalles</a></div><div class="ttdeci">void afficherSalles()</div><div class="ttdoc">Méthode permettant d'afficher les salles dans les logs.</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00128">EcoClassroom.java:128</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a8969226479c4b78e867d9f4413126723"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8969226479c4b78e867d9f4413126723">com.lasalle.eco_classroom_mobile.EcoClassroom.chargerSalles</a></div><div class="ttdeci">void chargerSalles()</div><div class="ttdoc">Méthode permettant de simuler un ajout de plusieurs salles.</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00147">EcoClassroom.java:147</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_a8f6624adefb30169b64d06a35946f378"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8f6624adefb30169b64d06a35946f378">com.lasalle.eco_classroom_mobile.EcoClassroom.onCreate</a></div><div class="ttdeci">void onCreate(Bundle savedInstanceState)</div><div class="ttdoc">Méthode appelée à la création de l'activité</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00045">EcoClassroom.java:45</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_ab8bd7e69919992d2ca0f9f3263770a71"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ab8bd7e69919992d2ca0f9f3263770a71">com.lasalle.eco_classroom_mobile.EcoClassroom.adaptateurSalle</a></div><div class="ttdeci">RecyclerView.Adapter adaptateurSalle</div><div class="ttdoc">l'adaptateur</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00038">EcoClassroom.java:38</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_ac6063dce1a6ab47dab4b3be2ab0cf652"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac6063dce1a6ab47dab4b3be2ab0cf652">com.lasalle.eco_classroom_mobile.EcoClassroom.onPause</a></div><div class="ttdeci">void onPause()</div><div class="ttdoc">Méthode appelée après qu'une boîte de dialogue s'est affichée (on reprend sur un onResume()) ou avant...</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00083">EcoClassroom.java:83</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_ac862a3e0e54d844d48163eab58e20f20"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac862a3e0e54d844d48163eab58e20f20">com.lasalle.eco_classroom_mobile.EcoClassroom.layoutVueSalles</a></div><div class="ttdeci">RecyclerView.LayoutManager layoutVueSalles</div><div class="ttdoc">le gestionnaire de mise en page</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00039">EcoClassroom.java:39</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_acdf0e523df458377f2aafafc3232cc89"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#acdf0e523df458377f2aafafc3232cc89">com.lasalle.eco_classroom_mobile.EcoClassroom.ajouterSalle</a></div><div class="ttdeci">void ajouterSalle(String nom, String description, double superficie)</div><div class="ttdoc">Méthode permettant d'ajouter une salle dans l'attribut salles.</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00139">EcoClassroom.java:139</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom_html_ae57194cbf623360031f69fac21ccea11"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ae57194cbf623360031f69fac21ccea11">com.lasalle.eco_classroom_mobile.EcoClassroom.vueSalles</a></div><div class="ttdeci">RecyclerView vueSalles</div><div class="ttdoc">la vue</div><div class="ttdef"><b>Definition:</b> <a href="_eco_classroom_8java_source.html#l00037">EcoClassroom.java:37</a></div></div>
+<div class="ttc" id="aclasscom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle_html"><div class="ttname"><a href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html">com.lasalle.eco_classroom_mobile.Salle</a></div><div class="ttdoc">Le concept de Salle.</div><div class="ttdef"><b>Definition:</b> <a href="_salle_8java_source.html#l00015">Salle.java:16</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_f852164f3bc4e56a388d4e1a68ff2bc5.html">eco-classroom-mobile</a></li><li class="navelem"><a class="el" href="dir_8309e0430c17e14bbc5295eac99c65cf.html">app</a></li><li class="navelem"><a class="el" href="dir_1a74c27156a7a0fee9dd3307bac3bb63.html">src</a></li><li class="navelem"><a class="el" href="dir_9c50399bac91572fe9c28a3084252c20.html">main</a></li><li class="navelem"><a class="el" href="dir_5f7e98e98f16bb5959813325d67473c7.html">java</a></li><li class="navelem"><a class="el" href="dir_53769db468fb6dd8781d1c87737b2da9.html">com</a></li><li class="navelem"><a class="el" href="dir_478e83d4b8b0b2646b99d7d6e8ce3245.html">lasalle</a></li><li class="navelem"><a class="el" href="dir_3c3a5897f8bcb5900b813d1031e25809.html">eco_classroom_mobile</a></li><li class="navelem"><a class="el" href="_eco_classroom_8java.html">EcoClassroom.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 22:04:22 pour Projet eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>
