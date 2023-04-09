@@ -6,7 +6,7 @@
 #include <QDebug>
 
 /**
- * @fn Communication::CommunicationMQTT
+ * @fn CommunicationMQTT::CommunicationMQTT
  * @brief Constructeur par défaut de la classe CommunicationMQTT
  */
 CommunicationMQTT::CommunicationMQTT()
@@ -15,7 +15,7 @@ CommunicationMQTT::CommunicationMQTT()
 }
 
 /**
- * @fn Communication::CommunicationMQTT
+ * @fn CommunicationMQTT::CommunicationMQTT
  * @brief Destructeur de la classe CommunicationMQTT
  */
 CommunicationMQTT::~CommunicationMQTT()

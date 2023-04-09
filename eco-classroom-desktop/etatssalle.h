@@ -1,5 +1,5 @@
 /**
- * @file etatsalle.h
+ * @file etatssalle.h
  * @brief Déclaration de la classe EtatsSalle
  */
 #ifndef ETATSALLE_H
