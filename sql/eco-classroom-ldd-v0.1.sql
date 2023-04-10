@@ -222,3 +222,25 @@ ALTER TABLE `SeuilsAlerte`
   ADD CONSTRAINT `SeuilsAlerte_fk_1` FOREIGN KEY (`idSalle`) REFERENCES `Salle` (`idSalle`) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
+
+-- Tests
+
+CREATE TABLE IF NOT EXISTS `Salle` (
+	`idSalle`	int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`nom`	varchar(32),
+	`description`	varchar(255),
+	`superficie`	int DEFAULT '0',
+	`idIndiceConfortTHI`	int DEFAULT '-4',
+    `idIndiceInconfortIADI`	int DEFAULT '0',
+	`idIndiceQualiteAir`	int DEFAULT '0',
+    `idIndiceConfinement`	int DEFAULT '0',
+	`etatFenetres`	int DEFAULT '0',
+	`etatLumieres`	int DEFAULT '0',
+	`estOccupe`	int DEFAULT '0',
+	`estFavori`	int DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO Salle(nom, description, superficie) VALUES ('B11','TD','15');
+INSERT INTO Salle(nom, description, superficie) VALUES ('B20','Atelier','65');
+INSERT INTO Salle(nom, description, superficie) VALUES ('B21','Salle de Physiques','40');
+INSERT INTO Salle(nom, description, superficie) VALUES ('B22','Cours','60');

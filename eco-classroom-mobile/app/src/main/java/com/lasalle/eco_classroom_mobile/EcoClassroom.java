@@ -6,11 +6,15 @@
 
 package com.lasalle.eco_classroom_mobile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.util.Vector;
@@ -29,7 +33,9 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * Attributs
      */
-    private Vector<Salle> salles = null;
+    private Vector<Salle> salles = null;  //!< les salles
+    private BaseDeDonnees baseDeDonnees;  //!< accès à la base de données
+    private Handler       handler = null; //<! Le handler utilisé par l'activité
 
     /**
      * Ressources GUI
@@ -48,10 +54,12 @@ public class EcoClassroom extends AppCompatActivity
         setContentView(R.layout.ecoclassroom);
         Log.d(TAG, "onCreate()");
 
-        chargerSalles();
-        afficherSalles();
+        initialiserHandler();
+        initialiserBaseDeDonnees();
 
+        chargerSalles();
         initialiserVueSalles();
+        afficherSalles();
     }
 
     /**
@@ -127,10 +135,14 @@ public class EcoClassroom extends AppCompatActivity
      */
     public void afficherSalles()
     {
+        Log.d(TAG, "afficherSalles() Nb salles = " + salles.size());
+        /*
         for(int i = 0; i < salles.size(); i++)
         {
             Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
-        }
+        }*/
+        // Force le rafraichissement de la liste des salles
+        this.adaptateurSalle.notifyDataSetChanged();
     }
 
     /**
@@ -146,6 +158,8 @@ public class EcoClassroom extends AppCompatActivity
      */
     public void chargerSalles()
     {
+        salles = baseDeDonnees.chargerSalles();
+        /*
         salles = new Vector<Salle>();
         ajouterSalle("B11", "Salle de cours", 18);
         ajouterSalle("B20", "Salle de TP", 65);
@@ -154,8 +168,89 @@ public class EcoClassroom extends AppCompatActivity
         // Pour les tests
         for(int i = 0; i < salles.size(); i++)
         {
-            if(i%2 == 0)
+            if(i % 2 == 0)
                 salles.get(i).setEstOccupe(true);
         }
+        */
+    }
+
+    /**
+     * @brief Méthode qui permet de récupérer l'instance de BaseDeDonnees
+     */
+    private void initialiserBaseDeDonnees()
+    {
+        baseDeDonnees = BaseDeDonnees.getInstance(handler);
+    }
+
+    /**
+     * @brief Initialise la gestion des messages en provenance des threads
+     */
+    private void initialiserHandler()
+    {
+        this.handler = new Handler(this.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message message)
+            {
+                Log.d(TAG, "[Handler] id message = " + message.what);
+                Log.d(TAG, "[Handler] message = " + message.obj.toString());
+
+                switch(message.what)
+                {
+                    case BaseDeDonnees.CONNEXION_OK:
+                        Log.d(TAG, "[Handler] CONNEXION_OK");
+                        /**
+                         * Exemples de requêtes
+                         *
+                         * baseDeDonnees.executerRequete("UPDATE Salle SET estFavori = '1'
+                         * WHERE Salle.idSalle = '1'");
+                         *
+                         * Pour selectionner() -> réponse dans REQUETE_SQL_SELECT
+                         * baseDeDonnees.selectionner("SELECT * FROM Salle");
+                         */
+                        afficherSalles();
+                        break;
+                    case BaseDeDonnees.CONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] CONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_OK:
+                        Log.d(TAG, "[Handler] DECONNEXION_OK");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] DECONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_OK:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_OK");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_ERREUR:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT");
+                        /**
+                         * Exemple de traitement d'une requête SELECT
+                         *
+                         * ResultSet resultatRequete = (ResultSet)message.obj;
+                         * try
+                         * {
+                         *    while(resultatRequete.next())
+                         *    {
+                         *        int numero = resultatRequete.getRow();
+                         *        Log.v(TAG, "[Handler] resultatRequete numéro = " + numero);
+                         *    }
+                         * }
+                         * catch(SQLException e)
+                         * {
+                         *    e.printStackTrace();
+                         * }
+                         */
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_SALLES:
+                        Log.d(TAG,
+                              "[Handler] REQUETE_SQL_SELECT_SALLES Nb salles = " +
+                                message.obj.toString());
+                        afficherSalles();
+                }
+            }
+        };
     }
 }
