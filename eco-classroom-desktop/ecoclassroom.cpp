@@ -261,60 +261,44 @@ void EcoClassroom::chargerSalles()
  * @fn EcoClassroom::creerElementsTexteCellule
  * @param salle
  */
-void EcoClassroom::creerElementsTexteCellule(const Salle&       salle,
-                                             QTableWidgetItem** elementNom,
-                                             QTableWidgetItem** elementTHI,
-                                             QTableWidgetItem** elementCO2)
+void EcoClassroom::creerElementsTexteCellule(const Salle& salle)
 {
-    *elementNom = new QTableWidgetItem(salle.getNom());
-    *elementTHI = new QTableWidgetItem(QString("Inconnu"));
-    *elementCO2 = new QTableWidgetItem(QString::number(0));
+    elementNom = new QTableWidgetItem(salle.getNom());
+    elementTHI = new QTableWidgetItem(QString("Inconnu"));
+    elementCO2 = new QTableWidgetItem(QString::number(0));
 
-    personnaliserElementsTexte(*elementNom, *elementTHI, *elementCO2);
+    personnaliserElementsTexte();
 }
 
 /**
  * @brief EcoClassroom::creerElementsImageCellule
  * @param salle
- * @param elementLumiere
- * @param elementFenetre
- * @param elementOccupation
  */
-void EcoClassroom::creerElementsImageCellule(const Salle& salle,
-                                             QLabel**     elementLumiere,
-                                             QLabel**     elementFenetre,
-                                             QLabel**     elementOccupation)
+void EcoClassroom::creerElementsImageCellule(const Salle& salle)
 {
-    *elementLumiere = new QLabel(this);
+    elementLumiere = new QLabel(this);
     if(salle.getLumiere())
-        (*elementLumiere)->setPixmap(QPixmap(":/images/led-rouge"));
+        elementLumiere->setPixmap(QPixmap(":/images/led-rouge"));
     else
-        (*elementLumiere)->setPixmap(QPixmap(":/images/led-verte"));
-    *elementFenetre = new QLabel(this);
+        elementLumiere->setPixmap(QPixmap(":/images/led-verte"));
+    elementFenetre = new QLabel(this);
     if(salle.getFenetre())
-        (*elementFenetre)->setPixmap(QPixmap(":/images/led-rouge"));
+        elementFenetre->setPixmap(QPixmap(":/images/led-rouge"));
     else
-        (*elementFenetre)->setPixmap(QPixmap(":/images/led-verte"));
-    *elementOccupation = new QLabel(this);
+        elementFenetre->setPixmap(QPixmap(":/images/led-verte"));
+    elementOccupation = new QLabel(this);
     if(salle.getOccupation())
-        (*elementOccupation)->setPixmap(QPixmap(":/images/led-rouge"));
+        elementOccupation->setPixmap(QPixmap(":/images/led-rouge"));
     else
-        (*elementOccupation)->setPixmap(QPixmap(":/images/led-verte"));
+        elementOccupation->setPixmap(QPixmap(":/images/led-verte"));
 
-    personnaliserElementsImage(*elementLumiere,
-                               *elementFenetre,
-                               *elementOccupation);
+    personnaliserElementsImage();
 }
 
 /**
  * @fn EcoClassroom::personnaliserElementsTexte
- * @param elementNom
- * @param elementTHI
- * @param elementCO2
  */
-void EcoClassroom::personnaliserElementsTexte(QTableWidgetItem* elementNom,
-                                              QTableWidgetItem* elementTHI,
-                                              QTableWidgetItem* elementCO2)
+void EcoClassroom::personnaliserElementsTexte()
 {
     elementNom->setFlags(Qt::ItemIsEnabled);
     elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -326,13 +310,8 @@ void EcoClassroom::personnaliserElementsTexte(QTableWidgetItem* elementNom,
 
 /**
  * @fn personnaliserElementsImage
- * @param elementLumiere
- * @param elementFenetre
- * @param elementOccupation
  */
-void EcoClassroom::personnaliserElementsImage(QLabel* elementLumiere,
-                                              QLabel* elementFenetre,
-                                              QLabel* elementOccupation)
+void EcoClassroom::personnaliserElementsImage()
 {
     elementLumiere->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     elementFenetre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -341,19 +320,8 @@ void EcoClassroom::personnaliserElementsImage(QLabel* elementLumiere,
 
 /**
  * @fn EcoClassroom::insererElementsCellule
- * @param elementNom
- * @param elementTHI
- * @param elementCO2
- * @param elementLumiere
- * @param elementFenetre
- * @param elementOccupation
  */
-void EcoClassroom::insererElementsCellule(QTableWidgetItem* elementNom,
-                                          QTableWidgetItem* elementTHI,
-                                          QTableWidgetItem* elementCO2,
-                                          QLabel*           elementLumiere,
-                                          QLabel*           elementFenetre,
-                                          QLabel*           elementOccupation)
+void EcoClassroom::insererElementsCellule()
 {
     int nb = tableWidgetSalles->rowCount();
     ++nb;
@@ -399,23 +367,12 @@ void EcoClassroom::afficherSalleTable(const Salle& salle)
              << salle.getOccupation();
 
     // créer des élements de cellule
-    QTableWidgetItem *elementNom = nullptr, *elementTHI = nullptr,
-                     *elementCO2 = nullptr;
-    creerElementsTexteCellule(salle, &elementNom, &elementTHI, &elementCO2);
-    QLabel *elementLumiere = nullptr, *elementFenetre = nullptr,
-           *elementOccupation = nullptr;
-    creerElementsImageCellule(salle,
-                              &elementLumiere,
-                              &elementFenetre,
-                              &elementOccupation);
+    creerElementsTexteCellule(salle);
+    creerElementsImageCellule(salle);
 
     // insérer les éléments de cellule
-    insererElementsCellule(elementNom,
-                           elementTHI,
-                           elementCO2,
-                           elementLumiere,
-                           elementFenetre,
-                           elementOccupation);
+    insererElementsCellule();
+
     // redimensionner la hauteur de la table
     redimensionnerHauteurTable();
 }
