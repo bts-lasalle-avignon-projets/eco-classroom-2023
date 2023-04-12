@@ -274,26 +274,11 @@ void EcoClassroom::creerElementsTexteCellule(const Salle&       salle,
 }
 
 /**
- * @fn EcoClassroom::personnaliserElementsTexte
- * @param elementNom
- * @param elementTHI
- * @param elementCO2
- */
-void EcoClassroom::personnaliserElementsTexte(QTableWidgetItem* elementNom,
-                                              QTableWidgetItem* elementTHI,
-                                              QTableWidgetItem* elementCO2)
-{
-    elementNom->setFlags(Qt::ItemIsEnabled);
-    elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    elementTHI->setFlags(Qt::ItemIsEnabled);
-    elementTHI->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    elementCO2->setFlags(Qt::ItemIsEnabled);
-    elementCO2->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-}
-
-/**
- * @fn EcoClassroom::creerElementsImageCellule
+ * @brief EcoClassroom::creerElementsImageCellule
  * @param salle
+ * @param elementLumiere
+ * @param elementFenetre
+ * @param elementOccupation
  */
 void EcoClassroom::creerElementsImageCellule(const Salle& salle,
                                              QLabel**     elementLumiere,
@@ -319,6 +304,24 @@ void EcoClassroom::creerElementsImageCellule(const Salle& salle,
     personnaliserElementsImage(*elementLumiere,
                                *elementFenetre,
                                *elementOccupation);
+}
+
+/**
+ * @fn EcoClassroom::personnaliserElementsTexte
+ * @param elementNom
+ * @param elementTHI
+ * @param elementCO2
+ */
+void EcoClassroom::personnaliserElementsTexte(QTableWidgetItem* elementNom,
+                                              QTableWidgetItem* elementTHI,
+                                              QTableWidgetItem* elementCO2)
+{
+    elementNom->setFlags(Qt::ItemIsEnabled);
+    elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementTHI->setFlags(Qt::ItemIsEnabled);
+    elementTHI->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementCO2->setFlags(Qt::ItemIsEnabled);
+    elementCO2->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
 /**
