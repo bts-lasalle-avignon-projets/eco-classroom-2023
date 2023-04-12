@@ -55,12 +55,16 @@ class EcoClassroom : public QMainWindow
     QMap<QString, Salle*> salles;           //!< Les salles
     QStringList           nomColonnesTable; //!< Le nom des colonnes de la table
     // Widgets
-    QWidget*        gui;                 //!< Le widget central
-    QStackedWidget* fenetres;            //!< Pile de fenêtres
-    QTableWidget*   tableWidgetSalles;   //!< Affichage sous forme de table
-    QLabel*         labelNomSalle;       //!< Le label pour le nom de la salle
-    QLabel*         nomSalle;            //!< Le nom de salle
-    QPushButton*    boutonRetourAccueil; //!< Bouton de retour
+    QWidget*        gui;                    //!< Le widget central
+    QStackedWidget* fenetres;               //!< Pile de fenêtres
+    QTableWidget*   tableWidgetSalles;      //!< Affichage sous forme de table
+    QLabel*         labelNomSalle;          //!< Le label pour le nom de la salle
+    QLabel*         nomSalle;               //!< Le nom de salle
+    QLabel*         labelSuperficieSalle;   //!< Le label pour le nom de la salle
+    QLabel*         superficieSalle;        //!< La superficie de la salle
+    QLabel*         labelDescriptionSalle;  //!< Le label pour le nom de la salle
+    QLabel*         descriptionSalle;       //!< La description de la salle
+    QPushButton*    boutonRetourAccueil;    //!< Bouton de retour
 
     void instancierWidgets();
     void initialiserTable();
