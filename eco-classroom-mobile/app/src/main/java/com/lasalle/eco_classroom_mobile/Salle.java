@@ -17,19 +17,26 @@ public class Salle
     /**
      * Constantes
      */
-    private static final String TAG = "_Salle_"; //!< TAG pour les logs (cf. Logcat)
-    /**
-     * @todo Créer les constantes max pour les indices
-     */
+    private static final String TAG               = "_Salle_"; //!< TAG pour les logs (cf. Logcat)
+    public static final int     TAUX_HUMIDITE_MIN = 0;         // !< le taux d'humidité minimum
+    public static final int     TAUX_HUMIDITE_MAX = 100;       // !< le taux d'humidité maximum
+    public static final int     CONCENTRATION_CO2_MIN = 0;     // !< la concentration minimum de CO2
     public static final int INDICE_QUALITE_AIR_MIN = 1; //!< l'indice de qualité de l'air minimum
-    public static final int INDICE_CONFORT_THERMIQUE_MIN = -3; //!< l'indice de confort thermique minimum
+    public static final int INDICE_QUALITE_AIR_MAX = 6; //!< l'indice de qualité de l'air maximum
+    public static final int INDICE_CONFORT_THERMIQUE_MIN =
+      -3; //!< l'indice de confort thermique minimum
+    public static final int INDICE_CONFORT_THERMIQUE_MAX =
+      3; //!< l'indice de confort thermique maximum
 
     /**
      * Attributs
      */
     private String  nom;              //!< le nom
     private String  description;      //!< le type
-    private double  superficie;       //!< la superficie en m2
+    private double  superficie;       //!< la superficie en m²
+    private double  temperature;      //!< la température en °C
+    private int     humidite;         //!< le taux d'humidité
+    private int     co2;              //!< le taux de co2 en ppm
     private int     qualiteAir;       //!< la qualité de l'air
     private int     confortThermique; //!< l'indice de confort thermique
     private boolean etatFenetre;      //!< l'état des fenêtres (ouvertes/fermées)
@@ -44,6 +51,9 @@ public class Salle
         this.nom              = "";
         this.description      = "";
         this.superficie       = 0.0;
+        this.temperature      = 0.0;
+        this.humidite         = 0;
+        this.co2              = 0;
         this.qualiteAir       = 0;
         this.confortThermique = -4;
         this.etatFenetre      = false;
@@ -56,10 +66,13 @@ public class Salle
      */
     public Salle(String nom, double superficie, String description)
     {
-        Log.d(TAG, "Salle("+nom+", "+superficie+", "+description+")");
+        Log.d(TAG, "Salle(" + nom + ", " + superficie + ", " + description + ")");
         this.nom              = nom;
         this.description      = description;
         this.superficie       = superficie;
+        this.temperature      = 0.0;
+        this.humidite         = 0;
+        this.co2              = 0;
         this.qualiteAir       = 0;
         this.confortThermique = -4;
         this.etatFenetre      = false;
@@ -89,6 +102,30 @@ public class Salle
     public double getSuperficie()
     {
         return this.superficie;
+    }
+
+    /**
+     * @brief Accesseur de l'attribut temperature
+     */
+    public double getTemperature()
+    {
+        return this.temperature;
+    }
+
+    /**
+     * @brief Accesseur de l'attribut humidite
+     */
+    public int getHumidite()
+    {
+        return this.humidite;
+    }
+
+    /**
+     * @brief Accesseur de l'attribut co2
+     */
+    public int getCo2()
+    {
+        return this.co2;
     }
 
     /**
@@ -156,14 +193,37 @@ public class Salle
     }
 
     /**
+     * @brief Mutateur de l'attribut superficie
+     */
+    public void setTemperature(double temperature)
+    {
+        this.temperature = temperature;
+    }
+
+    /**
+     * @brief Mutateur de l'attribut humidite
+     */
+    public void setHumidite(int humidite)
+    {
+        if(humidite >= TAUX_HUMIDITE_MIN && humidite <= TAUX_HUMIDITE_MAX)
+            this.humidite = humidite;
+    }
+
+    /**
+     * @brief Mutateur de l'attribut co2
+     */
+    public void setCo2(int co2)
+    {
+        if(co2 <= CONCENTRATION_CO2_MIN)
+            this.co2 = co2;
+    }
+
+    /**
      * @brief Mutateur de l'attribut qualiteAir
      */
     public void setQualiteAir(int qualiteAir)
     {
-        /**
-         * @todo Vérifier indice qualiteAir max
-         */
-        if(qualiteAir >= INDICE_QUALITE_AIR_MIN)
+        if(qualiteAir >= INDICE_QUALITE_AIR_MIN && qualiteAir <= INDICE_QUALITE_AIR_MAX)
             this.qualiteAir = qualiteAir;
     }
 
@@ -172,10 +232,8 @@ public class Salle
      */
     public void setConfortThermique(int confortThermique)
     {
-        /**
-         * @todo Vérifier indice confortThermique max
-         */
-        if(confortThermique >= INDICE_CONFORT_THERMIQUE_MIN)
+        if(confortThermique >= INDICE_CONFORT_THERMIQUE_MIN &&
+           confortThermique <= INDICE_CONFORT_THERMIQUE_MAX)
             this.confortThermique = confortThermique;
     }
 
