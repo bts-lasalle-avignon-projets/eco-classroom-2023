@@ -208,9 +208,9 @@ void EcoClassroom::initialiserFenetreInformations()
  */
 void EcoClassroom::initialiserGUI()
 {
-    // setFixedSize(qApp->desktop()->availableGeometry(this).width(),
-    //              qApp->desktop()->availableGeometry(this).height());
-    //  showMaximized();
+    setFixedSize(qApp->desktop()->availableGeometry(this).width(),
+                 qApp->desktop()->availableGeometry(this).height());
+    showMaximized();
     afficherFenetreAcceuil();
 }
 
