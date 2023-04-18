@@ -118,6 +118,15 @@ unsigned int Salle::getCO2() const
         return mesures->getCO2();
     return 0;
 }
+/**
+ * @brief Setter qui attribut une valeur a l'attribut Co2 de l'objet Salle
+ * @param co2
+ */
+void Salle::setCO2(unsigned int co2)
+{
+    mesures->setCO2(co2);
+    qDebug() << Q_FUNC_INFO << "co2 : " << co2;
+}
 
 /**
  * @brief Getter qui récupère l'etat de la lumiere
