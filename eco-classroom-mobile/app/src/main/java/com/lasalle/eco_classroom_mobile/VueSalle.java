@@ -160,7 +160,7 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
     }
 
     /**
-     * @brief
+     * @brief Méthode permettant de gérer les clics sur les objets de la vue
      */
     @Override
     public void onClick(View vue)
