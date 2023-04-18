@@ -188,8 +188,8 @@ void EcoClassroom::initialiserFenetreInformations()
  */
 void EcoClassroom::initialiserGUI()
 {
-    setFixedSize(qApp->desktop()->availableGeometry(this).width(),
-                 qApp->desktop()->availableGeometry(this).height());
+    /*setFixedSize(qApp->desktop()->availableGeometry(this).width(),
+                 qApp->desktop()->availableGeometry(this).height());*/
     showMaximized();
     afficherFenetreAcceuil();
 }
@@ -201,9 +201,9 @@ void EcoClassroom::initialiserGUI()
 void EcoClassroom::installerGestionEvenements()
 {
     connect(tableWidgetSalles,
-            SIGNAL(cellClicked(int,int)),
+            SIGNAL(cellClicked(int, int)),
             this,
-            SLOT(selectionnerSalle(int,int)));
+            SLOT(selectionnerSalle(int, int)));
     connect(boutonRetourAccueil,
             SIGNAL(clicked(bool)),
             this,
@@ -225,6 +225,10 @@ void EcoClassroom::chargerSalles()
     salles["B20"] = new Salle("B20", 65, "Atelier");
     salles["B21"] = new Salle("B21", 35, "Salle de TP");
     salles["B22"] = new Salle("B22", 80, "Salle de cours");
+    // Tests CO2
+    salles["B11"]->setCO2(605);
+    salles["B20"]->setCO2(1259);
+    salles["B21"]->setCO2(825);
     salles["B22"]->setCO2(1355);
 
     // Exemple avec une base de données SQLite
@@ -276,7 +280,7 @@ void EcoClassroom::afficherSalleTable(Salle salle)
 
     elementNom     = new QTableWidgetItem(salle.getNom());
     elementTHI     = new QTableWidgetItem(QString("Inconnu"));
-    elementCO2     = new QTableWidgetItem(QString::number(0));
+    elementCO2     = new QTableWidgetItem(QString::number(salle.getCO2()));
     elementLumiere = new QLabel(this);
     if(salle.getLumiere())
         elementLumiere->setPixmap(QPixmap(":/images/led-rouge"));
@@ -325,23 +329,23 @@ void EcoClassroom::afficherSalleTable(Salle salle)
                                      COLONNE_SALLE_OCCUPATION,
                                      elementOccupation);
 
+    // Test du dépassement seuil CO2
+    if(salle.getCO2() >= SEUIL_ALERTE_CO2)
+    {
+        // Fond de la cellule en rouge
+        coloriserFondCellule(elementCO2, QColor(255, 0, 0));
+        // ou :
+        /*coloriserFondCellule(tableWidgetSalles,
+                             nb - 1,
+                             COLONNE_SALLE_QUALITE_AIR,
+                             QString("#ff0000"));*/
+        alerterDepassementSeuil(salle);
+    }
+
     // redimensionner la hauteur de la table
-      tableWidgetSalles->setFixedHeight(
+    tableWidgetSalles->setFixedHeight(
       tableWidgetSalles->verticalHeader()->length() +
       tableWidgetSalles->horizontalHeader()->height());
-
-    // Test du dépassement seuil CO2
-        /*QMap<QString, int>::iterator i;
-        for (i = salles.begin(); i != salles.end(); ++i)
-
-        if(salles[i]->getCO2() >= 1300)
-        {
-            coloriserFondCellule(tableWidgetSalles,
-                                 nb - 1,
-                                 0,
-                                 QString("#ff0000"));
-        }*/
-        //alerterDepassementSeuil();
 }
 
 /**
@@ -385,13 +389,23 @@ void EcoClassroom::effacerSalles()
     nbLignesSalles = 0;
 }
 
-void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur)
+/**
+ * @fn EcoClassroom::alerterDepassementSeuil
+ * @brief Alerte d'un dépassement de seuil de CO2 dans une salle
+ */
+void EcoClassroom::alerterDepassementSeuil(const Salle& salle)
+{
+    qDebug() << Q_FUNC_INFO << salle.getNom();
+}
+
+void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
+                                        const QColor&     couleur)
 {
     cellule->setBackground(couleur);
 }
 
 void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
-                          const QString&    couleur)
+                                        const QString&    couleur)
 {
     QColor _couleur;
     _couleur.setNamedColor(couleur);
@@ -399,23 +413,19 @@ void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
 }
 
 void EcoClassroom::coloriserFondCellule(QTableWidget* tableWidgetSalles,
-                          int           ligne,
-                          int           colonne,
-                          const QColor& couleur)
+                                        int           ligne,
+                                        int           colonne,
+                                        const QColor& couleur)
 {
     tableWidgetSalles->item(ligne, colonne)->setBackground(couleur);
 }
 
 void EcoClassroom::coloriserFondCellule(QTableWidget*  tableWidgetSalles,
-                          int            ligne,
-                          int            colonne,
-                          const QString& couleur)
+                                        int            ligne,
+                                        int            colonne,
+                                        const QString& couleur)
 {
     QColor _couleur;
     _couleur.setNamedColor(couleur);
     coloriserFondCellule(tableWidgetSalles, ligne, colonne, _couleur);
-}
-
-void EcoClassroom::alerterDepassementSeuil()
-{
 }

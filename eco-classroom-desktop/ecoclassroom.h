@@ -72,7 +72,8 @@ class EcoClassroom : public QMainWindow
     void afficherInformationsSalle(const Salle& salle);
     void effacerTableauSalles();
     void effacerSalles();
-
+    void alerterDepassementSeuil(const Salle& salle);
+    // Pour le QTableWidget
     void coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur);
     void coloriserFondCellule(QTableWidgetItem* cellule,
                               const QString&    couleur);
@@ -84,8 +85,6 @@ class EcoClassroom : public QMainWindow
                               int            ligne,
                               int            colonne,
                               const QString& couleur);
-
-    void alerterDepassementSeuil();
 
   public slots:
     void afficherFenetre(EcoClassroom::Fenetre fenetre);
