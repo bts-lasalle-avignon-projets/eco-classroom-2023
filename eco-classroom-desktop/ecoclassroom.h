@@ -73,6 +73,20 @@ class EcoClassroom : public QMainWindow
     void effacerTableauSalles();
     void effacerSalles();
 
+    void coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur);
+    void coloriserFondCellule(QTableWidgetItem* cellule,
+                              const QString&    couleur);
+    void coloriserFondCellule(QTableWidget* tableWidgetSalles,
+                              int           ligne,
+                              int           colonne,
+                              const QColor& couleur);
+    void coloriserFondCellule(QTableWidget*  tableWidgetSalles,
+                              int            ligne,
+                              int            colonne,
+                              const QString& couleur);
+
+    void alerterDepassementSeuil();
+
   public slots:
     void afficherFenetre(EcoClassroom::Fenetre fenetre);
     void afficherFenetreAcceuil();

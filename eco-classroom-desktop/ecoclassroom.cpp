@@ -188,8 +188,8 @@ void EcoClassroom::initialiserFenetreInformations()
  */
 void EcoClassroom::initialiserGUI()
 {
-    setFixedSize(qApp->desktop()->availableGeometry(this).width(),
-                 qApp->desktop()->availableGeometry(this).height());
+    //setFixedSize(qApp->desktop()->availableGeometry(this).width(),
+    //             qApp->desktop()->availableGeometry(this).height());
     // showMaximized();
     afficherFenetreAcceuil();
 }
@@ -201,9 +201,9 @@ void EcoClassroom::initialiserGUI()
 void EcoClassroom::installerGestionEvenements()
 {
     connect(tableWidgetSalles,
-            SIGNAL(cellClicked(int, int)),
+            SIGNAL(cellClicked(int,int)),
             this,
-            SLOT(selectionnerSalle(int, int)));
+            SLOT(selectionnerSalle(int,int)));
     connect(boutonRetourAccueil,
             SIGNAL(clicked(bool)),
             this,
@@ -225,6 +225,7 @@ void EcoClassroom::chargerSalles()
     salles["B20"] = new Salle("B20", 65, "Atelier");
     salles["B21"] = new Salle("B21", 35, "Salle de TP");
     salles["B22"] = new Salle("B22", 80, "Salle de cours");
+    salles["B22"]->setCO2(1355);
 
     // Exemple avec une base de données SQLite
     /*
@@ -325,9 +326,22 @@ void EcoClassroom::afficherSalleTable(Salle salle)
                                      elementOccupation);
 
     // redimensionner la hauteur de la table
-    tableWidgetSalles->setFixedHeight(
+      tableWidgetSalles->setFixedHeight(
       tableWidgetSalles->verticalHeader()->length() +
       tableWidgetSalles->horizontalHeader()->height());
+
+    // Test du dépassement seuil CO2
+        /*QMap<QString, int>::iterator i;
+        for (i = salles.begin(); i != salles.end(); ++i)
+
+        if(salles[i]->getCO2() >= 1300)
+        {
+            coloriserFondCellule(tableWidgetSalles,
+                                 nb - 1,
+                                 0,
+                                 QString("#ff0000"));
+        }*/
+        //alerterDepassementSeuil();
 }
 
 /**
@@ -369,4 +383,39 @@ void EcoClassroom::effacerSalles()
 
     effacerTableauSalles();
     nbLignesSalles = 0;
+}
+
+void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur)
+{
+    cellule->setBackground(couleur);
+}
+
+void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
+                          const QString&    couleur)
+{
+    QColor _couleur;
+    _couleur.setNamedColor(couleur);
+    coloriserFondCellule(cellule, _couleur);
+}
+
+void EcoClassroom::coloriserFondCellule(QTableWidget* tableWidgetSalles,
+                          int           ligne,
+                          int           colonne,
+                          const QColor& couleur)
+{
+    tableWidgetSalles->item(ligne, colonne)->setBackground(couleur);
+}
+
+void EcoClassroom::coloriserFondCellule(QTableWidget*  tableWidgetSalles,
+                          int            ligne,
+                          int            colonne,
+                          const QString& couleur)
+{
+    QColor _couleur;
+    _couleur.setNamedColor(couleur);
+    coloriserFondCellule(tableWidgetSalles, ligne, colonne, _couleur);
+}
+
+void EcoClassroom::alerterDepassementSeuil()
+{
 }
