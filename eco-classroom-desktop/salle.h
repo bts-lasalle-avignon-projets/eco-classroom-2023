@@ -8,6 +8,8 @@
 
 #include <QString>
 
+#define SEUIL_ALERTE_CO2 1300
+
 class Mesures;
 class EtatsSalle;
 
@@ -38,6 +40,7 @@ class Salle
     unsigned int getTemperature() const;
     unsigned int getHumidite() const;
     unsigned int getCO2() const;
+    void         setCO2(unsigned int co2);
     bool         getLumiere() const;
     bool         getFenetre() const;
     bool         getOccupation() const;

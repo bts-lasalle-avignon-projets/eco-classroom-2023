@@ -58,15 +58,17 @@ class EcoClassroom : public QMainWindow
     QWidget*          gui;               //!< Le widget central
     QStackedWidget*   fenetres;          //!< Pile de fenêtres
     QTableWidget*     tableWidgetSalles; //!< Affichage sous forme de table
-    QTableWidgetItem* elementNom, *elementTHI, *elementCO2;
-    QLabel*           elementLumiere, *elementFenetre, *elementOccupation;
-    QLabel*           labelNomSalle;       //!< Le label pour le nom de la salle
-    QLabel*           nomSalle;            //!< Le nom de salle
-    QLabel*           labelSuperficieSalle;   //!< Le label pour le nom de la salle
-    QLabel*           superficieSalle;        //!< La superficie de la salle
-    QLabel*           labelDescriptionSalle;  //!< Le label pour le nom de la salle
-    QLabel*           descriptionSalle;       //!< La description de la salle
-    QPushButton*      boutonRetourAccueil;    //!< Bouton de retour
+    QTableWidgetItem *elementNom, *elementTHI,
+      *elementCO2; //!< Les élements d'une ligne de la table
+    QLabel *elementLumiere, *elementFenetre,
+      *elementOccupation;       //!< Les élements d'une ligne de la table
+    QLabel*      labelNomSalle; //!< Le label pour le nom de la salle
+    QLabel*      nomSalle;      //!< Le nom de salle
+    QLabel*      labelSuperficieSalle;  //!< Le label pour le nom de la salle
+    QLabel*      superficieSalle;       //!< La superficie de la salle
+    QLabel*      labelDescriptionSalle; //!< Le label pour le nom de la salle
+    QLabel*      descriptionSalle;      //!< La description de la salle
+    QPushButton* boutonRetourAccueil;   //!< Bouton de retour
 
     void instancierWidgets();
     void initialiserTable();
@@ -84,6 +86,19 @@ class EcoClassroom : public QMainWindow
     void afficherInformationsSalle(const Salle& salle);
     void effacerTableauSalles();
     void effacerSalles();
+    void alerterDepassementSeuilCO2(const Salle& salle);
+    // Pour le QTableWidget
+    void coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur);
+    void coloriserFondCellule(QTableWidgetItem* cellule,
+                              const QString&    couleur);
+    void coloriserFondCellule(QTableWidget* tableWidgetSalles,
+                              int           ligne,
+                              int           colonne,
+                              const QColor& couleur);
+    void coloriserFondCellule(QTableWidget*  tableWidgetSalles,
+                              int            ligne,
+                              int            colonne,
+                              const QString& couleur);
 
   public slots:
     void afficherFenetre(EcoClassroom::Fenetre fenetre);
