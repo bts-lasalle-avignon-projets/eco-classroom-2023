@@ -55,16 +55,18 @@ class EcoClassroom : public QMainWindow
     QMap<QString, Salle*> salles;           //!< Les salles
     QStringList           nomColonnesTable; //!< Le nom des colonnes de la table
     // Widgets
-    QWidget*        gui;                    //!< Le widget central
-    QStackedWidget* fenetres;               //!< Pile de fenêtres
-    QTableWidget*   tableWidgetSalles;      //!< Affichage sous forme de table
-    QLabel*         labelNomSalle;          //!< Le label pour le nom de la salle
-    QLabel*         nomSalle;               //!< Le nom de salle
-    QLabel*         labelSuperficieSalle;   //!< Le label pour le nom de la salle
-    QLabel*         superficieSalle;        //!< La superficie de la salle
-    QLabel*         labelDescriptionSalle;  //!< Le label pour le nom de la salle
-    QLabel*         descriptionSalle;       //!< La description de la salle
-    QPushButton*    boutonRetourAccueil;    //!< Bouton de retour
+    QWidget*          gui;               //!< Le widget central
+    QStackedWidget*   fenetres;          //!< Pile de fenêtres
+    QTableWidget*     tableWidgetSalles; //!< Affichage sous forme de table
+    QTableWidgetItem* elementNom, *elementTHI, *elementCO2;
+    QLabel*           elementLumiere, *elementFenetre, *elementOccupation;
+    QLabel*           labelNomSalle;       //!< Le label pour le nom de la salle
+    QLabel*           nomSalle;            //!< Le nom de salle
+    QLabel*           labelSuperficieSalle;   //!< Le label pour le nom de la salle
+    QLabel*           superficieSalle;        //!< La superficie de la salle
+    QLabel*           labelDescriptionSalle;  //!< Le label pour le nom de la salle
+    QLabel*           descriptionSalle;       //!< La description de la salle
+    QPushButton*      boutonRetourAccueil;    //!< Bouton de retour
 
     void instancierWidgets();
     void initialiserTable();
@@ -72,7 +74,13 @@ class EcoClassroom : public QMainWindow
     void initialiserGUI();
     void installerGestionEvenements();
     void chargerSalles();
-    void afficherSalleTable(Salle salle);
+    void creerElementsTexteCellule(const Salle& salle);
+    void creerElementsImageCellule(const Salle& salle);
+    void personnaliserElementsTexte();
+    void personnaliserElementsImage();
+    void insererElementsCellule();
+    void redimensionnerHauteurTable();
+    void afficherSalleTable(const Salle& salle);
     void afficherInformationsSalle(const Salle& salle);
     void effacerTableauSalles();
     void effacerSalles();

@@ -72,6 +72,8 @@ void EcoClassroom::selectionnerSalle(int ligne, int colonne)
     Q_UNUSED(colonne)
     QTableWidgetItem* salle;
     salle = tableWidgetSalles->item(ligne, COLONNE_SALLE_NOM);
+    if(salle == nullptr || salle->data(0).toString().isEmpty())
+        return;
     // qDebug() << Q_FUNC_INFO << salle->data(0).toString();
     qDebug() << Q_FUNC_INFO << "Salle"
              << salles[salle->data(0).toString()]->getNom();
@@ -263,7 +265,6 @@ void EcoClassroom::chargerSalles()
     }*/
 
     effacerSalles();
-
     qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
     QMapIterator<QString, Salle*> salle(salles);
     while(salle.hasNext())
@@ -275,25 +276,24 @@ void EcoClassroom::chargerSalles()
 }
 
 /**
- * @fn EcoClassroom::afficherSalleTable
- * @brief Affiche une salle dans le tableau
- * @param salle La salle à afficher dans le tableau
+ * @fn EcoClassroom::creerElementsTexteCellule
+ * @param salle
  */
-void EcoClassroom::afficherSalleTable(Salle salle)
+void EcoClassroom::creerElementsTexteCellule(const Salle& salle)
 {
-    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
-             << salle.getTemperature() << "humidite" << salle.getHumidite()
-             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
-             << "fenetre" << salle.getFenetre() << "occupation"
-             << salle.getOccupation();
+    elementNom = new QTableWidgetItem(salle.getNom());
+    elementTHI = new QTableWidgetItem(QString("Inconnu"));
+    elementCO2 = new QTableWidgetItem(QString::number(0));
 
-    // créer des élements de cellule
-    QTableWidgetItem *elementNom, *elementTHI, *elementCO2;
-    QLabel *          elementLumiere, *elementFenetre, *elementOccupation;
+    personnaliserElementsTexte();
+}
 
-    elementNom     = new QTableWidgetItem(salle.getNom());
-    elementTHI     = new QTableWidgetItem(QString("Inconnu"));
-    elementCO2     = new QTableWidgetItem(QString::number(0));
+/**
+ * @brief EcoClassroom::creerElementsImageCellule
+ * @param salle
+ */
+void EcoClassroom::creerElementsImageCellule(const Salle& salle)
+{
     elementLumiere = new QLabel(this);
     if(salle.getLumiere())
         elementLumiere->setPixmap(QPixmap(":/images/led-rouge"));
@@ -310,23 +310,41 @@ void EcoClassroom::afficherSalleTable(Salle salle)
     else
         elementOccupation->setPixmap(QPixmap(":/images/led-verte"));
 
-    // personnaliser les éléments
+    personnaliserElementsImage();
+}
+
+/**
+ * @fn EcoClassroom::personnaliserElementsTexte
+ */
+void EcoClassroom::personnaliserElementsTexte()
+{
     elementNom->setFlags(Qt::ItemIsEnabled);
     elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     elementTHI->setFlags(Qt::ItemIsEnabled);
     elementTHI->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     elementCO2->setFlags(Qt::ItemIsEnabled);
     elementCO2->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+}
+
+/**
+ * @fn personnaliserElementsImage
+ */
+void EcoClassroom::personnaliserElementsImage()
+{
     elementLumiere->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     elementFenetre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     elementOccupation->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+}
 
-    // ajouter une ligne
+/**
+ * @fn EcoClassroom::insererElementsCellule
+ */
+void EcoClassroom::insererElementsCellule()
+{
     int nb = tableWidgetSalles->rowCount();
     ++nb;
     tableWidgetSalles->setRowCount(nb);
 
-    // insérer les éléments de cellule
     tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_NOM, elementNom);
     tableWidgetSalles->setItem(nb - 1,
                                COLONNE_SALLE_CONFORT_THERMIQUE,
@@ -341,11 +359,40 @@ void EcoClassroom::afficherSalleTable(Salle salle)
     tableWidgetSalles->setCellWidget(nb - 1,
                                      COLONNE_SALLE_OCCUPATION,
                                      elementOccupation);
+}
 
-    // redimensionner la hauteur de la table
+/**
+ * @fn EcoClassroom::redimensionnerHauteurTable
+ */
+void EcoClassroom::redimensionnerHauteurTable()
+{
     tableWidgetSalles->setFixedHeight(
       tableWidgetSalles->verticalHeader()->length() +
       tableWidgetSalles->horizontalHeader()->height());
+}
+
+/**
+ * @fn EcoClassroom::afficherSalleTable
+ * @brief Affiche une salle dans le tableau
+ * @param salle La salle à afficher dans le tableau
+ */
+void EcoClassroom::afficherSalleTable(const Salle& salle)
+{
+    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
+             << salle.getTemperature() << "humidite" << salle.getHumidite()
+             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
+             << "fenetre" << salle.getFenetre() << "occupation"
+             << salle.getOccupation();
+
+    // créer des élements de cellule
+    creerElementsTexteCellule(salle);
+    creerElementsImageCellule(salle);
+
+    // insérer les éléments de cellule
+    insererElementsCellule();
+
+    // redimensionner la hauteur de la table
+    redimensionnerHauteurTable();
 }
 
 /**
