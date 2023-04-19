@@ -99,11 +99,13 @@ void EcoClassroom::instancierWidgets()
     initialiserFenetreInformations();
 
     // Les layouts
-    QVBoxLayout* layoutPrincipal      = new QVBoxLayout();
-    QVBoxLayout* layoutF1Principal    = new QVBoxLayout();
-    QHBoxLayout* layoutF1Table        = new QHBoxLayout();
+    QVBoxLayout* layoutPrincipal = new QVBoxLayout();
+    // La fenêtre accueil
+    QVBoxLayout* layoutF1Principal = new QVBoxLayout();
+    QHBoxLayout* layoutF1Table     = new QHBoxLayout();
+    // La fenêtre d'informations sur une salle
     QVBoxLayout* layoutF2Principal    = new QVBoxLayout();
-    QHBoxLayout* layoutF2Informations = new QHBoxLayout();
+    QGridLayout* layoutF2Informations = new QGridLayout();
     QHBoxLayout* layoutF2Boutons      = new QHBoxLayout();
 
     // Positionnement
@@ -113,9 +115,12 @@ void EcoClassroom::instancierWidgets()
     layoutF1Principal->addStretch();
     fenetreAccueil->setLayout(layoutF1Principal);
     // La fenêtre d'informations sur une salle
-    layoutF2Informations->addWidget(labelNomSalle);
-    layoutF2Informations->addWidget(nomSalle);
-    layoutF2Informations->addStretch();
+    layoutF2Informations->addWidget(labelNomSalle, 0, 0);
+    layoutF2Informations->addWidget(nomSalle, 0, 1);
+    layoutF2Informations->addWidget(labelSuperficieSalle, 1, 0);
+    layoutF2Informations->addWidget(superficieSalle, 1, 1);
+    layoutF2Informations->addWidget(labelDescriptionSalle, 2, 0);
+    layoutF2Informations->addWidget(descriptionSalle, 2, 1);
     layoutF2Boutons->addStretch();
     layoutF2Boutons->addWidget(boutonRetourAccueil);
     layoutF2Principal->addLayout(layoutF2Informations);
@@ -176,9 +181,22 @@ void EcoClassroom::initialiserTable()
  */
 void EcoClassroom::initialiserFenetreInformations()
 {
-    labelNomSalle = new QLabel(this);
+    // initialisation widgets dans la fênetre information
+    labelNomSalle         = new QLabel(this);
+    labelSuperficieSalle  = new QLabel(this);
+    labelDescriptionSalle = new QLabel(this);
+
+    // affichage du widget
     labelNomSalle->setText("Nom :");
-    nomSalle            = new QLabel(this);
+    nomSalle = new QLabel(this);
+
+    labelSuperficieSalle->setText("Superficie :");
+    superficieSalle = new QLabel(this);
+
+    labelDescriptionSalle->setText("Description :");
+    descriptionSalle = new QLabel(this);
+
+    // bouton pour quitter la fênetre
     boutonRetourAccueil = new QPushButton("Ok", this);
 }
 
@@ -340,6 +358,9 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
             << "Superficie : " << salle.getSuperficie() << "\n"
             << "Description : " << salle.getDescription();
     nomSalle->setText(salle.getNom());
+    superficieSalle->setText(QString::number(salle.getSuperficie()) +
+                             " m<sup>2</sup>");
+    descriptionSalle->setText(salle.getDescription());
     afficherFenetreInformations();
 }
 
