@@ -8,6 +8,8 @@
 
 #include <QString>
 
+#define SEUIL_ALERTE_CO2 1300
+
 class Mesures;
 class EtatsSalle;
 
