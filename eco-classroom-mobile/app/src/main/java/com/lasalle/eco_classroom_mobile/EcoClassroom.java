@@ -29,6 +29,9 @@ public class EcoClassroom extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_EcoClassroom_"; //!< TAG pour les logs (cf. Logcat)
+    private static final int DEPASSEMENT_TEMPERATURE = 0; //!< Chiffre corréspondant à un dépassement de seuil de température
+    private static final int DEPASSEMENT_HUMIDITE = 1; //!< Chiffre corréspondant à un dépassement de seuil d'humiditée
+    private static final int DEPASSEMENT_CO2 = 2; //!< Chiffre corréspondant à un dépassement de seuil de CO2
 
     /**
      * Attributs
@@ -252,5 +255,25 @@ public class EcoClassroom extends AppCompatActivity
                 }
             }
         };
+    }
+
+    public void depassementSeuil(Salle salle)
+    {
+        if(salle.getTemperature() > BaseDeDonnees.selectionner("SELECT temperatureMin FROM SeuilsAlerte") && salle.getTemperature() > BaseDeDonnees.selectionner("SELECT temperatureMax FROM SeuilsAlerte"))
+        {
+            notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
+        }
+        else if(salle.getHumidite() > BaseDeDonnees.selectionner("SELECT humiditeMin FROM SeuilsAlerte") && salle.getHumidite() > BaseDeDonnees.selectionner("SELECT humiditeMax FROM SeuilsAlerte"))
+        {
+            notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
+        }
+        else if(salle.getCo2() > BaseDeDonnees.selectionner("SELECT co2Min FROM SeuilsAlerte") && salle.getHumidite() > BaseDeDonnees.selectionner("SELECT co2eMax FROM SeuilsAlerte"))
+        {
+            notifierDepassement(salle, DEPASSEMENT_CO2);
+        }
+    }
+
+    public void notifierDepassement(Salle salle, int typeDepassement)
+    {
     }
 }
