@@ -8,6 +8,7 @@ package com.lasalle.eco_classroom_mobile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -257,23 +258,49 @@ public class EcoClassroom extends AppCompatActivity
         };
     }
 
-    public void depassementSeuil(Salle salle)
+    /**
+     * @brief Méthode permettant de vérifier et de notifier lors d'un dépassement de seuil dans une salle
+     */
+    public void alerterDepassementSeuil(Salle salle)
     {
-        if(salle.getTemperature() > BaseDeDonnees.selectionner("SELECT temperatureMin FROM SeuilsAlerte") && salle.getTemperature() > BaseDeDonnees.selectionner("SELECT temperatureMax FROM SeuilsAlerte"))
+        if(salle.getTemperature() > baseDeDonnees.selectionner("SELECT temperatureMin FROM SeuilsAlerte") && salle.getTemperature() > baseDeDonnees.selectionner("SELECT temperatureMax FROM SeuilsAlerte"))
         {
             notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
         }
-        else if(salle.getHumidite() > BaseDeDonnees.selectionner("SELECT humiditeMin FROM SeuilsAlerte") && salle.getHumidite() > BaseDeDonnees.selectionner("SELECT humiditeMax FROM SeuilsAlerte"))
+        else if(salle.getHumidite() > baseDeDonnees.selectionner("SELECT humiditeMin FROM SeuilsAlerte") && salle.getHumidite() > baseDeDonnees.selectionner("SELECT humiditeMax FROM SeuilsAlerte"))
         {
             notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
         }
-        else if(salle.getCo2() > BaseDeDonnees.selectionner("SELECT co2Min FROM SeuilsAlerte") && salle.getHumidite() > BaseDeDonnees.selectionner("SELECT co2eMax FROM SeuilsAlerte"))
+        else if(salle.getCo2() > baseDeDonnees.selectionner("SELECT co2Min FROM SeuilsAlerte") && salle.getHumidite() > baseDeDonnees.selectionner("SELECT co2eMax FROM SeuilsAlerte"))
         {
             notifierDepassement(salle, DEPASSEMENT_CO2);
         }
     }
 
+    /**
+     * @brief Méthode permettant d'envoyer une notification pour alerter d'un dépassement de seuil
+     */
     public void notifierDepassement(Salle salle, int typeDepassement)
     {
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
+
+        switch(typeDepassement)
+        {
+            case DEPASSEMENT_TEMPERATURE:
+                notification.setContentTitle("Dépassement de seuil")
+                        .setContentText("Température")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                        break;
+
+            case DEPASSEMENT_HUMIDITE:
+                notification.setContentTitle("Dépassement de seuil")
+                        .setContentText("Humidité")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                        break;
+
+            case DEPASSEMENT_CO2:
+                notification.setContentTitle("Dépassement de seuil")
+                        .setContentText("CO2")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
     }
 }
