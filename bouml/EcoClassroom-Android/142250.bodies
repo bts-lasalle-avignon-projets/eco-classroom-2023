@@ -1,0 +1,35 @@
+class Seuils
+!!!149930.java!!!	Seuils()
+        this.temperatureMin    = TEMPERATURE_MIN;
+        this.temperatureMax    = TEMPERATURE_MAX;
+        this.luminositeMin     = LUMINOSITE_MIN;
+        this.eclairementMoyen  = ECLAIREMENT_MOYEN;
+        this.humiditeMin       = HUMIDITE_MIN;
+        this.humiditeMax       = HUMIDITE_MAX;
+        this.co2Max            = CO2_MAX;
+        this.indiceConfinement = INDICE_CONFINEMENT;
+!!!150058.java!!!	Seuils(in temperatureMin : double, in temperatureMax : double, in luminositeMin : int, in eclairementMoyen : int, in humiditeMin : int, in humiditeMax : int, in co2Max : int, in indiceConfinement : int)
+        this.temperatureMin    = temperatureMin;
+        this.temperatureMax    = temperatureMax;
+        this.luminositeMin     = luminositeMin;
+        this.eclairementMoyen  = eclairementMoyen;
+        this.humiditeMin       = humiditeMin;
+        this.humiditeMax       = humiditeMax;
+        this.co2Max            = co2Max;
+        this.indiceConfinement = indiceConfinement;
+!!!150186.java!!!	getTemperatureMin() : double
+        return temperatureMin;
+!!!150314.java!!!	getTemperatureMax() : double
+        return temperatureMax;
+!!!150442.java!!!	getLuminositeMin() : int
+        return luminositeMin;
+!!!150570.java!!!	getEclairementMoyen() : int
+        return eclairementMoyen;
+!!!150698.java!!!	getHumiditeMin() : int
+        return humiditeMin;
+!!!150826.java!!!	getHumiditeMax() : int
+        return humiditeMax;
+!!!150954.java!!!	getCo2Max() : int
+        return co2Max;
+!!!151082.java!!!	getIndiceConfinement() : int
+        return indiceConfinement;

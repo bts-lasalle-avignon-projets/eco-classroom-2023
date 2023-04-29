@@ -2,23 +2,31 @@ format 224
 
 classcanvas 128042 class_ref 135082 // EcoClassroom
   classdiagramsettings member_max_width 0 end
-  xyz 151 251 2000
+  xyz 18 251 2000
 end
 classcanvas 128170 class_ref 135210 // AppCompatActivity
   classdiagramsettings member_max_width 0 end
-  xyz 538 99 2006
+  xyz 405 99 2006
 end
 classcanvas 128426 class_ref 134570 // AdaptateurSalle
   classdiagramsettings member_max_width 0 end
-  xyz 933 1175 2000
+  xyz 876 1688 2000
 end
 classcanvas 128554 class_ref 134698 // VueSalle
   classdiagramsettings member_max_width 0 end
-  xyz 2004 1175 2005
+  xyz 1947 1689 2005
 end
 classcanvas 128682 class_ref 134954 // Salle
   classdiagramsettings member_max_width 0 end
-  xyz 1507 28 3005
+  xyz 1295 28 3005
+end
+classcanvas 129194 class_ref 142250 // Seuils
+  classdiagramsettings hide_operations yes member_max_width 0 end
+  xyz 647 1026 3011
+end
+classcanvas 129450 class_ref 141866 // BaseDeDonnees
+  classdiagramsettings hide_attributes yes hide_operations yes member_max_width 0 end
+  xyz 1022 114 3017
 end
 relationcanvas 128298 relation_ref 134826 // <generalisation>
   from ref 128042 z 2007 to ref 128170
@@ -26,18 +34,40 @@ relationcanvas 128298 relation_ref 134826 // <generalisation>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128810 relation_ref 134954 // <unidirectional association>
-  from ref 128042 z 3006 stereotype "<<Vector>>" xyz 1282 504.5 3006 to ref 128682
-  role_a_pos 1411 466 3000 no_role_b
+  from ref 128042 z 3006 stereotype "<<Vector>>" xyz 1109.5 692.5 3006 to ref 128682
+  role_a_pos 1199 665 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128938 relation_ref 135210 // <unidirectional association>
   from ref 128554 z 3006 to ref 128682
-  role_a_pos 2230 1013 3000 no_role_b
+  role_a_pos 2209 1525 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129066 relation_ref 134698 // <unidirectional association>
-  from ref 128426 z 3006 stereotype "<<Vector>>" xyz 1492 1086 3006 to ref 128682
-  role_a_pos 1625 1013 3000 no_role_b
+  from ref 128426 z 3006 stereotype "<<Vector>>" xyz 1399 1598.5 3006 to ref 128682
+  role_a_pos 1519 1525 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129322 relation_ref 148778 // <unidirectional association>
+  from ref 128682 z 3012 to ref 129194
+  role_a_pos 1087 1157 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129578 relation_ref 148266 // <unidirectional association>
+  from ref 129450 z 3018 to point 992 114
+  line 129706 z 3018 to point 992 144
+  line 129834 z 3018 to ref 129450
+  role_a_pos 952 104 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129962 relation_ref 148394 // <unidirectional association>
+  from ref 129450 z 3018 stereotype "<<Vector>>" xyz 1159 218.5 3018 to ref 128682
+  role_a_pos 1199 238 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130090 relation_ref 148650 // <unidirectional association>
+  from ref 128042 z 3018 to ref 129450
+  role_a_pos 867 120 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

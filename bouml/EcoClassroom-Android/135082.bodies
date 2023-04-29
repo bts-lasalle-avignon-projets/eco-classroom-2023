@@ -4,10 +4,12 @@ class EcoClassroom
         setContentView(R.layout.ecoclassroom);
         Log.d(TAG, "onCreate()");
 
-        chargerSalles();
-        afficherSalles();
+        initialiserHandler();
+        initialiserBaseDeDonnees();
 
+        chargerSalles();
         initialiserVueSalles();
+        afficherSalles();
 !!!135210.java!!!	onStart() : void
         super.onStart();
         Log.d(TAG, "onStart()");
@@ -33,13 +35,19 @@ class EcoClassroom
         adaptateurSalle = new AdaptateurSalle(salles);
         vueSalles.setAdapter(adaptateurSalle);
 !!!135978.java!!!	afficherSalles() : void
+        Log.d(TAG, "afficherSalles() Nb salles = " + salles.size());
+        /*
         for(int i = 0; i < salles.size(); i++)
         {
             Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
-        }
+        }*/
+        // Force le rafraichissement de la liste des salles
+        this.adaptateurSalle.notifyDataSetChanged();
 !!!136106.java!!!	ajouterSalle(in nom : String, in description : String, in superficie : double) : void
         salles.add(new Salle(nom, superficie, description));
 !!!136234.java!!!	chargerSalles() : void
+        salles = baseDeDonnees.chargerSalles();
+        /*
         salles = new Vector<Salle>();
         ajouterSalle("B11", "Salle de cours", 18);
         ajouterSalle("B20", "Salle de TP", 65);
@@ -48,6 +56,109 @@ class EcoClassroom
         // Pour les tests
         for(int i = 0; i < salles.size(); i++)
         {
-            if(i%2 == 0)
+            if(i % 2 == 0)
                 salles.get(i).setEstOccupe(true);
+        }
+        */
+!!!148394.java!!!	initialiserBaseDeDonnees() : void
+        baseDeDonnees = BaseDeDonnees.getInstance(handler);
+!!!148522.java!!!	initialiserHandler() : void
+        this.handler = new Handler(this.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message message)
+            {
+                Log.d(TAG, "[Handler] id message = " + message.what);
+                Log.d(TAG, "[Handler] message = " + message.obj.toString());
+
+                switch(message.what)
+                {
+                    case BaseDeDonnees.CONNEXION_OK:
+                        Log.d(TAG, "[Handler] CONNEXION_OK");
+                        /**
+                         * Exemples de requêtes
+                         *
+                         * baseDeDonnees.executerRequete("UPDATE Salle SET estFavori = '1'
+                         * WHERE Salle.idSalle = '1'");
+                         *
+                         * Pour selectionner() -> réponse dans REQUETE_SQL_SELECT
+                         * baseDeDonnees.selectionner("SELECT * FROM Salle");
+                         */
+                        afficherSalles();
+                        break;
+                    case BaseDeDonnees.CONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] CONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_OK:
+                        Log.d(TAG, "[Handler] DECONNEXION_OK");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] DECONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_OK:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_OK");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_ERREUR:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT");
+                        /**
+                         * Exemple de traitement d'une requête SELECT
+                         *
+                         * ResultSet resultatRequete = (ResultSet)message.obj;
+                         * try
+                         * {
+                         *    while(resultatRequete.next())
+                         *    {
+                         *        int numero = resultatRequete.getRow();
+                         *        Log.v(TAG, "[Handler] resultatRequete numéro = " + numero);
+                         *    }
+                         * }
+                         * catch(SQLException e)
+                         * {
+                         *    e.printStackTrace();
+                         * }
+                         */
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_SALLES:
+                        Log.d(TAG,
+                              "[Handler] REQUETE_SQL_SELECT_SALLES Nb salles = " +
+                                message.obj.toString());
+                        afficherSalles();
+                }
+            }
+        };
+!!!148650.java!!!	alerterDepassementSeuil(inout salle : Salle) : void
+        if(salle.getTemperature() < salle.getSeuils().getTemperatureMin() || salle.getTemperature() > salle.getSeuils().getTemperatureMax())
+        {
+            notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
+        }
+        else if(salle.getHumidite() < salle.getSeuils().getHumiditeMin() || salle.getHumidite() > salle.getSeuils().getHumiditeMax())
+        {
+            notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
+        }
+        else if(salle.getCo2() >= salle.getSeuils().getCo2Max())
+        {
+            notifierDepassement(salle, DEPASSEMENT_CO2);
+        }
+!!!148778.java!!!	notifierDepassement(inout salle : Salle, in typeDepassement : int) : void
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "ecoChannelID");
+
+        switch(typeDepassement) {
+            case DEPASSEMENT_TEMPERATURE:
+                notification.setContentTitle("Dépassement de seuil")
+                        .setContentText("Température")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                break;
+
+            case DEPASSEMENT_HUMIDITE:
+                notification.setContentTitle("Dépassement de seuil")
+                        .setContentText("Humidité")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                break;
+
+            case DEPASSEMENT_CO2:
+                notification.setContentTitle("Dépassement de seuil")
+                        .setContentText("CO2")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         }
