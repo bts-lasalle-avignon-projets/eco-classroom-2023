@@ -42,6 +42,7 @@ public class Salle
     private boolean etatFenetre;      //!< l'état des fenêtres (ouvertes/fermées)
     private boolean etatLumiere;      //!< l'état des lumières (allumées/éteintes)
     private boolean estOccupe;        //!< indique l'occupation (oui/non)
+    private Seuils  seuils;           //!< les seuils pour cette salle
 
     /**
      * @brief Constructeur par défaut
@@ -59,6 +60,7 @@ public class Salle
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
+        this.seuils           = new Seuils();
     }
 
     /**
@@ -78,6 +80,27 @@ public class Salle
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
+        this.seuils           = new Seuils();
+    }
+
+    /**
+     * @brief Constructeur d'initialisation
+     */
+    public Salle(String nom, double superficie, String description, Seuils seuils)
+    {
+        Log.d(TAG, "Salle(" + nom + ", " + superficie + ", " + description + ")");
+        this.nom              = nom;
+        this.description      = description;
+        this.superficie       = superficie;
+        this.temperature      = 0.0;
+        this.humidite         = 0;
+        this.co2              = 0;
+        this.qualiteAir       = 0;
+        this.confortThermique = -4;
+        this.etatFenetre      = false;
+        this.etatLumiere      = false;
+        this.estOccupe        = false;
+        this.seuils           = seuils;
     }
 
     /**
@@ -166,6 +189,14 @@ public class Salle
     public boolean getEstOccupe()
     {
         return this.estOccupe;
+    }
+
+    /**
+     * @brief Accesseur de l'attribut seuils
+     */
+    public Seuils getSeuils()
+    {
+        return this.seuils;
     }
 
     /**

@@ -263,15 +263,15 @@ public class EcoClassroom extends AppCompatActivity
      */
     public void alerterDepassementSeuil(Salle salle)
     {
-        if(salle.getTemperature() > baseDeDonnees.selectionner("SELECT temperatureMin FROM SeuilsAlerte") && salle.getTemperature() > baseDeDonnees.selectionner("SELECT temperatureMax FROM SeuilsAlerte"))
+        if(salle.getTemperature() < salle.getSeuils().getTemperatureMin() || salle.getTemperature() > salle.getSeuils().getTemperatureMax())
         {
             notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
         }
-        else if(salle.getHumidite() > baseDeDonnees.selectionner("SELECT humiditeMin FROM SeuilsAlerte") && salle.getHumidite() > baseDeDonnees.selectionner("SELECT humiditeMax FROM SeuilsAlerte"))
+        else if(salle.getHumidite() < salle.getSeuils().getHumiditeMin() || salle.getHumidite() > salle.getSeuils().getHumiditeMax())
         {
             notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
         }
-        else if(salle.getCo2() > baseDeDonnees.selectionner("SELECT co2Min FROM SeuilsAlerte") && salle.getHumidite() > baseDeDonnees.selectionner("SELECT co2eMax FROM SeuilsAlerte"))
+        else if(salle.getCo2() >= salle.getSeuils().getCo2Max())
         {
             notifierDepassement(salle, DEPASSEMENT_CO2);
         }
@@ -282,25 +282,25 @@ public class EcoClassroom extends AppCompatActivity
      */
     public void notifierDepassement(Salle salle, int typeDepassement)
     {
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "ecoChannelID");
 
-        switch(typeDepassement)
-        {
+        switch(typeDepassement) {
             case DEPASSEMENT_TEMPERATURE:
                 notification.setContentTitle("Dépassement de seuil")
                         .setContentText("Température")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                        break;
+                break;
 
             case DEPASSEMENT_HUMIDITE:
                 notification.setContentTitle("Dépassement de seuil")
                         .setContentText("Humidité")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                        break;
+                break;
 
             case DEPASSEMENT_CO2:
                 notification.setContentTitle("Dépassement de seuil")
                         .setContentText("CO2")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        }
     }
 }
