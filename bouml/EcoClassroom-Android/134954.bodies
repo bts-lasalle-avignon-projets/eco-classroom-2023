@@ -91,3 +91,5 @@ class Salle
         this.etatLumiere = etatLumiere;
 !!!138538.java!!!	setEstOccupe(inout estOccupe : Boolean) : void
         this.estOccupe = estOccupe;
+!!!157738.java!!!	setSeuils(inout seuils : Seuils) : void
+        this.seuils = seuils;

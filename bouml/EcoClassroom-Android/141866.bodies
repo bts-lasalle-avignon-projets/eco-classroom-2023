@@ -274,7 +274,7 @@ class BaseDeDonnees
         {
             Log.w(TAG, "Pas de connexion MySQL !");
         }
-!!!148266.java!!!	chargerSalles() : Salle
+!!!148266.java!!!	chargerSalles() : void
         if(BaseDeDonnees.active)
         {
             /**
@@ -288,7 +288,7 @@ class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQL = "SELECT * FROM Salle";
+                            String requeteSQL = "SELECT * FROM Salle INNER JOIN Seuils ON Seuils.idSalle=Salle.idSalle;";
                             Log.d(TAG, "chargerSalles() requeteSQL = " + requeteSQL);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -307,14 +307,26 @@ class BaseDeDonnees
                                     resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE) +
                                     " - description = " +
                                     resultatRequete.getString(CHAMP_DESCRIPTION_SALLE));
-                                salles.add(
-                                  new Salle(resultatRequete.getString(CHAMP_NOM_SALLE),
-                                            resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE),
-                                            resultatRequete.getString(CHAMP_DESCRIPTION_SALLE)));
+                                Salle salle = new Salle(resultatRequete.getString(CHAMP_NOM_SALLE),
+                                        resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE),
+                                        resultatRequete.getString(CHAMP_DESCRIPTION_SALLE));
+                                salle.setEstOccupe((resultatRequete.getInt("estOccupe") == 1));
+                                salle.setEtatFenetre((resultatRequete.getInt("etatFenetres") == 1));
+                                salle.setEtatLumiere((resultatRequete.getInt("etatLumieres") == 1));
+                                salle.setConfortThermique(resultatRequete.getInt("idIndiceConfortTHI"));
+                                salle.setQualiteAir(resultatRequete.getInt("idIndiceQualiteAir"));
+                                Seuils seuils = new Seuils(resultatRequete.getDouble("temperatureMin"), resultatRequete.getDouble("temperatureMax"),
+                                        resultatRequete.getInt("luminositeMin"),
+                                        resultatRequete.getInt("eclairementMoyen"),
+                                        resultatRequete.getInt("humiditeMin"),
+                                        resultatRequete.getInt("humiditeMax"),
+                                        resultatRequete.getInt("co2Max"),
+                                        resultatRequete.getInt("indiceConfinement"));
+                                salles.add(salle);
                             }
                             Message message = new Message();
                             message.what    = REQUETE_SQL_SELECT_SALLES;
-                            message.obj     = salles.size();
+                            message.obj     = salles;
                             if(handler != null)
                                 handler.sendMessage(message);
                         }
@@ -348,9 +360,25 @@ class BaseDeDonnees
             // Pour les tests
             for(int i = 0; i < salles.size(); i++)
             {
+                if(i > 0)
+                {
+                    salles.get(i).setTemperature(19.);
+                    salles.get(i).setHumidite(49);
+                }
+                else
+                {
+                    salles.get(i).setTemperature(13.);
+                    salles.get(i).setHumidite(45);
+                }
                 if(i % 2 == 0)
+                {
                     salles.get(i).setEstOccupe(true);
+                }
             }
-        }
 
-        return this.salles;
+            Message message = new Message();
+            message.what    = REQUETE_SQL_SELECT_SALLES;
+            message.obj     = salles;
+            if(handler != null)
+                handler.sendMessage(message);
+        }

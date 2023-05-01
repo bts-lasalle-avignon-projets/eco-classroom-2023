@@ -67,6 +67,10 @@ public class Seuils
                   int    co2Max,
                   int    indiceConfinement)
     {
+        Log.d(TAG,
+              "Seuils(" + temperatureMin + ", " + temperatureMax + ", " + luminositeMin + ", " +
+                eclairementMoyen + ", " + humiditeMin + ", " + humiditeMax + ", " + co2Max + ", " +
+                indiceConfinement + ")");
         this.temperatureMin    = temperatureMin;
         this.temperatureMax    = temperatureMax;
         this.luminositeMin     = luminositeMin;

@@ -34,7 +34,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @brief Classe BaseDeDonnees.
  * @details La classe BaseDeDonnees permet de créer une interface entre
  * l'application Android et une bose de données distante.
- * @author @author Mercklen Jérémy
+ * @author Mercklen Jérémy
  * @author Thierry VAIRA
  * @version 0.1
  * @see https://www.tutorialspoint.com/java_mysql/
@@ -65,7 +65,7 @@ public class BaseDeDonnees
     // données par défaut (Raspberry Pi Zero)
     private static final int    PORT_DEFAUT = 3306; //!< Le numéro de port par défaut pour MySQL
     public final static boolean active =
-      false; //!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)
+      true; //!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)
 
     // La table Salle
     public static final String CHAMP_NOM_SALLE         = "nom";
@@ -620,7 +620,7 @@ public class BaseDeDonnees
      * @brief Méthode qui retourne les salles de la BDD.
      * @return salles Un vector de Salle
      */
-    public Vector<Salle> chargerSalles()
+    public void chargerSalles()
     {
         if(BaseDeDonnees.active)
         {
@@ -635,7 +635,7 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQL = "SELECT * FROM Salle";
+                            String requeteSQL = "SELECT * FROM Salle INNER JOIN Seuils ON Seuils.idSalle=Salle.idSalle;";
                             Log.d(TAG, "chargerSalles() requeteSQL = " + requeteSQL);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -654,14 +654,26 @@ public class BaseDeDonnees
                                     resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE) +
                                     " - description = " +
                                     resultatRequete.getString(CHAMP_DESCRIPTION_SALLE));
-                                salles.add(
-                                  new Salle(resultatRequete.getString(CHAMP_NOM_SALLE),
-                                            resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE),
-                                            resultatRequete.getString(CHAMP_DESCRIPTION_SALLE)));
+                                Salle salle = new Salle(resultatRequete.getString(CHAMP_NOM_SALLE),
+                                        resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE),
+                                        resultatRequete.getString(CHAMP_DESCRIPTION_SALLE));
+                                salle.setEstOccupe((resultatRequete.getInt("estOccupe") == 1));
+                                salle.setEtatFenetre((resultatRequete.getInt("etatFenetres") == 1));
+                                salle.setEtatLumiere((resultatRequete.getInt("etatLumieres") == 1));
+                                salle.setConfortThermique(resultatRequete.getInt("idIndiceConfortTHI"));
+                                salle.setQualiteAir(resultatRequete.getInt("idIndiceQualiteAir"));
+                                Seuils seuils = new Seuils(resultatRequete.getDouble("temperatureMin"), resultatRequete.getDouble("temperatureMax"),
+                                        resultatRequete.getInt("luminositeMin"),
+                                        resultatRequete.getInt("eclairementMoyen"),
+                                        resultatRequete.getInt("humiditeMin"),
+                                        resultatRequete.getInt("humiditeMax"),
+                                        resultatRequete.getInt("co2Max"),
+                                        resultatRequete.getInt("indiceConfinement"));
+                                salles.add(salle);
                             }
                             Message message = new Message();
                             message.what    = REQUETE_SQL_SELECT_SALLES;
-                            message.obj     = salles.size();
+                            message.obj     = salles;
                             if(handler != null)
                                 handler.sendMessage(message);
                         }
@@ -695,11 +707,27 @@ public class BaseDeDonnees
             // Pour les tests
             for(int i = 0; i < salles.size(); i++)
             {
+                if(i > 0)
+                {
+                    salles.get(i).setTemperature(19.);
+                    salles.get(i).setHumidite(49);
+                }
+                else
+                {
+                    salles.get(i).setTemperature(13.);
+                    salles.get(i).setHumidite(45);
+                }
                 if(i % 2 == 0)
+                {
                     salles.get(i).setEstOccupe(true);
+                }
             }
-        }
 
-        return this.salles;
+            Message message = new Message();
+            message.what    = REQUETE_SQL_SELECT_SALLES;
+            message.obj     = salles;
+            if(handler != null)
+                handler.sendMessage(message);
+        }
     }
 }

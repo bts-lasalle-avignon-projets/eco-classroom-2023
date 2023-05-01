@@ -1,6 +1,6 @@
 format 224
 "eco_classroom_mobile" // eco_classroom_mobile
-  revision 3
+  revision 4
   modified_by 42 "tv"
   // class settings
   
@@ -1112,6 +1112,21 @@ ${members}}
 	comment "@brief Mutateur de l'attribut estOccupe
 "
       end
+
+      operation 157738 "setSeuils"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "seuils" type class_ref 142250 // Seuils
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur de l'attribut seuils
+"
+      end
     end
 
     class 135082 "EcoClassroom"
@@ -1173,7 +1188,7 @@ ${members}};
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< Chiffre corréspondant à un dépassement de seuil de température"
+	comment "!< un dépassement de seuil de température"
       end
 
       attribute 147754 "DEPASSEMENT_HUMIDITE"
@@ -1187,7 +1202,7 @@ ${members}};
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< Chiffre corréspondant à un dépassement de seuil d'humiditée"
+	comment "!< un dépassement de seuil d'humiditée"
       end
 
       attribute 147882 "DEPASSEMENT_CO2"
@@ -1201,7 +1216,7 @@ ${members}};
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< Chiffre corréspondant à un dépassement de seuil de CO2"
+	comment "!< un dépassement de seuil de CO2"
       end
 
       classrelation 134954 // salles (<unidirectional association>)
@@ -1238,7 +1253,35 @@ ${members}};
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "<! Le handler utilisé par l'activité"
+	comment "<! le handler utilisé par l'activité"
+      end
+
+      attribute 157738 "notificationManager"
+	private explicit_type "NotificationManager"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le gestionnaire de notifications"
+      end
+
+      attribute 157866 "idNotification"
+	private explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! l'identifiant de notification"
       end
 
       attribute 134826 "vueSalles"
@@ -1258,7 +1301,7 @@ ${members}};
 
       classrelation 141738 // adaptateurSalle (<unidirectional association>)
 	relation 141738 --->
-	  a role_name "adaptateurSalle" private
+	  a role_name "adaptateurSalle" init_value " null" private
 	    comment "!< l'adaptateur"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1395,9 +1438,10 @@ et détruite par le système Android)
 
       operation 135978 "afficherSalles"
 	public explicit_return_type "void"
-	nparams 0
+	nparams 1
+	  param inout name "salles" explicit_type "Vector<Salle>"
 	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -1468,16 +1512,16 @@ et détruite par le système Android)
 
       operation 148650 "alerterDepassementSeuil"
 	public explicit_return_type "void"
-	nparams 1
-	  param inout name "salle" type class_ref 134954 // Salle
+	nparams 0
 	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
   ${body}}
 "
 	
 	
 	
-	comment "@brief Méthode permettant de vérifier et de notifier lors d'un dépassement de seuil dans une salle
+	comment "@brief Méthode permettant de vérifier et de notifier lors d'un dépassement de seuil dans une
+salle
 "
       end
 
@@ -1498,7 +1542,7 @@ et détruite par le système Android)
       end
     end
 
-    classdiagram 134570 "diagramme de classes 0.1"
+    classdiagram 134570 "diagramme de classes 0.2"
       classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_multiplicity yes member_max_width 0 show_relation_visibility yes end
       size A0
     end
@@ -1518,7 +1562,7 @@ ${members}}
       comment "@brief Classe BaseDeDonnees.
 @details La classe BaseDeDonnees permet de créer une interface entre
 l'application Android et une bose de données distante.
-@author @author Mercklen Jérémy
+@author Mercklen Jérémy
 @author Thierry VAIRA
 @version 0.1
 @see https://www.tutorialspoint.com/java_mysql/
@@ -1722,7 +1766,7 @@ l'application Android et une bose de données distante.
       attribute 145834 "active"
 	class_attribute const_attribute public explicit_type "boolean"
 	init_value "
-      false"
+      true"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -2185,6 +2229,7 @@ ${members}}
 	
 	classrelation 148522 // <realization>
 	  relation 148522 -_-|>
+	    stereotype "bind"
 	    a public
 	      java "${type}<Void, Integer, Boolean>"
 	      classrelation_ref 148522 // <realization>
@@ -2295,10 +2340,10 @@ traitement ce qui aura pour effet d'appeler automatiquement onProgressUpdate()
       end
 
       operation 148266 "chargerSalles"
-	public return_type class_ref 134954 // Salle
+	public explicit_return_type "void"
 	nparams 0
 	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Vector<${type}> ${name}${(}${)}${throws}${staticnl}{
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -2737,13 +2782,20 @@ ${imports}
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 import java.util.Vector;
 ${definition}"
       php_src "<?php
@@ -2843,6 +2895,11 @@ ${definition}"
       associated_elems
 	class_ref 141866 // BaseDeDonnees
       end
+      comment "@file BaseDeDonnees.java
+@brief Déclaration de la classe BaseDeDonnees
+@author FARGIER Mayeul
+@author Thierry VAIRA
+"
     end
 
     artifact 141610 "Seuils"
@@ -2855,6 +2912,10 @@ ${definition}"
       associated_elems
 	class_ref 142250 // Seuils
       end
+      comment "@file Salle.java
+@brief Le concept de Salle
+@author Mercklen Jérémy
+"
     end
   end
 end

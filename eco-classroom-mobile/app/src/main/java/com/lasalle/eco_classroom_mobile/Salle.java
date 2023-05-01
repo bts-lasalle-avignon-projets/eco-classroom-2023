@@ -291,4 +291,12 @@ public class Salle
     {
         this.estOccupe = estOccupe;
     }
+
+    /**
+     * @brief Mutateur de l'attribut seuils
+     */
+    public void setSeuils(Seuils seuils)
+    {
+        this.seuils = seuils;
+    }
 }
