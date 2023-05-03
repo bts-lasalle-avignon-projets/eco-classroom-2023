@@ -128,39 +128,39 @@ QString Salle::getQualiteAir() const
     if(getCO2() > SEUIL_BAS_QAIR_EXCELLENTE &&
        getCO2() < SEUIL_HAUT_QAIR_EXCELLENTE)
     {
-        return "Excellente";
+        return EXCELLENTE;
     }
 
     else if(getCO2() > SEUIL_BAS_QAIR_BONNE && getCO2() < SEUIL_HAUT_QAIR_BONNE)
     {
-        return "Bonne";
+        return BONNE;
     }
 
     else if(getCO2() > SEUIL_BAS_QAIR_MOYENNE &&
             getCO2() < SEUIL_HAUT_QAIR_MOYENNE)
     {
-        return "Moyenne";
+        return MOYENNE;
     }
 
     else if(getCO2() > SEUIL_BAS_QAIR_NULLE && getCO2() < SEUIL_HAUT_QAIR_NULLE)
     {
-        return "Nulle";
+        return NULLE;
     }
 
     else if(getCO2() > SEUIL_BAS_QAIR_MEDIOCRE &&
             getCO2() < SEUIL_HAUT_QAIR_MEDIOCRE)
     {
-        return "Mediocre";
+        return MEDIOCRE;
     }
 
     else if(getCO2() > SEUIL_BAS_QAIR_SEVERE &&
             getCO2() < SEUIL_HAUT_QAIR_SEVERE)
     {
-        return "Severe";
+        return SEVERE;
     }
 
     else
-        return "Inexistante";
+        return INEXISTENTE;
 }
 
 /**

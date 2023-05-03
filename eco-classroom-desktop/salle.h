@@ -24,6 +24,14 @@
 #define SEUIL_BAS_QAIR_SEVERE      1300
 #define SEUIL_HAUT_QAIR_SEVERE     2500
 
+#define INEXISTENTE "Inexistente"
+#define EXCELLENTE  "Excellente"
+#define BONNE       "Bonne"
+#define MOYENNE     "Moyenne"
+#define NULLE       "Nulle"
+#define MEDIOCRE    "Médiocre"
+#define SEVERE      "Sévère"
+
 class Mesures;
 class EtatsSalle;
 
