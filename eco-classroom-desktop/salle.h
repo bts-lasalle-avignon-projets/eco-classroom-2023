@@ -72,7 +72,6 @@ class Salle
     unsigned int getHumidite() const;
     unsigned int getCO2() const;
     QString      getQualiteAir() const;
-
     void setCO2(unsigned int co2);
     bool getLumiere() const;
     bool getFenetre() const;
