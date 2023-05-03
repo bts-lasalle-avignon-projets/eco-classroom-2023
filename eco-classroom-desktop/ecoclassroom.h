@@ -9,6 +9,8 @@
 #include <QtWidgets>
 #include <QMap>
 
+#define DUREE_NOTIFICATION 5000 // en ms
+
 class Salle;
 
 /**
@@ -69,6 +71,8 @@ class EcoClassroom : public QMainWindow
     QLabel*      labelDescriptionSalle; //!< Le label pour le nom de la salle
     QLabel*      descriptionSalle;      //!< La description de la salle
     QPushButton* boutonRetourAccueil;   //!< Bouton de retour
+    QSystemTrayIcon*
+      notificationConfinement; //!< Notification système du confinement
 
     void instancierWidgets();
     void initialiserTable();
@@ -87,6 +91,9 @@ class EcoClassroom : public QMainWindow
     void effacerTableauSalles();
     void effacerSalles();
     void alerterDepassementSeuilCO2(const Salle& salle);
+    void notifierSignalementConfinement(const QString& titre,
+                                        const QString& message);
+
     // Pour le QTableWidget
     void coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur);
     void coloriserFondCellule(QTableWidgetItem* cellule,

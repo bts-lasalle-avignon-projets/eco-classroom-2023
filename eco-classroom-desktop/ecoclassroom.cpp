@@ -130,6 +130,9 @@ void EcoClassroom::instancierWidgets()
     layoutF2Principal->addStretch();
     fenetreInformations->setLayout(layoutF2Principal);
 
+    notificationConfinement = new QSystemTrayIcon(this);
+    notificationConfinement->show();
+
     // La GUI
     layoutPrincipal->addWidget(fenetres);
     gui->setLayout(layoutPrincipal);
@@ -465,6 +468,9 @@ void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
                              nb - 1,
                              COLONNE_SALLE_QUALITE_AIR,
                              QString("#ff0000"));*/
+        notifierSignalementConfinement("ALERTE CO2 !",
+                                       "Confinement de la salle " +
+                                         salle.getNom());
     }
     else
     {
@@ -472,13 +478,36 @@ void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
         coloriserFondCellule(elementCO2, QColor(255, 255, 255));
     }
 }
+/**
+ * @fn EcoClassroom::notifierSignalementConfinement
+ * @brief Signale le confinement d'une salle grâce à une notification système
+ */
+void EcoClassroom::notifierSignalementConfinement(const QString& titre,
+                                                  const QString& message)
+{
+    qDebug() << Q_FUNC_INFO << "titre" << titre << "message" << message;
+    QSystemTrayIcon::MessageIcon iconeNotification =
+      QSystemTrayIcon::MessageIcon(QSystemTrayIcon::Critical);
+    notificationConfinement->showMessage(titre,
+                                         message,
+                                         iconeNotification,
+                                         DUREE_NOTIFICATION);
+}
 
+/**
+ * @fn EcoClassroom::coloriserFondCellule
+ * @brief Colorie le fond d'une cellule d'un QTableWidget
+ */
 void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
                                         const QColor&     couleur)
 {
     cellule->setBackground(couleur);
 }
 
+/**
+ * @fn EcoClassroom::coloriserFondCellule
+ * @brief Colorie le fond d'une cellule d'un QTableWidget
+ */
 void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
                                         const QString&    couleur)
 {
@@ -487,6 +516,10 @@ void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
     coloriserFondCellule(cellule, _couleur);
 }
 
+/**
+ * @fn EcoClassroom::coloriserFondCellule
+ * @brief Colorie le fond d'une cellule d'un QTableWidget
+ */
 void EcoClassroom::coloriserFondCellule(QTableWidget* tableWidgetSalles,
                                         int           ligne,
                                         int           colonne,
@@ -495,6 +528,10 @@ void EcoClassroom::coloriserFondCellule(QTableWidget* tableWidgetSalles,
     tableWidgetSalles->item(ligne, colonne)->setBackground(couleur);
 }
 
+/**
+ * @fn EcoClassroom::coloriserFondCellule
+ * @brief Colorie le fond d'une cellule d'un QTableWidget
+ */
 void EcoClassroom::coloriserFondCellule(QTableWidget*  tableWidgetSalles,
                                         int            ligne,
                                         int            colonne,
