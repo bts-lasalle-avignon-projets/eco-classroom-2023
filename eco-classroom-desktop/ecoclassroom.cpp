@@ -123,6 +123,8 @@ void EcoClassroom::instancierWidgets()
     layoutF2Informations->addWidget(superficieSalle, 1, 1);
     layoutF2Informations->addWidget(labelDescriptionSalle, 2, 0);
     layoutF2Informations->addWidget(descriptionSalle, 2, 1);
+    layoutF2Informations->addWidget(labelIndiceQAirSalle, 3, 0);
+    layoutF2Informations->addWidget(indiceQualiteAirSalle, 3, 1);
     layoutF2Boutons->addStretch();
     layoutF2Boutons->addWidget(boutonRetourAccueil);
     layoutF2Principal->addLayout(layoutF2Informations);
@@ -187,6 +189,7 @@ void EcoClassroom::initialiserFenetreInformations()
     labelNomSalle         = new QLabel(this);
     labelSuperficieSalle  = new QLabel(this);
     labelDescriptionSalle = new QLabel(this);
+    labelIndiceQAirSalle  = new QLabel(this);
 
     // affichage du widget
     labelNomSalle->setText("Nom :");
@@ -197,6 +200,9 @@ void EcoClassroom::initialiserFenetreInformations()
 
     labelDescriptionSalle->setText("Description :");
     descriptionSalle = new QLabel(this);
+
+    labelIndiceQAirSalle->setText("Indice Qualité de l'air :");
+    indiceQualiteAirSalle = new QLabel(this);
 
     // bouton pour quitter la fênetre
     boutonRetourAccueil = new QPushButton("Ok", this);
@@ -288,7 +294,7 @@ void EcoClassroom::creerElementsTexteCellule(const Salle& salle)
 {
     elementNom = new QTableWidgetItem(salle.getNom());
     elementTHI = new QTableWidgetItem(QString("Inconnu"));
-    elementCO2 = new QTableWidgetItem(QString::number(salle.getCO2()));
+    elementCO2 = new QTableWidgetItem(QString(salle.getQualiteAir()));
 
     personnaliserElementsTexte();
 }
@@ -412,11 +418,15 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
 {
     qInfo() << " Nom : " << salle.getNom() << "\n"
             << "Superficie : " << salle.getSuperficie() << "\n"
-            << "Description : " << salle.getDescription();
+            << "Description : " << salle.getDescription() << "\n"
+            << "Indice Qualité d'air : "
+            << salle.getQualiteAir() + " " + salle.getCO2();
     nomSalle->setText(salle.getNom());
     superficieSalle->setText(QString::number(salle.getSuperficie()) +
                              " m<sup>2</sup>");
     descriptionSalle->setText(salle.getDescription());
+    indiceQualiteAirSalle->setText(salle.getQualiteAir() + " (" +
+                                   QString::number(salle.getCO2()) + " ppm)");
     afficherFenetreInformations();
 }
 
@@ -472,6 +482,11 @@ void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
         coloriserFondCellule(elementCO2, QColor(255, 255, 255));
     }
 }
+
+/**
+ * @fn EcoClassroom::alerterDepassementSeuil
+ * @brief Vérifie et alerte d'un dépassement de seuil de CO2 dans une salle
+ */
 
 void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
                                         const QColor&     couleur)

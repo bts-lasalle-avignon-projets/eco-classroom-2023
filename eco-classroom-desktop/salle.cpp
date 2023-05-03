@@ -118,6 +118,51 @@ unsigned int Salle::getCO2() const
         return mesures->getCO2();
     return 0;
 }
+
+/**
+ * @brief Getter qui évalue la qualité d'air grâce a l'attribut Co2 de l'objet
+ * Salle
+ */
+QString Salle::getQualiteAir() const
+{
+    if(getCO2() > SEUIL_BAS_QAIR_EXCELLENTE &&
+       getCO2() < SEUIL_HAUT_QAIR_EXCELLENTE)
+    {
+        return "Excellente";
+    }
+
+    else if(getCO2() > SEUIL_BAS_QAIR_BONNE && getCO2() < SEUIL_HAUT_QAIR_BONNE)
+    {
+        return "Bonne";
+    }
+
+    else if(getCO2() > SEUIL_BAS_QAIR_MOYENNE &&
+            getCO2() < SEUIL_HAUT_QAIR_MOYENNE)
+    {
+        return "Moyenne";
+    }
+
+    else if(getCO2() > SEUIL_BAS_QAIR_NULLE && getCO2() < SEUIL_HAUT_QAIR_NULLE)
+    {
+        return "Nulle";
+    }
+
+    else if(getCO2() > SEUIL_BAS_QAIR_MEDIOCRE &&
+            getCO2() < SEUIL_HAUT_QAIR_MEDIOCRE)
+    {
+        return "Mediocre";
+    }
+
+    else if(getCO2() > SEUIL_BAS_QAIR_SEVERE &&
+            getCO2() < SEUIL_HAUT_QAIR_SEVERE)
+    {
+        return "Severe";
+    }
+
+    else
+        return "Inexistante";
+}
+
 /**
  * @brief Setter qui attribut une valeur a l'attribut Co2 de l'objet Salle
  * @param co2
