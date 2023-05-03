@@ -31,14 +31,14 @@ public class Seuils
     /**
      * Attributs
      */
-    private double temperatureMin;
-    private double temperatureMax;
-    private int    luminositeMin;
-    private int    eclairementMoyen;
-    private int    humiditeMin;
-    private int    humiditeMax;
-    private int    co2Max;
-    private int    indiceConfinement;
+    private double temperatureMin;    //<! le seuil de température minimum
+    private double temperatureMax;    //<! le seuil de température maximum
+    private int    luminositeMin;     //<! le seuil de luminosité minimum
+    private int    eclairementMoyen;  //<! l'éclairement moyen
+    private int    humiditeMin;       //<! le seuil d'humidité minimum
+    private int    humiditeMax;       //<! le seuil d'humidité maximum
+    private int    co2Max;            //<! le seuil de CO2 maximum
+    private int    indiceConfinement; //<! l'indice de confinement
 
     /**
      * @brief Constructeur par défaut
@@ -81,41 +81,73 @@ public class Seuils
         this.indiceConfinement = indiceConfinement;
     }
 
+    /**
+     * @brief Accesseur de l'attribut temperatureMin
+     * @return double La température minimum
+     */
     public double getTemperatureMin()
     {
         return temperatureMin;
     }
 
+    /**
+     * @brief Accesseur de l'attribut temperatureMax
+     * @return double La température maximum
+     */
     public double getTemperatureMax()
     {
         return temperatureMax;
     }
 
+    /**
+     * @brief Accesseur de l'attribut luminositeMin
+     * @return double La luminosité minimum
+     */
     public int getLuminositeMin()
     {
         return luminositeMin;
     }
 
+    /**
+     * @brief Accesseur de l'attribut eclairementMoyen
+     * @return double L'éclairement moyen
+     */
     public int getEclairementMoyen()
     {
         return eclairementMoyen;
     }
 
+    /**
+     * @brief Accesseur de l'attribut humiditeMin
+     * @return double L'humidité minimum
+     */
     public int getHumiditeMin()
     {
         return humiditeMin;
     }
 
+    /**
+     * @brief Accesseur de l'attribut humiditéMax
+     * @return double L'humidité maximum
+     */
     public int getHumiditeMax()
     {
         return humiditeMax;
     }
 
+    /**
+     * @brief Accesseur de l'attribut co2Max
+     * @return int Le CO2 maximum
+     */
     public int getCo2Max()
     {
         return co2Max;
     }
 
+    /**
+     * @brief Accesseur de l'attribut indiceConfinement
+     * @return int L'indice de confinement
+     */
     public int getIndiceConfinement()
     {
         return indiceConfinement;

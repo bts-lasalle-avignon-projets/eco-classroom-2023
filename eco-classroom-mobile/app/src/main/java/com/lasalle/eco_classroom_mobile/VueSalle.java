@@ -46,6 +46,7 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
 
     /**
      * @brief Constructeur d'initialisation
+     * @param vueSalle La vue de la salle
      */
     public VueSalle(final View vueSalle)
     {
@@ -73,6 +74,7 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
 
     /**
      * @brief Méthode permettant d'initialiser les widgets dans la vue
+     * @param vueSalle La vue de la salle
      */
     private void initialiserWidgets(final View vueSalle)
     {
@@ -106,6 +108,7 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
 
     /**
      * @brief Méthode permettant de configurer un TextView
+     * @param elementTexte l'élement de texte à modifier
      */
     private void configurerElementTexte(TextView elementTexte)
     {
@@ -118,6 +121,7 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
 
     /**
      * @brief Méthode permettant de configurer un ImageView
+     * @param elementImage L'élément de l'image à configurer
      */
     private void configurerElementImage(ImageView elementImage)
     {
@@ -129,6 +133,7 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
 
     /**
      * @brief Méthode permettant d'afficher les salles sur la vue
+     * @param salle La salle à afficher
      */
     public void afficher(Salle salle)
     {
@@ -161,6 +166,7 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
 
     /**
      * @brief Méthode permettant de gérer les clics sur les objets de la vue
+     * @param vue La vue où l'événement va arriver
      */
     @Override
     public void onClick(View vue)

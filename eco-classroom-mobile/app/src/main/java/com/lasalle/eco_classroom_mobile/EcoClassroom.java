@@ -142,6 +142,7 @@ public class EcoClassroom extends AppCompatActivity
 
     /**
      * @brief Méthode permettant d'afficher les salles dans les logs
+     * @param salles Les salles
      */
     public void afficherSalles(Vector<Salle> salles)
     {
@@ -163,6 +164,9 @@ public class EcoClassroom extends AppCompatActivity
 
     /**
      * @brief Méthode permettant d'ajouter une salle dans l'attribut salles
+     * @param nom Le nom de la salle
+     * @param description Le type de salle
+     * @param superficie La superficie de la salle en m²
      */
     public void ajouterSalle(String nom, String description, double superficie)
     {
@@ -256,6 +260,8 @@ public class EcoClassroom extends AppCompatActivity
 
     /**
      * @brief Méthode permettant d'envoyer une notification pour alerter d'un dépassement de seuil
+     * @param salle La salle où il y a un dépassement de seuil
+     * @param typeDepassement Indique le type de dépassement de seuil
      */
     public void notifierDepassement(Salle salle, int typeDepassement)
     {
@@ -320,7 +326,7 @@ public class EcoClassroom extends AppCompatActivity
         else
         {
             NotificationManagerCompat.from(this).notify(idNotification++, notification.build());
-            //NotificationManagerCompat.from(this).notify(typeDepassement, notification.build());
+            // NotificationManagerCompat.from(this).notify(typeDepassement, notification.build());
         }
 
         Toast toast =

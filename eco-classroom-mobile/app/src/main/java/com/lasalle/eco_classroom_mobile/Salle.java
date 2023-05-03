@@ -36,7 +36,7 @@ public class Salle
     private double  superficie;       //!< la superficie en m²
     private double  temperature;      //!< la température en °C
     private int     humidite;         //!< le taux d'humidité
-    private int     co2;              //!< le taux de co2 en ppm
+    private int     co2;              //!< le CO2 en ppm
     private int     qualiteAir;       //!< la qualité de l'air
     private int     confortThermique; //!< l'indice de confort thermique
     private boolean etatFenetre;      //!< l'état des fenêtres (ouvertes/fermées)
@@ -65,6 +65,9 @@ public class Salle
 
     /**
      * @brief Constructeur d'initialisation
+     * @param nom Le nom de la salle
+     * @param superficie La superficie de la salle en m²
+     * @param description Le type de salle
      */
     public Salle(String nom, double superficie, String description)
     {
@@ -85,6 +88,10 @@ public class Salle
 
     /**
      * @brief Constructeur d'initialisation
+     * @param nom Le nom de la salle
+     * @param superficie La superficie de la salle en m²
+     * @param description Le type de salle
+     * @param seuils Indique les seuils à ne pas dépasser pour cette salle
      */
     public Salle(String nom, double superficie, String description, Seuils seuils)
     {
@@ -105,6 +112,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut nom
+     * @return String Le nom de la salle
      */
     public String getNom()
     {
@@ -113,6 +121,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut description
+     * @return String Le type de salle
      */
     public String getDescription()
     {
@@ -121,6 +130,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut superficie
+     * @return double La superficie de la salle en m²
      */
     public double getSuperficie()
     {
@@ -129,6 +139,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut temperature
+     * @return double La température de la salle en °C
      */
     public double getTemperature()
     {
@@ -137,6 +148,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut humidite
+     * @return int Le taux d'humidité
      */
     public int getHumidite()
     {
@@ -145,6 +157,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut co2
+     * @return int Le CO2 en ppm
      */
     public int getCo2()
     {
@@ -153,6 +166,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut qualiteAir
+     * @return int La qualité de l'air
      */
     public int getQualiteAir()
     {
@@ -161,6 +175,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut confortThermique
+     * @return int Le confort thermique
      */
     public int getConfortThermique()
     {
@@ -169,6 +184,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut etatFenetre
+     * @return boolean L'état des fenêtres (ouvertes/fermées)
      */
     public boolean getEtatFenetre()
     {
@@ -177,6 +193,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut etatLumiere
+     * @return boolean L'état de la lumières (allumées/éteintes)
      */
     public boolean getEtatLumiere()
     {
@@ -185,6 +202,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut estOccupe
+     * @return boolean Indique l'occupation (oui/non)
      */
     public boolean getEstOccupe()
     {
@@ -193,6 +211,7 @@ public class Salle
 
     /**
      * @brief Accesseur de l'attribut seuils
+     * @return Seuils Les seuils à ne pas dépasser dans la salle
      */
     public Seuils getSeuils()
     {
@@ -201,6 +220,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut nom
+     * @param nom Le nouveau nom
      */
     public void setNom(String nom)
     {
@@ -209,6 +229,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut description
+     * @param description La nouvelle description
      */
     public void setDescription(String description)
     {
@@ -217,6 +238,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut superficie
+     * @param superficie La nouvelle superficie en m²
      */
     public void setSuperficie(double superficie)
     {
@@ -224,7 +246,8 @@ public class Salle
     }
 
     /**
-     * @brief Mutateur de l'attribut superficie
+     * @brief Mutateur de l'attribut temperature
+     * @param temperature La nouvelle température en °C
      */
     public void setTemperature(double temperature)
     {
@@ -233,6 +256,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut humidite
+     * @param humidite Le nouveau taux d'humidité
      */
     public void setHumidite(int humidite)
     {
@@ -242,6 +266,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut co2
+     * @param co2 Le nouveau CO2 en ppm
      */
     public void setCo2(int co2)
     {
@@ -251,6 +276,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut qualiteAir
+     * @param qualiteAir La nouvelle qualité de l'air
      */
     public void setQualiteAir(int qualiteAir)
     {
@@ -260,6 +286,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut confortThermique
+     * @param confortThermique Le nouveau confort thermique
      */
     public void setConfortThermique(int confortThermique)
     {
@@ -270,6 +297,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut etatFenetre
+     * @param etatFenetre Le nouvel état des fenêtres (ouvertes/fermées)
      */
     public void setEtatFenetre(boolean etatFenetre)
     {
@@ -278,6 +306,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut etatLumiere
+     * @param etatLumiere Le nouvel état des lumières (allumées/éteintes)
      */
     public void setEtatLumiere(boolean etatLumiere)
     {
@@ -286,6 +315,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut estOccupe
+     * @param estOccupe Le nouvel état d'occupation (oui/non)
      */
     public void setEstOccupe(Boolean estOccupe)
     {
@@ -294,6 +324,7 @@ public class Salle
 
     /**
      * @brief Mutateur de l'attribut seuils
+     * @param seuils Les nouveaux seuils à ne pas dépasser
      */
     public void setSeuils(Seuils seuils)
     {
