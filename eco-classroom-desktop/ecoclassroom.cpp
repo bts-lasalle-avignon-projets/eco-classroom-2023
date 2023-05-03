@@ -483,11 +483,6 @@ void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
     }
 }
 
-/**
- * @fn EcoClassroom::alerterDepassementSeuil
- * @brief Vérifie et alerte d'un dépassement de seuil de CO2 dans une salle
- */
-
 void EcoClassroom::coloriserFondCellule(QTableWidgetItem* cellule,
                                         const QColor&     couleur)
 {
