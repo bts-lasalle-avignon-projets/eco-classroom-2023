@@ -9,6 +9,19 @@
 #include <QtWidgets>
 #include <QMap>
 
+/**
+ * @def DUREE_NOTIFICATION
+ * @brief constante qui permet d'identifier la durée d'une notification système
+ * qui s'affiche à l'écran
+ */
+#define DUREE_NOTIFICATION 5000 // en ms
+
+/**
+ * @def TITRE_NOTIFICATION_CO2
+ * @brief Le titre de la notification système qui s'affiche à l'écran
+ */
+#define TITRE_NOTIFICATION_CO2 "ALERTE CO2 !"
+
 class Salle;
 
 /**
@@ -69,6 +82,8 @@ class EcoClassroom : public QMainWindow
     QLabel*      labelDescriptionSalle; //!< Le label pour le nom de la salle
     QLabel*      descriptionSalle;      //!< La description de la salle
     QPushButton* boutonRetourAccueil;   //!< Bouton de retour
+    QSystemTrayIcon*
+      notificationEcoClassroom; //!< Notification système du confinement
 
     void instancierWidgets();
     void initialiserTable();
@@ -87,6 +102,9 @@ class EcoClassroom : public QMainWindow
     void effacerTableauSalles();
     void effacerSalles();
     void alerterDepassementSeuilCO2(const Salle& salle);
+    void notifierSignalementConfinement(const QString& titre,
+                                        const QString& message);
+
     // Pour le QTableWidget
     void coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur);
     void coloriserFondCellule(QTableWidgetItem* cellule,
