@@ -9,28 +9,28 @@
 #include <QString>
 
 #define SEUIL_ALERTE_CO2 1300
+/**
+ *@brief Constantes utilisées pour evaluer la qualité de l'air
+ */
 
-#define SEUIL_QAIR_INEXISTANTE     0
-#define SEUIL_BAS_QAIR_EXCELLENTE  1
-#define SEUIL_HAUT_QAIR_EXCELLENTE 200
-#define SEUIL_BAS_QAIR_BONNE       201
-#define SEUIL_HAUT_QAIR_BONNE      400
-#define SEUIL_BAS_QAIR_MOYENNE     401
-#define SEUIL_HAUT_QAIR_MOYENNE    799
-#define SEUIL_BAS_QAIR_NULLE       800
-#define SEUIL_HAUT_QAIR_NULLE      999
-#define SEUIL_BAS_QAIR_MEDIOCRE    1000
-#define SEUIL_HAUT_QAIR_MEDIOCRE   1299
-#define SEUIL_BAS_QAIR_SEVERE      1300
-#define SEUIL_HAUT_QAIR_SEVERE     2500
+#define SEUIL_BAS_QUALITE_AIR_EXCELLENTE    0
+#define SEUIL_HAUT_QUALITE_AIR_EXCELLENTE   400
+#define SEUIL_BAS_QUALITE_AIR_TRES_BIEN     401
+#define SEUIL_HAUT_QUALITE_AIR_TRES_BIEN    1000
+#define SEUIL_BAS_QUALITE_AIR_MODERE        1001
+#define SEUIL_HAUT_QUALITE_AIR_MODERE       1500
+#define SEUIL_BAS_QUALITE_AIR_MAUVAIS       1501
+#define SEUIL_HAUT_QUALITE_AIR_MAUVAIS      2000
+#define SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS  2001
+#define SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS 5000
+#define SEUIL_BAS_QUALITE_AIR_SEVERE        5001
 
-#define INEXISTENTE "Inexistente"
-#define EXCELLENTE  "Excellente"
-#define BONNE       "Bonne"
-#define MOYENNE     "Moyenne"
-#define NULLE       "Nulle"
-#define MEDIOCRE    "Médiocre"
-#define SEVERE      "Sévère"
+#define EXCELLENTE   "Excellente"
+#define TRES_BIEN    "Très Bien"
+#define MODERE       "Modéré"
+#define MAUVAIS      "Mauvais"
+#define TRES_MAUVAIS "Très Mauvais"
+#define SEVERE       "Sévère"
 
 class Mesures;
 class EtatsSalle;
@@ -58,12 +58,11 @@ class Salle
 
     enum IndiceQualiteAir
     {
-        Inexistante,
         Excellente,
-        Bonne,
-        Moyenne,
-        Nulle,
-        Mediocre,
+        Tres_Bien,
+        Modere,
+        Mauvais,
+        Tres_Mauvais,
         Severe
     };
     */
@@ -80,13 +79,13 @@ class Salle
     unsigned int getHumidite() const;
     unsigned int getCO2() const;
     QString      getQualiteAir() const;
-    void setCO2(unsigned int co2);
-    bool getLumiere() const;
-    bool getFenetre() const;
-    bool getOccupation() const;
-    void calculerTHI();
-    void calculerIADI();
-    void calculerICONE();
+    void         setCO2(unsigned int co2);
+    bool         getLumiere() const;
+    bool         getFenetre() const;
+    bool         getOccupation() const;
+    void         calculerTHI();
+    void         calculerIADI();
+    void         calculerICONE();
 };
 
 #endif // SALLE_H

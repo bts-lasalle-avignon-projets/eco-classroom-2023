@@ -120,47 +120,38 @@ unsigned int Salle::getCO2() const
 }
 
 /**
- * @brief Getter qui évalue la qualité d'air grâce a l'attribut Co2 de l'objet
+ * @brief Méthode qui évalue la qualité d'air grâce a l'attribut Co2 de l'objet
  * Salle
  */
 QString Salle::getQualiteAir() const
 {
-    if(getCO2() > SEUIL_BAS_QAIR_EXCELLENTE &&
-       getCO2() < SEUIL_HAUT_QAIR_EXCELLENTE)
+    unsigned int valeurCO2 = getCO2();
+    if(valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_EXCELLENTE)
     {
         return EXCELLENTE;
     }
-
-    else if(getCO2() > SEUIL_BAS_QAIR_BONNE && getCO2() < SEUIL_HAUT_QAIR_BONNE)
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_BIEN &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_BIEN)
     {
-        return BONNE;
+        return TRES_BIEN;
     }
-
-    else if(getCO2() > SEUIL_BAS_QAIR_MOYENNE &&
-            getCO2() < SEUIL_HAUT_QAIR_MOYENNE)
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MODERE &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MODERE)
     {
-        return MOYENNE;
+        return MODERE;
     }
-
-    else if(getCO2() > SEUIL_BAS_QAIR_NULLE && getCO2() < SEUIL_HAUT_QAIR_NULLE)
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MAUVAIS)
     {
-        return NULLE;
+        return MAUVAIS;
     }
-
-    else if(getCO2() > SEUIL_BAS_QAIR_MEDIOCRE &&
-            getCO2() < SEUIL_HAUT_QAIR_MEDIOCRE)
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS)
     {
-        return MEDIOCRE;
+        return TRES_MAUVAIS;
     }
-
-    else if(getCO2() > SEUIL_BAS_QAIR_SEVERE &&
-            getCO2() < SEUIL_HAUT_QAIR_SEVERE)
-    {
-        return SEVERE;
-    }
-
     else
-        return INEXISTENTE;
+        return SEVERE;
 }
 
 /**
