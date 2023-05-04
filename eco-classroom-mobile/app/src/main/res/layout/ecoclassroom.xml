@@ -19,6 +19,12 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <Spinner
+        android:id="@+id/choixTri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

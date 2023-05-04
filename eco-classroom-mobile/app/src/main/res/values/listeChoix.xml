@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listeChoix">
+        <item>Toutes</item>
+        <item>Fenêtres ouvertes</item>
+        <item>Lumières allumées</item>
+        <item>Dépassement de seuil</item>
+    </string-array>
+</resources>

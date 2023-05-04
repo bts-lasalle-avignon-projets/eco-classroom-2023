@@ -23,6 +23,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.Vector;
@@ -70,6 +74,7 @@ public class EcoClassroom extends AppCompatActivity
 
         initialiserHandler();
         initialiserVueSalles();
+        initialiserListeDeroulante();
         initialiserBaseDeDonnees();
     }
 
@@ -229,6 +234,22 @@ public class EcoClassroom extends AppCompatActivity
                 }
             }
         };
+    }
+
+    /**
+     * @brief Méthode permettant d'initialiser la liste déroulante (spinner)
+     */
+    public void initialiserListeDeroulante()
+    {
+        Spinner                    listeDeroulante = (Spinner)findViewById(R.id.choixTri);
+        ArrayAdapter<CharSequence> adaptateur =
+          ArrayAdapter.createFromResource(this,
+                                          R.array.listeChoix,
+                                          android.R.layout.simple_spinner_item);
+        adaptateur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listeDeroulante.setAdapter(adaptateur);
+
+        listeDeroulante.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
     }
 
     /**
