@@ -130,8 +130,8 @@ void EcoClassroom::instancierWidgets()
     layoutF2Principal->addStretch();
     fenetreInformations->setLayout(layoutF2Principal);
 
-    notificationConfinement = new QSystemTrayIcon(this);
-    notificationConfinement->show();
+    notificationEcoClassroom = new QSystemTrayIcon(this);
+    notificationEcoClassroom->show();
 
     // La GUI
     layoutPrincipal->addWidget(fenetres);
@@ -468,7 +468,7 @@ void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
                              nb - 1,
                              COLONNE_SALLE_QUALITE_AIR,
                              QString("#ff0000"));*/
-        notifierSignalementConfinement("ALERTE CO2 !",
+        notifierSignalementConfinement(TITRE_NOTIFICATION_CO2,
                                        "Confinement de la salle " +
                                          salle.getNom());
     }
@@ -488,10 +488,10 @@ void EcoClassroom::notifierSignalementConfinement(const QString& titre,
     qDebug() << Q_FUNC_INFO << "titre" << titre << "message" << message;
     QSystemTrayIcon::MessageIcon iconeNotification =
       QSystemTrayIcon::MessageIcon(QSystemTrayIcon::Critical);
-    notificationConfinement->showMessage(titre,
-                                         message,
-                                         iconeNotification,
-                                         DUREE_NOTIFICATION);
+    notificationEcoClassroom->showMessage(titre,
+                                          message,
+                                          iconeNotification,
+                                          DUREE_NOTIFICATION);
 }
 
 /**
