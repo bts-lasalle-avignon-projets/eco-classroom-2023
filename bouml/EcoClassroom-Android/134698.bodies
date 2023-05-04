@@ -6,6 +6,20 @@ class VueSalle
         initialiserWidgets(vueSalle);
         configurerElementsTexte();
         configurerElementsImage();
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vue)
+            {
+                new AlertDialog.Builder(itemView.getContext())
+                  .setTitle(salle.getNom())
+                  .setMessage(salle.getDescription() + "\nSuperficie : " + salle.getSuperficie() +
+                              "m²\nTempérature : " + salle.getTemperature() +
+                              "°C\nHumidité : " + salle.getHumidite() +
+                              "%\nConcentration de CO₂ : " + salle.getCo2() + "ppm")
+                  .show();
+            }
+        });
 !!!138794.java!!!	initialiserWidgets(in vueSalle : View) : void
         this.nom              = ((TextView)vueSalle.findViewById(R.id.nom));
         this.qualiteAir       = ((TextView)vueSalle.findViewById(R.id.qualiteAir));
@@ -29,18 +43,20 @@ class VueSalle
                                         ESPACE_ETIREMENT));
 !!!139306.java!!!	configurerElementImage(inout elementImage : ImageView) : void
         elementImage.setLayoutParams(
-                new LinearLayout.LayoutParams(0,
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        ESPACE_ETIREMENT));
+          new LinearLayout.LayoutParams(0,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                                        ESPACE_ETIREMENT));
 !!!139434.java!!!	afficher(inout salle : Salle) : void
         Log.d(TAG, "afficher(Salle salle) nom = " + salle.getNom());
         this.salle = salle;
         nom.setText(salle.getNom());
-        if(salle.getQualiteAir() >= Salle.INDICE_QUALITE_AIR_MIN)
+        if(salle.getQualiteAir() >= Salle.INDICE_QUALITE_AIR_MIN &&
+           salle.getQualiteAir() <= Salle.INDICE_QUALITE_AIR_MAX)
             qualiteAir.setText(Integer.toString(salle.getQualiteAir()));
         else
             qualiteAir.setText("Inconnue");
-        if(salle.getConfortThermique() >= Salle.INDICE_CONFORT_THERMIQUE_MIN)
+        if(salle.getConfortThermique() >= Salle.INDICE_CONFORT_THERMIQUE_MIN &&
+           salle.getConfortThermique() <= Salle.INDICE_CONFORT_THERMIQUE_MAX)
             confortThermique.setText(Integer.toString(salle.getConfortThermique()));
         else
             confortThermique.setText("Inconnu");

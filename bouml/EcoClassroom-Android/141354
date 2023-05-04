@@ -1,6 +1,6 @@
 format 224
-"unknown" // unknown
-  revision 2
+"View" // unknown::View
+  revision 1
   modified_by 42 "tv"
   // class settings
   
@@ -30,10 +30,9 @@ format 224
   activitydiagramsettings
    end
   
-  java_dir "<unknown>"
-  package_ref 134826 // RecyclerView
-
-  classview 134826 "unknown"
+  java_dir "<unknown>/View/"
+  java_package "View"
+  classview 141354 "View"
     
     classdiagramsettings member_max_width 0 end
     
@@ -53,21 +52,7 @@ format 224
     
     activitydiagramsettings
      end
-    class 135210 "AppCompatActivity"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-    end
-
-    class 142122 "AsyncTask"
+    class 142378 "OnClickListener"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
@@ -81,6 +66,4 @@ ${members}}
       
     end
   end
-
-  package_ref 141354 // View
 end
