@@ -45,6 +45,13 @@ public class EcoClassroom extends AppCompatActivity
       0;                                               //!< un dépassement de seuil de température
     private static final int DEPASSEMENT_HUMIDITE = 1; //!< un dépassement de seuil d'humiditée
     private static final int DEPASSEMENT_CO2      = 2; //!< un dépassement de seuil de CO2
+    private static final int TOUTES = 0; //!< la position de "Toutes" dans la liste déroulante
+    private static final int FENETRES_OUVERTES =
+      1; //!< la position de "Fenêtres ouvertes" dans la liste déroulante
+    private static final int LUMIERES_ALLUMEES =
+      2; //!< la position de "Lumières allumées" dans la liste déroulante
+    private static final int DEPASSEMENT_DE_SEUIL =
+      3; //!< la position de "Dépassement de seuil" dans la liste déroulante
 
     /**
      * Attributs
@@ -250,17 +257,29 @@ public class EcoClassroom extends AppCompatActivity
         adaptateur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listeDeroulante.setAdapter(adaptateur);
 
-        listeDeroulante.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
+        listeDeroulante.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
+            public void onItemSelected(AdapterView<?> adaptateur, View vue, int position, long id)
             {
+                Log.d(TAG, "position : " + position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0)
             {
             }
         });
+    }
+
+    public void trierSalles(int choix)
+    {
+        switch(choix)
+        {
+            case TOUTES:
+                afficherSalles(salles);
+                break;
+            case FENETRES_OUVERTES:
+
+        }
     }
 
     /**
