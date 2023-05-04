@@ -74,7 +74,6 @@ public class EcoClassroom extends AppCompatActivity
 
         initialiserHandler();
         initialiserVueSalles();
-        initialiserListeDeroulante();
         initialiserBaseDeDonnees();
     }
 
@@ -143,6 +142,8 @@ public class EcoClassroom extends AppCompatActivity
 
         layoutVueSalles = new LinearLayoutManager(this);
         vueSalles.setLayoutManager(layoutVueSalles);
+
+        initialiserListeDeroulante();
     }
 
     /**
@@ -249,7 +250,17 @@ public class EcoClassroom extends AppCompatActivity
         adaptateur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listeDeroulante.setAdapter(adaptateur);
 
-        listeDeroulante.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        listeDeroulante.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
+            {
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0)
+            {
+            }
+        });
     }
 
     /**

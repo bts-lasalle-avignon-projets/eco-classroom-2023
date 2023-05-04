@@ -27,6 +27,12 @@ public class Salle
       -3; //!< l'indice de confort thermique minimum
     public static final int INDICE_CONFORT_THERMIQUE_MAX =
       3; //!< l'indice de confort thermique maximum
+    public static final double SUPERFICIE_PAR_DEFAUT  = 0.0; //!< la superficie par défaut en m²
+    public static final double TEMPERATURE_PAR_DEFAUT = 0.0; //!< la temperature par défaut en °C
+    public static final int    HUMIDITE_PAR_DEFAUT    = 0;   //!< le taux d'humidité par défaut
+    public static final int    CO2_PAR_DEFAUT         = 0;   //!< le CO2 par défaut en ppm
+    public static final int    QUALITE_AIR_PAR_DEFAUT = 0;   //!< la qualité de l'air par défaut
+    public static final int CONFORT_THERMIQUE_PAR_DEFAUT = -4; //!< le confort thermique par défaut
 
     /**
      * Attributs
