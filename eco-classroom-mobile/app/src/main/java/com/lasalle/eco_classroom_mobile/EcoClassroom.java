@@ -13,11 +13,9 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,7 +54,8 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * Attributs
      */
-    private Vector<Salle>       salles = null;              //!< les salles
+    private Vector<Salle>       salles          = null;     //!< les salles
+    private Vector<Salle>       sallesAffichees = null;     //!< les salles à afficher
     private BaseDeDonnees       baseDeDonnees;              //!< accès à la base de données
     private Handler             handler             = null; //<! le handler utilisé par l'activité
     private NotificationManager notificationManager = null; //<! le gestionnaire de notifications
@@ -144,7 +143,9 @@ public class EcoClassroom extends AppCompatActivity
      */
     public void initialiserVueSalles()
     {
-        vueSalles = (RecyclerView)findViewById(R.id.listeSalles);
+        this.salles          = new Vector<Salle>();
+        this.sallesAffichees = new Vector<Salle>();
+        vueSalles            = (RecyclerView)findViewById(R.id.listeSalles);
         vueSalles.setHasFixedSize(true);
 
         layoutVueSalles = new LinearLayoutManager(this);
@@ -154,25 +155,44 @@ public class EcoClassroom extends AppCompatActivity
     }
 
     /**
+     * @brief Mutateur de l'attribut salles
+     * @param salles Les salles
+     */
+    public void setSalles(Vector<Salle> salles)
+    {
+        this.salles.clear();
+        this.salles.addAll(salles);
+    }
+
+    /**
      * @brief Méthode permettant d'afficher les salles dans les logs
      * @param salles Les salles
      */
     public void afficherSalles(Vector<Salle> salles)
     {
         Log.d(TAG, "afficherSalles() Nb salles = " + salles.size());
-        /*
-        for(int i = 0; i < salles.size(); i++)
-        {
-            Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
-        }*/
-        this.salles = salles;
+        this.sallesAffichees.clear();
+        this.sallesAffichees.addAll(salles);
         if(this.adaptateurSalle == null)
         {
-            adaptateurSalle = new AdaptateurSalle(salles);
+            adaptateurSalle = new AdaptateurSalle(this.sallesAffichees);
             vueSalles.setAdapter(adaptateurSalle);
         }
         // Force le rafraichissement de la liste des salles
         this.adaptateurSalle.notifyDataSetChanged();
+    }
+
+    /**
+     * @brief Méthode permettant d'effacer l'affichage des salles
+     */
+    public void effacerSalles()
+    {
+        this.sallesAffichees.clear();
+        if(this.adaptateurSalle != null)
+        {
+            // Force le rafraichissement de la liste des salles
+            this.adaptateurSalle.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -193,6 +213,56 @@ public class EcoClassroom extends AppCompatActivity
     {
         Log.d(TAG, "chargerSalles()");
         baseDeDonnees.chargerSalles();
+    }
+
+    /**
+     * @brief Méthode qui permet de filtrer les salles à afficher
+     */
+    public void filtrerSalles(int choix)
+    {
+        if(salles != null)
+            Log.d(TAG,
+                  "filtrerSalles() choix : " + choix + " Nb salles totales  : " + salles.size());
+        if(salles == null || salles.size() == 0)
+            return;
+        Vector<Salle> sallesFiltrees = new Vector<Salle>();
+        switch(choix)
+        {
+            case TOUTES:
+                sallesFiltrees.addAll(salles);
+                break;
+            case FENETRES_OUVERTES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.getEtatFenetre())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case LUMIERES_ALLUMEES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.getEtatLumiere())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case DEPASSEMENT_DE_SEUIL:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(seuilTemperatureEstDepasse(salle) || seuilHumiditeEstDepasse(salle) ||
+                       seuilCo2EstDepasse(salle))
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            default:
+                return;
+        }
+        Log.d(TAG,
+              "filtrerSalles() choix : " + choix +
+                " Nb salles filtrées : " + sallesFiltrees.size());
+        afficherSalles(sallesFiltrees);
     }
 
     /**
@@ -237,6 +307,7 @@ public class EcoClassroom extends AppCompatActivity
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_SALLES:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_SALLES");
+                        setSalles((Vector<Salle>)message.obj);
                         afficherSalles((Vector<Salle>)message.obj);
                         alerterDepassementSeuil();
                 }
@@ -261,54 +332,13 @@ public class EcoClassroom extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> adaptateur, View vue, int position, long id)
             {
-                Log.d(TAG, "position : " + position);
-                trierSalles(position);
+                filtrerSalles(position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0)
             {
             }
         });
-    }
-
-    public void trierSalles(int choix)
-    {
-        Vector<Salle> sallesTriees = new Vector<Salle>(salles.size());
-
-        switch(choix)
-        {
-            case TOUTES:
-                afficherSalles(salles);
-                break;
-            case FENETRES_OUVERTES:
-                for(int indice = 0; indice < salles.size(); indice++)
-                {
-                    Salle salle = salles.get(indice);
-                    if(salle.getEtatFenetre())
-                        sallesTriees.add(salle);
-                }
-                afficherSalles(sallesTriees);
-                break;
-            case LUMIERES_ALLUMEES:
-                for(int indice = 0; indice < salles.size(); indice++)
-                {
-                    Salle salle = salles.get(indice);
-                    if(salle.getEtatLumiere())
-                        sallesTriees.add(salle);
-                }
-                afficherSalles(sallesTriees);
-                break;
-            case DEPASSEMENT_DE_SEUIL:
-                for(int indice = 0; indice < salles.size(); indice++)
-                {
-                    Salle salle = salles.get(indice);
-                    if(seuilTemperatureEstDepasse(salle) || seuilHumiditeEstDepasse(salle) ||
-                       seuilCo2EstDepasse(salle))
-                        sallesTriees.add(salle);
-                }
-                afficherSalles(sallesTriees);
-                break;
-        }
     }
 
     /**
