@@ -262,6 +262,7 @@ public class EcoClassroom extends AppCompatActivity
             public void onItemSelected(AdapterView<?> adaptateur, View vue, int position, long id)
             {
                 Log.d(TAG, "position : " + position);
+                trierSalles(position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0)
@@ -272,13 +273,41 @@ public class EcoClassroom extends AppCompatActivity
 
     public void trierSalles(int choix)
     {
+        Vector<Salle> sallesTriees = new Vector<Salle>(salles.size());
+
         switch(choix)
         {
             case TOUTES:
                 afficherSalles(salles);
                 break;
             case FENETRES_OUVERTES:
-
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.getEtatFenetre())
+                        sallesTriees.add(salle);
+                }
+                afficherSalles(sallesTriees);
+                break;
+            case LUMIERES_ALLUMEES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.getEtatLumiere())
+                        sallesTriees.add(salle);
+                }
+                afficherSalles(sallesTriees);
+                break;
+            case DEPASSEMENT_DE_SEUIL:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(seuilTemperatureEstDepasse(salle) || seuilHumiditeEstDepasse(salle) ||
+                       seuilCo2EstDepasse(salle))
+                        sallesTriees.add(salle);
+                }
+                afficherSalles(sallesTriees);
+                break;
         }
     }
 
@@ -292,21 +321,57 @@ public class EcoClassroom extends AppCompatActivity
         {
             Log.d(TAG, "alerterDepassementSeuil() salle : " + salles.get(i).getNom());
             Salle salle = salles.get(i);
-            if(salle.getTemperature() < salle.getSeuils().getTemperatureMin() ||
-               salle.getTemperature() > salle.getSeuils().getTemperatureMax())
+            if(seuilTemperatureEstDepasse(salle))
             {
                 notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
             }
-            if(salle.getHumidite() < salle.getSeuils().getHumiditeMin() ||
-               salle.getHumidite() > salle.getSeuils().getHumiditeMax())
+            if(seuilHumiditeEstDepasse(salle))
             {
                 notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
             }
-            if(salle.getCo2() >= salle.getSeuils().getCo2Max())
+            if(seuilCo2EstDepasse(salle))
             {
                 notifierDepassement(salle, DEPASSEMENT_CO2);
             }
         }
+    }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil de temperature d'une salle est dépassé
+     * @param salle la salle
+     * @return boolean le seuil de température est dépassé (oui/non)
+     */
+    public boolean seuilTemperatureEstDepasse(Salle salle)
+    {
+        if(salle.getTemperature() < salle.getSeuils().getTemperatureMin() ||
+           salle.getTemperature() > salle.getSeuils().getTemperatureMax())
+            return true;
+        return false;
+    }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil d'humidité d'une salle est dépassé
+     * @param salle la salle
+     * @return boolean le seuil d'humidité est dépassé (oui/non)
+     */
+    public boolean seuilHumiditeEstDepasse(Salle salle)
+    {
+        if(salle.getHumidite() < salle.getSeuils().getHumiditeMin() ||
+           salle.getHumidite() > salle.getSeuils().getHumiditeMax())
+            return true;
+        return false;
+    }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil de CO2 d'une salle est dépassé
+     * @param salle la salle
+     * @return boolean le seuil de CO2 est dépassé (oui/non)
+     */
+    public boolean seuilCo2EstDepasse(Salle salle)
+    {
+        if(salle.getCo2() >= salle.getSeuils().getCo2Max())
+            return true;
+        return false;
     }
 
     /**
