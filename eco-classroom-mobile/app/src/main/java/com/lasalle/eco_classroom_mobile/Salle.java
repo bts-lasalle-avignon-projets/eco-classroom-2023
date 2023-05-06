@@ -27,6 +27,12 @@ public class Salle
       -3; //!< l'indice de confort thermique minimum
     public static final int INDICE_CONFORT_THERMIQUE_MAX =
       3; //!< l'indice de confort thermique maximum
+    public static final double SUPERFICIE_PAR_DEFAUT  = 0.0; //!< la superficie par défaut en m²
+    public static final double TEMPERATURE_PAR_DEFAUT = 0.0; //!< la temperature par défaut en °C
+    public static final int    HUMIDITE_PAR_DEFAUT    = 0;   //!< le taux d'humidité par défaut
+    public static final int    CO2_PAR_DEFAUT         = 0;   //!< le CO2 par défaut en ppm
+    public static final int    QUALITE_AIR_PAR_DEFAUT = 0;   //!< la qualité de l'air par défaut
+    public static final int CONFORT_THERMIQUE_PAR_DEFAUT = -4; //!< le confort thermique par défaut
 
     /**
      * Attributs
@@ -329,5 +335,40 @@ public class Salle
     public void setSeuils(Seuils seuils)
     {
         this.seuils = seuils;
+    }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil de temperature de la salle est dépassé
+     * @return boolean le seuil de température est dépassé (oui/non)
+     */
+    public boolean estSeuilTemperatureDepasse()
+    {
+        if(getTemperature() < getSeuils().getTemperatureMin() ||
+           getTemperature() > getSeuils().getTemperatureMax())
+            return true;
+        return false;
+    }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil d'humidité de la salle est dépassé
+     * @return boolean le seuil d'humidité est dépassé (oui/non)
+     */
+    public boolean estSeuilHumiditeDepasse()
+    {
+        if(getHumidite() < getSeuils().getHumiditeMin() ||
+           getHumidite() > getSeuils().getHumiditeMax())
+            return true;
+        return false;
+    }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil de CO2 de la salle est dépassé
+     * @return boolean le seuil de CO2 est dépassé (oui/non)
+     */
+    public boolean estSeuilCo2Depasse()
+    {
+        if(getCo2() >= getSeuils().getCo2Max())
+            return true;
+        return false;
     }
 }

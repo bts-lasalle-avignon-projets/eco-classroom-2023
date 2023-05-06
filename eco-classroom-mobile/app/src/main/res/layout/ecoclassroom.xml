@@ -6,28 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".EcoClassroom">
 
+    <!-- en haut à droite à côté de la liste -->
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/labelFiltrer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_margin="16dp"
+        android:text="Filtrer :"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/choixFiltre"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- en haut à droite -->
+    <Spinner
+        android:id="@+id/choixFiltre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- en dessous du choix de filtre -->
+    <TextView
+        android:id="@+id/titreTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:padding="15dp"
         android:text="Salles"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelFiltrer" />
 
+    <!-- en dessous du titre -->
     <TableLayout
+        android:id="@+id/tableSalles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.268">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titreTable">
 
         <TableRow
             android:layout_width="match_parent"

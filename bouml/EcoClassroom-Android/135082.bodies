@@ -25,31 +25,104 @@ class EcoClassroom
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
 !!!135850.java!!!	initialiserVueSalles() : void
-        vueSalles = (RecyclerView)findViewById(R.id.listeSalles);
+        this.salles          = new Vector<Salle>();
+        this.sallesAffichees = new Vector<Salle>();
+        vueSalles            = (RecyclerView)findViewById(R.id.listeSalles);
         vueSalles.setHasFixedSize(true);
 
         layoutVueSalles = new LinearLayoutManager(this);
         vueSalles.setLayoutManager(layoutVueSalles);
+
+        initialiserListeDeroulante();
+!!!164266.java!!!	setSalles(inout salles : Vector<Salle>) : void
+        this.salles.clear();
+        this.salles.addAll(salles);
 !!!135978.java!!!	afficherSalles(inout salles : Vector<Salle>) : void
         Log.d(TAG, "afficherSalles() Nb salles = " + salles.size());
-        /*
-        for(int i = 0; i < salles.size(); i++)
-        {
-            Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
-        }*/
-        this.salles = salles;
+        this.sallesAffichees.clear();
+        this.sallesAffichees.addAll(salles);
         if(this.adaptateurSalle == null)
         {
-            adaptateurSalle = new AdaptateurSalle(salles);
+            adaptateurSalle = new AdaptateurSalle(this.sallesAffichees);
             vueSalles.setAdapter(adaptateurSalle);
         }
         // Force le rafraichissement de la liste des salles
         this.adaptateurSalle.notifyDataSetChanged();
+!!!164394.java!!!	effacerSalles() : void
+        this.sallesAffichees.clear();
+        if(this.adaptateurSalle != null)
+        {
+            // Force le rafraichissement de la liste des salles
+            this.adaptateurSalle.notifyDataSetChanged();
+        }
 !!!136106.java!!!	ajouterSalle(in nom : String, in description : String, in superficie : double) : void
         salles.add(new Salle(nom, superficie, description));
 !!!136234.java!!!	chargerSalles() : void
         Log.d(TAG, "chargerSalles()");
         baseDeDonnees.chargerSalles();
+!!!164522.java!!!	filtrerSalles(in choix : int) : void
+        if(salles != null)
+            Log.d(TAG,
+                  "filtrerSalles() choix : " + choix + " Nb salles totales  : " + salles.size());
+        if(salles == null || salles.size() == 0)
+            return;
+        Vector<Salle> sallesFiltrees = new Vector<Salle>();
+        switch(choix)
+        {
+            case TOUTES:
+                sallesFiltrees.addAll(salles);
+                break;
+            case FENETRES_OUVERTES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.getEtatFenetre())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case LUMIERES_ALLUMEES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.getEtatLumiere())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case SALLES_LIBRES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(!salle.getEstOccupe())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case DEPASSEMENT_DE_SEUIL:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.estSeuilTemperatureDepasse() || salle.estSeuilHumiditeDepasse() ||
+                       salle.estSeuilCo2Depasse())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case INTERVENTION:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    /**
+                     * @todo A vérifier et à améliorer (cf. besoin du client)
+                     */
+                    if((salle.getEtatFenetre() || salle.getEtatLumiere()) && !salle.getEstOccupe())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            default:
+                return;
+        }
+        Log.d(TAG,
+              "filtrerSalles() choix : " + choix +
+                " Nb salles filtrées : " + sallesFiltrees.size());
+        afficherSalles(sallesFiltrees);
 !!!148394.java!!!	initialiserBaseDeDonnees() : void
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
 !!!148522.java!!!	initialiserHandler() : void
@@ -82,27 +155,46 @@ class EcoClassroom
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_SALLES:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_SALLES");
+                        setSalles((Vector<Salle>)message.obj);
                         afficherSalles((Vector<Salle>)message.obj);
                         alerterDepassementSeuil();
                 }
             }
         };
+!!!164650.java!!!	initialiserListeDeroulante() : void
+        Spinner                    listeDeroulante = (Spinner)findViewById(R.id.choixFiltre);
+        ArrayAdapter<CharSequence> adaptateur =
+          ArrayAdapter.createFromResource(this,
+                                          R.array.listeChoix,
+                                          android.R.layout.simple_spinner_item);
+        adaptateur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listeDeroulante.setAdapter(adaptateur);
+
+        listeDeroulante.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adaptateur, View vue, int position, long id)
+            {
+                filtrerSalles(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0)
+            {
+            }
+        });
 !!!148650.java!!!	alerterDepassementSeuil() : void
         for(int i = 0; i < salles.size(); i++)
         {
             Log.d(TAG, "alerterDepassementSeuil() salle : " + salles.get(i).getNom());
             Salle salle = salles.get(i);
-            if(salle.getTemperature() < salle.getSeuils().getTemperatureMin() ||
-               salle.getTemperature() > salle.getSeuils().getTemperatureMax())
+            if(salle.estSeuilTemperatureDepasse())
             {
                 notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
             }
-            if(salle.getHumidite() < salle.getSeuils().getHumiditeMin() ||
-               salle.getHumidite() > salle.getSeuils().getHumiditeMax())
+            if(salle.estSeuilHumiditeDepasse())
             {
                 notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
             }
-            if(salle.getCo2() >= salle.getSeuils().getCo2Max())
+            if(salle.estSeuilCo2Depasse())
             {
                 notifierDepassement(salle, DEPASSEMENT_CO2);
             }
@@ -169,7 +261,7 @@ class EcoClassroom
         else
         {
             NotificationManagerCompat.from(this).notify(idNotification++, notification.build());
-            //NotificationManagerCompat.from(this).notify(typeDepassement, notification.build());
+            // NotificationManagerCompat.from(this).notify(typeDepassement, notification.build());
         }
 
         Toast toast =

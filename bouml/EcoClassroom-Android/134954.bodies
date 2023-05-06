@@ -93,3 +93,17 @@ class Salle
         this.estOccupe = estOccupe;
 !!!157738.java!!!	setSeuils(inout seuils : Seuils) : void
         this.seuils = seuils;
+!!!165162.java!!!	estSeuilTemperatureDepasse() : boolean
+        if(getTemperature() < getSeuils().getTemperatureMin() ||
+           getTemperature() > getSeuils().getTemperatureMax())
+            return true;
+        return false;
+!!!165290.java!!!	estSeuilHumiditeDepasse() : boolean
+        if(getHumidite() < getSeuils().getHumiditeMin() ||
+           getHumidite() > getSeuils().getHumiditeMax())
+            return true;
+        return false;
+!!!165418.java!!!	estSeuilCo2Depasse() : boolean
+        if(getCo2() >= getSeuils().getCo2Max())
+            return true;
+        return false;

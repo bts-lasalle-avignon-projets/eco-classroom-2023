@@ -13,16 +13,18 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.Vector;
@@ -41,11 +43,22 @@ public class EcoClassroom extends AppCompatActivity
       0;                                               //!< un dépassement de seuil de température
     private static final int DEPASSEMENT_HUMIDITE = 1; //!< un dépassement de seuil d'humiditée
     private static final int DEPASSEMENT_CO2      = 2; //!< un dépassement de seuil de CO2
+    // Les filtres
+    private static final int TOUTES = 0; //!< la position de "Toutes" dans la liste déroulante
+    private static final int FENETRES_OUVERTES =
+      1; //!< choix du filtre des salles "Fenêtres ouvertes"
+    private static final int LUMIERES_ALLUMEES =
+      2; //!< choix du filtre des salles "Lumières allumées"
+    private static final int SALLES_LIBRES = 3; //!< choix du filtre des salles "Libres"
+    private static final int DEPASSEMENT_DE_SEUIL =
+      4; //!< choix du filtre des salles "Dépassement de seuil"
+    private static final int INTERVENTION = 5; //!< choix du filtre des salles "Intervention"
 
     /**
      * Attributs
      */
-    private Vector<Salle>       salles = null;              //!< les salles
+    private Vector<Salle>       salles          = null;     //!< les salles
+    private Vector<Salle>       sallesAffichees = null;     //!< les salles à afficher
     private BaseDeDonnees       baseDeDonnees;              //!< accès à la base de données
     private Handler             handler             = null; //<! le handler utilisé par l'activité
     private NotificationManager notificationManager = null; //<! le gestionnaire de notifications
@@ -133,11 +146,25 @@ public class EcoClassroom extends AppCompatActivity
      */
     public void initialiserVueSalles()
     {
-        vueSalles = (RecyclerView)findViewById(R.id.listeSalles);
+        this.salles          = new Vector<Salle>();
+        this.sallesAffichees = new Vector<Salle>();
+        vueSalles            = (RecyclerView)findViewById(R.id.listeSalles);
         vueSalles.setHasFixedSize(true);
 
         layoutVueSalles = new LinearLayoutManager(this);
         vueSalles.setLayoutManager(layoutVueSalles);
+
+        initialiserListeDeroulante();
+    }
+
+    /**
+     * @brief Mutateur de l'attribut salles
+     * @param salles Les salles
+     */
+    public void setSalles(Vector<Salle> salles)
+    {
+        this.salles.clear();
+        this.salles.addAll(salles);
     }
 
     /**
@@ -147,19 +174,28 @@ public class EcoClassroom extends AppCompatActivity
     public void afficherSalles(Vector<Salle> salles)
     {
         Log.d(TAG, "afficherSalles() Nb salles = " + salles.size());
-        /*
-        for(int i = 0; i < salles.size(); i++)
-        {
-            Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
-        }*/
-        this.salles = salles;
+        this.sallesAffichees.clear();
+        this.sallesAffichees.addAll(salles);
         if(this.adaptateurSalle == null)
         {
-            adaptateurSalle = new AdaptateurSalle(salles);
+            adaptateurSalle = new AdaptateurSalle(this.sallesAffichees);
             vueSalles.setAdapter(adaptateurSalle);
         }
         // Force le rafraichissement de la liste des salles
         this.adaptateurSalle.notifyDataSetChanged();
+    }
+
+    /**
+     * @brief Méthode permettant d'effacer l'affichage des salles
+     */
+    public void effacerSalles()
+    {
+        this.sallesAffichees.clear();
+        if(this.adaptateurSalle != null)
+        {
+            // Force le rafraichissement de la liste des salles
+            this.adaptateurSalle.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -180,6 +216,75 @@ public class EcoClassroom extends AppCompatActivity
     {
         Log.d(TAG, "chargerSalles()");
         baseDeDonnees.chargerSalles();
+    }
+
+    /**
+     * @brief Méthode qui permet de filtrer les salles à afficher
+     */
+    public void filtrerSalles(int choix)
+    {
+        if(salles != null)
+            Log.d(TAG,
+                  "filtrerSalles() choix : " + choix + " Nb salles totales  : " + salles.size());
+        if(salles == null || salles.size() == 0)
+            return;
+        Vector<Salle> sallesFiltrees = new Vector<Salle>();
+        switch(choix)
+        {
+            case TOUTES:
+                sallesFiltrees.addAll(salles);
+                break;
+            case FENETRES_OUVERTES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.getEtatFenetre())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case LUMIERES_ALLUMEES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.getEtatLumiere())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case SALLES_LIBRES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(!salle.getEstOccupe())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case DEPASSEMENT_DE_SEUIL:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.estSeuilTemperatureDepasse() || salle.estSeuilHumiditeDepasse() ||
+                       salle.estSeuilCo2Depasse())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case INTERVENTION:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    /**
+                     * @todo A vérifier et à améliorer (cf. besoin du client)
+                     */
+                    if((salle.getEtatFenetre() || salle.getEtatLumiere()) && !salle.getEstOccupe())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            default:
+                return;
+        }
+        Log.d(TAG,
+              "filtrerSalles() choix : " + choix +
+                " Nb salles filtrées : " + sallesFiltrees.size());
+        afficherSalles(sallesFiltrees);
     }
 
     /**
@@ -224,11 +329,38 @@ public class EcoClassroom extends AppCompatActivity
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_SALLES:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_SALLES");
+                        setSalles((Vector<Salle>)message.obj);
                         afficherSalles((Vector<Salle>)message.obj);
                         alerterDepassementSeuil();
                 }
             }
         };
+    }
+
+    /**
+     * @brief Méthode permettant d'initialiser la liste déroulante (spinner)
+     */
+    public void initialiserListeDeroulante()
+    {
+        Spinner                    listeDeroulante = (Spinner)findViewById(R.id.choixFiltre);
+        ArrayAdapter<CharSequence> adaptateur =
+          ArrayAdapter.createFromResource(this,
+                                          R.array.listeChoix,
+                                          android.R.layout.simple_spinner_item);
+        adaptateur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listeDeroulante.setAdapter(adaptateur);
+
+        listeDeroulante.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adaptateur, View vue, int position, long id)
+            {
+                filtrerSalles(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0)
+            {
+            }
+        });
     }
 
     /**
@@ -241,17 +373,15 @@ public class EcoClassroom extends AppCompatActivity
         {
             Log.d(TAG, "alerterDepassementSeuil() salle : " + salles.get(i).getNom());
             Salle salle = salles.get(i);
-            if(salle.getTemperature() < salle.getSeuils().getTemperatureMin() ||
-               salle.getTemperature() > salle.getSeuils().getTemperatureMax())
+            if(salle.estSeuilTemperatureDepasse())
             {
                 notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
             }
-            if(salle.getHumidite() < salle.getSeuils().getHumiditeMin() ||
-               salle.getHumidite() > salle.getSeuils().getHumiditeMax())
+            if(salle.estSeuilHumiditeDepasse())
             {
                 notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
             }
-            if(salle.getCo2() >= salle.getSeuils().getCo2Max())
+            if(salle.estSeuilCo2Depasse())
             {
                 notifierDepassement(salle, DEPASSEMENT_CO2);
             }
