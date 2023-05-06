@@ -4,6 +4,7 @@
         <item>Toutes</item>
         <item>Fenêtres ouvertes</item>
         <item>Lumières allumées</item>
+        <item>Salles libres</item>
         <item>Dépassement de seuil</item>
     </string-array>
 </resources>

@@ -48,8 +48,10 @@ public class EcoClassroom extends AppCompatActivity
       1; //!< la position de "Fenêtres ouvertes" dans la liste déroulante
     private static final int LUMIERES_ALLUMEES =
       2; //!< la position de "Lumières allumées" dans la liste déroulante
+    private static final int SALLES_LIBRES =
+      3; //!< la position de "Salles libres" dans la liste déroulante
     private static final int DEPASSEMENT_DE_SEUIL =
-      3; //!< la position de "Dépassement de seuil" dans la liste déroulante
+      4; //!< la position de "Dépassement de seuil" dans la liste déroulante
 
     /**
      * Attributs
@@ -244,6 +246,14 @@ public class EcoClassroom extends AppCompatActivity
                 {
                     Salle salle = salles.get(indice);
                     if(salle.getEtatLumiere())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case SALLES_LIBRES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(!salle.getEstOccupe())
                         sallesFiltrees.add(salle);
                 }
                 break;
