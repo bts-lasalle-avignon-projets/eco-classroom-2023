@@ -1,6 +1,6 @@
 format 224
 "eco_classroom_mobile" // eco_classroom_mobile
-  revision 4
+  revision 5
   modified_by 42 "tv"
   // class settings
   
@@ -117,6 +117,7 @@ ${members}}
 	
 	
 	comment "@brief Constructeur d'initialisation
+@param salles Les salles
 "
       end
 
@@ -153,6 +154,8 @@ ${members}}
 	
 	
 	
+	comment "@brief
+"
       end
 
       operation 134954 "getItemCount"
@@ -167,6 +170,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Méthode renvoyant le nombre de salles présentes
+@return int Le nombre de salles
+"
       end
     end
 
@@ -337,6 +343,7 @@ Attributs
 	
 	
 	comment "@brief Constructeur d'initialisation
+@param vueSalle La vue de la salle
 "
       end
 
@@ -352,6 +359,7 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant d'initialiser les widgets dans la vue
+@param vueSalle La vue de la salle
 "
       end
 
@@ -395,6 +403,7 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant de configurer un TextView
+@param elementTexte l'élement de texte à modifier
 "
       end
 
@@ -410,6 +419,7 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant de configurer un ImageView
+@param elementImage L'élément de l'image à configurer
 "
       end
 
@@ -425,6 +435,7 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant d'afficher les salles sur la vue
+@param salle La salle à afficher
 "
       end
 
@@ -442,6 +453,7 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant de gérer les clics sur les objets de la vue
+@param vue La vue où l'événement va arriver
 "
       end
     end
@@ -576,6 +588,90 @@ ${members}}
 	comment "!< l'indice de confort thermique maximum"
       end
 
+      attribute 165162 "SUPERFICIE_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "double"
+	init_value " 0.0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< la superficie par défaut en m²"
+      end
+
+      attribute 165290 "TEMPERATURE_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "double"
+	init_value " 0.0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< la temperature par défaut en °C"
+      end
+
+      attribute 165418 "HUMIDITE_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le taux d'humidité par défaut"
+      end
+
+      attribute 165546 "CO2_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le CO2 par défaut en ppm"
+      end
+
+      attribute 165674 "QUALITE_AIR_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< la qualité de l'air par défaut"
+      end
+
+      attribute 165802 "CONFORT_THERMIQUE_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " -4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le confort thermique par défaut"
+      end
+
       attribute 135594 "nom"
 	private explicit_type "String"
 	cpp_decl ""
@@ -653,7 +749,7 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< le taux de co2 en ppm"
+	comment "!< le CO2 en ppm"
       end
 
       attribute 135978 "qualiteAir"
@@ -759,6 +855,9 @@ ${members}}
 	
 	
 	comment "@brief Constructeur d'initialisation
+@param nom Le nom de la salle
+@param superficie La superficie de la salle en m²
+@param description Le type de salle
 "
       end
 
@@ -777,6 +876,10 @@ ${members}}
 	
 	
 	comment "@brief Constructeur d'initialisation
+@param nom Le nom de la salle
+@param superficie La superficie de la salle en m²
+@param description Le type de salle
+@param seuils Indique les seuils à ne pas dépasser pour cette salle
 "
       end
 
@@ -791,6 +894,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut nom
+@return String Le nom de la salle
 "
       end
 
@@ -805,6 +909,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut description
+@return String Le type de salle
 "
       end
 
@@ -819,6 +924,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut superficie
+@return double La superficie de la salle en m²
 "
       end
 
@@ -833,6 +939,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut temperature
+@return double La température de la salle en °C
 "
       end
 
@@ -847,6 +954,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut humidite
+@return int Le taux d'humidité
 "
       end
 
@@ -861,6 +969,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut co2
+@return int Le CO2 en ppm
 "
       end
 
@@ -875,6 +984,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut qualiteAir
+@return int La qualité de l'air
 "
       end
 
@@ -889,6 +999,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut confortThermique
+@return int Le confort thermique
 "
       end
 
@@ -903,6 +1014,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut etatFenetre
+@return boolean L'état des fenêtres (ouvertes/fermées)
 "
       end
 
@@ -917,6 +1029,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut etatLumiere
+@return boolean L'état de la lumières (allumées/éteintes)
 "
       end
 
@@ -931,6 +1044,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut estOccupe
+@return boolean Indique l'occupation (oui/non)
 "
       end
 
@@ -945,6 +1059,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut seuils
+@return Seuils Les seuils à ne pas dépasser dans la salle
 "
       end
 
@@ -960,6 +1075,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut nom
+@param nom Le nouveau nom
 "
       end
 
@@ -975,6 +1091,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut description
+@param description La nouvelle description
 "
       end
 
@@ -990,6 +1107,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut superficie
+@param superficie La nouvelle superficie en m²
 "
       end
 
@@ -1004,7 +1122,8 @@ ${members}}
 	
 	
 	
-	comment "@brief Mutateur de l'attribut superficie
+	comment "@brief Mutateur de l'attribut temperature
+@param temperature La nouvelle température en °C
 "
       end
 
@@ -1020,6 +1139,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut humidite
+@param humidite Le nouveau taux d'humidité
 "
       end
 
@@ -1035,6 +1155,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut co2
+@param co2 Le nouveau CO2 en ppm
 "
       end
 
@@ -1050,6 +1171,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut qualiteAir
+@param qualiteAir La nouvelle qualité de l'air
 "
       end
 
@@ -1065,6 +1187,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut confortThermique
+@param confortThermique Le nouveau confort thermique
 "
       end
 
@@ -1080,6 +1203,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut etatFenetre
+@param etatFenetre Le nouvel état des fenêtres (ouvertes/fermées)
 "
       end
 
@@ -1095,6 +1219,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut etatLumiere
+@param etatLumiere Le nouvel état des lumières (allumées/éteintes)
 "
       end
 
@@ -1110,6 +1235,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut estOccupe
+@param estOccupe Le nouvel état d'occupation (oui/non)
 "
       end
 
@@ -1125,8 +1251,55 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut seuils
+@param seuils Les nouveaux seuils à ne pas dépasser
 "
       end
+
+      operation 165162 "estSeuilTemperatureDepasse"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de verifier si le seuil de temperature de la salle est dépassé
+@return boolean le seuil de température est dépassé (oui/non)
+"
+      end
+
+      operation 165290 "estSeuilHumiditeDepasse"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de verifier si le seuil d'humidité de la salle est dépassé
+@return boolean le seuil d'humidité est dépassé (oui/non)
+"
+      end
+
+      operation 165418 "estSeuilCo2Depasse"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de verifier si le seuil de CO2 de la salle est dépassé
+@return boolean le seuil de CO2 est dépassé (oui/non)
+"
+      end
+
     end
 
     class 135082 "EcoClassroom"
@@ -1219,6 +1392,96 @@ ${members}};
 	comment "!< un dépassement de seuil de CO2"
       end
 
+      attribute 164394 "TOUTES"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Les filtres
+!< la position de \"Toutes\" dans la liste déroulante"
+      end
+
+      attribute 164522 "FENETRES_OUVERTES"
+	class_attribute const_attribute private explicit_type "int"
+	init_value "
+      1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< choix du filtre des salles \"Fenêtres ouvertes\""
+      end
+
+      attribute 164650 "LUMIERES_ALLUMEES"
+	class_attribute const_attribute private explicit_type "int"
+	init_value "
+      2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< choix du filtre des salles \"Lumières allumées\""
+      end
+
+      attribute 164778 "SALLES_LIBRES"
+	class_attribute const_attribute private explicit_type "int"
+	init_value "
+      3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< choix du filtre des salles \"Libres\""
+      end
+
+      attribute 164906 "DEPASSEMENT_DE_SEUIL"
+	class_attribute const_attribute private explicit_type "int"
+	init_value "
+      4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< choix du filtre des salles \"Dépassement de seuil\""
+      end
+
+      attribute 165034 "INTERVENTION"
+	class_attribute const_attribute private explicit_type "int"
+	init_value "
+            5"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< choix du filtre des salles \"Intervention\""
+      end
+
       classrelation 134954 // salles (<unidirectional association>)
 	relation 134954 --->
 	  stereotype "Vector"
@@ -1229,6 +1492,17 @@ ${members}};
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 134954 // salles (<unidirectional association>)
+	  b parent class_ref 134954 // Salle
+      end
+
+      classrelation 155434 // sallesAffichees (<unidirectional association>)
+	relation 155434 --->
+	  stereotype "Vector"
+	  a role_name "sallesAffichees" init_value " null" private
+	    comment "!< les salles à afficher"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 155434 // sallesAffichees (<unidirectional association>)
 	  b parent class_ref 134954 // Salle
       end
 
@@ -1436,6 +1710,22 @@ et détruite par le système Android)
 "
       end
 
+      operation 164266 "setSalles"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "salles" explicit_type "Vector<Salle>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur de l'attribut salles
+@param salles Les salles
+"
+      end
+
       operation 135978 "afficherSalles"
 	public explicit_return_type "void"
 	nparams 1
@@ -1448,6 +1738,21 @@ et détruite par le système Android)
 	
 	
 	comment "@brief Méthode permettant d'afficher les salles dans les logs
+@param salles Les salles
+"
+      end
+
+      operation 164394 "effacerSalles"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant d'effacer l'affichage des salles
 "
       end
 
@@ -1465,6 +1770,9 @@ et détruite par le système Android)
 	
 	
 	comment "@brief Méthode permettant d'ajouter une salle dans l'attribut salles
+@param nom Le nom de la salle
+@param description Le type de salle
+@param superficie La superficie de la salle en m²
 "
       end
 
@@ -1479,6 +1787,21 @@ et détruite par le système Android)
 	
 	
 	comment "@brief Méthode permettant de simuler un ajout de plusieurs salles
+"
+      end
+
+      operation 164522 "filtrerSalles"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "choix" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui permet de filtrer les salles à afficher
 "
       end
 
@@ -1510,6 +1833,20 @@ et détruite par le système Android)
 "
       end
 
+      operation 164650 "initialiserListeDeroulante"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant d'initialiser la liste déroulante (spinner)
+"
+      end
+
       operation 148650 "alerterDepassementSeuil"
 	public explicit_return_type "void"
 	nparams 0
@@ -1538,6 +1875,8 @@ salle
 	
 	
 	comment "@brief Méthode permettant d'envoyer une notification pour alerter d'un dépassement de seuil
+@param salle La salle où il y a un dépassement de seuil
+@param typeDepassement Indique le type de dépassement de seuil
 "
       end
     end
@@ -2511,7 +2850,7 @@ ${members}}
 	MysqlColumn
 	comment "Attributs
 
-"
+<! le seuil de température minimum"
       end
 
       attribute 150442 "temperatureMax"
@@ -2524,6 +2863,7 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "<! le seuil de température maximum"
       end
 
       attribute 150570 "luminositeMin"
@@ -2536,6 +2876,7 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "<! le seuil de luminosité minimum"
       end
 
       attribute 150698 "eclairementMoyen"
@@ -2548,6 +2889,7 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "<! l'éclairement moyen"
       end
 
       attribute 150826 "humiditeMin"
@@ -2560,6 +2902,7 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "<! le seuil d'humidité minimum"
       end
 
       attribute 150954 "humiditeMax"
@@ -2572,6 +2915,7 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "<! le seuil d'humidité maximum"
       end
 
       attribute 151082 "co2Max"
@@ -2584,6 +2928,7 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "<! le seuil de CO2 maximum"
       end
 
       attribute 151210 "indiceConfinement"
@@ -2596,6 +2941,7 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "<! l'indice de confinement"
       end
 
       operation 149930 "Seuils"
@@ -2644,6 +2990,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Accesseur de l'attribut temperatureMin
+@return double La température minimum
+"
       end
 
       operation 150314 "getTemperatureMax"
@@ -2656,6 +3005,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Accesseur de l'attribut temperatureMax
+@return double La température maximum
+"
       end
 
       operation 150442 "getLuminositeMin"
@@ -2668,6 +3020,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Accesseur de l'attribut luminositeMin
+@return double La luminosité minimum
+"
       end
 
       operation 150570 "getEclairementMoyen"
@@ -2680,6 +3035,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Accesseur de l'attribut eclairementMoyen
+@return double L'éclairement moyen
+"
       end
 
       operation 150698 "getHumiditeMin"
@@ -2692,6 +3050,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Accesseur de l'attribut humiditeMin
+@return double L'humidité minimum
+"
       end
 
       operation 150826 "getHumiditeMax"
@@ -2704,6 +3065,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Accesseur de l'attribut humiditéMax
+@return double L'humidité maximum
+"
       end
 
       operation 150954 "getCo2Max"
@@ -2716,6 +3080,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Accesseur de l'attribut co2Max
+@return int Le CO2 maximum
+"
       end
 
       operation 151082 "getIndiceConfinement"
@@ -2728,6 +3095,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Accesseur de l'attribut indiceConfinement
+@return int L'indice de confinement
+"
       end
     end
   end
@@ -2785,16 +3155,18 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 import java.util.Vector;
 ${definition}"

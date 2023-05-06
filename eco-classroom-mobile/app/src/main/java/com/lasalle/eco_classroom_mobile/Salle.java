@@ -336,4 +336,39 @@ public class Salle
     {
         this.seuils = seuils;
     }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil de temperature de la salle est dépassé
+     * @return boolean le seuil de température est dépassé (oui/non)
+     */
+    public boolean estSeuilTemperatureDepasse()
+    {
+        if(getTemperature() < getSeuils().getTemperatureMin() ||
+           getTemperature() > getSeuils().getTemperatureMax())
+            return true;
+        return false;
+    }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil d'humidité de la salle est dépassé
+     * @return boolean le seuil d'humidité est dépassé (oui/non)
+     */
+    public boolean estSeuilHumiditeDepasse()
+    {
+        if(getHumidite() < getSeuils().getHumiditeMin() ||
+           getHumidite() > getSeuils().getHumiditeMax())
+            return true;
+        return false;
+    }
+
+    /**
+     * @brief Méthode permettant de verifier si le seuil de CO2 de la salle est dépassé
+     * @return boolean le seuil de CO2 est dépassé (oui/non)
+     */
+    public boolean estSeuilCo2Depasse()
+    {
+        if(getCo2() >= getSeuils().getCo2Max())
+            return true;
+        return false;
+    }
 }
