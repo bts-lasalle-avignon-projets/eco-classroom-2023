@@ -9,15 +9,15 @@
  * @fn CommunicationMQTT::CommunicationMQTT
  * @brief Constructeur par défaut de la classe CommunicationMQTT
  */
-CommunicationMQTT::CommunicationMQTT(QWidget* parent) : QWidget(parent)
+CommunicationMQTT::CommunicationMQTT(QObject* parent) : QObject(parent)
 {
     qDebug() << Q_FUNC_INFO;
     client = new QMqttClient(this);
     client->setHostname(IP_BROKER_MQTT);
     client->setPort(PORT_BROKER_MQTT);
 
-    connect(client, SIGNAL(connected()), this, SLOT(connecte()));
-    connect(client, SIGNAL(disconnected()), this, SLOT(deconnecte()));
+    connect(client, SIGNAL(connected()), this, SLOT(demarrer()));
+    connect(client, SIGNAL(disconnected()), this, SLOT(arreter()));
     connect(client,
             SIGNAL(messageReceived(const QByteArray&, const QMqttTopicName&)),
             this,
@@ -32,8 +32,8 @@ CommunicationMQTT::CommunicationMQTT(QWidget* parent) : QWidget(parent)
  */
 CommunicationMQTT::~CommunicationMQTT()
 {
-    qDebug() << Q_FUNC_INFO;
     seDeconnecter();
+    qDebug() << Q_FUNC_INFO;
 }
 
 /**
@@ -60,6 +60,7 @@ void CommunicationMQTT::seDeconnecter()
  */
 void CommunicationMQTT::sAbonner(QString topic)
 {
+    qDebug() << Q_FUNC_INFO << "topic" << topic;
     QMqttSubscription* subscription;
     subscription = client->subscribe(topic);
     if(!subscription)
@@ -70,18 +71,18 @@ void CommunicationMQTT::sAbonner(QString topic)
 }
 
 /**
- * @fn CommunicationMQTT::connecte
+ * @fn CommunicationMQTT::demarrer
  */
-void CommunicationMQTT::connecte()
+void CommunicationMQTT::demarrer()
 {
     qDebug() << Q_FUNC_INFO;
-    sAbonner("salles/#");
+    sAbonner(TOPIC_SALLES);
 }
 
 /**
- * @fn CommunicationMQTT::deconnecte
+ * @fn CommunicationMQTT::arreter
  */
-void CommunicationMQTT::deconnecte()
+void CommunicationMQTT::arreter()
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -94,6 +95,6 @@ void CommunicationMQTT::deconnecte()
 void CommunicationMQTT::recevoirMessage(const QByteArray&     message,
                                         const QMqttTopicName& topic)
 {
-    qDebug() << QDateTime::currentDateTime().toString() << topic.name()
-             << message;
+    qDebug() << QDateTime::currentDateTime().toString() << "topic"
+             << topic.name() << "message" << message;
 }
