@@ -10,8 +10,8 @@
 #include <QObject>
 
 #define IP_BROKER_MQTT   "192.168.52.7" //!< Constante pour l'ip du broker mqtt
-#define PORT_BROKER_MQTT 1883 //!< Constante pour le port du broker mqtt
-#define TOPIC_SALLE      "salle/#"
+#define PORT_BROKER_MQTT 1883       //!< Constante pour le port du broker mqtt
+#define TOPIC_SALLES     "salles/#" //!< Constante pour le topic des salles
 
 /**
  * @class CommunicationMQTT
@@ -19,6 +19,7 @@
  */
 class CommunicationMQTT : public QObject
 {
+    Q_OBJECT
   public:
     CommunicationMQTT(QObject* parent = nullptr);
     ~CommunicationMQTT();
@@ -26,6 +27,7 @@ class CommunicationMQTT : public QObject
   private:
     QMqttClient*       client;       //!< Client MQTT
     QMqttSubscription* subscription; //!< Subscription
+
   public slots:
     void seConnecter();
     void seDeconnecter();

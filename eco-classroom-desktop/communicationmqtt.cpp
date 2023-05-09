@@ -32,8 +32,8 @@ CommunicationMQTT::CommunicationMQTT(QObject* parent) : QObject(parent)
  */
 CommunicationMQTT::~CommunicationMQTT()
 {
-    qDebug() << Q_FUNC_INFO;
     seDeconnecter();
+    qDebug() << Q_FUNC_INFO;
 }
 
 /**
@@ -76,11 +76,11 @@ void CommunicationMQTT::sAbonner(QString topic)
 void CommunicationMQTT::demarrer()
 {
     qDebug() << Q_FUNC_INFO;
-    sAbonner(TOPIC_SALLE);
+    sAbonner(TOPIC_SALLES);
 }
 
 /**
- * @fn CommunicationMQTT::deconnecte
+ * @fn CommunicationMQTT::arreter
  */
 void CommunicationMQTT::arreter()
 {
