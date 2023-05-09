@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -70,6 +71,7 @@ public class EcoClassroom extends AppCompatActivity
     private RecyclerView               vueSalles;              //!< la vue
     private RecyclerView.Adapter       adaptateurSalle = null; //!< l'adaptateur
     private RecyclerView.LayoutManager layoutVueSalles;        //!< le gestionnaire de mise en page
+    private SwipeRefreshLayout         swipeRefreshLayout; //!< initialisation du swipe to refresh
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -81,6 +83,7 @@ public class EcoClassroom extends AppCompatActivity
         setContentView(R.layout.ecoclassroom);
         Log.d(TAG, "onCreate()");
 
+        actualiserDonnees();
         initialiserHandler();
         initialiserVueSalles();
         initialiserBaseDeDonnees();
@@ -139,6 +142,19 @@ public class EcoClassroom extends AppCompatActivity
     {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
+    }
+
+    public void actualiserDonnees()
+    {
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+                baseDeDonnees.chargerSalles();
+            }
+        });
     }
 
     /**
