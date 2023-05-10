@@ -5,6 +5,7 @@
 #ifndef MESURES_H
 #define MESURES_H
 
+#include <QVector>
 /**
  * @class Mesures
  * @brief Classe permettant de gérer les mesures d'une salle
@@ -12,9 +13,9 @@
 class Mesures
 {
   private:
-    double       temperature; //!< Temperature dans la salle
-    unsigned int humidite;    //!< Humidite dans la salle
-    unsigned int co2;         //!< Taux de CO2 dans la salle
+    double                temperature; //!< Temperature dans la salle
+    unsigned int          humidite;    //!< Humidite dans la salle
+    QVector<unsigned int> co2;         //!< Taux de CO2 dans la salle
 
   public:
     Mesures();
@@ -25,7 +26,12 @@ class Mesures
     unsigned int getCO2() const;
     void         setTemperature(double temperature);
     void         setHumidite(unsigned int humidite);
-    void         setCO2(unsigned int co2);
+    void         setCO2(unsigned int mesureCo2);
+    int          calculerIndiceICONE();
+    double       calculerProportionSeuilN1();
+    double       calculerProportionSeuilN2();
+    int calculerIndiceBrute(double proportionSeuilN1, double proportionSeuilN2);
+    int determinerIndiceICONE(int indiceBrute);
 };
 
 #endif // MESURES_H

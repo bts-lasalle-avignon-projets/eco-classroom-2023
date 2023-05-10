@@ -164,6 +164,12 @@ void Salle::setCO2(unsigned int co2)
     qDebug() << Q_FUNC_INFO << "co2 : " << co2;
 }
 
+int Salle::getIndiceICONE()
+{
+    indiceICONE = mesures->calculerIndiceICONE();
+    return indiceICONE;
+}
+
 /**
  * @brief Getter qui récupère l'etat de la lumiere
  */

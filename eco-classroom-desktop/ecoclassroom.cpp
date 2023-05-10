@@ -260,6 +260,16 @@ void EcoClassroom::chargerSalles()
     salles["B21"]->setCO2(825);
     salles["B22"]->setCO2(1355);
 
+    // Tests CO2 ICONE SIMULATION
+    salles["B11"]->setCO2(905);
+    salles["B11"]->setCO2(1705);
+    salles["B11"]->setCO2(1605);
+    salles["B11"]->setCO2(1005);
+    salles["B11"]->setCO2(1605);
+    salles["B11"]->setCO2(2005);
+
+    salles["B11"]->calculerICONE();
+    salles["B20"]->calculerICONE();
     // Exemple avec une base de données SQLite
     /*
     QVector<QStringList> sallesBDD;
@@ -429,7 +439,7 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
                              " m<sup>2</sup>");
     descriptionSalle->setText(salle.getDescription());
     indiceQualiteAirSalle->setText(salle.getQualiteAir() + " (" +
-                                   QString::number(salle.getCO2()) + " ppm)");
+                                   QString::number(salle.getCO2()) + "ppm) ");
     afficherFenetreInformations();
 }
 

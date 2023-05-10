@@ -48,7 +48,8 @@ class Salle
     Mesures*
       mesures; //!<  Relation entre la classe Salle et Mesures (agrégation)
     EtatsSalle*
-      etats; //!< Relation entre la classe Salle et EtatsSalle (agrégation)
+        etats; //!< Relation entre la classe Salle et EtatsSalle (agrégation)
+    int indiceICONE;
 
   public:
     /*
@@ -80,12 +81,12 @@ class Salle
     unsigned int getCO2() const;
     QString      getQualiteAir() const;
     void         setCO2(unsigned int co2);
+    int          getIndiceICONE();
     bool         getLumiere() const;
     bool         getFenetre() const;
     bool         getOccupation() const;
     void         calculerTHI();
     void         calculerIADI();
-    void         calculerICONE();
 };
 
 #endif // SALLE_H

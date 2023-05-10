@@ -51,7 +51,12 @@ unsigned int Mesures::getHumidite() const
  */
 unsigned int Mesures::getCO2() const
 {
-    return co2;
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "taille du vecteur :" << co2.size();
+    if(co2.size() != 0)
+        return co2.back();
+    else
+        return 0;
 }
 
 /**
@@ -79,7 +84,31 @@ void Mesures::setHumidite(unsigned int humidite)
  * @brief Setter de l'attribut co2
  * @param co2 mesure du co2 dans la salle
  */
-void Mesures::setCO2(unsigned int co2)
+void Mesures::setCO2(unsigned int mesureCo2)
 {
-    this->co2 = co2;
+    co2.push_back(mesureCo2);
+}
+
+int Mesures::calculerIndiceICONE()
+{
+    double proportionSeuilN1 = calculerProportionSeuilN1();
+    double proportionSeuilN2 = calculerProportionSeuilN2();
+    int indiceBrute = calculerIndiceBrute(proportionSeuilN1, proportionSeuilN2);
+    int indiceICONE = determinerIndiceICONE(indiceBrute);
+    return indiceICONE;
+}
+
+double Mesures::calculerProportionSeuilN1()
+{
+    int nbValeursSeuilN1 = 0;
+    qDebug() << "co2";
+    for(int i = 0; i < co2.size(); i++)
+    {
+        /**
+         * @todo Compter le NbValeursSeuilN1
+         */
+        qDebug() << co2[i];
+    }
+    qDebug() << "nbValeursSeuilN1" << nbValeursSeuilN1;
+    return double(nbValeursSeuilN1) / double(co2.size());
 }
