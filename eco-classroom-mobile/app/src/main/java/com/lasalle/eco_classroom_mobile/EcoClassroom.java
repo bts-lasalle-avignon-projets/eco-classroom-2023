@@ -71,7 +71,7 @@ public class EcoClassroom extends AppCompatActivity
     private RecyclerView               vueSalles;              //!< la vue
     private RecyclerView.Adapter       adaptateurSalle = null; //!< l'adaptateur
     private RecyclerView.LayoutManager layoutVueSalles;        //!< le gestionnaire de mise en page
-    private SwipeRefreshLayout         swipeRefreshLayout; //!< initialisation du swipe to refresh
+    private SwipeRefreshLayout actualisationSalles; //!<
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -144,15 +144,20 @@ public class EcoClassroom extends AppCompatActivity
         Log.d(TAG, "onDestroy()");
     }
 
+    /**
+     * @brief Méthode permettant de mettre à jour les données des salles
+     */
     public void actualiserDonnees()
     {
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        actualisationSalles = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        actualisationSalles.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
         {
             @Override
             public void onRefresh()
             {
-                baseDeDonnees.chargerSalles();
+                chargerSalles();
+                initialiserListeDeroulante();
+                actualisationSalles.setRefreshing(false);
             }
         });
     }
