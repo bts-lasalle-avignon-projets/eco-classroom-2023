@@ -34,8 +34,8 @@ relationcanvas 128298 relation_ref 134826 // <generalisation>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128810 relation_ref 134954 // <unidirectional association>
-  from ref 128042 z 3006 stereotype "<<Vector>>" xyz 1109 869 3006 to ref 128682
-  role_a_pos 1199 839 3000 no_role_b
+  from ref 128042 z 3006 stereotype "<<Vector>>" xyz 1109 893.5 3006 to ref 128682
+  role_a_pos 1199 859 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128938 relation_ref 135210 // <unidirectional association>
@@ -44,7 +44,7 @@ relationcanvas 128938 relation_ref 135210 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129066 relation_ref 134698 // <unidirectional association>
-  from ref 128426 z 3006 stereotype "<<Vector>>" xyz 1348.5 1890 3006 to ref 128682
+  from ref 128426 z 3006 stereotype "<<Vector>>" xyz 1348 1890 3006 to ref 128682
   role_a_pos 1455 1845 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
@@ -61,18 +61,18 @@ relationcanvas 129578 relation_ref 148266 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129962 relation_ref 148394 // <unidirectional association>
-  from ref 129450 z 3018 stereotype "<<Vector>>" xyz 1155 235.5 3018 to ref 128682
+  from ref 129450 z 3018 stereotype "<<Vector>>" xyz 1155 235 3018 to ref 128682
   role_a_pos 1291 265 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 130090 relation_ref 148650 // <unidirectional association>
   from ref 128042 z 3018 to ref 129450
-  role_a_pos 1113 183 3000 no_role_b
+  role_a_pos 1115 183 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 130218 relation_ref 155434 // <unidirectional association>
-  from ref 128042 z 3006 stereotype "<<Vector>>" xyz 1110 869.5 3000 to ref 128682
-  role_a_pos 1079 839 3000 no_role_b
+  from ref 128042 z 3006 stereotype "<<Vector>>" xyz 1110 893.5 3000 to ref 128682
+  role_a_pos 1079 859 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

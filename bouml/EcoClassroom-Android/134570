@@ -1,6 +1,6 @@
 format 224
 "eco_classroom_mobile" // eco_classroom_mobile
-  revision 5
+  revision 6
   modified_by 42 "tv"
   // class settings
   
@@ -1299,7 +1299,6 @@ ${members}}
 @return boolean le seuil de CO2 est dépassé (oui/non)
 "
       end
-
     end
 
     class 135082 "EcoClassroom"
@@ -1558,6 +1557,20 @@ ${members}};
 	comment "<! l'identifiant de notification"
       end
 
+      attribute 172330 "choixFiltrage"
+	private explicit_type "int"
+	init_value " TOUTES"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le choix de filtrage des salles"
+      end
+
       attribute 134826 "vueSalles"
 	private explicit_type "RecyclerView"
 	cpp_decl ""
@@ -1594,6 +1607,19 @@ ${members}};
 	mysql_decl ""
 	MysqlColumn
 	comment "!< le gestionnaire de mise en page"
+      end
+
+      attribute 172458 "actualisationSalles"
+	private explicit_type "SwipeRefreshLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le pull to refresh"
       end
 
       operation 135082 "onCreate"
@@ -1696,8 +1722,22 @@ et détruite par le système Android)
 "
       end
 
+      operation 171946 "initialiserActualisationSalles"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de mettre à jour les données des salles avec un pull to refresh
+"
+      end
+
       operation 135850 "initialiserVueSalles"
-	public explicit_return_type "void"
+	private explicit_return_type "void"
 	nparams 0
 	
 	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -3155,6 +3195,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
