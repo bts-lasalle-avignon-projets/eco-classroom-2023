@@ -64,6 +64,7 @@ public class EcoClassroom extends AppCompatActivity
     private Handler             handler             = null; //<! le handler utilisé par l'activité
     private NotificationManager notificationManager = null; //<! le gestionnaire de notifications
     private int                 idNotification      = 1;    //<! l'identifiant de notification
+    private int                 choixFiltrage       = TOUTES; //<! le choix de filtrage des salles
 
     /**
      * Ressources GUI
@@ -71,7 +72,7 @@ public class EcoClassroom extends AppCompatActivity
     private RecyclerView               vueSalles;              //!< la vue
     private RecyclerView.Adapter       adaptateurSalle = null; //!< l'adaptateur
     private RecyclerView.LayoutManager layoutVueSalles;        //!< le gestionnaire de mise en page
-    private SwipeRefreshLayout actualisationSalles; //!<
+    private SwipeRefreshLayout         actualisationSalles;    //!< le pull to refresh
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -83,7 +84,7 @@ public class EcoClassroom extends AppCompatActivity
         setContentView(R.layout.ecoclassroom);
         Log.d(TAG, "onCreate()");
 
-        actualiserDonnees();
+        initialiserActualisationSalles();
         initialiserHandler();
         initialiserVueSalles();
         initialiserBaseDeDonnees();
@@ -145,18 +146,16 @@ public class EcoClassroom extends AppCompatActivity
     }
 
     /**
-     * @brief Méthode permettant de mettre à jour les données des salles
+     * @brief Méthode permettant de mettre à jour les données des salles avec un pull to refresh
      */
-    public void actualiserDonnees()
+    private void initialiserActualisationSalles()
     {
         actualisationSalles = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
-        actualisationSalles.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
-        {
+        actualisationSalles.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
             {
                 chargerSalles();
-                initialiserListeDeroulante();
                 actualisationSalles.setRefreshing(false);
             }
         });
@@ -165,7 +164,7 @@ public class EcoClassroom extends AppCompatActivity
     /**
      * @brief Méthode permettant d'initialiser les attributs pour RecyclerView
      */
-    public void initialiserVueSalles()
+    private void initialiserVueSalles()
     {
         this.salles          = new Vector<Salle>();
         this.sallesAffichees = new Vector<Salle>();
@@ -352,6 +351,7 @@ public class EcoClassroom extends AppCompatActivity
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_SALLES");
                         setSalles((Vector<Salle>)message.obj);
                         afficherSalles((Vector<Salle>)message.obj);
+                        filtrerSalles(choixFiltrage);
                         alerterDepassementSeuil();
                 }
             }
@@ -375,6 +375,7 @@ public class EcoClassroom extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> adaptateur, View vue, int position, long id)
             {
+                choixFiltrage = position;
                 filtrerSalles(position);
             }
             @Override
