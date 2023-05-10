@@ -9,6 +9,8 @@
 #include <QtWidgets>
 #include <QMap>
 
+class CommunicationMQTT;
+
 class Salle;
 
 /**
@@ -51,8 +53,9 @@ class EcoClassroom : public QMainWindow
     ~EcoClassroom();
 
   private:
-    int                   nbLignesSalles;   //!< Nombre de salles dans la table
-    QMap<QString, Salle*> salles;           //!< Les salles
+    int                   nbLignesSalles; //!< Nombre de salles dans la table
+    QMap<QString, Salle*> salles;         //!< Les salles
+    CommunicationMQTT*    communicationmqtt;
     QStringList           nomColonnesTable; //!< Le nom des colonnes de la table
     // Widgets
     QWidget*        gui;               //!< Le widget central

@@ -76,7 +76,7 @@ void CommunicationMQTT::sAbonner(QString topic)
 void CommunicationMQTT::demarrer()
 {
     qDebug() << Q_FUNC_INFO;
-    sAbonner(TOPIC_SALLES);
+    sAbonner(TOPIC_RACINE);
 }
 
 /**
@@ -88,7 +88,7 @@ void CommunicationMQTT::arreter()
 }
 
 /**
- * @fn CommunicationMQTT::messageRecu
+ * @fn CommunicationMQTT::recevoirMessage
  * @param message
  * @param topic
  */
@@ -97,4 +97,7 @@ void CommunicationMQTT::recevoirMessage(const QByteArray&     message,
 {
     qDebug() << QDateTime::currentDateTime().toString() << "topic"
              << topic.name() << "message" << message;
+    /*
+     * @todo Emmettre un signal contenant le topic et le message
+     */
 }

@@ -11,7 +11,7 @@
 
 #define IP_BROKER_MQTT   "192.168.52.7" //!< Constante pour l'ip du broker mqtt
 #define PORT_BROKER_MQTT 1883       //!< Constante pour le port du broker mqtt
-#define TOPIC_SALLES     "salles/#" //!< Constante pour le topic des salles
+#define TOPIC_RACINE     "salles/#" //!< Constante pour le topic des salles
 
 /**
  * @class CommunicationMQTT
@@ -36,6 +36,10 @@ class CommunicationMQTT : public QObject
     void arreter();
     void recevoirMessage(const QByteArray&     message,
                          const QMqttTopicName& topic);
+  signals:
+    /*
+     * @todo Déclarer un signal contenant le topic et le message
+     */
 };
 
 #endif // COMMUNICATIONMQTT_H
