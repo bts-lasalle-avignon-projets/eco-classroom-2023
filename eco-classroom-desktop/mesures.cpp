@@ -164,10 +164,9 @@ int Mesures::calculerIndiceBrute(double proportionSeuilN1,
     calculIndiceBrute =
       ((2.5 / log10(2)) *
        (log10(1 + proportionSeuilN1 + (3 * proportionSeuilN2))));
-    qDebug() << "log10(2)" << log10(2);
     qDebug() << "calculIndiceBrute" << calculIndiceBrute;
     int indiceBrute = nearbyint(calculIndiceBrute);
-    qDebug() << "calculIndiceBrute" << indiceBrute;
+    qDebug() << "indiceBrute" << indiceBrute;
     return indiceBrute;
 }
 
