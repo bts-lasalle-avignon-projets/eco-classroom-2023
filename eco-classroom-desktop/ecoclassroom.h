@@ -22,6 +22,12 @@
  */
 #define TITRE_NOTIFICATION_CO2 "ALERTE CO2 !"
 
+/**
+ * @def SIMULATION_ICONE
+ * @brief Pour simuler des mesures de CO2 afin de déterminer l'indice ICONE
+ */
+#define SIMULATION_ICONE
+
 class Salle;
 
 /**
@@ -82,13 +88,13 @@ class EcoClassroom : public QMainWindow
     QLabel* superficieSalle;       //!< La superficie de la salle
     QLabel* labelDescriptionSalle; //!< Le label pour le nom de la salle
     QLabel* descriptionSalle;      //!< La description de la salle
-    QLabel*
-            labelIndiceQAirSalle; //!< Le label pour l'indice de la qualité d'air
-    QLabel* indiceQualiteAirSalle; //!< L'indice de la qualité de l'air
     QLabel* labelIndiceICONE;      //!< le label pour l'indice ICONE
     QLabel* indiceICONE; //!< l'indice ICONE (confinement d'une salle due à
                          //!< l'excès de co2)
-    QPushButton* boutonRetourAccueil; //!< Bouton de retour
+    QPushButton* boutonRetourAccueil;        //!< Bouton de retour
+    QLabel*      labelIndiceQualiteAirSalle; //!< Le label pour l'indice de la
+                                             //!< qualité d'air
+    QLabel* indiceQualiteAirSalle; //!< L'indice de la qualité de l'air
     QSystemTrayIcon*
       notificationEcoClassroom; //!< Notification système du confinement
 

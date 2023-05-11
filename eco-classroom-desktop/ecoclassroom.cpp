@@ -123,7 +123,7 @@ void EcoClassroom::instancierWidgets()
     layoutF2Informations->addWidget(superficieSalle, 1, 1);
     layoutF2Informations->addWidget(labelDescriptionSalle, 2, 0);
     layoutF2Informations->addWidget(descriptionSalle, 2, 1);
-    layoutF2Informations->addWidget(labelIndiceQAirSalle, 3, 0);
+    layoutF2Informations->addWidget(labelIndiceQualiteAirSalle, 3, 0);
     layoutF2Informations->addWidget(indiceQualiteAirSalle, 3, 1);
     layoutF2Informations->addWidget(labelIndiceICONE, 4, 0);
     layoutF2Informations->addWidget(indiceICONE, 4, 1);
@@ -192,11 +192,11 @@ void EcoClassroom::initialiserTable()
 void EcoClassroom::initialiserFenetreInformations()
 {
     // initialisation widgets dans la fênetre information
-    labelNomSalle         = new QLabel(this);
-    labelSuperficieSalle  = new QLabel(this);
-    labelDescriptionSalle = new QLabel(this);
-    labelIndiceQAirSalle  = new QLabel(this);
-    labelIndiceICONE      = new QLabel(this);
+    labelNomSalle              = new QLabel(this);
+    labelSuperficieSalle       = new QLabel(this);
+    labelDescriptionSalle      = new QLabel(this);
+    labelIndiceQualiteAirSalle = new QLabel(this);
+    labelIndiceICONE           = new QLabel(this);
 
     // affichage du widget
     labelNomSalle->setText("Nom :");
@@ -208,7 +208,7 @@ void EcoClassroom::initialiserFenetreInformations()
     labelDescriptionSalle->setText("Description :");
     descriptionSalle = new QLabel(this);
 
-    labelIndiceQAirSalle->setText("Indice Qualité de l'air :");
+    labelIndiceQualiteAirSalle->setText("Indice Qualité de l'air :");
     indiceQualiteAirSalle = new QLabel(this);
 
     labelIndiceICONE->setText("Indice ICONE :");
@@ -261,24 +261,55 @@ void EcoClassroom::chargerSalles()
     salles["B20"] = new Salle("B20", 65, "Atelier");
     salles["B21"] = new Salle("B21", 35, "Salle de TP");
     salles["B22"] = new Salle("B22", 80, "Salle de cours");
-    // Tests CO2
-    salles["B11"]->setCO2(605);
-    salles["B20"]->setCO2(1259);
-    salles["B21"]->setCO2(825);
-    salles["B22"]->setCO2(1355);
 
-    // Tests CO2 ICONE SIMULATION
-    salles["B11"]->setCO2(905);
-    salles["B11"]->setCO2(1705);
-    salles["B11"]->setCO2(1605);
-    salles["B11"]->setCO2(1005);
-    salles["B11"]->setCO2(1605);
-    salles["B11"]->setCO2(2005);
+#ifdef SIMULATION_ICONE
+    // différentes mesures
+    // échantillons (5 h de mesures - 1 mesure toutes les 10 minutes)
+    QVector<unsigned int> mesuresCO2DeLaB11(
+      { 312,  455,  380,  658,  889,  905,  1100, 1540, 1422, 1669,
+        1702, 1698, 1805, 1850, 1630, 1496, 1355, 1255, 1104, 1040,
+        922,  669,  702,  698,  512,  555,  480,  404,  489,  458 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB20(
+      { 312,  455, 380,  658,  889,  905, 999, 997, 822, 969,
+        1002, 698, 1005, 1050, 1130, 896, 855, 755, 804, 840,
+        622,  669, 702,  698,  512,  555, 480, 458, 489, 999 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB21(
+      { 312, 455, 380, 658, 889, 905, 900, 940, 922, 969,
+        702, 698, 805, 850, 630, 496, 355, 255, 504, 540,
+        922, 669, 702, 698, 512, 555, 480, 458, 489, 540 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB22(
+      { 1312, 1455, 1380, 1658, 189,  1905, 1701, 1740, 1722, 1769,
+        1702, 1798, 1805, 1850, 1730, 1896, 1355, 1755, 1704, 1940,
+        1922, 1869, 1702, 1698, 1712, 1755, 1780, 1758, 1789, 1705 }); // en ppm
+
+    for(int i = 0; i < mesuresCO2DeLaB11.size(); ++i)
+    {
+        salles["B11"]->setCO2(mesuresCO2DeLaB11[i]);
+    }
+
+    for(int i = 0; i < mesuresCO2DeLaB20.size(); ++i)
+    {
+        salles["B20"]->setCO2(mesuresCO2DeLaB20[i]);
+    }
+
+    for(int i = 0; i < mesuresCO2DeLaB21.size(); ++i)
+    {
+        salles["B21"]->setCO2(mesuresCO2DeLaB21[i]);
+    }
+
+    for(int i = 0; i < mesuresCO2DeLaB22.size(); ++i)
+    {
+        salles["B22"]->setCO2(mesuresCO2DeLaB22[i]);
+    }
 
     salles["B11"]->getIndiceICONE();
     salles["B20"]->getIndiceICONE();
     salles["B21"]->getIndiceICONE();
     salles["B22"]->getIndiceICONE();
+
+    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
+#endif
+
     // Exemple avec une base de données SQLite
     /*
     QVector<QStringList> sallesBDD;

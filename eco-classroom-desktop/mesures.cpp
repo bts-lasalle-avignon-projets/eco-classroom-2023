@@ -52,10 +52,12 @@ unsigned int Mesures::getHumidite() const
  */
 unsigned int Mesures::getCO2() const
 {
-    qDebug() << Q_FUNC_INFO;
-    qDebug() << "taille du vecteur :" << co2.size();
-    if(co2.size() != 0)
+    if(co2.size() > 0)
+    {
+        qDebug() << Q_FUNC_INFO << "co2" << co2.back();
+        // la dernière mesure
         return co2.back();
+    }
     else
         return 0;
 }
@@ -101,6 +103,7 @@ int Mesures::calculerIndiceICONE()
     double proportionSeuilN2 = calculerProportionSeuilN2();
     int indiceBrute = calculerIndiceBrute(proportionSeuilN1, proportionSeuilN2);
     int indiceICONE = determinerIndiceICONE(indiceBrute);
+    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
     return indiceICONE;
 }
 
@@ -113,16 +116,14 @@ int Mesures::calculerIndiceICONE()
 double Mesures::calculerProportionSeuilN1()
 {
     int nbValeursSeuilN1 = 0;
-    qDebug() << "co2";
     for(int i = 0; i < co2.size(); i++)
     {
         if((co2[i] >= 1000) && (co2[i] <= 1700))
         {
             nbValeursSeuilN1++;
         }
-        qDebug() << co2[i];
     }
-    qDebug() << "nbValeursSeuilN1" << nbValeursSeuilN1;
+    qDebug() << Q_FUNC_INFO << "nbValeursSeuilN1" << nbValeursSeuilN1;
     return double(nbValeursSeuilN1) / double(co2.size());
 }
 
