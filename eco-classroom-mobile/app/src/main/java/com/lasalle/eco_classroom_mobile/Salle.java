@@ -28,8 +28,8 @@ public class Salle
     public static final int INDICE_CONFORT_THERMIQUE_MAX =
       3; //!< l'indice de confort thermique maximum
     public static final double SUPERFICIE_PAR_DEFAUT  = 0.0; //!< la superficie par défaut en m²
-    public static final double TEMPERATURE_PAR_DEFAUT = 0.0; //!< la temperature par défaut en °C
-    public static final int    HUMIDITE_PAR_DEFAUT    = 0;   //!< le taux d'humidité par défaut
+    public static final double TEMPERATURE_PAR_DEFAUT = -50; //!< la temperature par défaut en °C
+    public static final int    HUMIDITE_PAR_DEFAUT    = -1;  //!< le taux d'humidité par défaut
     public static final int    CO2_PAR_DEFAUT         = 0;   //!< le CO2 par défaut en ppm
     public static final int    QUALITE_AIR_PAR_DEFAUT = 0;   //!< la qualité de l'air par défaut
     public static final int CONFORT_THERMIQUE_PAR_DEFAUT = -4; //!< le confort thermique par défaut
@@ -57,12 +57,12 @@ public class Salle
     {
         this.nom              = "";
         this.description      = "";
-        this.superficie       = 0.0;
-        this.temperature      = 0.0;
-        this.humidite         = 0;
-        this.co2              = 0;
-        this.qualiteAir       = 0;
-        this.confortThermique = -4;
+        this.superficie       = SUPERFICIE_PAR_DEFAUT;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
@@ -81,11 +81,11 @@ public class Salle
         this.nom              = nom;
         this.description      = description;
         this.superficie       = superficie;
-        this.temperature      = 0.0;
-        this.humidite         = 0;
-        this.co2              = 0;
-        this.qualiteAir       = 0;
-        this.confortThermique = -4;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
@@ -105,11 +105,11 @@ public class Salle
         this.nom              = nom;
         this.description      = description;
         this.superficie       = superficie;
-        this.temperature      = 0.0;
-        this.humidite         = 0;
-        this.co2              = 0;
-        this.qualiteAir       = 0;
-        this.confortThermique = -4;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
@@ -343,8 +343,9 @@ public class Salle
      */
     public boolean estSeuilTemperatureDepasse()
     {
-        if(getTemperature() < getSeuils().getTemperatureMin() ||
-           getTemperature() > getSeuils().getTemperatureMax())
+        if((getTemperature() < getSeuils().getTemperatureMin() ||
+           getTemperature() > getSeuils().getTemperatureMax()) &&
+             (getTemperature() != TEMPERATURE_PAR_DEFAUT))
             return true;
         return false;
     }
@@ -355,8 +356,8 @@ public class Salle
      */
     public boolean estSeuilHumiditeDepasse()
     {
-        if(getHumidite() < getSeuils().getHumiditeMin() ||
-           getHumidite() > getSeuils().getHumiditeMax())
+        if((getHumidite() < getSeuils().getHumiditeMin() ||
+           getHumidite() > getSeuils().getHumiditeMax()) && (getHumidite() != HUMIDITE_PAR_DEFAUT))
             return true;
         return false;
     }
@@ -367,7 +368,7 @@ public class Salle
      */
     public boolean estSeuilCo2Depasse()
     {
-        if(getCo2() >= getSeuils().getCo2Max())
+        if(getCo2() >= getSeuils().getCo2Max() && (getCo2() != CO2_PAR_DEFAUT))
             return true;
         return false;
     }
