@@ -254,22 +254,45 @@ void EcoClassroom::chargerSalles()
     salles["B20"] = new Salle("B20", 65, "Atelier");
     salles["B21"] = new Salle("B21", 35, "Salle de TP");
     salles["B22"] = new Salle("B22", 80, "Salle de cours");
-    // Tests CO2
-    salles["B11"]->setCO2(605);
+
+#ifdef SIMULATION_ICONE
+    // différentes mesures
+    // échantillons (5 h de mesures - 1 mesure toutes les 10 minutes)
+    /*QVector<unsigned int> mesuresCO2({    312, 455, 380, 658, 889, 905,
+                                1100, 1540, 1422, 1669, 1702, 1698,
+                                1805, 1850, 1630, 1496, 1355, 1255,
+                                1104, 1040, 922, 669, 702, 698,
+                                512, 555, 480, 458, 489, 405
+                           }); // en ppm*/
+    /*QVector<unsigned int> mesuresCO2({    312, 455, 380, 658, 889, 905,
+                                999, 997, 822, 969, 1002, 698,
+                                1005, 1050, 1130, 896, 855, 755,
+                                804, 840, 622, 669, 702, 698,
+                                512, 555, 480, 458, 489, 405
+                           }); // en ppm*/
+    /*QVector<unsigned int> mesuresCO2({    312, 455, 380, 658, 889, 905,
+                                900, 940, 922, 969, 702, 698,
+                                805, 850, 630, 496, 355, 255,
+                                504, 540, 922, 669, 702, 698,
+                                512, 555, 480, 458, 489, 405
+                           }); // en ppm*/
+    QVector<unsigned int> mesuresCO2(
+      { 1312, 1455, 1380, 1658, 189,  1905, 1701, 1740, 1722, 1769,
+        1702, 1798, 1805, 1850, 1730, 1896, 1355, 1755, 1704, 1940,
+        1922, 1869, 1702, 1698, 1712, 1755, 1780, 1758, 1789, 1705 }); // en ppm
+
+    for(int i = 0; i < mesuresCO2.size(); ++i)
+        salles["B11"]->setCO2(mesuresCO2[i]);
+
+    int indiceICONE = salles["B11"]->getIndiceICONE();
+    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
+#endif
+
+    // Tests CO2 : les autres salles
     salles["B20"]->setCO2(1259);
     salles["B21"]->setCO2(825);
     salles["B22"]->setCO2(1355);
 
-    // Tests CO2 ICONE SIMULATION
-    salles["B11"]->setCO2(905);
-    salles["B11"]->setCO2(1705);
-    salles["B11"]->setCO2(1605);
-    salles["B11"]->setCO2(1005);
-    salles["B11"]->setCO2(1605);
-    salles["B11"]->setCO2(2005);
-
-    salles["B11"]->calculerICONE();
-    salles["B20"]->calculerICONE();
     // Exemple avec une base de données SQLite
     /*
     QVector<QStringList> sallesBDD;

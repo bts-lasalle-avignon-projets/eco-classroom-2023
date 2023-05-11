@@ -161,7 +161,7 @@ QString Salle::getQualiteAir() const
 void Salle::setCO2(unsigned int co2)
 {
     mesures->setCO2(co2);
-    qDebug() << Q_FUNC_INFO << "co2 : " << co2;
+    qDebug() << Q_FUNC_INFO << "nom" << nom << "co2" << co2;
 }
 
 int Salle::getIndiceICONE()
