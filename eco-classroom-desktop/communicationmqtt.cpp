@@ -18,10 +18,6 @@ CommunicationMQTT::CommunicationMQTT(QObject* parent) : QObject(parent)
 
     connect(client, SIGNAL(connected()), this, SLOT(demarrer()));
     connect(client, SIGNAL(disconnected()), this, SLOT(arreter()));
-    connect(client,
-            SIGNAL(messageReceived(const QByteArray&, const QMqttTopicName&)),
-            this,
-            SLOT(recevoirMessage(const QByteArray&, const QMqttTopicName&)));
 
     seConnecter();
 }
@@ -34,6 +30,11 @@ CommunicationMQTT::~CommunicationMQTT()
 {
     seDeconnecter();
     qDebug() << Q_FUNC_INFO;
+}
+
+QMqttClient* CommunicationMQTT::getClient() const
+{
+    return client;
 }
 
 /**
@@ -85,19 +86,4 @@ void CommunicationMQTT::demarrer()
 void CommunicationMQTT::arreter()
 {
     qDebug() << Q_FUNC_INFO;
-}
-
-/**
- * @fn CommunicationMQTT::recevoirMessage
- * @param message
- * @param topic
- */
-void CommunicationMQTT::recevoirMessage(const QByteArray&     message,
-                                        const QMqttTopicName& topic)
-{
-    qDebug() << QDateTime::currentDateTime().toString() << "topic"
-             << topic.name() << "message" << message;
-    /*
-     * @todo Emmettre un signal contenant le topic et le message
-     */
 }

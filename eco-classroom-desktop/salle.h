@@ -8,6 +8,8 @@
 
 #include <QString>
 
+#define RACINE_TOPIC "salles"
+
 class Mesures;
 class EtatsSalle;
 
@@ -17,6 +19,15 @@ class EtatsSalle;
  */
 class Salle
 {
+  public:
+    enum ChampsTopic
+    {
+        RACINE,
+        SALLE,
+        MODULE,
+        TYPE_DONNEE
+    };
+
   private:
     QString      nom;         //!< Nom de la salle
     unsigned int superficie;  //!< Superficie de la salle

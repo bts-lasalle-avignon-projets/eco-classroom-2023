@@ -24,6 +24,8 @@ class CommunicationMQTT : public QObject
     CommunicationMQTT(QObject* parent = nullptr);
     ~CommunicationMQTT();
 
+    QMqttClient* getClient() const;
+
   private:
     QMqttClient*       client;       //!< Client MQTT
     QMqttSubscription* subscription; //!< Subscription
@@ -34,12 +36,6 @@ class CommunicationMQTT : public QObject
     void sAbonner(QString topic);
     void demarrer();
     void arreter();
-    void recevoirMessage(const QByteArray&     message,
-                         const QMqttTopicName& topic);
-  signals:
-    /*
-     * @todo Déclarer un signal contenant le topic et le message
-     */
 };
 
 #endif // COMMUNICATIONMQTT_H
