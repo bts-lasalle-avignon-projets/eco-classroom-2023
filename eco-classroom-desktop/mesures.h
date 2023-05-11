@@ -4,8 +4,14 @@
  */
 #ifndef MESURES_H
 #define MESURES_H
-
 #include <QVector>
+
+#define CONFINEMENT_NUL        0
+#define CONFINEMENT_FAIBLE     1
+#define CONFINEMENT_MOYEN      2
+#define CONFINEMENT_ELEVE      3
+#define CONFINEMENT_TRES_ELEVE 4
+#define CONFINEMENT_EXTREME    5
 /**
  * @class Mesures
  * @brief Classe permettant de gérer les mesures d'une salle

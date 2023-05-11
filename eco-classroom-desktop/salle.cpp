@@ -163,13 +163,39 @@ void Salle::setCO2(unsigned int co2)
     mesures->setCO2(co2);
     qDebug() << Q_FUNC_INFO << "co2 : " << co2;
 }
-
+/**
+ * @fn Salle::getIndiceICONE
+ * @brief méthode qui calcule l'indice ICONE(indice de confinement) et qui le
+ * retourne
+ * @return
+ */
 int Salle::getIndiceICONE()
 {
     indiceICONE = mesures->calculerIndiceICONE();
     return indiceICONE;
 }
-
+/**
+ * @fn Salle::afficherNiveauICONE
+ * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
+ * @return
+ */
+QString Salle::afficherNiveauICONE() const
+{
+    if(indiceICONE == CONFINEMENT_NUL)
+        return "Nul";
+    if(indiceICONE == CONFINEMENT_FAIBLE)
+        return "Faible";
+    if(indiceICONE == CONFINEMENT_MOYEN)
+        return "Moyen";
+    if(indiceICONE == CONFINEMENT_ELEVE)
+        return "Élevé";
+    if(indiceICONE == CONFINEMENT_TRES_ELEVE)
+        return "Très Élevé";
+    if(indiceICONE == CONFINEMENT_EXTREME)
+        return "Extrême";
+    else
+        return QString::number(indiceICONE);
+}
 /**
  * @brief Getter qui récupère l'etat de la lumiere
  */

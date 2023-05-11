@@ -53,6 +53,7 @@ class EcoClassroom : public QMainWindow
         COLONNE_SALLE_NOM,               //!< Le nom de la salle
         COLONNE_SALLE_CONFORT_THERMIQUE, //!<
         COLONNE_SALLE_QUALITE_AIR,       //!<
+        COLONNE_SALLE_ICONE,             //!<
         COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
         COLONNE_SALLE_LUMIERES,          //!< L'état des lumières
         COLONNE_SALLE_OCCUPATION,        //!< L'état d'occupation
@@ -71,8 +72,8 @@ class EcoClassroom : public QMainWindow
     QWidget*          gui;               //!< Le widget central
     QStackedWidget*   fenetres;          //!< Pile de fenêtres
     QTableWidget*     tableWidgetSalles; //!< Affichage sous forme de table
-    QTableWidgetItem *elementNom, *elementTHI,
-      *elementCO2; //!< Les élements d'une ligne de la table
+    QTableWidgetItem *elementNom, *elementTHI, *elementCO2,
+      *elementICONE; //!< Les élements d'une ligne de la table
     QLabel *elementLumiere, *elementFenetre,
       *elementOccupation;          //!< Les élements d'une ligne de la table
     QLabel* labelNomSalle;         //!< Le label pour le nom de la salle
@@ -82,9 +83,12 @@ class EcoClassroom : public QMainWindow
     QLabel* labelDescriptionSalle; //!< Le label pour le nom de la salle
     QLabel* descriptionSalle;      //!< La description de la salle
     QLabel*
-                 labelIndiceQAirSalle; //!< Le label pour l'indice de la qualité d'air
-    QLabel*      indiceQualiteAirSalle; //!< L'indice de la qualité de l'air
-    QPushButton* boutonRetourAccueil;   //!< Bouton de retour
+            labelIndiceQAirSalle; //!< Le label pour l'indice de la qualité d'air
+    QLabel* indiceQualiteAirSalle; //!< L'indice de la qualité de l'air
+    QLabel* labelIndiceICONE;      //!< le label pour l'indice ICONE
+    QLabel* indiceICONE; //!< l'indice ICONE (confinement d'une salle due à
+                         //!< l'excès de co2)
+    QPushButton* boutonRetourAccueil; //!< Bouton de retour
     QSystemTrayIcon*
       notificationEcoClassroom; //!< Notification système du confinement
 

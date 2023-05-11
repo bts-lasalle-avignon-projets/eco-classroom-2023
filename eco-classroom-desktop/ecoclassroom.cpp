@@ -125,6 +125,8 @@ void EcoClassroom::instancierWidgets()
     layoutF2Informations->addWidget(descriptionSalle, 2, 1);
     layoutF2Informations->addWidget(labelIndiceQAirSalle, 3, 0);
     layoutF2Informations->addWidget(indiceQualiteAirSalle, 3, 1);
+    layoutF2Informations->addWidget(labelIndiceICONE, 4, 0);
+    layoutF2Informations->addWidget(indiceICONE, 4, 1);
     layoutF2Boutons->addStretch();
     layoutF2Boutons->addWidget(boutonRetourAccueil);
     layoutF2Principal->addLayout(layoutF2Informations);
@@ -153,6 +155,7 @@ void EcoClassroom::initialiserTable()
     nomColonnesTable << "Salle"
                      << "Confort thermique"
                      << "Qualité air"
+                     << "Indice ICONE"
                      << "Lumières"
                      << "Occupée"
                      << "Fenêtres";
@@ -193,6 +196,7 @@ void EcoClassroom::initialiserFenetreInformations()
     labelSuperficieSalle  = new QLabel(this);
     labelDescriptionSalle = new QLabel(this);
     labelIndiceQAirSalle  = new QLabel(this);
+    labelIndiceICONE      = new QLabel(this);
 
     // affichage du widget
     labelNomSalle->setText("Nom :");
@@ -206,6 +210,9 @@ void EcoClassroom::initialiserFenetreInformations()
 
     labelIndiceQAirSalle->setText("Indice Qualité de l'air :");
     indiceQualiteAirSalle = new QLabel(this);
+
+    labelIndiceICONE->setText("Indice ICONE :");
+    indiceICONE = new QLabel(this);
 
     // bouton pour quitter la fênetre
     boutonRetourAccueil = new QPushButton("Ok", this);
@@ -268,8 +275,10 @@ void EcoClassroom::chargerSalles()
     salles["B11"]->setCO2(1605);
     salles["B11"]->setCO2(2005);
 
-    salles["B11"]->calculerICONE();
-    salles["B20"]->calculerICONE();
+    salles["B11"]->getIndiceICONE();
+    salles["B20"]->getIndiceICONE();
+    salles["B21"]->getIndiceICONE();
+    salles["B22"]->getIndiceICONE();
     // Exemple avec une base de données SQLite
     /*
     QVector<QStringList> sallesBDD;
@@ -305,9 +314,10 @@ void EcoClassroom::chargerSalles()
  */
 void EcoClassroom::creerElementsTexteCellule(const Salle& salle)
 {
-    elementNom = new QTableWidgetItem(salle.getNom());
-    elementTHI = new QTableWidgetItem(QString("Inconnu"));
-    elementCO2 = new QTableWidgetItem(QString(salle.getQualiteAir()));
+    elementNom   = new QTableWidgetItem(salle.getNom());
+    elementTHI   = new QTableWidgetItem(QString("Inconnu"));
+    elementCO2   = new QTableWidgetItem(QString(salle.getQualiteAir()));
+    elementICONE = new QTableWidgetItem(QString(salle.afficherNiveauICONE()));
 
     personnaliserElementsTexte();
 }
@@ -348,6 +358,8 @@ void EcoClassroom::personnaliserElementsTexte()
     elementTHI->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     elementCO2->setFlags(Qt::ItemIsEnabled);
     elementCO2->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementICONE->setFlags(Qt::ItemIsEnabled);
+    elementICONE->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
 /**
@@ -374,6 +386,7 @@ void EcoClassroom::insererElementsCellule()
                                COLONNE_SALLE_CONFORT_THERMIQUE,
                                elementTHI);
     tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_QUALITE_AIR, elementCO2);
+    tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_ICONE, elementICONE);
     tableWidgetSalles->setCellWidget(nb - 1,
                                      COLONNE_SALLE_LUMIERES,
                                      elementLumiere);
@@ -405,7 +418,8 @@ void EcoClassroom::afficherSalleTable(const Salle& salle)
 {
     qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
              << salle.getTemperature() << "humidite" << salle.getHumidite()
-             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
+             << "CO2" << salle.getCO2() << "Indice ICONE"
+             << salle.afficherNiveauICONE() << "lumiere" << salle.getLumiere()
              << "fenetre" << salle.getFenetre() << "occupation"
              << salle.getOccupation();
 
@@ -440,6 +454,7 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
     descriptionSalle->setText(salle.getDescription());
     indiceQualiteAirSalle->setText(salle.getQualiteAir() + " (" +
                                    QString::number(salle.getCO2()) + "ppm) ");
+    indiceICONE->setText(salle.afficherNiveauICONE());
     afficherFenetreInformations();
 }
 
@@ -495,9 +510,10 @@ void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
     else
     {
         // Fond de la cellule normal
-        coloriserFondCellule(elementCO2, QColor(255, 255, 255));
+        coloriserFondCellule(elementCO2, QColor(0, 150, 0));
     }
 }
+
 /**
  * @fn EcoClassroom::notifierSignalementConfinement
  * @brief Signale le confinement d'une salle grâce à une notification système
