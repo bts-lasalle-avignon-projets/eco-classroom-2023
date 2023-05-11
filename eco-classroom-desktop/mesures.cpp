@@ -123,8 +123,9 @@ double Mesures::calculerProportionSeuilN1()
             nbValeursSeuilN1++;
         }
     }
-    qDebug() << Q_FUNC_INFO << "nbValeursSeuilN1" << nbValeursSeuilN1;
-    return double(nbValeursSeuilN1) / double(co2.size());
+    qDebug() << Q_FUNC_INFO << "nbValeursSeuilN1" << nbValeursSeuilN1
+             << (double(nbValeursSeuilN1) / double(co2.size()));
+    return (double(nbValeursSeuilN1) / double(co2.size()));
 }
 
 /**
@@ -135,17 +136,16 @@ double Mesures::calculerProportionSeuilN1()
 double Mesures::calculerProportionSeuilN2()
 {
     int nbValeursSeuilN2 = 0;
-    qDebug() << "co2";
     for(int i = 0; i < co2.size(); i++)
     {
         if(co2[i] >= 1700)
         {
             nbValeursSeuilN2++;
         }
-        qDebug() << co2[i];
     }
-    qDebug() << "nbValeursSeuilN2" << nbValeursSeuilN2;
-    return double(nbValeursSeuilN2) / double(co2.size());
+    qDebug() << Q_FUNC_INFO << "nbValeursSeuilN2" << nbValeursSeuilN2
+             << (double(nbValeursSeuilN2) / double(co2.size()));
+    return (double(nbValeursSeuilN2) / double(co2.size()));
 }
 
 /**
@@ -158,16 +158,15 @@ double Mesures::calculerProportionSeuilN2()
 int Mesures::calculerIndiceBrute(double proportionSeuilN1,
                                  double proportionSeuilN2)
 {
-    qDebug() << "proportionSeuilN1" << proportionSeuilN1;
-    qDebug() << "proportionSeuilN2" << proportionSeuilN2;
+    qDebug() << Q_FUNC_INFO << "proportionSeuilN1" << proportionSeuilN1
+             << "proportionSeuilN2" << proportionSeuilN2;
     double calculIndiceBrute = 0.;
     calculIndiceBrute =
-      ((2.5 / log10(2)) *
-       (log10(1 + proportionSeuilN1 + (3 * proportionSeuilN2))));
-    qDebug() << "calculIndiceBrute" << calculIndiceBrute;
-    int indiceBrute = nearbyint(calculIndiceBrute);
-    qDebug() << "indiceBrute" << indiceBrute;
-    return indiceBrute;
+      ((2.5 / log10(2.)) *
+       (log10(1. + proportionSeuilN1 + (3. * proportionSeuilN2))));
+    qDebug() << Q_FUNC_INFO << "calculIndiceBrute" << calculIndiceBrute
+             << "indiceBrute" << nearbyint(calculIndiceBrute);
+    return nearbyint(calculIndiceBrute);
 }
 
 /**

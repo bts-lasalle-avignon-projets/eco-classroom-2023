@@ -282,32 +282,37 @@ void EcoClassroom::chargerSalles()
         1702, 1798, 1805, 1850, 1730, 1896, 1355, 1755, 1704, 1940,
         1922, 1869, 1702, 1698, 1712, 1755, 1780, 1758, 1789, 1705 }); // en ppm
 
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB11" << mesuresCO2DeLaB11;
     for(int i = 0; i < mesuresCO2DeLaB11.size(); ++i)
     {
         salles["B11"]->setCO2(mesuresCO2DeLaB11[i]);
     }
+    qDebug() << Q_FUNC_INFO << salles["B11"]->getNom() << "indiceICONE"
+             << salles["B11"]->getIndiceICONE();
 
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB20" << mesuresCO2DeLaB20;
     for(int i = 0; i < mesuresCO2DeLaB20.size(); ++i)
     {
         salles["B20"]->setCO2(mesuresCO2DeLaB20[i]);
     }
+    qDebug() << Q_FUNC_INFO << salles["B20"]->getNom() << "indiceICONE"
+             << salles["B20"]->getIndiceICONE();
 
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB21" << mesuresCO2DeLaB21;
     for(int i = 0; i < mesuresCO2DeLaB21.size(); ++i)
     {
         salles["B21"]->setCO2(mesuresCO2DeLaB21[i]);
     }
+    qDebug() << Q_FUNC_INFO << salles["B21"]->getNom() << "indiceICONE"
+             << salles["B21"]->getIndiceICONE();
 
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB22" << mesuresCO2DeLaB22;
     for(int i = 0; i < mesuresCO2DeLaB22.size(); ++i)
     {
         salles["B22"]->setCO2(mesuresCO2DeLaB22[i]);
     }
-
-    salles["B11"]->getIndiceICONE();
-    salles["B20"]->getIndiceICONE();
-    salles["B21"]->getIndiceICONE();
-    salles["B22"]->getIndiceICONE();
-
-    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
+    qDebug() << Q_FUNC_INFO << salles["B22"]->getNom() << "indiceICONE"
+             << salles["B22"]->getIndiceICONE();
 #endif
 
     // Exemple avec une base de données SQLite

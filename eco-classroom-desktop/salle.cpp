@@ -161,8 +161,8 @@ QString Salle::getQualiteAir() const
 void Salle::setCO2(unsigned int co2)
 {
     mesures->setCO2(co2);
-    qDebug() << Q_FUNC_INFO << "nom" << nom << "co2" << co2;
 }
+
 /**
  * @fn Salle::getIndiceICONE
  * @brief méthode qui calcule l'indice ICONE(indice de confinement) et qui le
@@ -174,6 +174,7 @@ int Salle::getIndiceICONE()
     indiceICONE = mesures->calculerIndiceICONE();
     return indiceICONE;
 }
+
 /**
  * @fn Salle::afficherNiveauICONE
  * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
@@ -196,6 +197,7 @@ QString Salle::afficherNiveauICONE() const
     else
         return QString::number(indiceICONE);
 }
+
 /**
  * @brief Getter qui récupère l'etat de la lumiere
  */
