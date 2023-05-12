@@ -251,9 +251,6 @@ public class EcoClassroom extends AppCompatActivity
                 for(int indice = 0; indice < salles.size(); indice++)
                 {
                     Salle salle = salles.get(indice);
-                    /**
-                     * @todo A vérifier et à améliorer (cf. besoin du client)
-                     */
                     if((salle.getEtatFenetre() || salle.getEtatLumiere()) && !salle.getEstOccupe())
                         sallesFiltrees.add(salle);
                 }
