@@ -46,14 +46,10 @@ public class EcoClassroom extends AppCompatActivity
     private static final int DEPASSEMENT_CO2      = 2; //!< un dépassement de seuil de CO2
     // Les filtres
     private static final int TOUTES = 0; //!< la position de "Toutes" dans la liste déroulante
-    private static final int FENETRES_OUVERTES =
-      1; //!< choix du filtre des salles "Fenêtres ouvertes"
-    private static final int LUMIERES_ALLUMEES =
-      2; //!< choix du filtre des salles "Lumières allumées"
-    private static final int SALLES_LIBRES = 3; //!< choix du filtre des salles "Libres"
+    private static final int SALLES_LIBRES = 1; //!< choix du filtre des salles "Libres"
     private static final int DEPASSEMENT_DE_SEUIL =
-      4; //!< choix du filtre des salles "Dépassement de seuil"
-    private static final int INTERVENTION = 5; //!< choix du filtre des salles "Intervention"
+      2; //!< choix du filtre des salles "Dépassement de seuil"
+    private static final int INTERVENTION = 3; //!< choix du filtre des salles "Intervention"
 
     /**
      * Attributs
@@ -254,22 +250,6 @@ public class EcoClassroom extends AppCompatActivity
             case TOUTES:
                 sallesFiltrees.addAll(salles);
                 break;
-            case FENETRES_OUVERTES:
-                for(int indice = 0; indice < salles.size(); indice++)
-                {
-                    Salle salle = salles.get(indice);
-                    if(salle.getEtatFenetre())
-                        sallesFiltrees.add(salle);
-                }
-                break;
-            case LUMIERES_ALLUMEES:
-                for(int indice = 0; indice < salles.size(); indice++)
-                {
-                    Salle salle = salles.get(indice);
-                    if(salle.getEtatLumiere())
-                        sallesFiltrees.add(salle);
-                }
-                break;
             case SALLES_LIBRES:
                 for(int indice = 0; indice < salles.size(); indice++)
                 {
@@ -291,9 +271,6 @@ public class EcoClassroom extends AppCompatActivity
                 for(int indice = 0; indice < salles.size(); indice++)
                 {
                     Salle salle = salles.get(indice);
-                    /**
-                     * @todo A vérifier et à améliorer (cf. besoin du client)
-                     */
                     if((salle.getEtatFenetre() || salle.getEtatLumiere()) && !salle.getEstOccupe())
                         sallesFiltrees.add(salle);
                 }

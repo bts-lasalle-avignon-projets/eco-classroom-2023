@@ -2,8 +2,6 @@
 <resources>
     <string-array name="listeChoix">
         <item>Toutes</item>
-        <item>Fenêtres ouvertes</item>
-        <item>Lumières allumées</item>
         <item>Libres</item>
         <item>Dépassement de seuil</item>
         <item>Intervention</item>
