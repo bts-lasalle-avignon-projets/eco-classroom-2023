@@ -1,0 +1,152 @@
+format 224
+
+classinstance 128042 class_ref 134954 // EcoClassroom
+  name ""   xyz 165 4 2000 life_line_z 2000
+classinstance 129834 class_ref 134570 // BaseDeDonnees
+  name ""   xyz 1055 4 2000 life_line_z 2000
+note 130218 "requête SELECT sur la table Salle"
+  xyzwh 524 402 2000 321 91
+classinstance 131114 class_ref 135338 // Salle
+  name ""   xyz 897 4 2000 life_line_z 2000
+fragment 131498 "loop"
+  xyzwh 73.5 545 1995 1200 178
+end
+textcanvas 131626 "[pour toutes les salles]"
+  xyzwh 184.5 842 2015 293 30
+textcanvas 131754 "[pour toutes les salles]"
+  xyzwh 184.5 842 2015 293 30
+fragment 131882 "loop"
+  xyzwh 75.5 835 1995 1200 785
+end
+fragment 134058 "alt"
+  xyzwh 157 1240 1995 1056 328
+end
+textcanvas 134186 "[seuil dépassé]"
+  xyzwh 303 1253 2000 196 30
+durationcanvas 128170 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 264 100 2010 11 40
+end
+durationcanvas 128426 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 264 172 2010 11 40
+end
+durationcanvas 128682 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 264 239 2010 11 40
+end
+durationcanvas 128938 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 264 321 2010 11 1352
+  overlappingdurationcanvas 129194
+    xyzwh 270 783 2020 11 25
+  end
+  overlappingdurationcanvas 132010
+    xyzwh 270 915 2020 11 739
+    overlappingdurationcanvas 132266
+      xyzwh 276 974 2030 11 25
+    end
+    overlappingdurationcanvas 132522
+      xyzwh 276 1034 2030 11 25
+    end
+    overlappingdurationcanvas 132778
+      xyzwh 276 1096 2030 11 32
+    end
+    overlappingdurationcanvas 133034
+      xyzwh 276 1164 2030 11 298
+      overlappingdurationcanvas 133546
+	xyzwh 282 1423 2040 11 34
+      end
+      overlappingdurationcanvas 133802
+	xyzwh 282 1353 2040 11 26
+      end
+    end
+  end
+end
+durationcanvas 129962 classinstance_ref 129834 // :BaseDeDonnees
+  xyzwh 1170 371 2010 11 26
+end
+durationcanvas 131242 classinstance_ref 131114 // :Salle
+  xyzwh 934 649 2010 11 25
+end
+durationcanvas 133290 classinstance_ref 131114 // :Salle
+  xyzwh 934 1208 2010 11 25
+end
+reflexivemsg 128298 synchronous
+  to durationcanvas_ref 128170
+  yz 100 2015 msg operation_ref 138026 // "instancierWidgets() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 273 70
+reflexivemsg 128554 synchronous
+  to durationcanvas_ref 128426
+  yz 172 2015 msg operation_ref 138282 // "initialiserGUI() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 278 142
+reflexivemsg 128810 synchronous
+  to durationcanvas_ref 128682
+  yz 239 2015 msg operation_ref 148906 // "installerGestionEvenements() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 278 209
+reflexivemsg 129066 synchronous
+  to durationcanvas_ref 128938
+  yz 321 2015 msg operation_ref 138410 // "chargerSalles() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 276 291
+reflexivemsg 129322 synchronous
+  to durationcanvas_ref 129194
+  yz 783 2025 msg operation_ref 149290 // "effacerSalles() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 282 754
+msg 130090 synchronous
+  from durationcanvas_ref 128938
+  to durationcanvas_ref 129962
+  yz 372 2015 msg operation_ref 135722 // "recuperer(in requete : QString, inout donnees : QString) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 650 342
+msg 131370 synchronous
+  from durationcanvas_ref 128938
+  to durationcanvas_ref 131242
+  yz 650 2015 msg operation_ref 140970 // "Salle()"
+  stereotype "<<new>>" xyz 543 680 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 562 620
+reflexivemsg 132138 synchronous
+  to durationcanvas_ref 132010
+  yz 915 2025 msg operation_ref 136746 // "afficherSalleTable(in salle : Salle) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 280 885
+reflexivemsg 132394 synchronous
+  to durationcanvas_ref 132266
+  yz 974 2035 msg operation_ref 156714 // "creerElementsTexteCellule(in salle : Salle) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 288 943
+reflexivemsg 132650 synchronous
+  to durationcanvas_ref 132522
+  yz 1034 2035 msg operation_ref 156842 // "creerElementsImageCellule(in salle : Salle) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 287 1008
+reflexivemsg 132906 synchronous
+  to durationcanvas_ref 132778
+  yz 1096 2035 msg operation_ref 157226 // "insererElementsCellule() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 288 1067
+reflexivemsg 133162 synchronous
+  to durationcanvas_ref 133034
+  yz 1164 2035 msg operation_ref 157482 // "alerterDepassementSeuilCO2(in salle : Salle) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 287 1138
+msg 133418 synchronous
+  from durationcanvas_ref 133034
+  to durationcanvas_ref 133290
+  yz 1208 2035 msg operation_ref 141610 // "getCO2() : uint"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 550 1178
+reflexivemsg 133674 synchronous
+  to durationcanvas_ref 133546
+  yz 1423 2045 msg operation_ref 157610 // "notifierSignalementConfinement(in titre : QString, in message : QString) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 293 1391
+reflexivemsg 133930 synchronous
+  to durationcanvas_ref 133802
+  yz 1353 2045 msg operation_ref 157738 // "coloriserFondCellule(inout cellule : QTableWidgetItem, in couleur : QColor) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 293 1317
+line 130730 -_-_
+  from ref 130218 z 2016 to ref 130090
+end
