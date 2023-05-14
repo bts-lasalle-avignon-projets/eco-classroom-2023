@@ -669,6 +669,7 @@ public class BaseDeDonnees
                                         resultatRequete.getInt("humiditeMax"),
                                         resultatRequete.getInt("co2Max"),
                                         resultatRequete.getInt("indiceConfinement"));
+                                salle.setSeuils(seuils);
                                 salles.add(salle);
                             }
                             Message message = new Message();
