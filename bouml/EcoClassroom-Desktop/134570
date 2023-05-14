@@ -1,6 +1,6 @@
 format 224
 "eco-classroom-desktop" // eco-classroom-desktop
-  revision 4
+  revision 5
   modified_by 42 "tv"
   // class settings
   
@@ -366,7 +366,6 @@ ${body}}
 	MysqlColumn
 	comment "!< compte le nombre d'accès à l'instance unique"
       end
-
     end
 
     class 134698 "typedef1"
@@ -395,7 +394,10 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
-      comment "@class communiquationmqtt.h
+      comment "#include <QtMqtt/QMqttClient>
+#include <QtMqtt/QMqttSubscription>
+
+@class CommunicationMQTT
 @brief Classe permettant de gérer la communication MQTT
 "
       operation 136234 "CommunicationMQTT"
@@ -403,7 +405,7 @@ ${inlines}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Communication::CommunicationMQTT
+	cpp_def "//@fn CommunicationMQTT::CommunicationMQTT
 //@brief Constructeur par défaut de la classe CommunicationMQTT
 //
 
@@ -421,7 +423,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Communication::CommunicationMQTT
+	cpp_def "//@fn CommunicationMQTT::CommunicationMQTT
 //@brief Destructeur de la classe CommunicationMQTT
 //
 
@@ -724,6 +726,80 @@ ${body}}
 	comment "!< Affichage sous forme de table"
       end
 
+      attribute 151082 "elementNom"
+	private explicit_type "QTableWidgetItem"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 151210 "elementTHI"
+	private explicit_type "QTableWidgetItem"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 151338 "elementCO2"
+	private explicit_type "QTableWidgetItem"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Les élements d'une ligne de la table"
+      end
+
+      attribute 151466 "elementLumiere"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 151594 "elementFenetre"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 151722 "elementOccupation"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Les élements d'une ligne de la table"
+      end
+
       attribute 144298 "labelNomSalle"
 	private explicit_type "QLabel"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
@@ -750,6 +826,84 @@ ${body}}
 	comment "!< Le nom de salle"
       end
 
+      attribute 151850 "labelSuperficieSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le label pour le nom de la salle"
+      end
+
+      attribute 151978 "superficieSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< La superficie de la salle"
+      end
+
+      attribute 152106 "labelDescriptionSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le label pour le nom de la salle"
+      end
+
+      attribute 152234 "descriptionSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< La description de la salle"
+      end
+
+      attribute 152362 "labelIndiceQAirSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le label pour l'indice de la qualité d'air"
+      end
+
+      attribute 152490 "indiceQualiteAirSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'indice de la qualité de l'air"
+      end
+
       attribute 144554 "boutonRetourAccueil"
 	private explicit_type "QPushButton"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
@@ -761,6 +915,19 @@ ${body}}
 	mysql_decl ""
 	MysqlColumn
 	comment "!< Bouton de retour"
+      end
+
+      attribute 152618 "notificationEcoClassroom"
+	private explicit_type "QSystemTrayIcon"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Notification système du confinement"
       end
 
       operation 138026 "instancierWidgets"
@@ -842,7 +1009,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn EcoClassroom::gererEvenements
+	cpp_def "//@fn EcoClassroom::installerGestionEvenements
 //@brief Installe les gestionnaire d'évènements (signal/slot)
 //
 
@@ -873,18 +1040,124 @@ ${body}}
 	
       end
 
+      operation 156714 "creerElementsTexteCellule"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "salle" type class_ref 135338 // Salle
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::creerElementsTexteCellule
+//@param salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 156842 "creerElementsImageCellule"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "salle" type class_ref 135338 // Salle
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief EcoClassroom::creerElementsImageCellule
+//@param salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 156970 "personnaliserElementsTexte"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::personnaliserElementsTexte
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 157098 "personnaliserElementsImage"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn personnaliserElementsImage
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 157226 "insererElementsCellule"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::insererElementsCellule
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 157354 "redimensionnerHauteurTable"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::redimensionnerHauteurTable
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 136746 "afficherSalleTable"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 1
 	  param in name "salle" type class_ref 135338 // Salle
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn EcoClassroom::afficheSalleTable
+	cpp_def "//@fn EcoClassroom::afficherSalleTable
 //@brief Affiche une salle dans le tableau
 //@param salle La salle à afficher dans le tableau
 //
 
-${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -940,6 +1213,130 @@ ${body}}
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 157482 "alerterDepassementSeuilCO2"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "salle" type class_ref 135338 // Salle
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::alerterDepassementSeuil
+//@brief Vérifie et alerte d'un dépassement de seuil de CO2 dans une salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 157610 "notifierSignalementConfinement"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 2
+	  param in name "titre" explicit_type "QString"
+	  param in name "message" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::notifierSignalementConfinement
+//@brief Signale le confinement d'une salle grâce à une notification système
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 157738 "coloriserFondCellule"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 2
+	  param inout name "cellule" explicit_type "QTableWidgetItem"
+	  param in name "couleur" explicit_type "QColor"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::coloriserFondCellule
+//@brief Colorie le fond d'une cellule d'un QTableWidget
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, const ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Pour le QTableWidget"
+      end
+
+      operation 157866 "coloriserFondCellule"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 2
+	  param inout name "cellule" explicit_type "QTableWidgetItem"
+	  param in name "couleur" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::coloriserFondCellule
+//@brief Colorie le fond d'une cellule d'un QTableWidget
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, const ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 157994 "coloriserFondCellule"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 4
+	  param inout name "tableWidgetSalles" explicit_type "QTableWidget"
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	  param in name "couleur" explicit_type "QColor"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, const ${t3} & ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::coloriserFondCellule
+//@brief Colorie le fond d'une cellule d'un QTableWidget
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} ${p1}, ${t2} ${p2}, const ${t3} & ${p3}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 158122 "coloriserFondCellule"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 4
+	  param inout name "tableWidgetSalles" explicit_type "QTableWidget"
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	  param in name "couleur" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, const ${t3} & ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::coloriserFondCellule
+//@brief Colorie le fond d'une cellule d'un QTableWidget
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} ${p1}, ${t2} ${p2}, const ${t3} & ${p3}${)}${const}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1040,7 +1437,6 @@ ${body}}
 	
 	
       end
-
     end
 
     class 135082 "typedef2"
@@ -1155,6 +1551,20 @@ ${body}}
 	
 	
 	
+	comment "
+@enum IndiceQualiteAir
+@brief Définit les différentes colonne du tableau
+
+enum IndiceQualiteAir
+{
+Excellente,
+Tres_Bien,
+Modere,
+Mauvais,
+Tres_Mauvais,
+Severe
+};
+"
       end
 
       operation 141098 "Salle"
@@ -1165,8 +1575,8 @@ ${body}}
 	  param in name "description" explicit_type "QString"
 	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::~Salle
-//@brief Destructeur de la classe Salle
+	cpp_def "//@fn Salle::Salle
+//@brief Constructeur de la classe Salle
 //
 
 ${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
@@ -1186,8 +1596,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getNom
-//@brief Getter de l'attribut nom
+	cpp_def "//@brief Getter de l'attribut nom
 //@return string le nom de la salle
 //
 
@@ -1205,8 +1614,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getSuperficie
-//@brief Getter de l'attribut superficie
+	cpp_def "//@brief Getter de l'attribut superficie
 //@return unsigned int la superficie de la salle
 //
 
@@ -1224,8 +1632,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getDescription
-//@brief Getter de l'attribut description
+	cpp_def "//@brief Getter de l'attribut description
 //@return string la description de la salle
 //
 
@@ -1244,8 +1651,7 @@ ${body}}
 	  param in name "nom" explicit_type "QString"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::setNom
-//@brief Setter de l'attribut nom
+	cpp_def "//@brief Setter de l'attribut nom
 //@param nom
 //
 
@@ -1264,8 +1670,7 @@ ${body}}
 	  param in name "superficie" explicit_type "uint"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::setSuperficie
-//@brief Setter de l'attribut superficie
+	cpp_def "//@brief Setter de l'attribut superficie
 //@param superficie
 //
 
@@ -1284,8 +1689,7 @@ ${body}}
 	  param in name "description" explicit_type "QString"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::setDescription
-//@brief Setter de l'attribut description
+	cpp_def "//@brief Setter de l'attribut description
 //@param description
 //
 
@@ -1303,8 +1707,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getTemperature
-//@brief Getter qui récupère la temperature
+	cpp_def "//@brief Getter qui récupère la temperature
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -1321,8 +1724,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getHumidite
-//@brief Getter qui récupère l'humidite
+	cpp_def "//@brief Getter qui récupère l'humidite
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -1339,11 +1741,47 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getCO2
-//@brief Getter qui récupère le CO2
+	cpp_def "//@brief Getter qui récupère le CO2
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 158250 "getQualiteAir"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Méthode qui évalue la qualité d'air grâce a l'attribut Co2 de l'objet
+//Salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 158378 "setCO2"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "co2" explicit_type "uint"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Setter qui attribut une valeur a l'attribut Co2 de l'objet Salle
+//@param co2
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1357,8 +1795,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getLumiere
-//@brief Getter qui récupère l'etat de la lumiere
+	cpp_def "//@brief Getter qui récupère l'etat de la lumiere
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -1375,8 +1812,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getFenetre
-//@brief Getter qui récupère l'etat de la fenetre
+	cpp_def "//@brief Getter qui récupère l'etat de la fenetre
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -1393,8 +1829,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@fn Salle::getOccupation
-//@brief Getter qui récupère l'etat de l'occupation de la salle
+	cpp_def "//@brief Getter qui récupère l'etat de l'occupation de la salle
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -1507,7 +1942,15 @@ ${inlines}
 //@param occupation l'état d'occupation de la salle
 //
 
+//@fn EtatsSalle::EtatsSalle
+//@brief Constructeur par defaut de la classe EtatsSalle
+//@param lumiere l'état de la lumière dans la salle
+//@param fenetre l'état d'ouverture des fenêtres de la salle
+//@param occupation l'état d'occupation de la salle
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${)} : lumiere(false), fenetre(false), occupation(false)
+ : lumiere(false), fenetre(false), occupation(false)
 ${throw}{
 ${body}}
 "
@@ -1532,7 +1975,16 @@ ${body}}
 //@param occupation l'état d'occupation de la salle (true : occupée)
 //
 
+//@fn EtatsSalle::EtatsSalle
+//@brief Constructeur d'initialisation de la classe EtatsSalle
+//@param lumiere l'état de la lumière dans la salle (true : allumée)
+//@param fenetre l'état d'ouverture des fenêtres de la salle (true : ouverte)
+//@param occupation l'état d'occupation de la salle (true : occupée)
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
+    lumiere(lumiere), fenetre(fenetre), occupation(occupation)
+ :
     lumiere(lumiere), fenetre(fenetre), occupation(occupation)
 ${throw}{
 ${body}}
@@ -1552,6 +2004,10 @@ ${body}}
 //@brief Destructeur de la clase EtatsSalle
 //
 
+//@fn EtatsSalle::~EtatsSalle
+//@brief Destructeur de la clase EtatsSalle
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
@@ -1567,6 +2023,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::getLumiere
+//@brief Getter de l'attribut lumiere
+//@return bool l'état de la lumière dans la salle (true : allumée)
+//
+
+//@fn EtatsSalle::getLumiere
 //@brief Getter de l'attribut lumiere
 //@return bool l'état de la lumière dans la salle (true : allumée)
 //
@@ -1590,6 +2051,11 @@ ${body}}
 //@return bool l'état d'une fenetre dans la salle (true : ouverte)
 //
 
+//@fn EtatsSalle::getFenetre
+//@brief Getter de l'attribut fenetre
+//@return bool l'état d'une fenetre dans la salle (true : ouverte)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -1605,6 +2071,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::getOccupation
+//@brief Getter de l'attribut occupation
+//@return bool l'état de l'occupation dans la salle (true : Occupé)
+//
+
+//@fn EtatsSalle::getOccupation
 //@brief Getter de l'attribut occupation
 //@return bool l'état de l'occupation dans la salle (true : Occupé)
 //
@@ -1629,6 +2100,11 @@ ${body}}
 //@param lumiere l'état de la lumière dans la salle (true : allumée)
 //
 
+//@fn EtatsSalle::setLumiere
+//@brief Setter de l'attribut lumiere
+//@param lumiere l'état de la lumière dans la salle (true : allumée)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -1649,6 +2125,11 @@ ${body}}
 //@param fenetre l'état d'ouverture des fenêtres dans la salle (true : ouverte)
 //
 
+//@fn EtatsSalle::setFenetre
+//@brief Setter de l'attribut fenetre
+//@param fenetre l'état d'ouverture des fenêtres dans la salle (true : ouverte)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -1665,6 +2146,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::setOccupation
+//@brief Setter de l'attribut occupation
+//@param occupation l'état d'occupation de la salle (true : occupée)
+//
+
+//@fn EtatsSalle::setOccupation
 //@brief Setter de l'attribut occupation
 //@param occupation l'état d'occupation de la salle (true : occupée)
 //
@@ -1890,7 +2376,6 @@ ${body}}
 	
 	
       end
-
     end
 
     classdiagram 134570 "diagramme classes"

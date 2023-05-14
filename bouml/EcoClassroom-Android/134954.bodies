@@ -2,12 +2,12 @@ class Salle
 !!!136362.java!!!	Salle()
         this.nom              = "";
         this.description      = "";
-        this.superficie       = 0.0;
-        this.temperature      = 0.0;
-        this.humidite         = 0;
-        this.co2              = 0;
-        this.qualiteAir       = 0;
-        this.confortThermique = -4;
+        this.superficie       = SUPERFICIE_PAR_DEFAUT;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
@@ -17,11 +17,11 @@ class Salle
         this.nom              = nom;
         this.description      = description;
         this.superficie       = superficie;
-        this.temperature      = 0.0;
-        this.humidite         = 0;
-        this.co2              = 0;
-        this.qualiteAir       = 0;
-        this.confortThermique = -4;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
@@ -31,11 +31,11 @@ class Salle
         this.nom              = nom;
         this.description      = description;
         this.superficie       = superficie;
-        this.temperature      = 0.0;
-        this.humidite         = 0;
-        this.co2              = 0;
-        this.qualiteAir       = 0;
-        this.confortThermique = -4;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
@@ -94,16 +94,17 @@ class Salle
 !!!157738.java!!!	setSeuils(inout seuils : Seuils) : void
         this.seuils = seuils;
 !!!165162.java!!!	estSeuilTemperatureDepasse() : boolean
-        if(getTemperature() < getSeuils().getTemperatureMin() ||
-           getTemperature() > getSeuils().getTemperatureMax())
+        if((getTemperature() < getSeuils().getTemperatureMin() ||
+           getTemperature() > getSeuils().getTemperatureMax()) &&
+             (getTemperature() != TEMPERATURE_PAR_DEFAUT))
             return true;
         return false;
 !!!165290.java!!!	estSeuilHumiditeDepasse() : boolean
-        if(getHumidite() < getSeuils().getHumiditeMin() ||
-           getHumidite() > getSeuils().getHumiditeMax())
+        if((getHumidite() < getSeuils().getHumiditeMin() ||
+           getHumidite() > getSeuils().getHumiditeMax()) && (getHumidite() != HUMIDITE_PAR_DEFAUT))
             return true;
         return false;
 !!!165418.java!!!	estSeuilCo2Depasse() : boolean
-        if(getCo2() >= getSeuils().getCo2Max())
+        if(getCo2() >= getSeuils().getCo2Max() && (getCo2() != CO2_PAR_DEFAUT))
             return true;
         return false;

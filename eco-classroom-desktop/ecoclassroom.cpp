@@ -488,6 +488,7 @@ void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
         coloriserFondCellule(elementCO2, QColor(255, 255, 255));
     }
 }
+
 /**
  * @fn EcoClassroom::notifierSignalementConfinement
  * @brief Signale le confinement d'une salle grâce à une notification système

@@ -28,6 +28,37 @@ class Salle
     if(mesures != nullptr)
         return mesures->getCO2();
     return 0;
+!!!158250.cpp!!!	getQualiteAir() : QString
+    unsigned int valeurCO2 = getCO2();
+    if(valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_EXCELLENTE)
+    {
+        return EXCELLENTE;
+    }
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_BIEN &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_BIEN)
+    {
+        return TRES_BIEN;
+    }
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MODERE &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MODERE)
+    {
+        return MODERE;
+    }
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MAUVAIS)
+    {
+        return MAUVAIS;
+    }
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS)
+    {
+        return TRES_MAUVAIS;
+    }
+    else
+        return SEVERE;
+!!!158378.cpp!!!	setCO2(in co2 : uint) : void
+    mesures->setCO2(co2);
+    qDebug() << Q_FUNC_INFO << "co2 : " << co2;
 !!!139010.cpp!!!	getLumiere() : bool
     if(etats != nullptr)
         return etats->getLumiere();

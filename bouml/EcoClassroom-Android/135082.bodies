@@ -83,22 +83,6 @@ class EcoClassroom
             case TOUTES:
                 sallesFiltrees.addAll(salles);
                 break;
-            case FENETRES_OUVERTES:
-                for(int indice = 0; indice < salles.size(); indice++)
-                {
-                    Salle salle = salles.get(indice);
-                    if(salle.getEtatFenetre())
-                        sallesFiltrees.add(salle);
-                }
-                break;
-            case LUMIERES_ALLUMEES:
-                for(int indice = 0; indice < salles.size(); indice++)
-                {
-                    Salle salle = salles.get(indice);
-                    if(salle.getEtatLumiere())
-                        sallesFiltrees.add(salle);
-                }
-                break;
             case SALLES_LIBRES:
                 for(int indice = 0; indice < salles.size(); indice++)
                 {
@@ -120,9 +104,6 @@ class EcoClassroom
                 for(int indice = 0; indice < salles.size(); indice++)
                 {
                     Salle salle = salles.get(indice);
-                    /**
-                     * @todo A vérifier et à améliorer (cf. besoin du client)
-                     */
                     if((salle.getEtatFenetre() || salle.getEtatLumiere()) && !salle.getEstOccupe())
                         sallesFiltrees.add(salle);
                 }

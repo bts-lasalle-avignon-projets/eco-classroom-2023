@@ -1,6 +1,6 @@
 format 224
 "eco_classroom_mobile" // eco_classroom_mobile
-  revision 6
+  revision 7
   modified_by 42 "tv"
   // class settings
   
@@ -604,7 +604,7 @@ ${members}}
 
       attribute 165290 "TEMPERATURE_PAR_DEFAUT"
 	class_attribute const_attribute public explicit_type "double"
-	init_value " 0.0"
+	init_value " -50"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -618,7 +618,7 @@ ${members}}
 
       attribute 165418 "HUMIDITE_PAR_DEFAUT"
 	class_attribute const_attribute public explicit_type "int"
-	init_value " 0"
+	init_value " -1"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1406,40 +1406,9 @@ ${members}};
 !< la position de \"Toutes\" dans la liste déroulante"
       end
 
-      attribute 164522 "FENETRES_OUVERTES"
-	class_attribute const_attribute private explicit_type "int"
-	init_value "
-      1"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< choix du filtre des salles \"Fenêtres ouvertes\""
-      end
-
-      attribute 164650 "LUMIERES_ALLUMEES"
-	class_attribute const_attribute private explicit_type "int"
-	init_value "
-      2"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< choix du filtre des salles \"Lumières allumées\""
-      end
-
       attribute 164778 "SALLES_LIBRES"
 	class_attribute const_attribute private explicit_type "int"
-	init_value "
-      3"
+	init_value " 1"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1454,7 +1423,7 @@ ${members}};
       attribute 164906 "DEPASSEMENT_DE_SEUIL"
 	class_attribute const_attribute private explicit_type "int"
 	init_value "
-      4"
+      2"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1468,8 +1437,7 @@ ${members}};
 
       attribute 165034 "INTERVENTION"
 	class_attribute const_attribute private explicit_type "int"
-	init_value "
-            5"
+	init_value " 3"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1515,18 +1483,14 @@ ${members}};
 	  b parent class_ref 141866 // BaseDeDonnees
       end
 
-      attribute 148010 "handler"
-	private explicit_type "Handler"
-	init_value " null"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 162090 // handler (<unidirectional association>)
+	relation 162090 --->
+	  a role_name "handler" init_value " null" private
+	    comment "<! le handler utilisé par l'activité"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "<! le handler utilisé par l'activité"
+	    classrelation_ref 162090 // handler (<unidirectional association>)
+	  b parent class_ref 148906 // Handler
       end
 
       attribute 157738 "notificationManager"
@@ -1919,6 +1883,7 @@ salle
 @param typeDepassement Indique le type de dépassement de seuil
 "
       end
+
     end
 
     classdiagram 134570 "diagramme de classes 0.2"
@@ -2317,18 +2282,14 @@ l'application Android et une bose de données distante.
 	  b parent class_ref 141866 // BaseDeDonnees
       end
 
-      attribute 147370 "handler"
-	private explicit_type "Handler"
-	init_value " null"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 161962 // handler (<unidirectional association>)
+	relation 161962 --->
+	  a role_name "handler" init_value " null" private
+	    comment "<! Le handler pour l'échange de messages entre les threads"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "<! Le handler pour l'échange de messages entre les threads"
+	    classrelation_ref 161962 // handler (<unidirectional association>)
+	  b parent class_ref 148906 // Handler
       end
 
       classrelation 148394 // salles (<unidirectional association>)
@@ -2732,6 +2693,7 @@ traitement ce qui aura pour effet d'appeler automatiquement onProgressUpdate()
 @return salles Un vector de Salle
 "
       end
+
     end
 
     class 142250 "Seuils"
@@ -3139,6 +3101,20 @@ ${members}}
 @return int L'indice de confinement
 "
       end
+    end
+
+    class 148906 "Handler"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
     end
   end
 
