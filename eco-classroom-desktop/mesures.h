@@ -12,6 +12,9 @@
 #define CONFINEMENT_ELEVE      3
 #define CONFINEMENT_TRES_ELEVE 4
 #define CONFINEMENT_EXTREME    5
+
+#define SEUIL_BAS_CO2_DEFINI 1000
+#define SEUIL_HAUT_CO2_DEFINI 1700
 /**
  * @class Mesures
  * @brief Classe permettant de gérer les mesures d'une salle

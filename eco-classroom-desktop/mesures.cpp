@@ -118,7 +118,7 @@ double Mesures::calculerProportionSeuilN1()
     int nbValeursSeuilN1 = 0;
     for(int i = 0; i < co2.size(); i++)
     {
-        if((co2[i] >= 1000) && (co2[i] <= 1700))
+        if((co2[i] >= SEUIL_BAS_CO2_DEFINI) && (co2[i] <= SEUIL_HAUT_CO2_DEFINI))
         {
             nbValeursSeuilN1++;
         }
@@ -138,7 +138,7 @@ double Mesures::calculerProportionSeuilN2()
     int nbValeursSeuilN2 = 0;
     for(int i = 0; i < co2.size(); i++)
     {
-        if(co2[i] >= 1700)
+        if(co2[i] >= SEUIL_HAUT_CO2_DEFINI)
         {
             nbValeursSeuilN2++;
         }
@@ -165,8 +165,8 @@ int Mesures::calculerIndiceBrute(double proportionSeuilN1,
       ((2.5 / log10(2.)) *
        (log10(1. + proportionSeuilN1 + (3. * proportionSeuilN2))));
     qDebug() << Q_FUNC_INFO << "calculIndiceBrute" << calculIndiceBrute
-             << "indiceBrute" << nearbyint(calculIndiceBrute);
-    return nearbyint(calculIndiceBrute);
+             << "indiceBrute" << round(calculIndiceBrute);
+    return round(calculIndiceBrute);
 }
 
 /**
