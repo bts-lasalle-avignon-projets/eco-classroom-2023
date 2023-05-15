@@ -123,8 +123,10 @@ void EcoClassroom::instancierWidgets()
     layoutF2Informations->addWidget(superficieSalle, 1, 1);
     layoutF2Informations->addWidget(labelDescriptionSalle, 2, 0);
     layoutF2Informations->addWidget(descriptionSalle, 2, 1);
-    layoutF2Informations->addWidget(labelIndiceQAirSalle, 3, 0);
+    layoutF2Informations->addWidget(labelIndiceQualiteAirSalle, 3, 0);
     layoutF2Informations->addWidget(indiceQualiteAirSalle, 3, 1);
+    layoutF2Informations->addWidget(labelIndiceICONE, 4, 0);
+    layoutF2Informations->addWidget(indiceICONE, 4, 1);
     layoutF2Boutons->addStretch();
     layoutF2Boutons->addWidget(boutonRetourAccueil);
     layoutF2Principal->addLayout(layoutF2Informations);
@@ -153,6 +155,7 @@ void EcoClassroom::initialiserTable()
     nomColonnesTable << "Salle"
                      << "Confort thermique"
                      << "Qualité air"
+                     << "Indice ICONE"
                      << "Lumières"
                      << "Occupée"
                      << "Fenêtres";
@@ -189,10 +192,11 @@ void EcoClassroom::initialiserTable()
 void EcoClassroom::initialiserFenetreInformations()
 {
     // initialisation widgets dans la fênetre information
-    labelNomSalle         = new QLabel(this);
-    labelSuperficieSalle  = new QLabel(this);
-    labelDescriptionSalle = new QLabel(this);
-    labelIndiceQAirSalle  = new QLabel(this);
+    labelNomSalle              = new QLabel(this);
+    labelSuperficieSalle       = new QLabel(this);
+    labelDescriptionSalle      = new QLabel(this);
+    labelIndiceQualiteAirSalle = new QLabel(this);
+    labelIndiceICONE           = new QLabel(this);
 
     // affichage du widget
     labelNomSalle->setText("Nom :");
@@ -204,8 +208,11 @@ void EcoClassroom::initialiserFenetreInformations()
     labelDescriptionSalle->setText("Description :");
     descriptionSalle = new QLabel(this);
 
-    labelIndiceQAirSalle->setText("Indice Qualité de l'air :");
+    labelIndiceQualiteAirSalle->setText("Indice Qualité de l'air :");
     indiceQualiteAirSalle = new QLabel(this);
+
+    labelIndiceICONE->setText("Indice ICONE :");
+    indiceICONE = new QLabel(this);
 
     // bouton pour quitter la fênetre
     boutonRetourAccueil = new QPushButton("Ok", this);
@@ -254,11 +261,59 @@ void EcoClassroom::chargerSalles()
     salles["B20"] = new Salle("B20", 65, "Atelier");
     salles["B21"] = new Salle("B21", 35, "Salle de TP");
     salles["B22"] = new Salle("B22", 80, "Salle de cours");
-    // Tests CO2
-    salles["B11"]->setCO2(605);
-    salles["B20"]->setCO2(1259);
-    salles["B21"]->setCO2(825);
-    salles["B22"]->setCO2(1355);
+
+#ifdef SIMULATION_ICONE
+    // différentes mesures
+    // échantillons (5 h de mesures - 1 mesure toutes les 10 minutes)
+    QVector<unsigned int> mesuresCO2DeLaB11(
+      { 312,  455,  380,  658,  889,  905,  1100, 1540, 1422, 1669,
+        1702, 1698, 1805, 1850, 1630, 1496, 1355, 1255, 1104, 1040,
+        922,  669,  702,  698,  512,  555,  480,  404,  489,  458 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB20(
+      { 312,  455, 380,  658,  889,  905, 999, 997, 822, 969,
+        1002, 698, 1005, 1050, 1130, 896, 855, 755, 804, 840,
+        622,  669, 702,  698,  512,  555, 480, 458, 489, 999 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB21(
+      { 312, 455, 380, 658, 889, 905, 900, 940, 922, 969,
+        702, 698, 805, 850, 630, 496, 355, 255, 504, 540,
+        922, 669, 702, 698, 512, 555, 480, 458, 489, 540 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB22(
+      { 1312, 1455, 1380, 1658, 189,  1905, 1701, 1740, 1722, 1769,
+        1702, 1798, 1805, 1850, 1730, 1896, 1355, 1755, 1704, 1940,
+        1922, 1869, 1702, 1698, 1712, 1755, 1780, 1758, 1789, 1705 }); // en ppm
+
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB11" << mesuresCO2DeLaB11;
+    for(int i = 0; i < mesuresCO2DeLaB11.size(); ++i)
+    {
+        salles["B11"]->setCO2(mesuresCO2DeLaB11[i]);
+    }
+    qDebug() << Q_FUNC_INFO << salles["B11"]->getNom() << "indiceICONE"
+             << salles["B11"]->getIndiceICONE();
+
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB20" << mesuresCO2DeLaB20;
+    for(int i = 0; i < mesuresCO2DeLaB20.size(); ++i)
+    {
+        salles["B20"]->setCO2(mesuresCO2DeLaB20[i]);
+    }
+    qDebug() << Q_FUNC_INFO << salles["B20"]->getNom() << "indiceICONE"
+             << salles["B20"]->getIndiceICONE();
+
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB21" << mesuresCO2DeLaB21;
+    for(int i = 0; i < mesuresCO2DeLaB21.size(); ++i)
+    {
+        salles["B21"]->setCO2(mesuresCO2DeLaB21[i]);
+    }
+    qDebug() << Q_FUNC_INFO << salles["B21"]->getNom() << "indiceICONE"
+             << salles["B21"]->getIndiceICONE();
+
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB22" << mesuresCO2DeLaB22;
+    for(int i = 0; i < mesuresCO2DeLaB22.size(); ++i)
+    {
+        salles["B22"]->setCO2(mesuresCO2DeLaB22[i]);
+    }
+    qDebug() << Q_FUNC_INFO << salles["B22"]->getNom() << "indiceICONE"
+             << salles["B22"]->getIndiceICONE();
+#endif
 
     // Exemple avec une base de données SQLite
     /*
@@ -295,9 +350,10 @@ void EcoClassroom::chargerSalles()
  */
 void EcoClassroom::creerElementsTexteCellule(const Salle& salle)
 {
-    elementNom = new QTableWidgetItem(salle.getNom());
-    elementTHI = new QTableWidgetItem(QString("Inconnu"));
-    elementCO2 = new QTableWidgetItem(QString(salle.getQualiteAir()));
+    elementNom   = new QTableWidgetItem(salle.getNom());
+    elementTHI   = new QTableWidgetItem(QString("Inconnu"));
+    elementCO2   = new QTableWidgetItem(QString(salle.getQualiteAir()));
+    elementICONE = new QTableWidgetItem(QString(salle.afficherNiveauICONE()));
 
     personnaliserElementsTexte();
 }
@@ -338,6 +394,8 @@ void EcoClassroom::personnaliserElementsTexte()
     elementTHI->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     elementCO2->setFlags(Qt::ItemIsEnabled);
     elementCO2->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementICONE->setFlags(Qt::ItemIsEnabled);
+    elementICONE->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
 /**
@@ -364,6 +422,7 @@ void EcoClassroom::insererElementsCellule()
                                COLONNE_SALLE_CONFORT_THERMIQUE,
                                elementTHI);
     tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_QUALITE_AIR, elementCO2);
+    tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_ICONE, elementICONE);
     tableWidgetSalles->setCellWidget(nb - 1,
                                      COLONNE_SALLE_LUMIERES,
                                      elementLumiere);
@@ -395,7 +454,8 @@ void EcoClassroom::afficherSalleTable(const Salle& salle)
 {
     qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
              << salle.getTemperature() << "humidite" << salle.getHumidite()
-             << "CO2" << salle.getCO2() << "lumiere" << salle.getLumiere()
+             << "CO2" << salle.getCO2() << "Indice ICONE"
+             << salle.afficherNiveauICONE() << "lumiere" << salle.getLumiere()
              << "fenetre" << salle.getFenetre() << "occupation"
              << salle.getOccupation();
 
@@ -429,7 +489,8 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
                              " m<sup>2</sup>");
     descriptionSalle->setText(salle.getDescription());
     indiceQualiteAirSalle->setText(salle.getQualiteAir() + " (" +
-                                   QString::number(salle.getCO2()) + " ppm)");
+                                   QString::number(salle.getCO2()) + "ppm) ");
+    indiceICONE->setText(salle.afficherNiveauICONE());
     afficherFenetreInformations();
 }
 
@@ -485,7 +546,7 @@ void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
     else
     {
         // Fond de la cellule normal
-        coloriserFondCellule(elementCO2, QColor(255, 255, 255));
+        coloriserFondCellule(elementCO2, QColor(0, 150, 0));
     }
 }
 

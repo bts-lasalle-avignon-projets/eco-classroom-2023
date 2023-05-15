@@ -32,6 +32,13 @@
 #define TRES_MAUVAIS "Très Mauvais"
 #define SEVERE       "Sévère"
 
+#define CONFINEMENT_NUL        0
+#define CONFINEMENT_FAIBLE     1
+#define CONFINEMENT_MOYEN      2
+#define CONFINEMENT_ELEVE      3
+#define CONFINEMENT_TRES_ELEVE 4
+#define CONFINEMENT_EXTREME    5
+
 class Mesures;
 class EtatsSalle;
 
@@ -45,6 +52,7 @@ class Salle
     QString      nom;         //!< Nom de la salle
     unsigned int superficie;  //!< Superficie de la salle
     QString      description; //!< Description de la salle
+    int          indiceICONE; //!< indice Confinement de la salle
     Mesures*
       mesures; //!<  Relation entre la classe Salle et Mesures (agrégation)
     EtatsSalle*
@@ -80,12 +88,13 @@ class Salle
     unsigned int getCO2() const;
     QString      getQualiteAir() const;
     void         setCO2(unsigned int co2);
+    int          getIndiceICONE();
+    QString      afficherNiveauICONE() const;
     bool         getLumiere() const;
     bool         getFenetre() const;
     bool         getOccupation() const;
     void         calculerTHI();
     void         calculerIADI();
-    void         calculerICONE();
 };
 
 #endif // SALLE_H
