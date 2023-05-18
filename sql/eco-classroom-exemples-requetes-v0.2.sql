@@ -18,6 +18,9 @@ WHERE idIndiceQualiteAir > '0';
 
 SELECT * FROM Salle;
 
+SELECT * FROM Salle
+INNER JOIN Seuils ON Seuils.idSalle=Salle.idSalle;
+
 SELECT Salle.nom,IndiceConfortTHI.libelle,IndiceQualiteAir.libelle FROM Salle
 INNER JOIN IndiceConfortTHI ON IndiceConfortTHI.idIndiceConfortTHI=Salle.idIndiceConfortTHI
 INNER JOIN IndiceQualiteAir ON IndiceQualiteAir.idIndiceQualiteAir=Salle.idIndiceQualiteAir;

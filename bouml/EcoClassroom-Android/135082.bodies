@@ -4,16 +4,18 @@ class EcoClassroom
         setContentView(R.layout.ecoclassroom);
         Log.d(TAG, "onCreate()");
 
-        chargerSalles();
-        afficherSalles();
-
+        initialiserActualisationSalles();
+        initialiserHandler();
         initialiserVueSalles();
+        initialiserBaseDeDonnees();
 !!!135210.java!!!	onStart() : void
         super.onStart();
         Log.d(TAG, "onStart()");
 !!!135338.java!!!	onResume() : void
         super.onResume();
         Log.d(TAG, "onResume()");
+        baseDeDonnees.setHandler(handler);
+        chargerSalles();
 !!!135466.java!!!	onPause() : void
         super.onPause();
         Log.d(TAG, "onPause()");
@@ -23,31 +25,241 @@ class EcoClassroom
 !!!135722.java!!!	onDestroy() : void
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
+!!!171946.java!!!	initialiserActualisationSalles() : void
+        actualisationSalles = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        actualisationSalles.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh()
+            {
+                chargerSalles();
+                actualisationSalles.setRefreshing(false);
+            }
+        });
 !!!135850.java!!!	initialiserVueSalles() : void
-        vueSalles = (RecyclerView)findViewById(R.id.listeSalles);
+        this.salles          = new Vector<Salle>();
+        this.sallesAffichees = new Vector<Salle>();
+        vueSalles            = (RecyclerView)findViewById(R.id.listeSalles);
         vueSalles.setHasFixedSize(true);
 
         layoutVueSalles = new LinearLayoutManager(this);
         vueSalles.setLayoutManager(layoutVueSalles);
 
-        adaptateurSalle = new AdaptateurSalle(salles);
-        vueSalles.setAdapter(adaptateurSalle);
-!!!135978.java!!!	afficherSalles() : void
-        for(int i = 0; i < salles.size(); i++)
+        initialiserListeDeroulante();
+!!!164266.java!!!	setSalles(inout salles : Vector<Salle>) : void
+        this.salles.clear();
+        this.salles.addAll(salles);
+!!!135978.java!!!	afficherSalles(inout salles : Vector<Salle>) : void
+        Log.d(TAG, "afficherSalles() Nb salles = " + salles.size());
+        this.sallesAffichees.clear();
+        this.sallesAffichees.addAll(salles);
+        if(this.adaptateurSalle == null)
         {
-            Log.d(TAG, "afficherSalles() salle : nom = " + salles.get(i).getNom());
+            adaptateurSalle = new AdaptateurSalle(this.sallesAffichees);
+            vueSalles.setAdapter(adaptateurSalle);
+        }
+        // Force le rafraichissement de la liste des salles
+        this.adaptateurSalle.notifyDataSetChanged();
+!!!164394.java!!!	effacerSalles() : void
+        this.sallesAffichees.clear();
+        if(this.adaptateurSalle != null)
+        {
+            // Force le rafraichissement de la liste des salles
+            this.adaptateurSalle.notifyDataSetChanged();
         }
 !!!136106.java!!!	ajouterSalle(in nom : String, in description : String, in superficie : double) : void
         salles.add(new Salle(nom, superficie, description));
 !!!136234.java!!!	chargerSalles() : void
-        salles = new Vector<Salle>();
-        ajouterSalle("B11", "Salle de cours", 18);
-        ajouterSalle("B20", "Salle de TP", 65);
-        ajouterSalle("B21", "Salle de Physiques", 40);
+        Log.d(TAG, "chargerSalles()");
+        baseDeDonnees.chargerSalles();
+!!!164522.java!!!	filtrerSalles(in choix : int) : void
+        if(salles != null)
+            Log.d(TAG,
+                  "filtrerSalles() choix : " + choix + " Nb salles totales  : " + salles.size());
+        if(salles == null || salles.size() == 0)
+            return;
+        Vector<Salle> sallesFiltrees = new Vector<Salle>();
+        switch(choix)
+        {
+            case TOUTES:
+                sallesFiltrees.addAll(salles);
+                break;
+            case SALLES_LIBRES:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(!salle.getEstOccupe())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case DEPASSEMENT_DE_SEUIL:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if(salle.estSeuilTemperatureDepasse() || salle.estSeuilHumiditeDepasse() ||
+                       salle.estSeuilCo2Depasse())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            case INTERVENTION:
+                for(int indice = 0; indice < salles.size(); indice++)
+                {
+                    Salle salle = salles.get(indice);
+                    if((salle.getEtatFenetre() || salle.getEtatLumiere()) && !salle.getEstOccupe())
+                        sallesFiltrees.add(salle);
+                }
+                break;
+            default:
+                return;
+        }
+        Log.d(TAG,
+              "filtrerSalles() choix : " + choix +
+                " Nb salles filtrées : " + sallesFiltrees.size());
+        afficherSalles(sallesFiltrees);
+!!!148394.java!!!	initialiserBaseDeDonnees() : void
+        baseDeDonnees = BaseDeDonnees.getInstance(handler);
+!!!148522.java!!!	initialiserHandler() : void
+        this.handler = new Handler(this.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message message)
+            {
+                Log.d(TAG, "[Handler] id message = " + message.what);
+                Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
-        // Pour les tests
+                switch(message.what)
+                {
+                    case BaseDeDonnees.CONNEXION_OK:
+                        Log.d(TAG, "[Handler] CONNEXION_OK");
+                        break;
+                    case BaseDeDonnees.CONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] CONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_OK:
+                        Log.d(TAG, "[Handler] DECONNEXION_OK");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] DECONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_OK:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_OK");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_ERREUR:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_SALLES:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_SALLES");
+                        setSalles((Vector<Salle>)message.obj);
+                        afficherSalles((Vector<Salle>)message.obj);
+                        filtrerSalles(choixFiltrage);
+                        alerterDepassementSeuil();
+                }
+            }
+        };
+!!!164650.java!!!	initialiserListeDeroulante() : void
+        Spinner                    listeDeroulante = (Spinner)findViewById(R.id.choixFiltre);
+        ArrayAdapter<CharSequence> adaptateur =
+          ArrayAdapter.createFromResource(this,
+                                          R.array.listeChoix,
+                                          android.R.layout.simple_spinner_item);
+        adaptateur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listeDeroulante.setAdapter(adaptateur);
+
+        listeDeroulante.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adaptateur, View vue, int position, long id)
+            {
+                choixFiltrage = position;
+                filtrerSalles(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0)
+            {
+            }
+        });
+!!!148650.java!!!	alerterDepassementSeuil() : void
         for(int i = 0; i < salles.size(); i++)
         {
-            if(i%2 == 0)
-                salles.get(i).setEstOccupe(true);
+            Log.d(TAG, "alerterDepassementSeuil() salle : " + salles.get(i).getNom());
+            Salle salle = salles.get(i);
+            if(salle.estSeuilTemperatureDepasse())
+            {
+                notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
+            }
+            if(salle.estSeuilHumiditeDepasse())
+            {
+                notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
+            }
+            if(salle.estSeuilCo2Depasse())
+            {
+                notifierDepassement(salle, DEPASSEMENT_CO2);
+            }
         }
+!!!148778.java!!!	notifierDepassement(inout salle : Salle, in typeDepassement : int) : void
+        Log.d(TAG,
+              "alerterDepassementSeuil() salle : " + salle.getNom() + " -> " + typeDepassement);
+        String titre   = "Dépassement de seuil : " + salle.getNom();
+        String message = "";
+
+        switch(typeDepassement)
+        {
+            case DEPASSEMENT_TEMPERATURE:
+                message = "Température";
+                break;
+            case DEPASSEMENT_HUMIDITE:
+                message = "Humidité";
+                break;
+            case DEPASSEMENT_CO2:
+                message = "CO2";
+                break;
+            default:
+                return;
+        }
+
+        // cf. https://developer.android.com/develop/ui/views/notifications/build-notification#java
+        NotificationCompat.Builder notification =
+          new NotificationCompat.Builder(this, "ecoChannelID")
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle(titre)
+            .setContentText(message)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        // Si API26
+        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+        {
+            CharSequence        name        = getString(R.string.app_name);
+            String              description = "Notification EcoClassroom";
+            int                 importance  = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("EcoClassroom", name, importance);
+            channel.setDescription(description);
+            // notificationManager =
+            // (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager = (NotificationManager)getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+        Intent intent = new Intent(this, EcoClassroom.class);
+        // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent =
+          PendingIntent.getActivity(this,
+                                    0,
+                                    new Intent(this, EcoClassroom.class),
+                                    PendingIntent.FLAG_UPDATE_CURRENT);
+        // PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
+        // EcoClassroom.class), PendingIntent.FLAG_IMMUTABLE);
+        // notification.setContentIntent(pendingIntent);
+        notification.setFullScreenIntent(pendingIntent, true);
+        notification.setAutoCancel(true);
+        // Si API26
+        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+        {
+            notificationManager.notify(idNotification++, notification.build());
+        }
+        else
+        {
+            NotificationManagerCompat.from(this).notify(idNotification++, notification.build());
+            // NotificationManagerCompat.from(this).notify(typeDepassement, notification.build());
+        }
+
+        Toast toast =
+          Toast.makeText(getApplicationContext(),
+                         "Salle " + salle.getNom() + " : dépassement de seuil " + message,
+                         Toast.LENGTH_SHORT);
+        toast.show();

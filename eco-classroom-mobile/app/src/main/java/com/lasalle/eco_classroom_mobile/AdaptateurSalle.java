@@ -34,6 +34,7 @@ public class AdaptateurSalle extends RecyclerView.Adapter<VueSalle>
 
     /**
      * @brief Constructeur d'initialisation
+     * @param salles Les salles
      */
     public AdaptateurSalle(Vector<Salle> salles)
     {
@@ -56,6 +57,9 @@ public class AdaptateurSalle extends RecyclerView.Adapter<VueSalle>
         return new VueSalle(view);
     }
 
+    /**
+     * @brief
+     */
     @Override
     public void onBindViewHolder(@NonNull VueSalle holder, int position)
     {
@@ -63,6 +67,10 @@ public class AdaptateurSalle extends RecyclerView.Adapter<VueSalle>
         holder.afficher(salle);
     }
 
+    /**
+     * @brief Méthode renvoyant le nombre de salles présentes
+     * @return int Le nombre de salles
+     */
     @Override
     public int getItemCount()
     {

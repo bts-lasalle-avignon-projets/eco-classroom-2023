@@ -2,28 +2,56 @@ class Salle
 !!!136362.java!!!	Salle()
         this.nom              = "";
         this.description      = "";
-        this.superficie       = 0.0;
-        this.qualiteAir       = 0;
-        this.confortThermique = -4;
+        this.superficie       = SUPERFICIE_PAR_DEFAUT;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
+        this.seuils           = new Seuils();
 !!!136490.java!!!	Salle(in nom : String, in superficie : double, in description : String)
-        Log.d(TAG, "Salle("+nom+", "+superficie+", "+description+")");
+        Log.d(TAG, "Salle(" + nom + ", " + superficie + ", " + description + ")");
         this.nom              = nom;
         this.description      = description;
         this.superficie       = superficie;
-        this.qualiteAir       = 0;
-        this.confortThermique = -4;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
         this.etatFenetre      = false;
         this.etatLumiere      = false;
         this.estOccupe        = false;
+        this.seuils           = new Seuils();
+!!!148906.java!!!	Salle(in nom : String, in superficie : double, in description : String, inout seuils : Seuils)
+        Log.d(TAG, "Salle(" + nom + ", " + superficie + ", " + description + ")");
+        this.nom              = nom;
+        this.description      = description;
+        this.superficie       = superficie;
+        this.temperature      = TEMPERATURE_PAR_DEFAUT;
+        this.humidite         = HUMIDITE_PAR_DEFAUT;
+        this.co2              = CO2_PAR_DEFAUT;
+        this.qualiteAir       = QUALITE_AIR_PAR_DEFAUT;
+        this.confortThermique = CONFORT_THERMIQUE_PAR_DEFAUT;
+        this.etatFenetre      = false;
+        this.etatLumiere      = false;
+        this.estOccupe        = false;
+        this.seuils           = seuils;
 !!!136618.java!!!	getNom() : String
         return this.nom;
 !!!136746.java!!!	getDescription() : String
         return this.description;
 !!!136874.java!!!	getSuperficie() : double
         return this.superficie;
+!!!149034.java!!!	getTemperature() : double
+        return this.temperature;
+!!!149162.java!!!	getHumidite() : int
+        return this.humidite;
+!!!149290.java!!!	getCo2() : int
+        return this.co2;
 !!!137002.java!!!	getQualiteAir() : int
         return this.qualiteAir;
 !!!137130.java!!!	getConfortThermique() : int
@@ -34,23 +62,28 @@ class Salle
         return this.etatLumiere;
 !!!137514.java!!!	getEstOccupe() : boolean
         return this.estOccupe;
+!!!149418.java!!!	getSeuils() : Seuils
+        return this.seuils;
 !!!137642.java!!!	setNom(in nom : String) : void
         this.nom = nom;
 !!!137770.java!!!	setDescription(in description : String) : void
         this.description = description;
 !!!137898.java!!!	setSuperficie(in superficie : double) : void
         this.superficie = superficie;
+!!!149546.java!!!	setTemperature(in temperature : double) : void
+        this.temperature = temperature;
+!!!149674.java!!!	setHumidite(in humidite : int) : void
+        if(humidite >= TAUX_HUMIDITE_MIN && humidite <= TAUX_HUMIDITE_MAX)
+            this.humidite = humidite;
+!!!149802.java!!!	setCo2(in co2 : int) : void
+        if(co2 <= CONCENTRATION_CO2_MIN)
+            this.co2 = co2;
 !!!138026.java!!!	setQualiteAir(in qualiteAir : int) : void
-        /**
-         * @todo Vérifier indice qualiteAir max
-         */
-        if(qualiteAir >= INDICE_QUALITE_AIR_MIN)
+        if(qualiteAir >= INDICE_QUALITE_AIR_MIN && qualiteAir <= INDICE_QUALITE_AIR_MAX)
             this.qualiteAir = qualiteAir;
 !!!138154.java!!!	setConfortThermique(in confortThermique : int) : void
-        /**
-         * @todo Vérifier indice confortThermique max
-         */
-        if(confortThermique >= INDICE_CONFORT_THERMIQUE_MIN)
+        if(confortThermique >= INDICE_CONFORT_THERMIQUE_MIN &&
+           confortThermique <= INDICE_CONFORT_THERMIQUE_MAX)
             this.confortThermique = confortThermique;
 !!!138282.java!!!	setEtatFenetre(inout etatFenetre : boolean) : void
         this.etatFenetre = etatFenetre;
@@ -58,3 +91,20 @@ class Salle
         this.etatLumiere = etatLumiere;
 !!!138538.java!!!	setEstOccupe(inout estOccupe : Boolean) : void
         this.estOccupe = estOccupe;
+!!!157738.java!!!	setSeuils(inout seuils : Seuils) : void
+        this.seuils = seuils;
+!!!165162.java!!!	estSeuilTemperatureDepasse() : boolean
+        if((getTemperature() < getSeuils().getTemperatureMin() ||
+           getTemperature() > getSeuils().getTemperatureMax()) &&
+             (getTemperature() != TEMPERATURE_PAR_DEFAUT))
+            return true;
+        return false;
+!!!165290.java!!!	estSeuilHumiditeDepasse() : boolean
+        if((getHumidite() < getSeuils().getHumiditeMin() ||
+           getHumidite() > getSeuils().getHumiditeMax()) && (getHumidite() != HUMIDITE_PAR_DEFAUT))
+            return true;
+        return false;
+!!!165418.java!!!	estSeuilCo2Depasse() : boolean
+        if(getCo2() >= getSeuils().getCo2Max() && (getCo2() != CO2_PAR_DEFAUT))
+            return true;
+        return false;

@@ -12,7 +12,7 @@ CREATE DATABASE IF NOT EXISTS `ecoclassroom` CHARACTER SET utf8;
 
 USE ecoclassroom;
 
-DROP TABLE IF EXISTS SeuilsAlerte;
+DROP TABLE IF EXISTS Seuils;
 DROP TABLE IF EXISTS MesureCo2;
 DROP TABLE IF EXISTS MesureLuminosite;
 DROP TABLE IF EXISTS MesureHumidite;
@@ -203,44 +203,34 @@ ALTER TABLE `MesureCo2`
 
 -- Pour chaque salle ou pour toutes ? 
 
-CREATE TABLE IF NOT EXISTS `SeuilsAlerte` (
+CREATE TABLE IF NOT EXISTS `Seuils` (
 	`idSalle`	int NOT NULL,
-	`temperatureMin`	double,
-	`temperatureMax`	double,
-	`luminositeMin`	int,
-	`luminositeMax`	int,
-	`humiditeMin`	int,
-	`humiditeMax`	int,
-	`co2Min`	int,
-	`co2Max`	int
+	`temperatureMin`	double DEFAULT '14',
+	`temperatureMax`	double DEFAULT '30',
+	`luminositeMin`	int DEFAULT '300',
+	`eclairementMoyen`	int DEFAULT '500',
+	`humiditeMin`	int DEFAULT '45',
+	`humiditeMax`	int DEFAULT '55',
+	`co2Max`	int DEFAULT '1300',
+    `indiceConfinement`	int DEFAULT '5'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `SeuilsAlerte`
+ALTER TABLE `Seuils`
   ADD PRIMARY KEY (`idSalle`);
 
-ALTER TABLE `SeuilsAlerte`
-  ADD CONSTRAINT `SeuilsAlerte_fk_1` FOREIGN KEY (`idSalle`) REFERENCES `Salle` (`idSalle`) ON DELETE CASCADE;
+ALTER TABLE `Seuils`
+  ADD CONSTRAINT `Seuils_fk_1` FOREIGN KEY (`idSalle`) REFERENCES `Salle` (`idSalle`) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
 
--- Tests
-
-CREATE TABLE IF NOT EXISTS `Salle` (
-	`idSalle`	int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`nom`	varchar(32),
-	`description`	varchar(255),
-	`superficie`	int DEFAULT '0',
-	`idIndiceConfortTHI`	int DEFAULT '-4',
-    `idIndiceInconfortIADI`	int DEFAULT '0',
-	`idIndiceQualiteAir`	int DEFAULT '0',
-    `idIndiceConfinement`	int DEFAULT '0',
-	`etatFenetres`	int DEFAULT '0',
-	`etatLumieres`	int DEFAULT '0',
-	`estOccupe`	int DEFAULT '0',
-	`estFavori`	int DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- LMD : pour les tests
 
 INSERT INTO Salle(nom, description, superficie) VALUES ('B11','TD','15');
 INSERT INTO Salle(nom, description, superficie) VALUES ('B20','Atelier','65');
 INSERT INTO Salle(nom, description, superficie) VALUES ('B21','Salle de Physiques','40');
 INSERT INTO Salle(nom, description, superficie) VALUES ('B22','Cours','60');
+
+INSERT INTO Seuils(idSalle, temperatureMin, temperatureMax, luminositeMin, eclairementMoyen, humiditeMin, humiditeMax, co2Max, indiceConfinement) VALUES ('1','14','30','250','500','30','55','1000','4');
+INSERT INTO Seuils(idSalle, temperatureMin, temperatureMax, luminositeMin, eclairementMoyen, humiditeMin, humiditeMax, co2Max, indiceConfinement) VALUES ('2','12','28','300','500','40','55','1200','5');
+INSERT INTO Seuils(idSalle, temperatureMin, temperatureMax, luminositeMin, eclairementMoyen, humiditeMin, humiditeMax, co2Max, indiceConfinement) VALUES ('3','15','35','300','500','35','55','1000','4');
+INSERT INTO Seuils(idSalle, temperatureMin, temperatureMax, luminositeMin, eclairementMoyen, humiditeMin, humiditeMax, co2Max, indiceConfinement) VALUES ('4','15','35','300','500','35','55','1000','4');
