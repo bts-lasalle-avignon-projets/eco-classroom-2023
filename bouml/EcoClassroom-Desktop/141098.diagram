@@ -12,9 +12,9 @@ fragment 131498 "loop"
   xyzwh 73.5 545 1995 1200 178
 end
 textcanvas 131626 "[pour toutes les salles]"
-  xyzwh 184.5 842 2015 293 30
+  xyzwh 184 842 2015 293 30
 textcanvas 131754 "[pour toutes les salles]"
-  xyzwh 184.5 842 2015 293 30
+  xyzwh 184 842 2015 293 30
 fragment 131882 "loop"
   xyzwh 75.5 835 1995 1200 785
 end

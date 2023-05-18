@@ -1,6 +1,6 @@
 format 224
 "eco-classroom-desktop" // eco-classroom-desktop
-  revision 5
+  revision 6
   modified_by 42 "tv"
   // class settings
   
@@ -394,22 +394,30 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
-      comment "#include <QtMqtt/QMqttClient>
-#include <QtMqtt/QMqttSubscription>
-
-@class CommunicationMQTT
+      comment "@class CommunicationMQTT
 @brief Classe permettant de gérer la communication MQTT
 "
+      classrelation 148266 // <generalisation>
+	relation 148266 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 148266 // <generalisation>
+	  b parent class_ref 134698 // typedef1
+      end
+
       operation 136234 "CommunicationMQTT"
 	preserve_cpp_body_indent public explicit_return_type ""
-	nparams 0
-	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+	nparams 1
+	  param inout name "parent" explicit_type "QObject"
+	    defaultvalue "nullptr"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn CommunicationMQTT::CommunicationMQTT
 //@brief Constructeur par défaut de la classe CommunicationMQTT
 //
 
-${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} : QObject(parent)
+${throw}{
 ${body}}
 "
 	
@@ -428,6 +436,153 @@ ${body}}
 //
 
 ${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 141610 "Q_OBJECT"
+	
+	cpp "  Q_OBJECT" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 164906 "getClient"
+	preserve_cpp_body_indent const public explicit_return_type "QMqttClient"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 159146 "client"
+	private explicit_type "QMqttClient"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Client MQTT"
+      end
+
+      attribute 159274 "subscription"
+	private explicit_type "QMqttSubscription"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Subscription"
+      end
+
+      extra_member 141738 "slots"
+	
+	cpp "  public slots:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 165034 "seConnecter"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn CommunicationMQTT::seConnecter
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165162 "seDeconnecter"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn CommunicationMQTT::seDeconnecter
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165290 "sAbonner"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "topic" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn CommunicationMQTT::sAbonner
+//@param topic
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165418 "demarrer"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn CommunicationMQTT::demarrer
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165546 "arreter"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn CommunicationMQTT::arreter
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -563,6 +718,17 @@ ${items}};
 	  MysqlColumn
 	end
 
+	attribute 159402 "COLONNE_SALLE_ICONE"
+	  public type class_ref 142122 // ColonneTableau
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
 	attribute 143786 "COLONNE_SALLE_FENETRES"
 	  public type class_ref 142122 // ColonneTableau
 	  cpp_decl "  ${name}${value},${comment}"
@@ -620,7 +786,9 @@ ${items}};
 //@param parent nullptr pour en faire la fenêtre principale de l'application
 //
 
-${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} : QMainWindow(parent)
+${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
+    QMainWindow(parent), nbLignesSalles(0),
+    communicationMQTT(new CommunicationMQTT(this))
 ${throw}{
 ${body}}
 "
@@ -673,6 +841,16 @@ ${body}}
 	  b parent class_ref 135338 // Salle
       end
 
+      classrelation 148394 // communicationMQTT (<unidirectional association>)
+	relation 148394 --->
+	  a role_name "communicationMQTT" private
+	    comment "!< Relation entre la classe EcoClassroom et"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 148394 // communicationMQTT (<unidirectional association>)
+	  b parent class_ref 134826 // CommunicationMQTT
+      end
+
       attribute 135338 "nomColonnesTable"
 	private explicit_type "QStringList"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
@@ -683,7 +861,8 @@ ${body}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< Le nom des colonnes de la table"
+	comment "!< CommunicationMQTT (association)
+!< Le nom des colonnes de la table"
       end
 
       attribute 135466 "gui"
@@ -751,6 +930,18 @@ ${body}}
       end
 
       attribute 151338 "elementCO2"
+	private explicit_type "QTableWidgetItem"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159530 "elementICONE"
 	private explicit_type "QTableWidgetItem"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
@@ -878,7 +1069,7 @@ ${body}}
 	comment "!< La description de la salle"
       end
 
-      attribute 152362 "labelIndiceQAirSalle"
+      attribute 159658 "labelIndiceICONE"
 	private explicit_type "QLabel"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
@@ -888,10 +1079,10 @@ ${body}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< Le label pour l'indice de la qualité d'air"
+	comment "!< le label pour l'indice ICONE"
       end
 
-      attribute 152490 "indiceQualiteAirSalle"
+      attribute 159786 "indiceICONE"
 	private explicit_type "QLabel"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
@@ -901,7 +1092,7 @@ ${body}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< L'indice de la qualité de l'air"
+	comment "!< l'indice ICONE (confinement d'une salle due à"
       end
 
       attribute 144554 "boutonRetourAccueil"
@@ -914,7 +1105,35 @@ ${body}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< Bouton de retour"
+	comment "!< l'excès de co2)
+!< Bouton de retour"
+      end
+
+      attribute 159914 "labelIndiceQualiteAirSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le label pour l'indice de la"
+      end
+
+      attribute 152490 "indiceQualiteAirSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< qualité d'air
+!< L'indice de la qualité de l'air"
       end
 
       attribute 152618 "notificationEcoClassroom"
@@ -1437,6 +1656,53 @@ ${body}}
 	
 	
       end
+
+      operation 165674 "recevoirMessageMQTT"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "message" explicit_type "QByteArray"
+	  param in name "topic" explicit_type "QMqttTopicName"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::recevoirMessage
+//@param message
+//@param topic
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165802 "traiterNouveauMessageMQTT"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 4
+	  param in name "salle" explicit_type "QString"
+	  param in name "module" explicit_type "QString"
+	  param in name "typeDonnee" explicit_type "QString"
+	  param in name "message" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::traiterNouveauMessageMQTT
+//@param salle
+//@param module
+//@param typeDonnee
+//@param message
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
     end
 
     class 135082 "typedef2"
@@ -1468,6 +1734,63 @@ ${inlines}
       comment "@class EcoClassroom
 @brief Classe permettant de gérer une salle
 "
+      class 148650 "ChampsTopic"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 160042 "RACINE"
+	  public type class_ref 148650 // ChampsTopic
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 160170 "SALLE"
+	  public type class_ref 148650 // ChampsTopic
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 160298 "MODULE"
+	  public type class_ref 148650 // ChampsTopic
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 160426 "TYPE_DONNEE"
+	  public type class_ref 148650 // ChampsTopic
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
       attribute 136490 "nom"
 	private explicit_type "QString"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
@@ -1505,6 +1828,19 @@ ${inlines}
 	mysql_decl ""
 	MysqlColumn
 	comment "!< Description de la salle"
+      end
+
+      attribute 160554 "indiceICONE"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< indice Confinement de la salle"
       end
 
       classrelation 135082 // mesures (<unidirectional association>)
@@ -1790,6 +2126,45 @@ ${body}}
 	
       end
 
+      operation 166570 "getIndiceICONE"
+	preserve_cpp_body_indent public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Salle::getIndiceICONE
+//@brief méthode qui calcule l'indice ICONE(indice de confinement) et qui le
+//retourne
+//@return
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166698 "afficherNiveauICONE"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Salle::afficherNiveauICONE
+//@brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
+//@return
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 139010 "getLumiere"
 	preserve_cpp_body_indent const public explicit_return_type "bool"
 	nparams 0
@@ -1863,16 +2238,6 @@ ${body}}
 	
       end
 
-      operation 142122 "calculerICONE"
-	preserve_cpp_body_indent public explicit_return_type "void"
-	nparams 0
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
-"
-	
-	
-	
-	
-      end
     end
 
     class 135466 "EtatsSalle"
@@ -1949,7 +2314,15 @@ ${inlines}
 //@param occupation l'état d'occupation de la salle
 //
 
+//@fn EtatsSalle::EtatsSalle
+//@brief Constructeur par defaut de la classe EtatsSalle
+//@param lumiere l'état de la lumière dans la salle
+//@param fenetre l'état d'ouverture des fenêtres de la salle
+//@param occupation l'état d'occupation de la salle
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${)} : lumiere(false), fenetre(false), occupation(false)
+ : lumiere(false), fenetre(false), occupation(false)
  : lumiere(false), fenetre(false), occupation(false)
 ${throw}{
 ${body}}
@@ -1982,7 +2355,16 @@ ${body}}
 //@param occupation l'état d'occupation de la salle (true : occupée)
 //
 
+//@fn EtatsSalle::EtatsSalle
+//@brief Constructeur d'initialisation de la classe EtatsSalle
+//@param lumiere l'état de la lumière dans la salle (true : allumée)
+//@param fenetre l'état d'ouverture des fenêtres de la salle (true : ouverte)
+//@param occupation l'état d'occupation de la salle (true : occupée)
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
+    lumiere(lumiere), fenetre(fenetre), occupation(occupation)
+ :
     lumiere(lumiere), fenetre(fenetre), occupation(occupation)
  :
     lumiere(lumiere), fenetre(fenetre), occupation(occupation)
@@ -2008,6 +2390,10 @@ ${body}}
 //@brief Destructeur de la clase EtatsSalle
 //
 
+//@fn EtatsSalle::~EtatsSalle
+//@brief Destructeur de la clase EtatsSalle
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
@@ -2023,6 +2409,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::getLumiere
+//@brief Getter de l'attribut lumiere
+//@return bool l'état de la lumière dans la salle (true : allumée)
+//
+
+//@fn EtatsSalle::getLumiere
 //@brief Getter de l'attribut lumiere
 //@return bool l'état de la lumière dans la salle (true : allumée)
 //
@@ -2056,6 +2447,11 @@ ${body}}
 //@return bool l'état d'une fenetre dans la salle (true : ouverte)
 //
 
+//@fn EtatsSalle::getFenetre
+//@brief Getter de l'attribut fenetre
+//@return bool l'état d'une fenetre dans la salle (true : ouverte)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2071,6 +2467,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::getOccupation
+//@brief Getter de l'attribut occupation
+//@return bool l'état de l'occupation dans la salle (true : Occupé)
+//
+
+//@fn EtatsSalle::getOccupation
 //@brief Getter de l'attribut occupation
 //@return bool l'état de l'occupation dans la salle (true : Occupé)
 //
@@ -2105,6 +2506,11 @@ ${body}}
 //@param lumiere l'état de la lumière dans la salle (true : allumée)
 //
 
+//@fn EtatsSalle::setLumiere
+//@brief Setter de l'attribut lumiere
+//@param lumiere l'état de la lumière dans la salle (true : allumée)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2130,6 +2536,11 @@ ${body}}
 //@param fenetre l'état d'ouverture des fenêtres dans la salle (true : ouverte)
 //
 
+//@fn EtatsSalle::setFenetre
+//@brief Setter de l'attribut fenetre
+//@param fenetre l'état d'ouverture des fenêtres dans la salle (true : ouverte)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2146,6 +2557,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::setOccupation
+//@brief Setter de l'attribut occupation
+//@param occupation l'état d'occupation de la salle (true : occupée)
+//
+
+//@fn EtatsSalle::setOccupation
 //@brief Setter de l'attribut occupation
 //@param occupation l'état d'occupation de la salle (true : occupée)
 //
@@ -2209,7 +2625,8 @@ ${inlines}
 
       attribute 136234 "co2"
 	private explicit_type "uint"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
 "
 	java_decl ""
 	php_decl ""
@@ -2360,12 +2777,114 @@ ${body}}
       operation 140714 "setCO2"
 	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
-	  param in name "co2" explicit_type "uint"
+	  param in name "mesureCo2" explicit_type "uint"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn Mesures::setCO2
 //@brief Setter de l'attribut co2
 //@param co2 mesure du co2 dans la salle
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165930 "calculerIndiceICONE"
+	preserve_cpp_body_indent public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Mesures::calculerIndiceICONE
+//@brief calcule l'indice ICONE
+//@return
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166058 "calculerProportionSeuilN1"
+	preserve_cpp_body_indent public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Mesures::calculerProportionSeuilN1
+//@brief calcule la proportion de valeurs de Co2 comprises entre 1000 et 17000
+//ppm
+//@return
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166186 "calculerProportionSeuilN2"
+	preserve_cpp_body_indent public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Mesures::calculerProportionSeuilN2
+//@brief calcule la proportion de valeurs de Co2 supérieurs à 1700 ppm
+//@return
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166314 "calculerIndiceBrute"
+	preserve_cpp_body_indent public explicit_return_type "int"
+	nparams 2
+	  param in name "proportionSeuilN1" explicit_type "double"
+	  param in name "proportionSeuilN2" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Mesures::calculerIndiceBrute
+//@param proportionSeuilN1
+//@param proportionSeuilN2
+//@brief calcule l'indice Brute permettant de calculer l'indice ICONE
+//@return
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166442 "determinerIndiceICONE"
+	preserve_cpp_body_indent public explicit_return_type "int"
+	nparams 1
+	  param in name "indiceBrute" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn Mesures::determinerIndiceICONE
+//@param indiceBrute
+//@brief determine l'indice ICONE par rapport à l'indice Brute
+//@return
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
