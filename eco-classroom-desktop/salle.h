@@ -8,6 +8,10 @@
 
 #include <QString>
 
+/**
+ * @def RACINE_TOPIC
+ * @brief La racine des topics
+ */
 #define RACINE_TOPIC "salles"
 
 class Mesures;

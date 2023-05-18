@@ -11,7 +11,7 @@
  */
 CommunicationMQTT::CommunicationMQTT(QObject* parent) : QObject(parent)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << IP_BROKER_MQTT << PORT_BROKER_MQTT;
     client = new QMqttClient(this);
     client->setHostname(IP_BROKER_MQTT);
     client->setPort(PORT_BROKER_MQTT);

@@ -9,9 +9,24 @@
 #include <QtMqtt/QtMqtt>
 #include <QObject>
 
-#define IP_BROKER_MQTT   "192.168.52.7" //!< Constante pour l'ip du broker mqtt
-#define PORT_BROKER_MQTT 1883       //!< Constante pour le port du broker mqtt
-#define TOPIC_RACINE     "salles/#" //!< Constante pour le topic des salles
+/**
+ * @def IP_BROKER_MQTT
+ * @brief L'ip du broker MQTT (raspeberry pi zero)
+ */
+#define IP_BROKER_MQTT "192.168.52.7"
+//#define IP_BROKER_MQTT "127.0.0.1"
+
+/**
+ * @def PORT_BROKER_MQTT
+ * @brief Le port par défaut du broker MQTT
+ */
+#define PORT_BROKER_MQTT 1883
+
+/**
+ * @def TOPIC_RACINE
+ * @brief La racine des topics pour l'abonnement
+ */
+#define TOPIC_RACINE "salles/#"
 
 /**
  * @class CommunicationMQTT
