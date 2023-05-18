@@ -33,18 +33,18 @@ relationcanvas 128042 relation_ref 141738 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 132098 relation_ref 134954 // <directional composition>
-  from ref 131842 z 3006 stereotype "<<QMap>>" xyz 1144.5 1019 3006 to ref 131970
-  role_a_pos 1137 1368 3000 no_role_b
+  from ref 131842 z 3006 stereotype "<<QMap>>" xyz 1144 1019 3006 to ref 131970
+  role_a_pos 1137 1400 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 132354 relation_ref 135210 // <unidirectional association>
   from ref 131970 z 3012 to ref 132226
-  role_a_pos 795 1799 3000 no_role_b
+  role_a_pos 804 1804 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 132610 relation_ref 135082 // <unidirectional association>
   from ref 131970 z 3012 to ref 132482
-  role_a_pos 1624 1821 3000 no_role_b
+  role_a_pos 1598 1829 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

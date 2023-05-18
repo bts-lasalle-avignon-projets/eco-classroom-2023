@@ -58,7 +58,24 @@ class Salle
         return SEVERE;
 !!!158378.cpp!!!	setCO2(in co2 : uint) : void
     mesures->setCO2(co2);
-    qDebug() << Q_FUNC_INFO << "co2 : " << co2;
+!!!166570.cpp!!!	getIndiceICONE() : int
+    indiceICONE = mesures->calculerIndiceICONE();
+    return indiceICONE;
+!!!166698.cpp!!!	afficherNiveauICONE() : QString
+    if(indiceICONE == CONFINEMENT_NUL)
+        return "Nul";
+    if(indiceICONE == CONFINEMENT_FAIBLE)
+        return "Faible";
+    if(indiceICONE == CONFINEMENT_MOYEN)
+        return "Moyen";
+    if(indiceICONE == CONFINEMENT_ELEVE)
+        return "Élevé";
+    if(indiceICONE == CONFINEMENT_TRES_ELEVE)
+        return "Très Élevé";
+    if(indiceICONE == CONFINEMENT_EXTREME)
+        return "Extrême";
+    else
+        return QString::number(indiceICONE);
 !!!139010.cpp!!!	getLumiere() : bool
     if(etats != nullptr)
         return etats->getLumiere();

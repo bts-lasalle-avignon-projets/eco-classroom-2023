@@ -8,6 +8,9 @@
 
 #include <QtWidgets>
 #include <QMap>
+#include <QtMqtt/QMqttTopicName>
+
+class CommunicationMQTT;
 
 /**
  * @def DUREE_NOTIFICATION
@@ -57,9 +60,9 @@ class EcoClassroom : public QMainWindow
     enum ColonneTableau
     {
         COLONNE_SALLE_NOM,               //!< Le nom de la salle
-        COLONNE_SALLE_CONFORT_THERMIQUE, //!<
-        COLONNE_SALLE_QUALITE_AIR,       //!<
-        COLONNE_SALLE_ICONE,             //!<
+        COLONNE_SALLE_CONFORT_THERMIQUE, //!< Le confort thermique
+        COLONNE_SALLE_QUALITE_AIR,       //!< La qualité de l'air
+        COLONNE_SALLE_ICONE,             //!< Le confinement
         COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
         COLONNE_SALLE_LUMIERES,          //!< L'état des lumières
         COLONNE_SALLE_OCCUPATION,        //!< L'état d'occupation
@@ -71,9 +74,12 @@ class EcoClassroom : public QMainWindow
     ~EcoClassroom();
 
   private:
-    int                   nbLignesSalles;   //!< Nombre de salles dans la table
-    QMap<QString, Salle*> salles;           //!< Les salles
-    QStringList           nomColonnesTable; //!< Le nom des colonnes de la table
+    int                   nbLignesSalles; //!< Nombre de salles dans la table
+    QMap<QString, Salle*> salles;         //!< Les salles
+    CommunicationMQTT*
+      communicationMQTT;          //!< Relation entre la classe EcoClassroom et
+                                  //!< CommunicationMQTT (association)
+    QStringList nomColonnesTable; //!< Le nom des colonnes de la table
     // Widgets
     QWidget*          gui;               //!< Le widget central
     QStackedWidget*   fenetres;          //!< Pile de fenêtres
@@ -136,6 +142,12 @@ class EcoClassroom : public QMainWindow
     void afficherFenetreAcceuil();
     void afficherFenetreInformations();
     void selectionnerSalle(int ligne, int colonne);
+    void recevoirMessageMQTT(const QByteArray&     message,
+                             const QMqttTopicName& topic);
+    void traiterNouveauMessageMQTT(QString salle,
+                                   QString module,
+                                   QString typeDonnee,
+                                   QString message);
 };
 
 #endif // ECOCLASSROOM_H

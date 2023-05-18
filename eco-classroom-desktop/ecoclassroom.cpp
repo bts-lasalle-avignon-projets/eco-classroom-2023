@@ -4,13 +4,16 @@
  */
 #include "ecoclassroom.h"
 #include "salle.h"
+#include "communicationmqtt.h"
 
 /**
  * @fn EcoClassroom::EcoClassroom
  * @brief Constructeur de la classe EcoClassroom
  * @param parent nullptr pour en faire la fenêtre principale de l'application
  */
-EcoClassroom::EcoClassroom(QWidget* parent) : QMainWindow(parent)
+EcoClassroom::EcoClassroom(QWidget* parent) :
+    QMainWindow(parent), nbLignesSalles(0),
+    communicationMQTT(new CommunicationMQTT(this))
 {
     qDebug() << Q_FUNC_INFO;
     instancierWidgets();
@@ -244,6 +247,11 @@ void EcoClassroom::installerGestionEvenements()
             SIGNAL(clicked(bool)),
             this,
             SLOT(afficherFenetreAcceuil()));
+    connect(
+      communicationMQTT->getClient(),
+      SIGNAL(messageReceived(const QByteArray&, const QMqttTopicName&)),
+      this,
+      SLOT(recevoirMessageMQTT(const QByteArray&, const QMqttTopicName&)));
 }
 
 /**
@@ -520,6 +528,47 @@ void EcoClassroom::effacerSalles()
 
     effacerTableauSalles();
     nbLignesSalles = 0;
+}
+
+/**
+ * @fn EcoClassroom::recevoirMessage
+ * @param message
+ * @param topic
+ */
+void EcoClassroom::recevoirMessageMQTT(const QByteArray&     message,
+                                       const QMqttTopicName& topic)
+{
+    qDebug() << Q_FUNC_INFO << QDateTime::currentDateTime().toString()
+             << "topic" << topic.name() << "message" << message;
+    QStringList champsTopic = topic.name().split("/");
+    qDebug() << Q_FUNC_INFO << "champsTopic" << champsTopic;
+
+    if(champsTopic.at(Salle::ChampsTopic::RACINE)
+         .startsWith(RACINE_TOPIC)) // Ex de topic : salles/B22/Sonde/co2
+    {
+        traiterNouveauMessageMQTT(
+          champsTopic.at(Salle::ChampsTopic::SALLE),
+          champsTopic.at(Salle::ChampsTopic::MODULE),
+          champsTopic.at(Salle::ChampsTopic::TYPE_DONNEE),
+          QString(message));
+    }
+}
+
+/**
+ * @fn EcoClassroom::traiterNouveauMessageMQTT
+ * @param salle
+ * @param module
+ * @param typeDonnee
+ * @param message
+ */
+void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
+                                             QString module,
+                                             QString typeDonnee,
+                                             QString message)
+{
+    qDebug() << Q_FUNC_INFO << QDateTime::currentDateTime().toString()
+             << "salle" << salle << "typeDonnee" << typeDonnee << "message"
+             << message;
 }
 
 /**

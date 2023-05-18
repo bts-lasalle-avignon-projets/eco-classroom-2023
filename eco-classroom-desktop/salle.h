@@ -8,11 +8,15 @@
 
 #include <QString>
 
-#define SEUIL_ALERTE_CO2 1300
 /**
- *@brief Constantes utilisées pour evaluer la qualité de l'air
+ * @def RACINE_TOPIC
+ * @brief La racine des topics
  */
+#define RACINE_TOPIC "salles"
 
+#define SEUIL_ALERTE_CO2 1300
+
+// Constantes utilisées pour evaluer la qualité de l'air
 #define SEUIL_BAS_QUALITE_AIR_EXCELLENTE    0
 #define SEUIL_HAUT_QUALITE_AIR_EXCELLENTE   400
 #define SEUIL_BAS_QUALITE_AIR_TRES_BIEN     401
@@ -48,6 +52,15 @@ class EtatsSalle;
  */
 class Salle
 {
+  public:
+    enum ChampsTopic
+    {
+        RACINE,
+        SALLE,
+        MODULE,
+        TYPE_DONNEE
+    };
+
   private:
     QString      nom;         //!< Nom de la salle
     unsigned int superficie;  //!< Superficie de la salle

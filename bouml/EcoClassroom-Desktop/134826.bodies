@@ -1,5 +1,36 @@
 class CommunicationMQTT
-!!!136234.cpp!!!	CommunicationMQTT()
-    qDebug() << Q_FUNC_INFO;
+!!!136234.cpp!!!	CommunicationMQTT(inout parent : QObject = nullptr)
+    qDebug() << Q_FUNC_INFO << IP_BROKER_MQTT << PORT_BROKER_MQTT;
+    client = new QMqttClient(this);
+    client->setHostname(IP_BROKER_MQTT);
+    client->setPort(PORT_BROKER_MQTT);
+
+    connect(client, SIGNAL(connected()), this, SLOT(demarrer()));
+    connect(client, SIGNAL(disconnected()), this, SLOT(arreter()));
+
+    seConnecter();
 !!!136362.cpp!!!	~CommunicationMQTT()
+    seDeconnecter();
+    qDebug() << Q_FUNC_INFO;
+!!!164906.cpp!!!	getClient() : QMqttClient
+    return client;
+!!!165034.cpp!!!	seConnecter() : void
+    qDebug() << Q_FUNC_INFO;
+    client->connectToHost();
+!!!165162.cpp!!!	seDeconnecter() : void
+    qDebug() << Q_FUNC_INFO;
+    client->disconnectFromHost();
+!!!165290.cpp!!!	sAbonner(in topic : QString) : void
+    qDebug() << Q_FUNC_INFO << "topic" << topic;
+    QMqttSubscription* subscription;
+    subscription = client->subscribe(topic);
+    if(!subscription)
+    {
+        qDebug() << Q_FUNC_INFO << "erreur subscription";
+        return;
+    }
+!!!165418.cpp!!!	demarrer() : void
+    qDebug() << Q_FUNC_INFO;
+    sAbonner(TOPIC_RACINE);
+!!!165546.cpp!!!	arreter() : void
     qDebug() << Q_FUNC_INFO;
