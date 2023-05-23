@@ -57,6 +57,7 @@ public class EcoClassroom extends AppCompatActivity
     private Vector<Salle>       salles          = null;     //!< les salles
     private Vector<Salle>       sallesAffichees = null;     //!< les salles à afficher
     private BaseDeDonnees       baseDeDonnees;              //!< accès à la base de données
+    private ConnexionMQTT       connexionMQTT;              //!< permet la connexion MQTT
     private Handler             handler             = null; //<! le handler utilisé par l'activité
     private NotificationManager notificationManager = null; //<! le gestionnaire de notifications
     private int                 idNotification      = 1;    //<! l'identifiant de notification
@@ -153,6 +154,8 @@ public class EcoClassroom extends AppCompatActivity
             {
                 chargerSalles();
                 actualisationSalles.setRefreshing(false);
+                for(int i = 0; i < salles.size(); i++)
+                    recevoirDonneesSalle(salles.elementAt(i));
             }
         });
     }
@@ -171,6 +174,15 @@ public class EcoClassroom extends AppCompatActivity
         vueSalles.setLayoutManager(layoutVueSalles);
 
         initialiserListeDeroulante();
+    }
+
+    /**
+     * @brief Méthode permettant de mettre à jours les mesures et états de la salle
+     * @param salle La salle dont on veut les mesures et états
+     */
+    void recevoirDonneesSalle(Salle salle)
+    {
+        String donneesSalle;
     }
 
     /**
