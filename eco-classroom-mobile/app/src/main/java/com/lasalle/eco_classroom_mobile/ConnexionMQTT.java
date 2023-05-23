@@ -46,19 +46,19 @@ public class ConnexionMQTT
 
                         public void connexionPerdue(Throwable cause)
                         {
-                            System.out.println("connexionPerdue: " + cause.getMessage());
+                            Log.d(TAG, "connexionPerdue: " + cause.getMessage());
                         }
 
                         public void messageArrive(String topic, MqttMessage message)
                         {
-                            System.out.println("topic: " + topic);
-                            System.out.println("Qos: " + message.getQos());
-                            System.out.println("message content: " + new String(message.getPayload()));
+                            Log.d(TAG, "topic: " + topic);
+                            Log.d(TAG, "Qos: " + message.getQos());
+                            Log.d(TAG, "contenu du message: " + new String(message.getPayload()));
 
                         }
 
                         public void deliveryComplete(IMqttDeliveryToken token) {
-                            System.out.println("deliveryComplete---------" + token.isComplete());
+                            Log.d(TAG, "deliveryComplete---------" + token.isComplete());
                         }
 
                     });
