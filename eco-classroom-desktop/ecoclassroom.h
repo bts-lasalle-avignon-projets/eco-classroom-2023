@@ -11,6 +11,7 @@
 #include <QtMqtt/QMqttTopicName>
 
 class CommunicationMQTT;
+class BaseDeDonnees;
 
 /**
  * @def DUREE_NOTIFICATION
@@ -31,6 +32,26 @@ class CommunicationMQTT;
  */
 #define SIMULATION_ICONE
 
+/**
+ * @def POSITION_NOM_DE_LA_SALLE_LISTE_BDD
+ * @brief indique la position du nom de la salle dans la table Salle de la BDD
+ * ecoclassroom
+ */
+#define POSITION_NOM_DE_LA_SALLE_LISTE_BDD 1
+
+/**
+ * @def POSITION_DESCRIPTION_DE_LA_SALLE_LISTE_BDD
+ * @brief indique la position de la description de la salle dans la table Salle
+ * de la BDD ecoclassroom
+ */
+#define POSITION_DESCRIPTION_DE_LA_SALLE_LISTE_BDD 2
+
+/**
+ * @def POSITION_SUPERFICIE_DE_LA_SALLE_LISTE_BDD
+ * @brief indique la position de la superficie de la salle dans la table Salle
+ * de la BDD ecoclassroom
+ */
+#define POSITION_SUPERFICIE_DE_LA_SALLE_LISTE_BDD 3
 class Salle;
 
 /**
@@ -79,7 +100,8 @@ class EcoClassroom : public QMainWindow
     CommunicationMQTT*
       communicationMQTT;          //!< Relation entre la classe EcoClassroom et
                                   //!< CommunicationMQTT (association)
-    QStringList nomColonnesTable; //!< Le nom des colonnes de la table
+    BaseDeDonnees* baseDeDonnees; //!< Base de données
+    QStringList    nomColonnesTable; //!< Le nom des colonnes de la table
     // Widgets
     QWidget*          gui;               //!< Le widget central
     QStackedWidget*   fenetres;          //!< Pile de fenêtres
