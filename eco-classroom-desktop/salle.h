@@ -53,12 +53,39 @@ class EtatsSalle;
 class Salle
 {
   public:
+    /**
+     * @enum ChampsTopic
+     * @brief Les différents champs d'un topic MQTT
+     */
     enum ChampsTopic
     {
         RACINE,
         SALLE,
         MODULE,
         TYPE_DONNEE
+    };
+    /**
+     * @enum TableSalle
+     * @brief Les différents champs de la table Salle
+     */
+    enum TableSalle
+    {
+        CHAMP_NOM = 1,
+        CHAMP_DESCRIPTION,
+        CHAMP_SUPERFICIE
+    };
+    /*
+     * @enum IndiceQualiteAir
+     * @brief Définit les différentes colonne du tableau
+     */
+    enum IndiceQualiteAir
+    {
+        Excellente,
+        Tres_Bien,
+        Modere,
+        Mauvais,
+        Tres_Mauvais,
+        Severe
     };
 
   private:
@@ -72,22 +99,6 @@ class Salle
       etats; //!< Relation entre la classe Salle et EtatsSalle (agrégation)
 
   public:
-    /*
-     *
-     * @enum IndiceQualiteAir
-     * @brief Définit les différentes colonne du tableau
-
-    enum IndiceQualiteAir
-    {
-        Excellente,
-        Tres_Bien,
-        Modere,
-        Mauvais,
-        Tres_Mauvais,
-        Severe
-    };
-    */
-
     Salle();
     Salle(QString nom, unsigned int superficie, QString description);
     QString      getNom() const;
