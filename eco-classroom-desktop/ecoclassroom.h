@@ -118,7 +118,9 @@ class EcoClassroom : public QMainWindow
     void initialiserGUI();
     void installerGestionEvenements();
     void chargerSalles();
+#ifdef SIMULATION_ICONE
     void simulerMesureICONE();
+#endif
     void creerElementsTexteCellule(const Salle& salle);
     void creerElementsImageCellule(const Salle& salle);
     void personnaliserElementsTexte();
