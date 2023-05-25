@@ -28,6 +28,21 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
     private static final String TAG = "_VueSalle_"; //!< TAG pour les logs (cf. Logcat)
     private static final float  ESPACE_ETIREMENT =
       4f; //<! constante de poids pour les paramètres du TextView dans le TableRow
+    private static final int CONFORT_FROID = -3; //<! indice correspondant au froid pour le THI
+    private static final int CONFORT_FRAIS = -2; //<! indice correspondant au frais pour le THI
+    private static final int CONFORT_LEGEREMENT_FRAIS =
+      -1; //<! indice correspondant au légérement frais pour le THI
+    private static final int CONFORT_NEUTRE = 0; //<! indice correspondant au neutre pour le THI
+    private static final int CONFORT_LEGEREMENT_TIEDE =
+      1; //<! indice correspondant au légérement tiède pour le THI
+    private static final int CONFORT_TIEDE    = 2; //<! indice correspondant au tiède pour le THI
+    private static final int CONFORT_CHAUD    = 3; //<! indice correspondant au chaud pour le THI
+    private static final int AIR_EXCELLENT    = 1;
+    private static final int AIR_TRES_BIEN    = 2;
+    private static final int AIR_MODERE       = 3;
+    private static final int AIR_MAUVAIS      = 4;
+    private static final int AIR_TRES_MAUVAIS = 5;
+    private static final int AIR_SEVERE       = 6;
 
     /**
      * Attributs
@@ -140,16 +155,8 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
         Log.d(TAG, "afficher(Salle salle) nom = " + salle.getNom());
         this.salle = salle;
         nom.setText(salle.getNom());
-        if(salle.getQualiteAir() >= Salle.INDICE_QUALITE_AIR_MIN &&
-           salle.getQualiteAir() <= Salle.INDICE_QUALITE_AIR_MAX)
-            qualiteAir.setText(Integer.toString(salle.getQualiteAir()));
-        else
-            qualiteAir.setText("Inconnue");
-        if(salle.getConfortThermique() >= Salle.INDICE_CONFORT_THERMIQUE_MIN &&
-           salle.getConfortThermique() <= Salle.INDICE_CONFORT_THERMIQUE_MAX)
-            confortThermique.setText(Integer.toString(salle.getConfortThermique()));
-        else
-            confortThermique.setText("Inconnu");
+        qualiteAir.setText(interpreterIndiceQualiteAir(salle.getQualiteAir()));
+        confortThermique.setText(interpreterIndiceConfort(salle.getConfortThermique()));
         if(salle.getEtatFenetre())
             etatFenetre.setImageResource(R.drawable.led_rouge);
         else
@@ -171,5 +178,53 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
     @Override
     public void onClick(View vue)
     {
+    }
+
+    /**
+     * @brief Méthode renvoyant à quoi correspond l'indice de confort
+     */
+    public String interpreterIndiceConfort(int indice)
+    {
+        switch(indice)
+        {
+            case CONFORT_FROID:
+                return "Froid";
+            case CONFORT_FRAIS:
+                return "Frais";
+            case CONFORT_LEGEREMENT_FRAIS:
+                return "Légérement frais";
+            case CONFORT_NEUTRE:
+                return "Neutre";
+            case CONFORT_LEGEREMENT_TIEDE:
+                return "Légérement tiède";
+            case CONFORT_TIEDE:
+                return "Tiède";
+            case CONFORT_CHAUD:
+                return "Chaud";
+        }
+        return "Inconnue";
+    }
+
+    /**
+     * @brief Méthode renvoyant à quoi correspond l'indice de qualitée de l'air
+     */
+    public String interpreterIndiceQualiteAir(int indice)
+    {
+        switch(indice)
+        {
+            case AIR_EXCELLENT:
+                return "Excellent";
+            case AIR_TRES_BIEN:
+                return "Très bien";
+            case AIR_MODERE:
+                return "Modéré";
+            case AIR_MAUVAIS:
+                return "Mauvais";
+            case AIR_TRES_MAUVAIS:
+                return "Très mauvais";
+            case AIR_SEVERE:
+                return "Sévère";
+        }
+        return "Inconnu";
     }
 }
