@@ -1,12 +1,14 @@
 class EcoClassroom
 !!!136490.cpp!!!	EcoClassroom(inout parent : QWidget = nullptr)
     qDebug() << Q_FUNC_INFO;
+    baseDeDonnees->connecter();
     instancierWidgets();
     initialiserGUI();
     installerGestionEvenements();
     chargerSalles();
 !!!136618.cpp!!!	~EcoClassroom()
     qDebug() << Q_FUNC_INFO;
+    BaseDeDonnees::detruireInstance();
 !!!138026.cpp!!!	instancierWidgets() : void
     // Le widget principal
     gui = new QWidget(this);
@@ -144,15 +146,55 @@ class EcoClassroom
 !!!138410.cpp!!!	chargerSalles() : void
     qDebug() << Q_FUNC_INFO;
     salles.clear();
-
+    /*
     // Pour les tests
     // Exemple simple (si pas de base de données)
     salles["B11"] = new Salle("B11", 18, "Salle de TD");
     salles["B20"] = new Salle("B20", 65, "Atelier");
     salles["B21"] = new Salle("B21", 35, "Salle de TP");
-    salles["B22"] = new Salle("B22", 80, "Salle de cours");
+    salles["B22"] = new Salle("B22", 80, "Salle de cours");*/
+
+#ifdef AVEC_BDD
+    QVector<QStringList> sallesBDD;
+    QString              requete = "SELECT * FROM Salle";
+    bool                 retour;
+
+    retour = baseDeDonnees->recuperer(requete, sallesBDD);
+    if(retour)
+    {
+        qDebug() << Q_FUNC_INFO << sallesBDD;
+        for(int i = 0; i < sallesBDD.size(); ++i)
+        {
+            qDebug() << Q_FUNC_INFO << sallesBDD[i][i];
+            QString nomDeLaSalle = sallesBDD[i][Salle::TableSalle::CHAMP_NOM];
+            QString descriptionDeLaSalle =
+              sallesBDD[i][Salle::TableSalle::CHAMP_DESCRIPTION];
+            unsigned int superficieDeLaSalle =
+              sallesBDD[i][Salle::TableSalle::CHAMP_SUPERFICIE].toInt();
+            salles[nomDeLaSalle] = new Salle(nomDeLaSalle,
+                                             superficieDeLaSalle,
+                                             descriptionDeLaSalle);
+        }
+    }
+    else
+    {
+        QMessageBox::critical(0, "Erreur BDD", "Aucune salle chargée !");
+    }
+#endif
 
 #ifdef SIMULATION_ICONE
+    simulerMesureICONE();
+#endif
+    effacerSalles();
+    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
+    QMapIterator<QString, Salle*> salle(salles);
+    while(salle.hasNext())
+    {
+        salle.next();
+        qDebug() << Q_FUNC_INFO << "Salle" << salle.key();
+        afficherSalleTable(*salle.value());
+    }
+!!!134551.cpp!!!	simulerMesureICONE() : void
     // différentes mesures
     // échantillons (5 h de mesures - 1 mesure toutes les 10 minutes)
     QVector<unsigned int> mesuresCO2DeLaB11(
@@ -203,35 +245,6 @@ class EcoClassroom
     }
     qDebug() << Q_FUNC_INFO << salles["B22"]->getNom() << "indiceICONE"
              << salles["B22"]->getIndiceICONE();
-#endif
-
-    // Exemple avec une base de données SQLite
-    /*
-    QVector<QStringList> sallesBDD;
-    QString requete = "SELECT * FROM Salle";
-    bool    retour;
-
-    retour = baseDeDonnees->recuperer(requete, sallesBDD);
-    if(retour)
-    {
-        qDebug() << Q_FUNC_INFO << sallesBDD;
-        for(int i = 0; i < sallesBDD.size(); ++i)
-            qDebug() << Q_FUNC_INFO << sallesBDD[i];
-    }
-    else
-    {
-        QMessageBox::critical(0, "Erreur BDD", "Aucune salle chargée !");
-    }*/
-
-    effacerSalles();
-    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
-    QMapIterator<QString, Salle*> salle(salles);
-    while(salle.hasNext())
-    {
-        salle.next();
-        qDebug() << Q_FUNC_INFO << "Salle" << salle.key();
-        afficherSalleTable(*salle.value());
-    }
 !!!156714.cpp!!!	creerElementsTexteCellule(in salle : Salle) : void
     elementNom   = new QTableWidgetItem(salle.getNom());
     elementTHI   = new QTableWidgetItem(QString("Inconnu"));

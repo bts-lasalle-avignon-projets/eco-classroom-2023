@@ -1,34 +1,64 @@
 format 224
 
+classcanvas 128023 class_ref 134826 // CommunicationMQTT
+  classdiagramsettings member_max_width 0 end
+  color white
+  xyz 1201.7 636.8 3005
+end
 classcanvas 128042 class_ref 134954 // EcoClassroom
   classdiagramsettings member_max_width 0 end
-  xyz 38 23 2000
+  xyz 149 24.1 2000
 end
 classcanvas 128170 class_ref 135338 // Salle
   classdiagramsettings member_max_width 0 end
-  xyz 1430 215 2006
+  color mediumgreen
+  xyz 334.3 1177.2 2006
+end
+classcanvas 128279 class_ref 134570 // BaseDeDonnees
+  classdiagramsettings member_max_width 0 end
+  color white
+  xyz 1198.1 131.8 3011
 end
 classcanvas 128426 class_ref 135466 // EtatsSalle
   classdiagramsettings member_max_width 0 end
-  xyz 1476 857 2012
+  color mediumgreen
+  xyz 74.3 1709.9 2012
 end
 classcanvas 128682 class_ref 135594 // Mesures
   classdiagramsettings member_max_width 0 end
-  xyz 1898 857 3005
+  color mediumgreen
+  xyz 608.6 1710.4 3005
+end
+relationcanvas 128151 relation_ref 148394 // <unidirectional association>
+  from ref 128042 z 3006 to ref 128023
+  role_a_pos 1037 682 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128298 relation_ref 134954 // <directional composition>
-  from ref 128042 z 2007 stereotype "<<QList>>" xyz 1009.5 444 2007 to ref 128170
-  role_a_pos 1334 404 3000 no_role_b
+  from ref 128042 z 2007 stereotype "<<QMap>>" xyz 524 1092 2007 to ref 128170
+  role_a_pos 576 1154 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128407 relation_ref 141738 // <unidirectional association>
+  from ref 128279 z 3012 to point 1158 130
+  line 128535 z 3012 to point 1158 173
+  line 128663 z 3012 to ref 128279
+  role_a_pos 1155 160 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128554 relation_ref 135210 // <unidirectional association>
   from ref 128170 z 2013 to ref 128426
-  role_a_pos 1704 816 3000 no_role_b
+  role_a_pos 383 1686 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128791 relation_ref 134551 // <unidirectional association>
+  from ref 128042 z 3012 to ref 128279
+  role_a_pos 1070 356 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128810 relation_ref 135082 // <unidirectional association>
   from ref 128170 z 3006 to ref 128682
-  role_a_pos 2096 816 3000 no_role_b
+  role_a_pos 796 1687 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

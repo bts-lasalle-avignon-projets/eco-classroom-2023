@@ -1,7 +1,7 @@
 format 224
 "eco-classroom-desktop" // eco-classroom-desktop
-  revision 6
-  modified_by 42 "tv"
+  revision 7
+  modified_by 23 "tvaira"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -405,6 +405,16 @@ ${inlines}
 	  b parent class_ref 134698 // typedef1
       end
 
+      extra_member 141610 "Q_OBJECT"
+	
+	cpp "  Q_OBJECT" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
       operation 136234 "CommunicationMQTT"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 1
@@ -444,23 +454,13 @@ ${body}}
 	
       end
 
-      extra_member 141610 "Q_OBJECT"
-	
-	cpp "  Q_OBJECT" ""
-	java ""
-	php ""
-	python ""
-	idl ""
-	mysql ""
-      end
-
       operation 164906 "getClient"
 	preserve_cpp_body_indent const public explicit_return_type "QMqttClient"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -593,7 +593,7 @@ ${body}}
     end
 
     class 134954 "EcoClassroom"
-      visibility package 
+      visibility package stereotype "QMainWindow"
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
 ${inlines}
@@ -788,7 +788,8 @@ ${items}};
 
 ${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
     QMainWindow(parent), nbLignesSalles(0),
-    communicationMQTT(new CommunicationMQTT(this))
+    communicationMQTT(new CommunicationMQTT(this)),
+    baseDeDonnees(BaseDeDonnees::getInstance())
 ${throw}{
 ${body}}
 "
@@ -851,6 +852,17 @@ ${body}}
 	  b parent class_ref 134826 // CommunicationMQTT
       end
 
+      classrelation 134551 // baseDeDonnees (<unidirectional association>)
+	relation 134551 --->
+	  a role_name "baseDeDonnees" private
+	    comment "!< CommunicationMQTT (association)
+!< Base de données"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 134551 // baseDeDonnees (<unidirectional association>)
+	  b parent class_ref 134570 // BaseDeDonnees
+      end
+
       attribute 135338 "nomColonnesTable"
 	private explicit_type "QStringList"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
@@ -861,8 +873,7 @@ ${body}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< CommunicationMQTT (association)
-!< Le nom des colonnes de la table"
+	comment "!< Le nom des colonnes de la table"
       end
 
       attribute 135466 "gui"
@@ -1248,6 +1259,25 @@ ${body}}
 "
 	cpp_def "//@fn EcoClassroom::chargerSalles
 //@brief Charger les salles
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134551 "simulerMesureICONE"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@fn EcoClassroom::simulerMesureICONE
+//@brief Permet de simuler les mesures de CO2 pour les salles
+//et donc simuler la mesure de l'indice ICONE
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -1702,7 +1732,6 @@ ${body}}
 	
 	
       end
-
     end
 
     class 135082 "typedef2"
@@ -1781,6 +1810,53 @@ ${items}};
 
 	attribute 160426 "TYPE_DONNEE"
 	  public type class_ref 148650 // ChampsTopic
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
+      class 134551 "TableSalle"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 134551 "CHAMP_NOM"
+	  public type class_ref 134551 // TableSalle
+	  init_value " 1"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 134679 "CHAMP_DESCRIPTION"
+	  public type class_ref 134551 // TableSalle
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 134807 "CHAMP_SUPERFICIE"
+	  public type class_ref 134551 // TableSalle
 	  cpp_decl "  ${name}${value},${comment}"
 	  java_decl ""
 	  php_decl ""
@@ -2237,7 +2313,6 @@ ${body}}
 	
 	
       end
-
     end
 
     class 135466 "EtatsSalle"
@@ -2321,7 +2396,15 @@ ${inlines}
 //@param occupation l'état d'occupation de la salle
 //
 
+//@fn EtatsSalle::EtatsSalle
+//@brief Constructeur par defaut de la classe EtatsSalle
+//@param lumiere l'état de la lumière dans la salle
+//@param fenetre l'état d'ouverture des fenêtres de la salle
+//@param occupation l'état d'occupation de la salle
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${)} : lumiere(false), fenetre(false), occupation(false)
+ : lumiere(false), fenetre(false), occupation(false)
  : lumiere(false), fenetre(false), occupation(false)
  : lumiere(false), fenetre(false), occupation(false)
 ${throw}{
@@ -2362,7 +2445,16 @@ ${body}}
 //@param occupation l'état d'occupation de la salle (true : occupée)
 //
 
+//@fn EtatsSalle::EtatsSalle
+//@brief Constructeur d'initialisation de la classe EtatsSalle
+//@param lumiere l'état de la lumière dans la salle (true : allumée)
+//@param fenetre l'état d'ouverture des fenêtres de la salle (true : ouverte)
+//@param occupation l'état d'occupation de la salle (true : occupée)
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
+    lumiere(lumiere), fenetre(fenetre), occupation(occupation)
+ :
     lumiere(lumiere), fenetre(fenetre), occupation(occupation)
  :
     lumiere(lumiere), fenetre(fenetre), occupation(occupation)
@@ -2394,6 +2486,10 @@ ${body}}
 //@brief Destructeur de la clase EtatsSalle
 //
 
+//@fn EtatsSalle::~EtatsSalle
+//@brief Destructeur de la clase EtatsSalle
+//
+
 ${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
@@ -2409,6 +2505,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::getLumiere
+//@brief Getter de l'attribut lumiere
+//@return bool l'état de la lumière dans la salle (true : allumée)
+//
+
+//@fn EtatsSalle::getLumiere
 //@brief Getter de l'attribut lumiere
 //@return bool l'état de la lumière dans la salle (true : allumée)
 //
@@ -2452,6 +2553,11 @@ ${body}}
 //@return bool l'état d'une fenetre dans la salle (true : ouverte)
 //
 
+//@fn EtatsSalle::getFenetre
+//@brief Getter de l'attribut fenetre
+//@return bool l'état d'une fenetre dans la salle (true : ouverte)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2467,6 +2573,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::getOccupation
+//@brief Getter de l'attribut occupation
+//@return bool l'état de l'occupation dans la salle (true : Occupé)
+//
+
+//@fn EtatsSalle::getOccupation
 //@brief Getter de l'attribut occupation
 //@return bool l'état de l'occupation dans la salle (true : Occupé)
 //
@@ -2511,6 +2622,11 @@ ${body}}
 //@param lumiere l'état de la lumière dans la salle (true : allumée)
 //
 
+//@fn EtatsSalle::setLumiere
+//@brief Setter de l'attribut lumiere
+//@param lumiere l'état de la lumière dans la salle (true : allumée)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2541,6 +2657,11 @@ ${body}}
 //@param fenetre l'état d'ouverture des fenêtres dans la salle (true : ouverte)
 //
 
+//@fn EtatsSalle::setFenetre
+//@brief Setter de l'attribut fenetre
+//@param fenetre l'état d'ouverture des fenêtres dans la salle (true : ouverte)
+//
+
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2557,6 +2678,11 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@fn EtatsSalle::setOccupation
+//@brief Setter de l'attribut occupation
+//@param occupation l'état d'occupation de la salle (true : occupée)
+//
+
+//@fn EtatsSalle::setOccupation
 //@brief Setter de l'attribut occupation
 //@param occupation l'état d'occupation de la salle (true : occupée)
 //
