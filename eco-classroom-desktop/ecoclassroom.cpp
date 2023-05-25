@@ -33,6 +33,7 @@ EcoClassroom::EcoClassroom(QWidget* parent) :
 EcoClassroom::~EcoClassroom()
 {
     qDebug() << Q_FUNC_INFO;
+    BaseDeDonnees::detruireInstance();
 }
 
 // Méthodes publiques
@@ -273,7 +274,7 @@ void EcoClassroom::chargerSalles()
     salles["B21"] = new Salle("B21", 35, "Salle de TP");
     salles["B22"] = new Salle("B22", 80, "Salle de cours");*/
 
-    // Exemple avec une base de données SQLite
+#ifdef AVEC_BDD
     QVector<QStringList> sallesBDD;
     QString              requete = "SELECT * FROM Salle";
     bool                 retour;
@@ -285,77 +286,25 @@ void EcoClassroom::chargerSalles()
         for(int i = 0; i < sallesBDD.size(); ++i)
         {
             qDebug() << Q_FUNC_INFO << sallesBDD[i][i];
-            QString nomDeLaSalle =
-              sallesBDD[i][POSITION_NOM_DE_LA_SALLE_LISTE_BDD];
+            QString nomDeLaSalle = sallesBDD[i][Salle::TableSalle::CHAMP_NOM];
             QString descriptionDeLaSalle =
-              sallesBDD[i][POSITION_DESCRIPTION_DE_LA_SALLE_LISTE_BDD];
+              sallesBDD[i][Salle::TableSalle::CHAMP_DESCRIPTION];
             unsigned int superficieDeLaSalle =
-              sallesBDD[i][POSITION_SUPERFICIE_DE_LA_SALLE_LISTE_BDD].toInt();
+              sallesBDD[i][Salle::TableSalle::CHAMP_SUPERFICIE].toInt();
             salles[nomDeLaSalle] = new Salle(nomDeLaSalle,
                                              superficieDeLaSalle,
                                              descriptionDeLaSalle);
         }
-
-#ifdef SIMULATION_ICONE
-        // différentes mesures
-        // échantillons (5 h de mesures - 1 mesure toutes les 10 minutes)
-        QVector<unsigned int>
-                              mesuresCO2DeLaB11({ 312,  455,  380,  658,  889,  905,  1100, 1540,
-                              1422, 1669, 1702, 1698, 1805, 1850, 1630, 1496,
-                              1355, 1255, 1104, 1040, 922,  669,  702,  698,
-                              512,  555,  480,  404,  489,  458 }); // en ppm
-        QVector<unsigned int> mesuresCO2DeLaB20(
-          { 312,  455, 380,  658,  889,  905, 999, 997, 822, 969,
-            1002, 698, 1005, 1050, 1130, 896, 855, 755, 804, 840,
-            622,  669, 702,  698,  512,  555, 480, 458, 489, 999 }); // en ppm
-        QVector<unsigned int> mesuresCO2DeLaB21(
-          { 312, 455, 380, 658, 889, 905, 900, 940, 922, 969,
-            702, 698, 805, 850, 630, 496, 355, 255, 504, 540,
-            922, 669, 702, 698, 512, 555, 480, 458, 489, 540 }); // en ppm
-        QVector<unsigned int>
-          mesuresCO2DeLaB22({ 1312, 1455, 1380, 1658, 189,  1905, 1701, 1740,
-                              1722, 1769, 1702, 1798, 1805, 1850, 1730, 1896,
-                              1355, 1755, 1704, 1940, 1922, 1869, 1702, 1698,
-                              1712, 1755, 1780, 1758, 1789, 1705 }); // en ppm
-
-        qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB11" << mesuresCO2DeLaB11;
-        for(int i = 0; i < mesuresCO2DeLaB11.size(); ++i)
-        {
-            salles["B11"]->setCO2(mesuresCO2DeLaB11[i]);
-        }
-        qDebug() << Q_FUNC_INFO << salles["B11"]->getNom() << "indiceICONE"
-                 << salles["B11"]->getIndiceICONE();
-
-        qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB20" << mesuresCO2DeLaB20;
-        for(int i = 0; i < mesuresCO2DeLaB20.size(); ++i)
-        {
-            salles["B20"]->setCO2(mesuresCO2DeLaB20[i]);
-        }
-        qDebug() << Q_FUNC_INFO << salles["B20"]->getNom() << "indiceICONE"
-                 << salles["B20"]->getIndiceICONE();
-
-        qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB21" << mesuresCO2DeLaB21;
-        for(int i = 0; i < mesuresCO2DeLaB21.size(); ++i)
-        {
-            salles["B21"]->setCO2(mesuresCO2DeLaB21[i]);
-        }
-        qDebug() << Q_FUNC_INFO << salles["B21"]->getNom() << "indiceICONE"
-                 << salles["B21"]->getIndiceICONE();
-
-        qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB22" << mesuresCO2DeLaB22;
-        for(int i = 0; i < mesuresCO2DeLaB22.size(); ++i)
-        {
-            salles["B22"]->setCO2(mesuresCO2DeLaB22[i]);
-        }
-        qDebug() << Q_FUNC_INFO << salles["B22"]->getNom() << "indiceICONE"
-                 << salles["B22"]->getIndiceICONE();
-#endif
     }
     else
     {
         QMessageBox::critical(0, "Erreur BDD", "Aucune salle chargée !");
     }
+#endif
 
+#ifdef SIMULATION_ICONE
+    simulerMesureICONE();
+#endif
     effacerSalles();
     qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
     QMapIterator<QString, Salle*> salle(salles);
@@ -365,6 +314,64 @@ void EcoClassroom::chargerSalles()
         qDebug() << Q_FUNC_INFO << "Salle" << salle.key();
         afficherSalleTable(*salle.value());
     }
+}
+/**
+ * @fn EcoClassroom::simulerMesureICONE
+ * @brief Permet de simuler les mesures de CO2 pour les salles
+ * et donc simuler la mesure de l'indice ICONE
+ */
+void EcoClassroom::simulerMesureICONE()
+{
+    // différentes mesures
+    // échantillons (5 h de mesures - 1 mesure toutes les 10 minutes)
+    QVector<unsigned int> mesuresCO2DeLaB11(
+      { 312,  455,  380,  658,  889,  905,  1100, 1540, 1422, 1669,
+        1702, 1698, 1805, 1850, 1630, 1496, 1355, 1255, 1104, 1040,
+        922,  669,  702,  698,  512,  555,  480,  404,  489,  458 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB20(
+      { 312,  455, 380,  658,  889,  905, 999, 997, 822, 969,
+        1002, 698, 1005, 1050, 1130, 896, 855, 755, 804, 840,
+        622,  669, 702,  698,  512,  555, 480, 458, 489, 999 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB21(
+      { 312, 455, 380, 658, 889, 905, 900, 940, 922, 969,
+        702, 698, 805, 850, 630, 496, 355, 255, 504, 540,
+        922, 669, 702, 698, 512, 555, 480, 458, 489, 540 }); // en ppm
+    QVector<unsigned int> mesuresCO2DeLaB22(
+      { 1312, 1455, 1380, 1658, 189,  1905, 1701, 1740, 1722, 1769,
+        1702, 1798, 1805, 1850, 1730, 1896, 1355, 1755, 1704, 1940,
+        1922, 1869, 1702, 1698, 1712, 1755, 1780, 1758, 1789, 1705 }); // en ppm
+
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB11" << mesuresCO2DeLaB11;
+    for(int i = 0; i < mesuresCO2DeLaB11.size(); ++i)
+    {
+        salles["B11"]->setCO2(mesuresCO2DeLaB11[i]);
+    }
+    qDebug() << Q_FUNC_INFO << salles["B11"]->getNom() << "indiceICONE"
+             << salles["B11"]->getIndiceICONE();
+
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB20" << mesuresCO2DeLaB20;
+    for(int i = 0; i < mesuresCO2DeLaB20.size(); ++i)
+    {
+        salles["B20"]->setCO2(mesuresCO2DeLaB20[i]);
+    }
+    qDebug() << Q_FUNC_INFO << salles["B20"]->getNom() << "indiceICONE"
+             << salles["B20"]->getIndiceICONE();
+
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB21" << mesuresCO2DeLaB21;
+    for(int i = 0; i < mesuresCO2DeLaB21.size(); ++i)
+    {
+        salles["B21"]->setCO2(mesuresCO2DeLaB21[i]);
+    }
+    qDebug() << Q_FUNC_INFO << salles["B21"]->getNom() << "indiceICONE"
+             << salles["B21"]->getIndiceICONE();
+
+    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB22" << mesuresCO2DeLaB22;
+    for(int i = 0; i < mesuresCO2DeLaB22.size(); ++i)
+    {
+        salles["B22"]->setCO2(mesuresCO2DeLaB22[i]);
+    }
+    qDebug() << Q_FUNC_INFO << salles["B22"]->getNom() << "indiceICONE"
+             << salles["B22"]->getIndiceICONE();
 }
 
 /**

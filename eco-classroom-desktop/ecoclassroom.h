@@ -33,25 +33,11 @@ class BaseDeDonnees;
 #define SIMULATION_ICONE
 
 /**
- * @def POSITION_NOM_DE_LA_SALLE_LISTE_BDD
- * @brief indique la position du nom de la salle dans la table Salle de la BDD
- * ecoclassroom
+ * @def AVEC_BDD
+ * @brief Pour utiliser les données qui sont dans la Base de données
  */
-#define POSITION_NOM_DE_LA_SALLE_LISTE_BDD 1
+#define AVEC_BDD
 
-/**
- * @def POSITION_DESCRIPTION_DE_LA_SALLE_LISTE_BDD
- * @brief indique la position de la description de la salle dans la table Salle
- * de la BDD ecoclassroom
- */
-#define POSITION_DESCRIPTION_DE_LA_SALLE_LISTE_BDD 2
-
-/**
- * @def POSITION_SUPERFICIE_DE_LA_SALLE_LISTE_BDD
- * @brief indique la position de la superficie de la salle dans la table Salle
- * de la BDD ecoclassroom
- */
-#define POSITION_SUPERFICIE_DE_LA_SALLE_LISTE_BDD 3
 class Salle;
 
 /**
@@ -132,6 +118,7 @@ class EcoClassroom : public QMainWindow
     void initialiserGUI();
     void installerGestionEvenements();
     void chargerSalles();
+    void simulerMesureICONE();
     void creerElementsTexteCellule(const Salle& salle);
     void creerElementsImageCellule(const Salle& salle);
     void personnaliserElementsTexte();

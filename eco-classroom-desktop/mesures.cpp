@@ -118,7 +118,8 @@ double Mesures::calculerProportionSeuilN1()
     int nbValeursSeuilN1 = 0;
     for(int i = 0; i < co2.size(); i++)
     {
-        if((co2[i] >= SEUIL_BAS_CO2_DEFINI) && (co2[i] <= SEUIL_HAUT_CO2_DEFINI))
+        if((co2[i] >= SEUIL_BAS_CO2_DEFINI) &&
+           (co2[i] <= SEUIL_HAUT_CO2_DEFINI))
         {
             nbValeursSeuilN1++;
         }

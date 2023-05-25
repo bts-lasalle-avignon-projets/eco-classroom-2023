@@ -61,6 +61,13 @@ class Salle
         TYPE_DONNEE
     };
 
+    enum TableSalle
+    {
+        CHAMP_NOM = 1,
+        CHAMP_DESCRIPTION,
+        CHAMP_SUPERFICIE
+    };
+
   private:
     QString      nom;         //!< Nom de la salle
     unsigned int superficie;  //!< Superficie de la salle
