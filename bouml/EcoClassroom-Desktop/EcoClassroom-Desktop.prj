@@ -1,7 +1,7 @@
 format 224
 "EcoClassroom-Desktop"
-  revision 10
-  modified_by 42 "tv"
+  revision 11
+  modified_by 2 "btssn2"
   cpp_root_dir "../../"
 
 
@@ -591,6 +591,41 @@ ${members}};
     sequencediagram 141098 "Visualiser la liste des salles"
       sequencediagramsettings end
       overlapping_bars size A0
+    end
+  end
+
+  deploymentview 128002 "eco-classroom-deploiement"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    deploymentdiagram 141058 "eco-classroom-deploiement"
+      deploymentdiagramsettings
+       end
+      size A0
+    end
+
+    deploymentnode 128002 "PC"
+    end
+
+    deploymentnode 128130 "Tablette"
+    end
+
+    deploymentnode 128258 "serveurMySQL"
+    end
+
+    deploymentnode 128386 "baseDeDonnees"
+    end
+
+    deploymentnode 128514 "brokerMQTT"
+    end
+
+    deploymentnode 128642 "passerelle"
+    end
+
+    deploymentnode 128770 "moduleSonde"
+    end
+
+    deploymentnode 128898 "moduleDetection"
     end
   end
 end
