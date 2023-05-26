@@ -1,8 +1,28 @@
 var searchData=
 [
-  ['_7ebasededonnees_305',['~BaseDeDonnees',['../class_base_de_donnees.html#a5dc474cdbe003644fb0ca7b8f2ec6b93',1,'BaseDeDonnees']]],
-  ['_7ecommunicationmqtt_306',['~CommunicationMQTT',['../class_communication_m_q_t_t.html#aa87d3ee77f58d5508b235c00d67278fd',1,'CommunicationMQTT']]],
-  ['_7eecoclassroom_307',['~EcoClassroom',['../class_eco_classroom.html#af5c927831b4afe8a57e270fa816fbfdc',1,'EcoClassroom']]],
-  ['_7eetatssalle_308',['~EtatsSalle',['../class_etats_salle.html#a82f0e0a01c5b55207310133028365f25',1,'EtatsSalle']]],
-  ['_7emesures_309',['~Mesures',['../class_mesures.html#a4bb192b80fbf2c0f9aea5911ce29c652',1,'Mesures']]]
+  ['sabonner_542',['sAbonner',['../class_communication_m_q_t_t.html#acd455d9897cb24d84a24724d5423891b',1,'CommunicationMQTT']]],
+  ['salle_543',['Salle',['../class_salle.html#a4cb05b76fb2b5430ac2bf903b8f75906',1,'Salle::Salle()'],['../class_salle.html#ade056f44c8fc75c5da56ee75eb2291af',1,'Salle::Salle(QString nom, unsigned int superficie, QString description)'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aba9fe7fc464cfa0879a17199d8a39415',1,'com.lasalle.eco_classroom_mobile.Salle.Salle()'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#afa4ae1e9bcd4c600342259f941bc1fe0',1,'com.lasalle.eco_classroom_mobile.Salle.Salle(String nom, double superficie, String description)'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#af693d2295f3bfc0c8d8118647b4fbffe',1,'com.lasalle.eco_classroom_mobile.Salle.Salle(String nom, double superficie, String description, Seuils seuils)']]],
+  ['seconnecter_544',['seConnecter',['../class_communication_m_q_t_t.html#ae685693177ee02a7bafd1379b7da4abf',1,'CommunicationMQTT']]],
+  ['sedeconnecter_545',['seDeconnecter',['../class_communication_m_q_t_t.html#a960f346a3e13f53d7522058e4f980914',1,'CommunicationMQTT']]],
+  ['selectionner_546',['selectionner',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a370be4f2d2fe855df312b13c571ac050',1,'com::lasalle::eco_classroom_mobile::BaseDeDonnees']]],
+  ['selectionnersalle_547',['selectionnerSalle',['../class_eco_classroom.html#a21e3febf07b09a89f7e9902ddb0d85b8',1,'EcoClassroom']]],
+  ['setco2_548',['setCO2',['../class_mesures.html#a10996035a4b02757fd1f521aca5026ba',1,'Mesures::setCO2()'],['../class_salle.html#a1d11e3f9d4cd0f11d8f0148d4dd29ab9',1,'Salle::setCO2()'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aaac5cbbd9a249d1054413f90d4982069',1,'com.lasalle.eco_classroom_mobile.Salle.setCo2()']]],
+  ['setconfortthermique_549',['setConfortThermique',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a2805eebddd160be8b8ffb88e9e0e78b7',1,'com::lasalle::eco_classroom_mobile::Salle']]],
+  ['setdescription_550',['setDescription',['../class_salle.html#ab72ef4bfcfe50c6f04f691311c1bbe28',1,'Salle::setDescription()'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a9a7096b1260d4a2424f7778fd2e117f5',1,'com.lasalle.eco_classroom_mobile.Salle.setDescription()']]],
+  ['setestoccupe_551',['setEstOccupe',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ac77c6f105d19778002db2ed96abf9c7b',1,'com::lasalle::eco_classroom_mobile::Salle']]],
+  ['setetatfenetre_552',['setEtatFenetre',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aa6727da3c9ae1dd373f933b0089e459d',1,'com::lasalle::eco_classroom_mobile::Salle']]],
+  ['setetatlumiere_553',['setEtatLumiere',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ae9392cec2bbf9bae10266905fb046f9f',1,'com::lasalle::eco_classroom_mobile::Salle']]],
+  ['setfenetre_554',['setFenetre',['../class_etats_salle.html#adb6b50fb5c20dcd864fb1b2123282216',1,'EtatsSalle']]],
+  ['sethandler_555',['setHandler',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#aab78293f5d7f46d89cad90b076bc5715',1,'com::lasalle::eco_classroom_mobile::BaseDeDonnees']]],
+  ['sethumidite_556',['setHumidite',['../class_mesures.html#aee61e9e7108b1a9b9057cc5a17b4516f',1,'Mesures::setHumidite()'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a3d3b8c137ab73f68187d6affd2331012',1,'com.lasalle.eco_classroom_mobile.Salle.setHumidite()']]],
+  ['setlumiere_557',['setLumiere',['../class_etats_salle.html#a2a3aa29a3ffd115fc72e43672c9870c3',1,'EtatsSalle']]],
+  ['setnom_558',['setNom',['../class_salle.html#a9640a07eaa76b4e280b3f6d4c900f17c',1,'Salle::setNom()'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a8a12664303171c55e273edfc9e4aa2c6',1,'com.lasalle.eco_classroom_mobile.Salle.setNom()']]],
+  ['setoccupation_559',['setOccupation',['../class_etats_salle.html#a58f6bbffeceaf795ad5290be9f63c079',1,'EtatsSalle']]],
+  ['setqualiteair_560',['setQualiteAir',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aa505d6a2ac8a7a4588a453814394a06c',1,'com::lasalle::eco_classroom_mobile::Salle']]],
+  ['setsalles_561',['setSalles',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a14742de19f29a8a23c06fb1dd4e5b608',1,'com::lasalle::eco_classroom_mobile::EcoClassroom']]],
+  ['setseuils_562',['setSeuils',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a02fbe904c17af9c013af7e7de2237b47',1,'com::lasalle::eco_classroom_mobile::Salle']]],
+  ['setsuperficie_563',['setSuperficie',['../class_salle.html#aff2ba088d51acf6f82649898a8662baf',1,'Salle::setSuperficie()'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ad274ee4ef5e989a763e25e261510bccd',1,'com.lasalle.eco_classroom_mobile.Salle.setSuperficie()']]],
+  ['settemperature_564',['setTemperature',['../class_mesures.html#a6370bd7152282bf33e106bf223d5d9c5',1,'Mesures::setTemperature()'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#afb1c8b6a0a864b9d091c0b66ed77df54',1,'com.lasalle.eco_classroom_mobile.Salle.setTemperature()']]],
+  ['seuils_565',['Seuils',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a1246cfa52dac559e81e738b233d0eda1',1,'com.lasalle.eco_classroom_mobile.Seuils.Seuils()'],['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#abc6057802a96a03f8faa0db954c17c16',1,'com.lasalle.eco_classroom_mobile.Seuils.Seuils(double temperatureMin, double temperatureMax, int luminositeMin, int eclairementMoyen, int humiditeMin, int humiditeMax, int co2Max, int indiceConfinement)']]],
+  ['simulermesureicone_566',['simulerMesureICONE',['../class_eco_classroom.html#a0448d409a3e866019027f586c9005b1c',1,'EcoClassroom']]]
 ];
