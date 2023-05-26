@@ -18,6 +18,8 @@
 
 Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules connectés afin de détecter et mesurer l’état de celle-ci. Les informations seront accessibles à partir d’une tablette ou d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.
 
+![](images/deploiement.png)
+
 ## Documentation du code
 
 https://btssn-lasalle-84.github.io/eco-classroom-2023/
@@ -26,10 +28,12 @@ https://btssn-lasalle-84.github.io/eco-classroom-2023/
 
 Base de données MySQL 8.0 `ecoclassroom` hébergée sur www.db4free.net (pour les tests) :
 
-![](sql/eco-classroom-v0.1.png)
+![](sql/eco-classroom-v0.2.png)
 
 ```sql
---- LDD (langage de définition de données)
+-- LDD (langage de définition de données)
+
+-- Voir aussi : https://www.db4free.net/phpMyAdmin/
 
 DROP DATABASE IF EXISTS `ecoclassroom`;
 
@@ -41,7 +45,7 @@ CREATE DATABASE IF NOT EXISTS `ecoclassroom` CHARACTER SET utf8;
 
 USE ecoclassroom;
 
-DROP TABLE IF EXISTS SeuilsAlerte;
+DROP TABLE IF EXISTS Seuils;
 DROP TABLE IF EXISTS MesureCo2;
 DROP TABLE IF EXISTS MesureLuminosite;
 DROP TABLE IF EXISTS MesureHumidite;
@@ -142,6 +146,8 @@ CREATE TABLE IF NOT EXISTS `Salle` (
 ALTER TABLE `Salle`
   ADD UNIQUE KEY `nom` (`nom`);
 
+-- ALTER TABLE `Salle` CHANGE `idSalle` `idSalle` INT NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`idSalle`); 
+
 ALTER TABLE `Salle`
   ADD CONSTRAINT `Salle_fk_1` FOREIGN KEY (`idIndiceConfortTHI`) REFERENCES `IndiceConfortTHI` (`idIndiceConfortTHI`) ON DELETE CASCADE,
   ADD CONSTRAINT `Salle_fk_2` FOREIGN KEY (`idIndiceInconfortIADI`) REFERENCES `IndiceInconfortIADI` (`idIndiceInconfortIADI`) ON DELETE CASCADE,
@@ -228,26 +234,23 @@ ALTER TABLE `MesureCo2`
 
 -- --------------------------------------------------------
 
--- Pour chaque salle ou pour toutes ?
-
-CREATE TABLE IF NOT EXISTS `SeuilsAlerte` (
+CREATE TABLE IF NOT EXISTS `Seuils` (
 	`idSalle`	int NOT NULL,
-	`temperatureMin`	double,
-	`temperatureMax`	double,
-	`luminositeMin`	int,
-	`luminositeMax`	int,
-	`humiditeMin`	int,
-	`humiditeMax`	int,
-	`co2Min`	int,
-	`co2Max`	int
+	`temperatureMin`	double DEFAULT '14',
+	`temperatureMax`	double DEFAULT '30',
+	`luminositeMin`	int DEFAULT '300',
+	`eclairementMoyen`	int DEFAULT '500',
+	`humiditeMin`	int DEFAULT '45',
+	`humiditeMax`	int DEFAULT '55',
+	`co2Max`	int DEFAULT '1300',
+    `indiceConfinement`	int DEFAULT '5'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `SeuilsAlerte`
+ALTER TABLE `Seuils`
   ADD PRIMARY KEY (`idSalle`);
 
-ALTER TABLE `SeuilsAlerte`
-  ADD CONSTRAINT `SeuilsAlerte_fk_1` FOREIGN KEY (`idSalle`) REFERENCES `Salle` (`idSalle`) ON DELETE CASCADE;
-
+ALTER TABLE `Seuils`
+  ADD CONSTRAINT `Seuils_fk_1` FOREIGN KEY (`idSalle`) REFERENCES `Salle` (`idSalle`) ON DELETE CASCADE;
 -- --------------------------------------------------------
 ```
 
@@ -379,6 +382,24 @@ dependencies {
 ```
 
 ## Versions
+
+![](images/livraisons.png)
+
+### 0.2
+
+![](images/jira-tickets-v0.2.png)
+
+- Android :
+
+![](images/screenshot-android-salles-v0.2.png)
+
+![](images/screenshot-android-interventions-v0.2.png)
+
+- PC Desktop Qt :
+
+![](images/screenshot-qt-salles-v0.2.png)
+
+![](images/screenshot-qt-salle-v0.2.png)
 
 ### 0.1
 

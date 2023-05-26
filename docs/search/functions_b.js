@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['useappcontext_303',['useAppContext',['../classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_example_instrumented_test.html#ac6b25ab12fec360593007f1aae9f1b75',1,'com::lasalle::eco_classroom_mobile::ExampleInstrumentedTest']]]
+  ['personnaliserelementsimage_536',['personnaliserElementsImage',['../class_eco_classroom.html#ac41b125d389ce8d072a2c3e1d18503e8',1,'EcoClassroom']]],
+  ['personnaliserelementstexte_537',['personnaliserElementsTexte',['../class_eco_classroom.html#a6d1b5c2ab19b0f07b8954bffd711ed9f',1,'EcoClassroom']]]
 ];

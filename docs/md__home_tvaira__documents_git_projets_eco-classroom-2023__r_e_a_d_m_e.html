@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>eco-classroom: README</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">eco-classroom
+   &#160;<span id="projectnumber">0.2</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('md__home_tvaira__documents_git_projets_eco-classroom-2023__r_e_a_d_m_e.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">README </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><img src="https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&amp;logoColor=fff&amp;style=plastic" alt="C++ Badge" class="inline"/> <img src="https://img.shields.io/badge/Android-3DDC84?logo=android&amp;logoColor=fff&amp;style=plastic" alt="Android Badge" class="inline"/></p>
+<p><img src="https://badgen.net/badge/Qt/5.12.8/green" alt="" class="inline"/> <a href="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/make-qt.yml"><object type="image/svg+xml" data="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/make-qt.yml/badge.svg" style="pointer-events: none;">qt-build</object></a> <a href="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/android-build.yml"><object type="image/svg+xml" data="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/android-build.yml/badge.svg" style="pointer-events: none;">android-build</object></a> <a href="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment"><object type="image/svg+xml" data="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop" style="pointer-events: none;">pages-build-deployment</object></a></p>
+<h1>Le projet eco-classroom 2023</h1>
+<ul>
+<li><a href="#le-projet-eco-classroom-2023">Le projet eco-classroom 2023</a><ul>
+<li><a href="#documentation-du-code">Documentation du code</a></li>
+<li><a href="#base-de-données">Base de données</a></li>
+<li><a href="#mqtt">MQTT</a><ul>
+<li><a href="#qt-mqtt">Qt MQTT</a></li>
+<li><a href="#paho-mqtt-android">Paho MQTT (Android)</a></li>
+</ul>
+</li>
+<li><a href="#versions">Versions</a><ul>
+<li><a href="#01">0.1</a></li>
+</ul>
+</li>
+<li><a href="#auteurs">Auteurs</a></li>
+</ul>
+</li>
+</ul>
+<hr  />
+<p>Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules connectés afin de détecter et mesurer l’état de celle-ci. Les informations seront accessibles à partir d’une tablette ou d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.</p>
+<div class="image">
+<img src="deploiement.png" alt=""/>
+</div>
+   <h2>Documentation du code</h2>
+<p><a href="https://btssn-lasalle-84.github.io/eco-classroom-2023/">https://btssn-lasalle-84.github.io/eco-classroom-2023/</a></p>
+<h2>Base de données</h2>
+<p>Base de données MySQL 8.0 <code>ecoclassroom</code> hébergée sur www.db4free.net (pour les tests) :</p>
+<p><img src="sql/eco-classroom-v0.2.png" alt="" class="inline"/></p>
+<p>```sql &ndash; LDD (langage de définition de données)</p>
+<p>&ndash; Voir aussi : <a href="https://www.db4free.net/phpMyAdmin/">https://www.db4free.net/phpMyAdmin/</a></p>
+<p>DROP DATABASE IF EXISTS <code>ecoclassroom</code>;</p>
+<p>CREATE DATABASE IF NOT EXISTS <code>ecoclassroom</code> CHARACTER SET utf8;</p>
+<hr  />
+ <h2>&ndash; Base de données : <code>ecoclassroom</code> </h2>
+<p>USE ecoclassroom;</p>
+<p>DROP TABLE IF EXISTS Seuils; DROP TABLE IF EXISTS MesureCo2; DROP TABLE IF EXISTS MesureLuminosite; DROP TABLE IF EXISTS MesureHumidite; DROP TABLE IF EXISTS MesureTemperature; DROP TABLE IF EXISTS BrokerMQTT; DROP TABLE IF EXISTS IndiceQualiteAir; DROP TABLE IF EXISTS IndiceConfinement; DROP TABLE IF EXISTS IndiceInconfortIADI; DROP TABLE IF EXISTS IndiceConfortTHI; DROP TABLE IF EXISTS <a class="el" href="class_salle.html">Salle</a>;</p>
+<hr  />
+<p>CREATE TABLE IF NOT EXISTS <code>IndiceConfortTHI</code> ( <code>idIndiceConfortTHI</code> int NOT NULL, <code>libelle</code> varchar(255) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>IndiceConfortTHI</code> ADD PRIMARY KEY (<code>idIndiceConfortTHI</code>);</p>
+<p>INSERT INTO IndiceConfortTHI(idIndiceConfortTHI,libelle) VALUES (-4,'inconnu'), (-3,'froid'), (-2,'frais'), (-1,'légèrement frais'), (0,'neutre'), (1,'légèrement tiède'), (2,'tiède'), (3,'chaud');</p>
+<p>CREATE TABLE IF NOT EXISTS <code>IndiceInconfortIADI</code> ( <code>idIndiceInconfortIADI</code> int NOT NULL, <code>libelle</code> varchar(255) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>IndiceInconfortIADI</code> ADD PRIMARY KEY (<code>idIndiceInconfortIADI</code>);</p>
+<p>INSERT INTO IndiceInconfortIADI(idIndiceInconfortIADI,libelle) VALUES (0,'aucun'), (1,'gêne'), (2,'mal être'), (3,'inconfort'), (4,'stress intense'), (5,'urgence médicale');</p>
+<p>CREATE TABLE IF NOT EXISTS <code>IndiceConfinement</code> ( <code>idIndiceConfinement</code> int NOT NULL, <code>libelle</code> varchar(255) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>IndiceConfinement</code> ADD PRIMARY KEY (<code>idIndiceConfinement</code>);</p>
+<p>INSERT INTO IndiceConfinement(idIndiceConfinement,libelle) VALUES (0, 'nul'), (1, 'faible'), (2, 'moyen'), (3, 'élevé'), (4, 'très élevé'), (5, 'extrême');</p>
+<p>CREATE TABLE IF NOT EXISTS <code>IndiceQualiteAir</code> ( <code>idIndiceQualiteAir</code> int NOT NULL, <code>libelle</code> varchar(255) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>IndiceQualiteAir</code> ADD PRIMARY KEY (<code>idIndiceQualiteAir</code>);</p>
+<p>INSERT INTO IndiceQualiteAir(idIndiceQualiteAir,libelle) VALUES (0,'inconnu'), (1,'excellent'), (2,'très bien'), (3,'modéré'), (4,'mauvais'), (5,'très mauvais'), (6,'sévère');</p>
+<hr  />
+<p>CREATE TABLE IF NOT EXISTS <code><a class="el" href="class_salle.html">Salle</a></code> ( <code>idSalle</code> int NOT NULL AUTO_INCREMENT PRIMARY KEY, <code>nom</code> varchar(32), <code>description</code> varchar(255), <code>superficie</code> int DEFAULT '0', <code>idIndiceConfortTHI</code> int DEFAULT '-4', <code>idIndiceInconfortIADI</code> int DEFAULT '0', <code>idIndiceQualiteAir</code> int DEFAULT '0', <code>idIndiceConfinement</code> int DEFAULT '0', <code>etatFenetres</code> int DEFAULT '0', <code>etatLumieres</code> int DEFAULT '0', <code>estOccupe</code> int DEFAULT '0', <code>estFavori</code> int DEFAULT '0' ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code><a class="el" href="class_salle.html">Salle</a></code> ADD UNIQUE KEY <code>nom</code> (<code>nom</code>);</p>
+<p>&ndash; ALTER TABLE <code><a class="el" href="class_salle.html">Salle</a></code> CHANGE <code>idSalle</code> <code>idSalle</code> INT NOT NULL AUTO_INCREMENT, add PRIMARY KEY (<code>idSalle</code>);</p>
+<p>ALTER TABLE <code><a class="el" href="class_salle.html">Salle</a></code> ADD CONSTRAINT <code>Salle_fk_1</code> FOREIGN KEY (<code>idIndiceConfortTHI</code>) REFERENCES <code>IndiceConfortTHI</code> (<code>idIndiceConfortTHI</code>) ON DELETE CASCADE, ADD CONSTRAINT <code>Salle_fk_2</code> FOREIGN KEY (<code>idIndiceInconfortIADI</code>) REFERENCES <code>IndiceInconfortIADI</code> (<code>idIndiceInconfortIADI</code>) ON DELETE CASCADE, ADD CONSTRAINT <code>Salle_fk_3</code> FOREIGN KEY (<code>idIndiceQualiteAir</code>) REFERENCES <code>IndiceQualiteAir</code> (<code>idIndiceQualiteAir</code>) ON DELETE CASCADE, ADD CONSTRAINT <code>Salle_fk_4</code> FOREIGN KEY (<code>idIndiceConfinement</code>) REFERENCES <code>IndiceConfinement</code> (<code>idIndiceConfinement</code>) ON DELETE CASCADE;</p>
+<hr  />
+<p>CREATE TABLE IF NOT EXISTS <code>BrokerMQTT</code> ( <code>idBrokerMQTT</code> int, <code>hostname</code> varchar(255) NOT NULL, <code>port</code> int NOT NULL DEFAULT '1883', <code>username</code> varchar(64) DEFAULT NULL, <code>password</code> varchar(64) DEFAULT NULL, <code>estActif</code> int DEFAULT '0' ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>BrokerMQTT</code> ADD PRIMARY KEY (<code>idBrokerMQTT</code>);</p>
+<hr  />
+<p>CREATE TABLE IF NOT EXISTS <code>MesureTemperature</code> ( <code>idMesureTemperature</code> int AUTO_INCREMENT PRIMARY KEY, <code>idSalle</code> int NOT NULL, <code>temperature</code> DECIMAL(3, 1) NOT NULL, <code>horodatage</code> DATETIME NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>MesureTemperature</code> ADD UNIQUE KEY <code>horodatage</code> (<code>horodatage</code>), ADD KEY <code>MesureTemperature_fk_1</code> (<code>idSalle</code>);</p>
+<p>ALTER TABLE <code>MesureTemperature</code> ADD CONSTRAINT <code>MesureTemperature_fk_1</code> FOREIGN KEY (<code>idSalle</code>) REFERENCES <code><a class="el" href="class_salle.html">Salle</a></code> (<code>idSalle</code>) ON DELETE CASCADE;</p>
+<hr  />
+<p>CREATE TABLE IF NOT EXISTS <code>MesureHumidite</code> ( <code>idMesureHumidite</code> int AUTO_INCREMENT PRIMARY KEY, <code>idSalle</code> int NOT NULL, <code>humidite</code> TINYINT UNSIGNED NOT NULL, <code>horodatage</code> DATETIME NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>MesureHumidite</code> ADD UNIQUE KEY <code>horodatage</code> (<code>horodatage</code>), ADD KEY <code>MesureHumidite_fk_1</code> (<code>idSalle</code>);</p>
+<p>ALTER TABLE <code>MesureHumidite</code> ADD CONSTRAINT <code>MesureHumidite_fk_1</code> FOREIGN KEY (<code>idSalle</code>) REFERENCES <code><a class="el" href="class_salle.html">Salle</a></code> (<code>idSalle</code>) ON DELETE CASCADE;</p>
+<hr  />
+<p>CREATE TABLE IF NOT EXISTS <code>MesureLuminosite</code> ( <code>idMesureLuminosite</code> int AUTO_INCREMENT PRIMARY KEY, <code>idSalle</code> int NOT NULL, <code>luminosite</code> SMALLINT UNSIGNED NOT NULL, <code>horodatage</code> DATETIME NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>MesureLuminosite</code> ADD UNIQUE KEY <code>horodatage</code> (<code>horodatage</code>), ADD KEY <code>MesureLuminosite_fk_1</code> (<code>idSalle</code>);</p>
+<p>ALTER TABLE <code>MesureLuminosite</code> ADD CONSTRAINT <code>MesureLuminosite_fk_1</code> FOREIGN KEY (<code>idSalle</code>) REFERENCES <code><a class="el" href="class_salle.html">Salle</a></code> (<code>idSalle</code>) ON DELETE CASCADE;</p>
+<hr  />
+<p>CREATE TABLE IF NOT EXISTS <code>MesureCo2</code> ( <code>idMesureCo2</code> int AUTO_INCREMENT PRIMARY KEY, <code>idSalle</code> int NOT NULL, <code>co2</code> SMALLINT UNSIGNED NOT NULL, <code>horodatage</code> DATETIME NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>MesureCo2</code> ADD UNIQUE KEY <code>horodatage</code> (<code>horodatage</code>), ADD KEY <code>MesureCo2_fk_1</code> (<code>idSalle</code>);</p>
+<p>ALTER TABLE <code>MesureCo2</code> ADD CONSTRAINT <code>MesureCo2_fk_1</code> FOREIGN KEY (<code>idSalle</code>) REFERENCES <code><a class="el" href="class_salle.html">Salle</a></code> (<code>idSalle</code>) ON DELETE CASCADE;</p>
+<hr  />
+<p>CREATE TABLE IF NOT EXISTS <code>Seuils</code> ( <code>idSalle</code> int NOT NULL, <code>temperatureMin</code> double DEFAULT '14', <code>temperatureMax</code> double DEFAULT '30', <code>luminositeMin</code> int DEFAULT '300', <code>eclairementMoyen</code> int DEFAULT '500', <code>humiditeMin</code> int DEFAULT '45', <code>humiditeMax</code> int DEFAULT '55', <code>co2Max</code> int DEFAULT '1300', <code>indiceConfinement</code> int DEFAULT '5' ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE <code>Seuils</code> ADD PRIMARY KEY (<code>idSalle</code>);</p>
+<p>ALTER TABLE <code>Seuils</code> ADD CONSTRAINT <code>Seuils_fk_1</code> FOREIGN KEY (<code>idSalle</code>) REFERENCES <code><a class="el" href="class_salle.html">Salle</a></code> (<code>idSalle</code>) ON DELETE CASCADE;</p>
+<hr  />
+ <div class="fragment"><div class="line">## MQTT</div>
+<div class="line"> </div>
+<div class="line">Voir aussi : [modules-lora/README.md](modules-lora/README.md)</div>
+<div class="line"> </div>
+<div class="line">### Qt MQTT</div>
+<div class="line"> </div>
+<div class="line">[Qt MQTT](https://doc.qt.io/QtMQTT/index.html) fournit une implémentation conforme à la norme MQTT.</div>
+<div class="line"> </div>
+<div class="line">Qt MQTT fait parti de [Qt For Automation](http://doc.qt.io/QtForAutomation/qtautomation-overview.html) et pas directement de Qt. Il faut donc l&#39;installer.</div>
+<div class="line"> </div>
+<div class="line">Installation :</div>
+<div class="line"> </div>
+<div class="line">1. Identifier la version de Qt :</div>
+<div class="line"> </div>
+<div class="line">```sh</div>
+<div class="line">$ qmake -v</div>
+<div class="line">QMake version 3.1</div>
+<div class="line">Using Qt version 5.12.8 in /usr/lib/x86_64-linux-gnu</div>
+</div><!-- fragment --><p>Ici, la version de Qt est <code>5.12.8</code>.</p>
+<ol type="1">
+<li>Récupérer le code source du module <code>mqtt</code> en clonant le dépôt git</li>
+</ol>
+<div class="fragment"><div class="line">$ sudo git clone https://code.qt.io/qt/qtmqtt.git</div>
+<div class="line">$ cd qtmqtt/</div>
+</div><!-- fragment --><ol type="1">
+<li>Sélectionner la branche qui correspond à la version de Qt utilisée</li>
+</ol>
+<div class="fragment"><div class="line">$ sudo git checkout 5.12.8</div>
+</div><!-- fragment --><ol type="1">
+<li>Installer le paquet fournissant les fichiers d'en-tête de développement indépendants</li>
+</ol>
+<div class="fragment"><div class="line">$ sudo apt install qtbase5-private-dev</div>
+</div><!-- fragment --><ol type="1">
+<li>Fabriquer et installer le module <code>mqtt</code></li>
+</ol>
+<div class="fragment"><div class="line">$ sudo qmake</div>
+<div class="line"> </div>
+<div class="line">$ sudo make</div>
+<div class="line"> </div>
+<div class="line">$ sudo make install</div>
+</div><!-- fragment --><p>Pour accèder aux classes du module Qt MQTT, il faudra ajouter le module <code>mqtt</code> au fichier de projet <code>.pro</code> :</p>
+<div class="fragment"><div class="line">QT += mqtt</div>
+</div><!-- fragment --><h3>Paho MQTT (Android)</h3>
+<p>Il faut ajouter les dépendances vers les bibliothèques nécessaires à l’utilisation du protocole MQTT : le client Paho MQTT et le service Android fournis par Eclipse.</p>
+<p>Liens : <a href="https://www.eclipse.org/paho/">Eclipse Paho</a> et <a href="https://github.com/eclipse/paho.mqtt.java">github</a></p>
+<ol type="1">
+<li>Il faut ajouter l’url d’Eclipse Paho dans le ficher <code>build.gradle</code> du projet :</li>
+</ol>
+<div class="fragment"><div class="line">buildscript {</div>
+<div class="line">    repositories {</div>
+<div class="line">        google()</div>
+<div class="line">        jcenter()</div>
+<div class="line">    }</div>
+<div class="line">    dependencies {</div>
+<div class="line">        classpath &#39;com.android.tools.build:gradle:3.1.3&#39;</div>
+<div class="line">        // NOTE: Do not place your application dependencies here; they belong</div>
+<div class="line">        // in the individual module build.gradle files</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">allprojects {</div>
+<div class="line">    repositories {</div>
+<div class="line">        google()</div>
+<div class="line">        jcenter()</div>
+<div class="line">        maven {</div>
+<div class="line">            url &quot;https://repo.eclipse.org/content/repositories/paho-snapshots/&quot;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">task clean(type: Delete) {</div>
+<div class="line">    delete rootProject.buildDir</div>
+<div class="line">}</div>
+</div><!-- fragment --><ol type="1">
+<li>Puis, il faut ajouter les dépendances vers le client Paho MQTT et le service Android dans le fichier build.gradle du dossier <code>app</code> :</li>
+</ol>
+<div class="fragment"><div class="line">...</div>
+<div class="line">dependencies {</div>
+<div class="line">    ...</div>
+<div class="line"> </div>
+<div class="line">    implementation &#39;org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0&#39;</div>
+<div class="line">    implementation &#39;org.eclipse.paho:org.eclipse.paho.android.service:1.1.1&#39;</div>
+<div class="line">    implementation &#39;androidx.localbroadcastmanager:localbroadcastmanager:1.0.0&#39;</div>
+<div class="line">}</div>
+</div><!-- fragment --><ol type="1">
+<li>L’utilisation du protocole MQTT suppose que l’on ait un accès réseau. Pour cela, on va attribuer les permissions <code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>, <code>ACCESS_WIFI_STATE</code> et <code>WAKE_LOCK</code> à l’application Android dans son fichier <code><a class="el" href="_android_manifest_8xml.html">AndroidManifest.xml</a></code>. On ajoutera aussi le service <code>MqttService</code>.</li>
+</ol>
+<div class="fragment"><div class="line">&lt;?<span class="keyword">xml</span> <span class="keyword">version</span>=<span class="stringliteral">&quot;1.0&quot;</span> <span class="keyword">encoding</span>=<span class="stringliteral">&quot;utf-8&quot;</span>?&gt;</div>
+<div class="line">&lt;<span class="keywordtype">manifest</span> <span class="keyword">xmlns:android</span>=<span class="stringliteral">&quot;http://schemas.android.com/apk/res/android&quot;</span></div>
+<div class="line">    ...&gt;</div>
+<div class="line"> </div>
+<div class="line">    &lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.INTERNET&quot;</span> /&gt;</div>
+<div class="line">    &lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.ACCESS_NETWORK_STATE&quot;</span> /&gt;</div>
+<div class="line">    &lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.ACCESS_WIFI_STATE&quot;</span> /&gt;</div>
+<div class="line">    &lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.WAKE_LOCK&quot;</span>/&gt;</div>
+<div class="line"> </div>
+<div class="line">    &lt;<span class="keywordtype">application</span></div>
+<div class="line">        ...&gt;</div>
+<div class="line">        ...</div>
+<div class="line">        &lt;<span class="keywordtype">service</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;org.eclipse.paho.android.service.MqttService&quot;</span> /&gt;</div>
+<div class="line">    &lt;/<span class="keywordtype">application</span>&gt;</div>
+<div class="line"> </div>
+<div class="line">&lt;/<span class="keywordtype">manifest</span>&gt;</div>
+</div><!-- fragment --><h2>Versions</h2>
+<div class="image">
+<img src="livraisons.png" alt=""/>
+</div>
+   <h3>0.2</h3>
+<div class="image">
+<img src="jira-tickets-v0.2.png" alt=""/>
+</div>
+   <ul>
+<li>Android :</li>
+</ul>
+<div class="image">
+<img src="screenshot-android-salles-v0.2.png" alt=""/>
+</div>
+   <div class="image">
+<img src="screenshot-android-interventions-v0.2.png" alt=""/>
+</div>
+   <ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<div class="image">
+<img src="screenshot-qt-salles-v0.2.png" alt=""/>
+</div>
+   <div class="image">
+<img src="screenshot-qt-salle-v0.2.png" alt=""/>
+</div>
+   <h3>0.1</h3>
+<div class="image">
+<img src="jira-tickets-v0.1.png" alt=""/>
+</div>
+   <ul>
+<li>Android :</li>
+</ul>
+<div class="image">
+<img src="screenshot-android-salles-v0.1.png" alt=""/>
+</div>
+   <ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<div class="image">
+<img src="screenshot-qt-salles-v0.1.png" alt=""/>
+</div>
+   <h2>Auteurs</h2>
+<p>Étudiants IR :</p>
+<ul>
+<li>Jérémy MERCKLEN</li>
+<li>Baptiste COCHET</li>
+<li>Célian SUBIRANA</li>
+</ul>
+<hr  />
+<p> ©️ LaSalle Avignon 2023 </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 26 Mai 2023 11:05:29 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.8.17&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>
