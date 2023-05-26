@@ -4,6 +4,7 @@
  */
 #include "mesures.h"
 #include <QDebug>
+#include <tgmath.h>
 
 /**
  * @fn Mesures::Mesures
@@ -51,7 +52,14 @@ unsigned int Mesures::getHumidite() const
  */
 unsigned int Mesures::getCO2() const
 {
-    return co2;
+    if(co2.size() > 0)
+    {
+        qDebug() << Q_FUNC_INFO << "co2" << co2.back();
+        // la dernière mesure
+        return co2.back();
+    }
+    else
+        return 0;
 }
 
 /**
@@ -79,7 +87,109 @@ void Mesures::setHumidite(unsigned int humidite)
  * @brief Setter de l'attribut co2
  * @param co2 mesure du co2 dans la salle
  */
-void Mesures::setCO2(unsigned int co2)
+void Mesures::setCO2(unsigned int mesureCo2)
 {
-    this->co2 = co2;
+    co2.push_back(mesureCo2);
+}
+
+/**
+ * @fn Mesures::calculerIndiceICONE
+ * @brief calcule l'indice ICONE
+ * @return
+ */
+int Mesures::calculerIndiceICONE()
+{
+    double proportionSeuilN1 = calculerProportionSeuilN1();
+    double proportionSeuilN2 = calculerProportionSeuilN2();
+    int indiceBrute = calculerIndiceBrute(proportionSeuilN1, proportionSeuilN2);
+    int indiceICONE = determinerIndiceICONE(indiceBrute);
+    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
+    return indiceICONE;
+}
+
+/**
+ * @fn Mesures::calculerProportionSeuilN1
+ * @brief calcule la proportion de valeurs de Co2 comprises entre 1000 et 17000
+ * ppm
+ * @return
+ */
+double Mesures::calculerProportionSeuilN1()
+{
+    int nbValeursSeuilN1 = 0;
+    for(int i = 0; i < co2.size(); i++)
+    {
+        if((co2[i] >= SEUIL_BAS_CO2_DEFINI) &&
+           (co2[i] <= SEUIL_HAUT_CO2_DEFINI))
+        {
+            nbValeursSeuilN1++;
+        }
+    }
+    qDebug() << Q_FUNC_INFO << "nbValeursSeuilN1" << nbValeursSeuilN1
+             << (double(nbValeursSeuilN1) / double(co2.size()));
+    return (double(nbValeursSeuilN1) / double(co2.size()));
+}
+
+/**
+ * @fn Mesures::calculerProportionSeuilN2
+ * @brief calcule la proportion de valeurs de Co2 supérieurs à 1700 ppm
+ * @return
+ */
+double Mesures::calculerProportionSeuilN2()
+{
+    int nbValeursSeuilN2 = 0;
+    for(int i = 0; i < co2.size(); i++)
+    {
+        if(co2[i] >= SEUIL_HAUT_CO2_DEFINI)
+        {
+            nbValeursSeuilN2++;
+        }
+    }
+    qDebug() << Q_FUNC_INFO << "nbValeursSeuilN2" << nbValeursSeuilN2
+             << (double(nbValeursSeuilN2) / double(co2.size()));
+    return (double(nbValeursSeuilN2) / double(co2.size()));
+}
+
+/**
+ * @fn Mesures::calculerIndiceBrute
+ * @param proportionSeuilN1
+ * @param proportionSeuilN2
+ * @brief calcule l'indice Brute permettant de calculer l'indice ICONE
+ * @return
+ */
+int Mesures::calculerIndiceBrute(double proportionSeuilN1,
+                                 double proportionSeuilN2)
+{
+    qDebug() << Q_FUNC_INFO << "proportionSeuilN1" << proportionSeuilN1
+             << "proportionSeuilN2" << proportionSeuilN2;
+    double calculIndiceBrute = 0.;
+    calculIndiceBrute =
+      ((2.5 / log10(2.)) *
+       (log10(1. + proportionSeuilN1 + (3. * proportionSeuilN2))));
+    qDebug() << Q_FUNC_INFO << "calculIndiceBrute" << calculIndiceBrute
+             << "indiceBrute" << round(calculIndiceBrute);
+    return round(calculIndiceBrute);
+}
+
+/**
+ * @fn Mesures::determinerIndiceICONE
+ * @param indiceBrute
+ * @brief determine l'indice ICONE par rapport à l'indice Brute
+ * @return
+ */
+int Mesures::determinerIndiceICONE(int indiceBrute)
+{
+    if(indiceBrute < 0.5)
+        return CONFINEMENT_NUL;
+    else if((indiceBrute >= 0.5) && indiceBrute < 1.5)
+        return CONFINEMENT_FAIBLE;
+    else if((indiceBrute >= 1.5) && indiceBrute < 2.5)
+        return CONFINEMENT_MOYEN;
+    else if((indiceBrute >= 2.5) && indiceBrute < 3.5)
+        return CONFINEMENT_ELEVE;
+    else if((indiceBrute >= 3.5) && indiceBrute < 4.5)
+        return CONFINEMENT_TRES_ELEVE;
+    else if(indiceBrute >= 4.5)
+        return CONFINEMENT_EXTREME;
+    else
+        return -1;
 }

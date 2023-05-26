@@ -1,6 +1,6 @@
 format 224
 "EcoClassroom-Android"
-  revision 9
+  revision 14
   modified_by 42 "tv"
   java_root_dir "../../"
 
@@ -481,4 +481,31 @@ ${members}};
   package_ref 134570 // eco_classroom_mobile
 
   package_ref 134698 // unknown
+
+  usecaseview 134570 "ds"
+    
+    usecasediagramsettings end
+    
+    sequencediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    activitydiagramsettings
+     end
+    sequencediagram 141098 "Visualiser la liste des salles"
+      sequencediagramsettings end
+      overlapping_bars size A0
+    end
+  end
 end

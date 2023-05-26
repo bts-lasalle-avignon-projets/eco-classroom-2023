@@ -120,6 +120,85 @@ unsigned int Salle::getCO2() const
 }
 
 /**
+ * @brief Méthode qui évalue la qualité d'air grâce a l'attribut Co2 de l'objet
+ * Salle
+ */
+QString Salle::getQualiteAir() const
+{
+    unsigned int valeurCO2 = getCO2();
+    if(valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_EXCELLENTE)
+    {
+        return EXCELLENTE;
+    }
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_BIEN &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_BIEN)
+    {
+        return TRES_BIEN;
+    }
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MODERE &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MODERE)
+    {
+        return MODERE;
+    }
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MAUVAIS)
+    {
+        return MAUVAIS;
+    }
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS)
+    {
+        return TRES_MAUVAIS;
+    }
+    else
+        return SEVERE;
+}
+
+/**
+ * @brief Setter qui attribut une valeur a l'attribut Co2 de l'objet Salle
+ * @param co2
+ */
+void Salle::setCO2(unsigned int co2)
+{
+    mesures->setCO2(co2);
+}
+
+/**
+ * @fn Salle::getIndiceICONE
+ * @brief méthode qui calcule l'indice ICONE(indice de confinement) et qui le
+ * retourne
+ * @return
+ */
+int Salle::getIndiceICONE()
+{
+    indiceICONE = mesures->calculerIndiceICONE();
+    return indiceICONE;
+}
+
+/**
+ * @fn Salle::afficherNiveauICONE
+ * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
+ * @return
+ */
+QString Salle::afficherNiveauICONE() const
+{
+    if(indiceICONE == CONFINEMENT_NUL)
+        return "Nul";
+    if(indiceICONE == CONFINEMENT_FAIBLE)
+        return "Faible";
+    if(indiceICONE == CONFINEMENT_MOYEN)
+        return "Moyen";
+    if(indiceICONE == CONFINEMENT_ELEVE)
+        return "Élevé";
+    if(indiceICONE == CONFINEMENT_TRES_ELEVE)
+        return "Très Élevé";
+    if(indiceICONE == CONFINEMENT_EXTREME)
+        return "Extrême";
+    else
+        return QString::number(indiceICONE);
+}
+
+/**
  * @brief Getter qui récupère l'etat de la lumiere
  */
 bool Salle::getLumiere() const

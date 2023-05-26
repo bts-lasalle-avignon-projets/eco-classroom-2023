@@ -1,0 +1,310 @@
+format 224
+
+classinstance 128042 class_ref 135082 // EcoClassroom
+  name ""   xyz 223 4 2000 life_line_z 2000
+classinstance 129962 class_ref 141866 // BaseDeDonnees
+  name ""   xyz 1148 4 2000 life_line_z 2000
+classinstance 130858 class_ref 134954 // Salle
+  name ""   xyz 1638 4 2000 life_line_z 2000
+classinstance 131242 class_ref 148906 // Handler
+  name ""   xyz 854 4 2000 life_line_z 2000
+note 131882 "Exécute une requête SQL sur la table Salle"
+  xyzwh 1319 476 2000 327 93
+classinstance 133418 class_ref 142250 // Seuils
+  name ""   xyz 1829 4 2000 life_line_z 2000
+fragment 134570 "loop"
+  xyzwh 1070 617 1995 850 567
+end
+textcanvas 134698 "[pour chaque salle]"
+  xyzwh 272 1559.5 2020 249 30
+fragment 136106 "loop"
+  xyzwh 172 1555.5 1995 1575 540
+end
+fragment 138026 "alt"
+  xyzwh 234 1611 2000 1471 140
+end
+textcanvas 138154 "[seuil humidité dépassé]"
+  xyzwh 344.5 1775 2005 362 30
+fragment 138282 "alt"
+  xyzwh 233.5 1764 2000 1471 140
+end
+fragment 138410 "alt"
+  xyzwh 232.5 1916 2000 1471 140
+end
+textcanvas 138538 "[seuil température dépassé]"
+  xyzwh 344 1618 2005 362 30
+textcanvas 138666 "[seuil co2 dépassé]"
+  xyzwh 343 1924 2005 362 30
+durationcanvas 128170 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 322 93 2010 11 321
+  overlappingdurationcanvas 128426
+    xyzwh 328 144 2020 11 25
+  end
+  overlappingdurationcanvas 128682
+    xyzwh 328 198 2020 11 49
+  end
+  overlappingdurationcanvas 128938
+    xyzwh 328 308 2020 11 25
+  end
+  overlappingdurationcanvas 129194
+    xyzwh 328 359 2020 11 49
+  end
+end
+durationcanvas 129450 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 322 493 2010 11 101
+  overlappingdurationcanvas 129706
+    xyzwh 328 539 2020 11 49
+  end
+end
+durationcanvas 130090 classinstance_ref 129962 // :BaseDeDonnees
+  xyzwh 1263 572 2010 11 690
+end
+durationcanvas 130346 classinstance_ref 129962 // :BaseDeDonnees
+  xyzwh 1263 392 2010 11 61
+  overlappingdurationcanvas 130602
+    xyzwh 1269 422 2020 11 25
+  end
+end
+durationcanvas 131370 classinstance_ref 131242 // :Handler
+  xyzwh 910 234 2010 11 25
+end
+durationcanvas 131626 classinstance_ref 130858 // :Salle
+  xyzwh 1675 649 2010 11 25
+end
+durationcanvas 132138 classinstance_ref 130858 // :Salle
+  xyzwh 1675 761 2010 11 25
+end
+durationcanvas 132394 classinstance_ref 130858 // :Salle
+  xyzwh 1675 826 2010 11 25
+end
+durationcanvas 132650 classinstance_ref 130858 // :Salle
+  xyzwh 1675 892 2010 11 26
+end
+durationcanvas 132906 classinstance_ref 130858 // :Salle
+  xyzwh 1675 948 2010 11 25
+end
+durationcanvas 133162 classinstance_ref 130858 // :Salle
+  xyzwh 1675 1007 2010 11 26
+end
+durationcanvas 133546 classinstance_ref 133418 // :Seuils
+  xyzwh 1873 1058 2010 11 27
+end
+durationcanvas 134058 classinstance_ref 130858 // :Salle
+  xyzwh 1675 1143 2010 11 26
+end
+durationcanvas 134314 classinstance_ref 131242 // :Handler
+  xyzwh 910 1244 2010 11 303
+  overlappingdurationcanvas 134826
+    xyzwh 916 1306 2020 11 236
+  end
+end
+durationcanvas 135082 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 322 1340 2010 11 25
+end
+durationcanvas 135338 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 322 1405 2010 11 25
+end
+durationcanvas 135594 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 322 1460 2010 11 25
+end
+durationcanvas 135850 classinstance_ref 128042 // :EcoClassroom
+  xyzwh 322 1517 2010 11 610
+  overlappingdurationcanvas 136746
+    xyzwh 328 1706 2020 11 25
+  end
+  overlappingdurationcanvas 137258
+    xyzwh 328 1867 2020 11 25
+  end
+  overlappingdurationcanvas 137770
+    xyzwh 328 2005 2020 11 25
+  end
+end
+durationcanvas 136490 classinstance_ref 130858 // :Salle
+  xyzwh 1675 1654 2010 11 27
+end
+durationcanvas 137002 classinstance_ref 130858 // :Salle
+  xyzwh 1675 1803 2010 11 29
+end
+durationcanvas 137514 classinstance_ref 130858 // :Salle
+  xyzwh 1675 1957 2010 11 27
+end
+reflexivemsg 128298 synchronous
+  to durationcanvas_ref 128170
+  yz 93 2015 msg operation_ref 135082 // "onCreate(inout savedInstanceState : Bundle) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 336 62
+reflexivemsg 128554 synchronous
+  to durationcanvas_ref 128426
+  yz 144 2025 msg operation_ref 171946 // "initialiserActualisationSalles() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 338 118
+reflexivemsg 128810 synchronous
+  to durationcanvas_ref 128682
+  yz 198 2025 msg operation_ref 148522 // "initialiserHandler() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 340 171
+reflexivemsg 129066 synchronous
+  to durationcanvas_ref 128938
+  yz 308 2025 msg operation_ref 135850 // "initialiserVueSalles() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 337 284
+reflexivemsg 129322 synchronous
+  to durationcanvas_ref 129194
+  yz 359 2025 msg operation_ref 148394 // "initialiserBaseDeDonnees() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 340 335
+reflexivemsg 129578 synchronous
+  to durationcanvas_ref 129450
+  yz 493 2015 msg operation_ref 135338 // "onResume() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 334 465
+reflexivemsg 129834 synchronous
+  to durationcanvas_ref 129706
+  yz 539 2025 msg operation_ref 136234 // "chargerSalles() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 340 509
+msg 130218 synchronous
+  from durationcanvas_ref 129706
+  to durationcanvas_ref 130090
+  yz 572 2025 msg operation_ref 148266 // "chargerSalles() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 702 542
+msg 130474 synchronous
+  from durationcanvas_ref 129194
+  to durationcanvas_ref 130346
+  yz 392 2025 msg operation_ref 145962 // "getInstance() : BaseDeDonnees"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 715 362
+reflexivemsg 130730 synchronous
+  to durationcanvas_ref 130602
+  yz 422 2025 msg operation_ref 147114 // "connecter() : boolean"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1280 393
+msg 131498 synchronous
+  from durationcanvas_ref 128682
+  to durationcanvas_ref 131370
+  yz 235 2030 explicitmsg "Handler()"
+  stereotype "<<new>>" xyz 563 247 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 563 205
+msg 131754 synchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 131626
+  yz 650 2015 msg operation_ref 136362 // "Salle()"
+  stereotype "<<new>>" xyz 1413 665 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1432 620
+msg 132266 synchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 132138
+  yz 762 2015 msg operation_ref 138538 // "setEstOccupe(inout estOccupe : Boolean) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1373 732
+msg 132522 synchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 132394
+  yz 826 2015 msg operation_ref 138282 // "setEtatFenetre(inout etatFenetre : boolean) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1369 796
+msg 132778 synchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 132650
+  yz 892 2015 msg operation_ref 138410 // "setEtatLumiere(inout etatLumiere : boolean) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1366 862
+msg 133034 synchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 132906
+  yz 948 2015 msg operation_ref 138154 // "setConfortThermique(in confortThermique : int) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1326 918
+msg 133290 synchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 133162
+  yz 1007 2015 msg operation_ref 138026 // "setQualiteAir(in qualiteAir : int) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1380 977
+msg 133674 synchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 133546
+  yz 1058 2015 msg operation_ref 149930 // "Seuils()"
+  stereotype "<<new>>" xyz 1512 1074 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1523 1028
+msg 134186 synchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 134058
+  yz 1143 2015 msg operation_ref 157738 // "setSeuils(inout seuils : Seuils) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1405 1113
+msg 134442 asynchronous
+  from durationcanvas_ref 130090
+  to durationcanvas_ref 134314
+  yz 1244 2015 explicitmsg "sendMessage()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 991 1214
+reflexivemsg 134954 synchronous
+  to durationcanvas_ref 134826
+  yz 1306 2025 explicitmsg "handleMessage()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 927 1276
+msg 135210 synchronous
+  from durationcanvas_ref 134826
+  to durationcanvas_ref 135082
+  yz 1341 2025 msg operation_ref 164266 // "setSalles(inout salles : Vector<Salle>) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 555 1311
+msg 135466 synchronous
+  from durationcanvas_ref 134826
+  to durationcanvas_ref 135338
+  yz 1406 2025 msg operation_ref 135978 // "afficherSalles(inout salles : Vector<Salle>) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 526 1376
+msg 135722 synchronous
+  from durationcanvas_ref 134826
+  to durationcanvas_ref 135594
+  yz 1461 2025 msg operation_ref 164522 // "filtrerSalles(in choix : int) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 542 1431
+msg 135978 synchronous
+  from durationcanvas_ref 134826
+  to durationcanvas_ref 135850
+  yz 1517 2025 msg operation_ref 148650 // "alerterDepassementSeuil() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 449 1487
+msg 136618 synchronous
+  from durationcanvas_ref 135850
+  to durationcanvas_ref 136490
+  yz 1654 2015 msg operation_ref 165162 // "estSeuilTemperatureDepasse() : boolean"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 802 1624
+reflexivemsg 136874 synchronous
+  to durationcanvas_ref 136746
+  yz 1706 2025 msg operation_ref 148778 // "notifierDepassement(inout salle : Salle, in typeDepassement : int) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 338 1676
+msg 137130 synchronous
+  from durationcanvas_ref 135850
+  to durationcanvas_ref 137002
+  yz 1803 2015 msg operation_ref 165290 // "estSeuilHumiditeDepasse() : boolean"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 826 1773
+reflexivemsg 137386 synchronous
+  to durationcanvas_ref 137258
+  yz 1867 2025 msg operation_ref 148778 // "notifierDepassement(inout salle : Salle, in typeDepassement : int) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 340 1837
+msg 137642 synchronous
+  from durationcanvas_ref 135850
+  to durationcanvas_ref 137514
+  yz 1957 2015 msg operation_ref 165418 // "estSeuilCo2Depasse() : boolean"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 857 1927
+reflexivemsg 137898 synchronous
+  to durationcanvas_ref 137770
+  yz 2005 2025 msg operation_ref 148778 // "notifierDepassement(inout salle : Salle, in typeDepassement : int) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 338 1975
+line 132010 -_-_ decenter_end 36
+  from ref 131882 z 2011 to ref 130090
+end

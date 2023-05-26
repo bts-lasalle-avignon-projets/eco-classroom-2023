@@ -1,4 +1,7 @@
 <map id="EcoClassroom" name="EcoClassroom">
-<area shape="rect" id="node1" title="Classe permettant de faire l&#39;IHM du projet Eco classroom." alt="" coords="5,131,240,545"/>
-<area shape="rect" id="node2" href="$class_q_main_window.html" title=" " alt="" coords="65,5,181,83"/>
+<area shape="rect" id="node1" title="Classe permettant de faire l&#39;IHM du projet Eco classroom." alt="" coords="124,433,365,921"/>
+<area shape="rect" id="node2" href="$class_q_main_window.html" title=" " alt="" coords="5,213,121,290"/>
+<area shape="rect" id="node3" href="$class_communication_m_q_t_t.html" title="Classe permettant de gérer la communication MQTT." alt="" coords="145,154,344,349"/>
+<area shape="rect" id="node4" href="$class_q_object.html" title=" " alt="" coords="207,5,282,83"/>
+<area shape="rect" id="node5" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="368,132,527,371"/>
 </map>

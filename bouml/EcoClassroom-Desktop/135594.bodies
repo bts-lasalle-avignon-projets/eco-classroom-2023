@@ -4,10 +4,74 @@ class Mesures
 !!!140074.cpp!!!	getHumidite() : uint
     return humidite;
 !!!140202.cpp!!!	getCO2() : uint
-    return co2;
+    if(co2.size() > 0)
+    {
+        qDebug() << Q_FUNC_INFO << "co2" << co2.back();
+        // la dernière mesure
+        return co2.back();
+    }
+    else
+        return 0;
 !!!140458.cpp!!!	setTemperature(in temperature : double) : void
     this->temperature = temperature;
 !!!140586.cpp!!!	setHumidite(in humidite : uint) : void
     this->humidite = humidite;
-!!!140714.cpp!!!	setCO2(in co2 : uint) : void
-    this->co2 = co2;
+!!!140714.cpp!!!	setCO2(in mesureCo2 : uint) : void
+    co2.push_back(mesureCo2);
+!!!165930.cpp!!!	calculerIndiceICONE() : int
+    double proportionSeuilN1 = calculerProportionSeuilN1();
+    double proportionSeuilN2 = calculerProportionSeuilN2();
+    int indiceBrute = calculerIndiceBrute(proportionSeuilN1, proportionSeuilN2);
+    int indiceICONE = determinerIndiceICONE(indiceBrute);
+    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
+    return indiceICONE;
+!!!166058.cpp!!!	calculerProportionSeuilN1() : double
+    int nbValeursSeuilN1 = 0;
+    for(int i = 0; i < co2.size(); i++)
+    {
+        if((co2[i] >= SEUIL_BAS_CO2_DEFINI) &&
+           (co2[i] <= SEUIL_HAUT_CO2_DEFINI))
+        {
+            nbValeursSeuilN1++;
+        }
+    }
+    qDebug() << Q_FUNC_INFO << "nbValeursSeuilN1" << nbValeursSeuilN1
+             << (double(nbValeursSeuilN1) / double(co2.size()));
+    return (double(nbValeursSeuilN1) / double(co2.size()));
+!!!166186.cpp!!!	calculerProportionSeuilN2() : double
+    int nbValeursSeuilN2 = 0;
+    for(int i = 0; i < co2.size(); i++)
+    {
+        if(co2[i] >= SEUIL_HAUT_CO2_DEFINI)
+        {
+            nbValeursSeuilN2++;
+        }
+    }
+    qDebug() << Q_FUNC_INFO << "nbValeursSeuilN2" << nbValeursSeuilN2
+             << (double(nbValeursSeuilN2) / double(co2.size()));
+    return (double(nbValeursSeuilN2) / double(co2.size()));
+!!!166314.cpp!!!	calculerIndiceBrute(in proportionSeuilN1 : double, in proportionSeuilN2 : double) : int
+    qDebug() << Q_FUNC_INFO << "proportionSeuilN1" << proportionSeuilN1
+             << "proportionSeuilN2" << proportionSeuilN2;
+    double calculIndiceBrute = 0.;
+    calculIndiceBrute =
+      ((2.5 / log10(2.)) *
+       (log10(1. + proportionSeuilN1 + (3. * proportionSeuilN2))));
+    qDebug() << Q_FUNC_INFO << "calculIndiceBrute" << calculIndiceBrute
+             << "indiceBrute" << round(calculIndiceBrute);
+    return round(calculIndiceBrute);
+!!!166442.cpp!!!	determinerIndiceICONE(in indiceBrute : int) : int
+    if(indiceBrute < 0.5)
+        return CONFINEMENT_NUL;
+    else if((indiceBrute >= 0.5) && indiceBrute < 1.5)
+        return CONFINEMENT_FAIBLE;
+    else if((indiceBrute >= 1.5) && indiceBrute < 2.5)
+        return CONFINEMENT_MOYEN;
+    else if((indiceBrute >= 2.5) && indiceBrute < 3.5)
+        return CONFINEMENT_ELEVE;
+    else if((indiceBrute >= 3.5) && indiceBrute < 4.5)
+        return CONFINEMENT_TRES_ELEVE;
+    else if(indiceBrute >= 4.5)
+        return CONFINEMENT_EXTREME;
+    else
+        return -1;

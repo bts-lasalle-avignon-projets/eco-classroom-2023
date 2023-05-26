@@ -1,6 +1,6 @@
 format 224
 "eco_classroom_mobile" // eco_classroom_mobile
-  revision 2
+  revision 7
   modified_by 42 "tv"
   // class settings
   
@@ -117,6 +117,7 @@ ${members}}
 	
 	
 	comment "@brief Constructeur d'initialisation
+@param salles Les salles
 "
       end
 
@@ -153,6 +154,8 @@ ${members}}
 	
 	
 	
+	comment "@brief
+"
       end
 
       operation 134954 "getItemCount"
@@ -167,6 +170,9 @@ ${members}}
 	
 	
 	
+	comment "@brief Méthode renvoyant le nombre de salles présentes
+@return int Le nombre de salles
+"
       end
     end
 
@@ -191,6 +197,14 @@ ${members}}
 	    java "${type}"
 	    classrelation_ref 135082 // <generalisation>
 	  b parent class_ref 135338 // ViewHolder
+      end
+
+      classrelation 148906 // <realization>
+	relation 148906 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 148906 // <realization>
+	  b parent class_ref 142378 // OnClickListener
       end
 
       attribute 136618 "TAG"
@@ -329,6 +343,7 @@ Attributs
 	
 	
 	comment "@brief Constructeur d'initialisation
+@param vueSalle La vue de la salle
 "
       end
 
@@ -344,6 +359,7 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant d'initialiser les widgets dans la vue
+@param vueSalle La vue de la salle
 "
       end
 
@@ -387,6 +403,7 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant de configurer un TextView
+@param elementTexte l'élement de texte à modifier
 "
       end
 
@@ -402,6 +419,7 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant de configurer un ImageView
+@param elementImage L'élément de l'image à configurer
 "
       end
 
@@ -417,6 +435,25 @@ Attributs
 	
 	
 	comment "@brief Méthode permettant d'afficher les salles sur la vue
+@param salle La salle à afficher
+"
+      end
+
+      operation 151210 "onClick"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "vue" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode permettant de gérer les clics sur les objets de la vue
+@param vue La vue où l'événement va arriver
 "
       end
     end
@@ -452,6 +489,48 @@ ${members}}
 !< TAG pour les logs (cf. Logcat)"
       end
 
+      attribute 148138 "TAUX_HUMIDITE_MIN"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< le taux d'humidité minimum"
+      end
+
+      attribute 148266 "TAUX_HUMIDITE_MAX"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 100"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< le taux d'humidité maximum"
+      end
+
+      attribute 148394 "CONCENTRATION_CO2_MIN"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< la concentration minimum de CO2"
+      end
+
       attribute 135338 "INDICE_QUALITE_AIR_MIN"
 	class_attribute const_attribute public explicit_type "int"
 	init_value " 1"
@@ -463,9 +542,21 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "@todo Créer les constantes max pour les indices
+	comment "!< l'indice de qualité de l'air minimum"
+      end
 
-!< l'indice de qualité de l'air minimum"
+      attribute 148522 "INDICE_QUALITE_AIR_MAX"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 6"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< l'indice de qualité de l'air maximum"
       end
 
       attribute 135466 "INDICE_CONFORT_THERMIQUE_MIN"
@@ -480,6 +571,105 @@ ${members}}
 	mysql_decl ""
 	MysqlColumn
 	comment "!< l'indice de confort thermique minimum"
+      end
+
+      attribute 148650 "INDICE_CONFORT_THERMIQUE_MAX"
+	class_attribute const_attribute public explicit_type "int"
+	init_value "
+      3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< l'indice de confort thermique maximum"
+      end
+
+      attribute 165162 "SUPERFICIE_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "double"
+	init_value " 0.0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< la superficie par défaut en m²"
+      end
+
+      attribute 165290 "TEMPERATURE_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "double"
+	init_value " -50"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< la temperature par défaut en °C"
+      end
+
+      attribute 165418 "HUMIDITE_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " -1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le taux d'humidité par défaut"
+      end
+
+      attribute 165546 "CO2_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le CO2 par défaut en ppm"
+      end
+
+      attribute 165674 "QUALITE_AIR_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< la qualité de l'air par défaut"
+      end
+
+      attribute 165802 "CONFORT_THERMIQUE_PAR_DEFAUT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " -4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le confort thermique par défaut"
       end
 
       attribute 135594 "nom"
@@ -520,7 +710,46 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< la superficie en m2"
+	comment "!< la superficie en m²"
+      end
+
+      attribute 148778 "temperature"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< la température en °C"
+      end
+
+      attribute 148906 "humidite"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le taux d'humidité"
+      end
+
+      attribute 149034 "co2"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le CO2 en ppm"
       end
 
       attribute 135978 "qualiteAir"
@@ -588,6 +817,16 @@ ${members}}
 	comment "!< indique l'occupation (oui/non)"
       end
 
+      classrelation 148778 // seuils (<unidirectional association>)
+	relation 148778 --->
+	  a role_name "seuils" private
+	    comment "!< les seuils pour cette salle"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 148778 // seuils (<unidirectional association>)
+	  b parent class_ref 142250 // Seuils
+      end
+
       operation 136362 "Salle"
 	public explicit_return_type ""
 	nparams 0
@@ -616,6 +855,31 @@ ${members}}
 	
 	
 	comment "@brief Constructeur d'initialisation
+@param nom Le nom de la salle
+@param superficie La superficie de la salle en m²
+@param description Le type de salle
+"
+      end
+
+      operation 148906 "Salle"
+	public explicit_return_type ""
+	nparams 4
+	  param in name "nom" explicit_type "String"
+	  param in name "superficie" explicit_type "double"
+	  param in name "description" explicit_type "String"
+	  param inout name "seuils" type class_ref 142250 // Seuils
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation
+@param nom Le nom de la salle
+@param superficie La superficie de la salle en m²
+@param description Le type de salle
+@param seuils Indique les seuils à ne pas dépasser pour cette salle
 "
       end
 
@@ -630,6 +894,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut nom
+@return String Le nom de la salle
 "
       end
 
@@ -644,6 +909,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut description
+@return String Le type de salle
 "
       end
 
@@ -658,6 +924,52 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut superficie
+@return double La superficie de la salle en m²
+"
+      end
+
+      operation 149034 "getTemperature"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut temperature
+@return double La température de la salle en °C
+"
+      end
+
+      operation 149162 "getHumidite"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut humidite
+@return int Le taux d'humidité
+"
+      end
+
+      operation 149290 "getCo2"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut co2
+@return int Le CO2 en ppm
 "
       end
 
@@ -672,6 +984,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut qualiteAir
+@return int La qualité de l'air
 "
       end
 
@@ -686,6 +999,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut confortThermique
+@return int Le confort thermique
 "
       end
 
@@ -700,6 +1014,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut etatFenetre
+@return boolean L'état des fenêtres (ouvertes/fermées)
 "
       end
 
@@ -714,6 +1029,7 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut etatLumiere
+@return boolean L'état de la lumières (allumées/éteintes)
 "
       end
 
@@ -728,6 +1044,22 @@ ${members}}
 	
 	
 	comment "@brief Accesseur de l'attribut estOccupe
+@return boolean Indique l'occupation (oui/non)
+"
+      end
+
+      operation 149418 "getSeuils"
+	public return_type class_ref 142250 // Seuils
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut seuils
+@return Seuils Les seuils à ne pas dépasser dans la salle
 "
       end
 
@@ -743,6 +1075,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut nom
+@param nom Le nouveau nom
 "
       end
 
@@ -758,6 +1091,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut description
+@param description La nouvelle description
 "
       end
 
@@ -773,6 +1107,55 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut superficie
+@param superficie La nouvelle superficie en m²
+"
+      end
+
+      operation 149546 "setTemperature"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "temperature" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur de l'attribut temperature
+@param temperature La nouvelle température en °C
+"
+      end
+
+      operation 149674 "setHumidite"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "humidite" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur de l'attribut humidite
+@param humidite Le nouveau taux d'humidité
+"
+      end
+
+      operation 149802 "setCo2"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "co2" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur de l'attribut co2
+@param co2 Le nouveau CO2 en ppm
 "
       end
 
@@ -788,6 +1171,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut qualiteAir
+@param qualiteAir La nouvelle qualité de l'air
 "
       end
 
@@ -803,6 +1187,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut confortThermique
+@param confortThermique Le nouveau confort thermique
 "
       end
 
@@ -818,6 +1203,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut etatFenetre
+@param etatFenetre Le nouvel état des fenêtres (ouvertes/fermées)
 "
       end
 
@@ -833,6 +1219,7 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut etatLumiere
+@param etatLumiere Le nouvel état des lumières (allumées/éteintes)
 "
       end
 
@@ -848,6 +1235,68 @@ ${members}}
 	
 	
 	comment "@brief Mutateur de l'attribut estOccupe
+@param estOccupe Le nouvel état d'occupation (oui/non)
+"
+      end
+
+      operation 157738 "setSeuils"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "seuils" type class_ref 142250 // Seuils
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur de l'attribut seuils
+@param seuils Les nouveaux seuils à ne pas dépasser
+"
+      end
+
+      operation 165162 "estSeuilTemperatureDepasse"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de verifier si le seuil de temperature de la salle est dépassé
+@return boolean le seuil de température est dépassé (oui/non)
+"
+      end
+
+      operation 165290 "estSeuilHumiditeDepasse"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de verifier si le seuil d'humidité de la salle est dépassé
+@return boolean le seuil d'humidité est dépassé (oui/non)
+"
+      end
+
+      operation 165418 "estSeuilCo2Depasse"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de verifier si le seuil de CO2 de la salle est dépassé
+@return boolean le seuil de CO2 est dépassé (oui/non)
 "
       end
     end
@@ -900,17 +1349,190 @@ ${members}};
 !< TAG pour les logs (cf. Logcat)"
       end
 
+      attribute 147626 "DEPASSEMENT_TEMPERATURE"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< un dépassement de seuil de température"
+      end
+
+      attribute 147754 "DEPASSEMENT_HUMIDITE"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< un dépassement de seuil d'humiditée"
+      end
+
+      attribute 147882 "DEPASSEMENT_CO2"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< un dépassement de seuil de CO2"
+      end
+
+      attribute 164394 "TOUTES"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Les filtres
+!< la position de \"Toutes\" dans la liste déroulante"
+      end
+
+      attribute 164778 "SALLES_LIBRES"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< choix du filtre des salles \"Libres\""
+      end
+
+      attribute 164906 "DEPASSEMENT_DE_SEUIL"
+	class_attribute const_attribute private explicit_type "int"
+	init_value "
+      2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< choix du filtre des salles \"Dépassement de seuil\""
+      end
+
+      attribute 165034 "INTERVENTION"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< choix du filtre des salles \"Intervention\""
+      end
+
       classrelation 134954 // salles (<unidirectional association>)
 	relation 134954 --->
 	  stereotype "Vector"
 	  a role_name "salles" init_value " null" private
 	    comment "Attributs
 
-"
+!< les salles"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 134954 // salles (<unidirectional association>)
 	  b parent class_ref 134954 // Salle
+      end
+
+      classrelation 155434 // sallesAffichees (<unidirectional association>)
+	relation 155434 --->
+	  stereotype "Vector"
+	  a role_name "sallesAffichees" init_value " null" private
+	    comment "!< les salles à afficher"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 155434 // sallesAffichees (<unidirectional association>)
+	  b parent class_ref 134954 // Salle
+      end
+
+      classrelation 148650 // baseDeDonnees (<unidirectional association>)
+	relation 148650 --->
+	  a role_name "baseDeDonnees" private
+	    comment "!< accès à la base de données"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 148650 // baseDeDonnees (<unidirectional association>)
+	  b parent class_ref 141866 // BaseDeDonnees
+      end
+
+      classrelation 162090 // handler (<unidirectional association>)
+	relation 162090 --->
+	  a role_name "handler" init_value " null" private
+	    comment "<! le handler utilisé par l'activité"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 162090 // handler (<unidirectional association>)
+	  b parent class_ref 148906 // Handler
+      end
+
+      attribute 157738 "notificationManager"
+	private explicit_type "NotificationManager"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le gestionnaire de notifications"
+      end
+
+      attribute 157866 "idNotification"
+	private explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! l'identifiant de notification"
+      end
+
+      attribute 172330 "choixFiltrage"
+	private explicit_type "int"
+	init_value " TOUTES"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le choix de filtrage des salles"
       end
 
       attribute 134826 "vueSalles"
@@ -930,7 +1552,7 @@ ${members}};
 
       classrelation 141738 // adaptateurSalle (<unidirectional association>)
 	relation 141738 --->
-	  a role_name "adaptateurSalle" private
+	  a role_name "adaptateurSalle" init_value " null" private
 	    comment "!< l'adaptateur"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -949,6 +1571,19 @@ ${members}};
 	mysql_decl ""
 	MysqlColumn
 	comment "!< le gestionnaire de mise en page"
+      end
+
+      attribute 172458 "actualisationSalles"
+	private explicit_type "SwipeRefreshLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le pull to refresh"
       end
 
       operation 135082 "onCreate"
@@ -1051,8 +1686,22 @@ et détruite par le système Android)
 "
       end
 
+      operation 171946 "initialiserActualisationSalles"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de mettre à jour les données des salles avec un pull to refresh
+"
+      end
+
       operation 135850 "initialiserVueSalles"
-	public explicit_return_type "void"
+	private explicit_return_type "void"
 	nparams 0
 	
 	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -1065,7 +1714,39 @@ et détruite par le système Android)
 "
       end
 
+      operation 164266 "setSalles"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "salles" explicit_type "Vector<Salle>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur de l'attribut salles
+@param salles Les salles
+"
+      end
+
       operation 135978 "afficherSalles"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "salles" explicit_type "Vector<Salle>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant d'afficher les salles dans les logs
+@param salles Les salles
+"
+      end
+
+      operation 164394 "effacerSalles"
 	public explicit_return_type "void"
 	nparams 0
 	
@@ -1075,7 +1756,7 @@ et détruite par le système Android)
 	
 	
 	
-	comment "@brief Méthode permettant d'afficher les salles dans les logs
+	comment "@brief Méthode permettant d'effacer l'affichage des salles
 "
       end
 
@@ -1093,6 +1774,9 @@ et détruite par le système Android)
 	
 	
 	comment "@brief Méthode permettant d'ajouter une salle dans l'attribut salles
+@param nom Le nom de la salle
+@param description Le type de salle
+@param superficie La superficie de la salle en m²
 "
       end
 
@@ -1110,11 +1794,1327 @@ et détruite par le système Android)
 "
       end
 
+      operation 164522 "filtrerSalles"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "choix" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui permet de filtrer les salles à afficher
+"
+      end
+
+      operation 148394 "initialiserBaseDeDonnees"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui permet de récupérer l'instance de BaseDeDonnees
+"
+      end
+
+      operation 148522 "initialiserHandler"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Initialise la gestion des messages en provenance des threads
+"
+      end
+
+      operation 164650 "initialiserListeDeroulante"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant d'initialiser la liste déroulante (spinner)
+"
+      end
+
+      operation 148650 "alerterDepassementSeuil"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de vérifier et de notifier lors d'un dépassement de seuil dans une
+salle
+"
+      end
+
+      operation 148778 "notifierDepassement"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "salle" type class_ref 134954 // Salle
+	  param in name "typeDepassement" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant d'envoyer une notification pour alerter d'un dépassement de seuil
+@param salle La salle où il y a un dépassement de seuil
+@param typeDepassement Indique le type de dépassement de seuil
+"
+      end
+
     end
 
-    classdiagram 134570 "diagramme de classes 0.1"
+    classdiagram 134570 "diagramme de classes 0.2"
       classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_multiplicity yes member_max_width 0 show_relation_visibility yes end
       size A0
+    end
+
+    class 141866 "BaseDeDonnees"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Classe BaseDeDonnees.
+@details La classe BaseDeDonnees permet de créer une interface entre
+l'application Android et une bose de données distante.
+@author Mercklen Jérémy
+@author Thierry VAIRA
+@version 0.1
+@see https://www.tutorialspoint.com/java_mysql/
+"
+      attribute 144042 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_BaseDeDonnees_\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs"
+      end
+
+      attribute 144170 "CONNEXION_OK"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144298 "CONNEXION_ERREUR"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144426 "DECONNEXION_OK"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144554 "DECONNEXION_ERREUR"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144682 "REQUETE_SQL_OK"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144810 "REQUETE_SQL_ERREUR"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 5"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144938 "REQUETE_SQL_SELECT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 6"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 145066 "REQUETE_SQL_SELECT_SALLES"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 7"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 145194 "NOM_BDD"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+      \"ecoclassroom\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le nom par défaut de la base de données"
+      end
+
+      attribute 145322 "IDENTIFIANT"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+      \"ecoclassroom\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le nom de l'utilisateur par défaut de la base de données"
+      end
+
+      attribute 145450 "MOT_DE_PASSE"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+      \"ecoclassroom\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le mot de passe par défaut de la base de données"
+      end
+
+      attribute 145578 "HOSTNAME"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+      \"www.db4free.net\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'adresse du serveur de base de données par défaut"
+      end
+
+      attribute 145706 "PORT_DEFAUT"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 3306"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " private static final String HOSTNAME = \"192.168.52.7\"; //!< L'adresse du serveur de base de
+ données par défaut (Raspberry Pi Zero)
+!< Le numéro de port par défaut pour MySQL"
+      end
+
+      attribute 145834 "active"
+	class_attribute const_attribute public explicit_type "boolean"
+	init_value "
+      true"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)"
+      end
+
+      attribute 145962 "CHAMP_NOM_SALLE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value " \"nom\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " La table Salle
+"
+      end
+
+      attribute 146090 "CHAMP_SUPERFICIE_SALLE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value " \"superficie\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 146218 "CHAMP_DESCRIPTION_SALLE"
+	class_attribute const_attribute public explicit_type "String"
+	init_value " \"description\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 146346 "nomBDD"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attributs
+
+!< Nom de la base de données"
+      end
+
+      attribute 146474 "identifiant"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Identifiant de l'utilisateur de la base de données"
+      end
+
+      attribute 146602 "motDePasse"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Mot de passe de l'identifiant"
+      end
+
+      attribute 146730 "hostName"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Nom de la machine distante"
+      end
+
+      attribute 146858 "url"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'URL de connexion à la base de données"
+      end
+
+      attribute 146986 "port"
+	const_attribute private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Port sur lequel le processus de la base de données écoute"
+      end
+
+      attribute 147114 "connexion"
+	class_attribute public explicit_type "Connection"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< objet de connexion à MySQL (null par défaut)"
+      end
+
+      attribute 147242 "mutex"
+	class_attribute const_attribute public explicit_type "Lock"
+	init_value "
+      new ReentrantLock(true)"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< mutex pour l'exécution concurrente de requêtes"
+      end
+
+      classrelation 148266 // bdd (<unidirectional association>)
+	relation 148266 --->
+	  a role_name "bdd" init_value " null" class_relation private
+	    comment "!< l'instance unique de BaseDeDonnees (Singleton)"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 148266 // bdd (<unidirectional association>)
+	  b parent class_ref 141866 // BaseDeDonnees
+      end
+
+      classrelation 161962 // handler (<unidirectional association>)
+	relation 161962 --->
+	  a role_name "handler" init_value " null" private
+	    comment "<! Le handler pour l'échange de messages entre les threads"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 161962 // handler (<unidirectional association>)
+	  b parent class_ref 148906 // Handler
+      end
+
+      classrelation 148394 // salles (<unidirectional association>)
+	relation 148394 --->
+	  stereotype "Vector"
+	  a role_name "salles" init_value " null" private
+	    comment "!< les salles"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 148394 // salles (<unidirectional association>)
+	  b parent class_ref 134954 // Salle
+      end
+
+      operation 145962 "getInstance"
+	class_operation public return_type class_ref 141866 // BaseDeDonnees
+	nparams 0
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn getInstance
+@brief Retourne l'instance BaseDeDonnees
+"
+      end
+
+      operation 146090 "getInstance"
+	class_operation public return_type class_ref 141866 // BaseDeDonnees
+	nparams 4
+	  param in name "nomBase" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "motDePasse" explicit_type "String"
+	  param in name "hostName" explicit_type "String"
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn getInstance
+@brief Retourne l'instance BaseDeDonnees
+@param nomBase le nom de la base de données
+@param identifiant le nom d'un utilisateur autorisé sur la base de
+  données.
+@param motDePasse le mot de passe de l'utilisateur.
+@param hostName le nom de la machine distante.
+"
+      end
+
+      operation 146218 "getInstance"
+	class_operation public return_type class_ref 141866 // BaseDeDonnees
+	nparams 1
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn getInstance
+@brief Retourne l'instance BaseDeDonnees
+@param handler Le handler pour l'échange de messages entre les threads.
+"
+      end
+
+      operation 146346 "getInstance"
+	class_operation public return_type class_ref 141866 // BaseDeDonnees
+	nparams 5
+	  param in name "nomBase" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "motDePasse" explicit_type "String"
+	  param in name "hostName" explicit_type "String"
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn getInstance
+@brief Retourne l'instance BaseDeDonnees
+@param nomBase le nom de la base de données
+@param identifiant le nom d'un utilisateur autorisé sur la base de
+  données.
+@param motDePasse le mot de passe de l'utilisateur.
+@param hostName le nom de la machine distante.
+@param handler Le handler pour l'échange de messages entre les threads.
+"
+      end
+
+      operation 146474 "BaseDeDonnees"
+	private explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut de la classe BaseDeDonnees.
+@see BaseDeDonnees()
+"
+      end
+
+      operation 146602 "BaseDeDonnees"
+	private explicit_return_type ""
+	nparams 1
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut de la classe BaseDeDonnees.
+@see BaseDeDonnees()
+"
+      end
+
+      operation 146730 "BaseDeDonnees"
+	private explicit_return_type ""
+	nparams 5
+	  param in name "nomBase" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "motDePasse" explicit_type "String"
+	  param in name "hostName" explicit_type "String"
+	  param in name "port" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe BaseDeDonnees.
+@see BaseDeDonnees(String nomBase, String identifiant, String motDePasse, String
+    hostName, int port)
+@param nomBase le nom de la base de données MySQL
+@param identifiant le nom d'un utilisateur autorisé sur la base de
+  données.
+@param motDePasse le mot de passe de l'utilisateur.
+@param hostName le nom de la machine distante.
+@param port le numéro de port sur lequel le processus de la base de
+  données écoute.
+"
+      end
+
+      operation 146858 "BaseDeDonnees"
+	private explicit_return_type ""
+	nparams 6
+	  param in name "nomBase" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "motDePasse" explicit_type "String"
+	  param in name "hostName" explicit_type "String"
+	  param in name "port" explicit_type "int"
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe BaseDeDonnees.
+@see BaseDeDonnees(String nomBase, String identifiant, String motDePasse, String
+  hostName, int port)
+@param nomBase le nom de la base de données
+@param identifiant le nom d'un utilisateur autorisé sur la base de
+  données.
+@param motDePasse le mot de passe de l'utilisateur.
+@param hostName le nom de la machine distante.
+@param port le numéro de port sur lequel le processus de la base de
+  données écoute.
+@param handler Le handler pour l'échange de messages entre les threads.
+"
+      end
+
+      operation 146986 "setHandler"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn setHandler
+@brief Fixe le gestionnaire de messages du thread UI
+@param handler Handler le gestionnaire de messages du thread UI
+"
+      end
+
+      operation 147114 "connecter"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn connecter
+@brief Connexion à la base de données MySQL si pas déjà connecté
+@return boolean vrai si la connexion a réussi sinon faux
+"
+      end
+
+      operation 147242 "reconnecter"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn reconnecter
+@brief Reconnexion à la base de données MySQL
+@return boolean vrai si la connexion a réussi sinon faux
+"
+      end
+
+      operation 147370 "deconnecter"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn deconnecter
+@brief Déconnexion de la base de données MySQL
+@return boolean vrai si la déconnexion a réussi sinon faux
+"
+      end
+
+      operation 147498 "estConnecte"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn estConnecte
+@brief Retourne vrai si on est connecté à la base de données MySQL
+@return boolean vrai si on est connecté à la base de données MySQL sinon faux
+"
+      end
+
+      class 141994 "ConnexionMySql"
+	visibility private 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 148522 // <realization>
+	  relation 148522 -_-|>
+	    stereotype "bind"
+	    a public
+	      java "${type}<Void, Integer, Boolean>"
+	      classrelation_ref 148522 // <realization>
+	    b parent class_ref 142122 // AsyncTask
+	end
+
+	attribute 147498 "messageConnexion"
+	  private explicit_type "String"
+	  init_value " \"\""
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 147626 "doInBackground"
+	  protected explicit_return_type "Boolean"
+	  nparams 1
+	    param inout name "" explicit_type "Void...unused"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	  comment "@fn doInBackground
+@brief Méthode de connexion qui s’exécute dans un autre thread
+"
+	end
+
+	operation 147754 "onProgressUpdate"
+	  protected explicit_return_type "void"
+	  nparams 1
+	    param inout name "" explicit_type "Integer...progress"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	  comment "@fn onProgressUpdate
+@brief Méthode permettant d'indiquer la progression de la tâche d'arrière plan (s’exécute
+dans le thread UI)
+@details doInBackground peut appeler publishProgress() pour indiquer l'avancement du
+traitement ce qui aura pour effet d'appeler automatiquement onProgressUpdate()
+"
+	end
+
+	operation 147882 "onPostExecute"
+	  protected explicit_return_type "void"
+	  nparams 1
+	    param inout name "result" explicit_type "Boolean"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	  comment "@fn onPostExecute
+@brief Méthode appelée lorsque doInBackground a terminé (s’exécute dans le thread UI)
+"
+	end
+      end
+
+      operation 148010 "executerRequete"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "requete" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn executerRequete
+@brief Méthode qui exécute une requête UPDATE, INSERT ou DELETE en arrière-plan
+"
+      end
+
+      operation 148138 "selectionner"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "requeteSELECT" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Sélectionne des enregistrements dans la base de données en arrière-plan
+@param requeteSELECT String la requête SQL
+"
+      end
+
+      operation 148266 "chargerSalles"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui retourne les salles de la BDD.
+@return salles Un vector de Salle
+"
+      end
+
+    end
+
+    class 142250 "Seuils"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class Seuils
+@brief Les Seuils pour une Salle
+"
+      attribute 149162 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_Seuils_\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs (cf. Logcat)"
+      end
+
+      attribute 149290 "TEMPERATURE_MIN"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 14"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Les seuils par défaut
+ !< la température minimum"
+      end
+
+      attribute 149418 "TEMPERATURE_MAX"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 30"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< la température maximum"
+      end
+
+      attribute 149546 "LUMINOSITE_MIN"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 300"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< la luminosité minimum"
+      end
+
+      attribute 149674 "ECLAIREMENT_MOYEN"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 500"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< l'éclairement moyen"
+      end
+
+      attribute 149802 "HUMIDITE_MIN"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 45"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< le taux d'humidité minimum"
+      end
+
+      attribute 149930 "HUMIDITE_MAX"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 55"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< le taux d'humidité maximum"
+      end
+
+      attribute 150058 "CO2_MAX"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 1300"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< la concentration maximum de CO2"
+      end
+
+      attribute 150186 "INDICE_CONFINEMENT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 5"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " !< l'indice quand il faut confiner"
+      end
+
+      attribute 150314 "temperatureMin"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attributs
+
+<! le seuil de température minimum"
+      end
+
+      attribute 150442 "temperatureMax"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le seuil de température maximum"
+      end
+
+      attribute 150570 "luminositeMin"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le seuil de luminosité minimum"
+      end
+
+      attribute 150698 "eclairementMoyen"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! l'éclairement moyen"
+      end
+
+      attribute 150826 "humiditeMin"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le seuil d'humidité minimum"
+      end
+
+      attribute 150954 "humiditeMax"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le seuil d'humidité maximum"
+      end
+
+      attribute 151082 "co2Max"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! le seuil de CO2 maximum"
+      end
+
+      attribute 151210 "indiceConfinement"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! l'indice de confinement"
+      end
+
+      operation 149930 "Seuils"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut
+"
+      end
+
+      operation 150058 "Seuils"
+	public explicit_return_type ""
+	nparams 8
+	  param in name "temperatureMin" explicit_type "double"
+	  param in name "temperatureMax" explicit_type "double"
+	  param in name "luminositeMin" explicit_type "int"
+	  param in name "eclairementMoyen" explicit_type "int"
+	  param in name "humiditeMin" explicit_type "int"
+	  param in name "humiditeMax" explicit_type "int"
+	  param in name "co2Max" explicit_type "int"
+	  param in name "indiceConfinement" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}, ${t6} ${p6}, ${t7} ${p7}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation
+"
+      end
+
+      operation 150186 "getTemperatureMin"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut temperatureMin
+@return double La température minimum
+"
+      end
+
+      operation 150314 "getTemperatureMax"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut temperatureMax
+@return double La température maximum
+"
+      end
+
+      operation 150442 "getLuminositeMin"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut luminositeMin
+@return double La luminosité minimum
+"
+      end
+
+      operation 150570 "getEclairementMoyen"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut eclairementMoyen
+@return double L'éclairement moyen
+"
+      end
+
+      operation 150698 "getHumiditeMin"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut humiditeMin
+@return double L'humidité minimum
+"
+      end
+
+      operation 150826 "getHumiditeMax"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut humiditéMax
+@return double L'humidité maximum
+"
+      end
+
+      operation 150954 "getCo2Max"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut co2Max
+@return int Le CO2 maximum
+"
+      end
+
+      operation 151082 "getIndiceConfinement"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'attribut indiceConfinement
+@return int L'indice de confinement
+"
+      end
+    end
+
+    class 148906 "Handler"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
     end
   end
 
@@ -1165,11 +3165,26 @@ ${namespace_end}"
       java_src "${comment}
 ${package}
 ${imports}
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 import java.util.Vector;
 ${definition}"
       php_src "<?php
@@ -1223,6 +3238,7 @@ ${definition}"
       java_src "${comment}
 ${package}
 ${imports}
+import android.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -1236,6 +3252,57 @@ ${definition}"
       end
       comment "@file VueSalle.java
 @brief Vue affichant les salles
+@author Mercklen Jérémy
+"
+    end
+
+    artifact 141482 "BaseDeDonnees"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import com.lasalle.eco_classroom_mobile.Salle;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.util.Vector;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+${definition}"
+      associated_elems
+	class_ref 141866 // BaseDeDonnees
+      end
+      comment "@file BaseDeDonnees.java
+@brief Déclaration de la classe BaseDeDonnees
+@author FARGIER Mayeul
+@author Thierry VAIRA
+"
+    end
+
+    artifact 141610 "Seuils"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+${definition}"
+      associated_elems
+	class_ref 142250 // Seuils
+      end
+      comment "@file Salle.java
+@brief Le concept de Salle
 @author Mercklen Jérémy
 "
     end

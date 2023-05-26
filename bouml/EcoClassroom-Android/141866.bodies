@@ -1,0 +1,385 @@
+class BaseDeDonnees
+!!!145962.java!!!	getInstance() : BaseDeDonnees
+        if(bdd == null)
+            bdd = new BaseDeDonnees();
+        return bdd;
+!!!146090.java!!!	getInstance(in nomBase : String, in identifiant : String, in motDePasse : String, in hostName : String) : BaseDeDonnees
+        if(bdd == null)
+            bdd = new BaseDeDonnees(nomBase, identifiant, motDePasse, hostName, PORT_DEFAUT);
+        return bdd;
+!!!146218.java!!!	getInstance(inout handler : Handler) : BaseDeDonnees
+        if(bdd == null)
+            bdd = new BaseDeDonnees(handler);
+        return bdd;
+!!!146346.java!!!	getInstance(in nomBase : String, in identifiant : String, in motDePasse : String, in hostName : String, inout handler : Handler) : BaseDeDonnees
+        if(bdd == null)
+            bdd =
+              new BaseDeDonnees(nomBase, identifiant, motDePasse, hostName, PORT_DEFAUT, handler);
+        return bdd;
+!!!146474.java!!!	BaseDeDonnees()
+        this.nomBDD      = NOM_BDD;
+        this.identifiant = IDENTIFIANT;
+        this.motDePasse  = MOT_DE_PASSE;
+        this.hostName    = HOSTNAME;
+        this.port        = PORT_DEFAUT;
+        this.salles      = new Vector<Salle>();
+        Log.d(TAG,
+              "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
+                " - motDePasse = " + motDePasse + " - hostName = " + hostName);
+
+        // Initialise l'url pour la connexion à la base de données MySQL
+        // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
+        // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
+        this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD + "?useSSL=false";
+        connecter();
+!!!146602.java!!!	BaseDeDonnees(inout handler : Handler)
+        this.nomBDD      = NOM_BDD;
+        this.identifiant = IDENTIFIANT;
+        this.motDePasse  = MOT_DE_PASSE;
+        this.hostName    = HOSTNAME;
+        this.port        = PORT_DEFAUT;
+        this.handler     = handler;
+        this.salles      = new Vector<Salle>();
+        Log.d(TAG,
+              "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
+                " - motDePasse = " + motDePasse + " - hostName = " + hostName);
+
+        // Initialise l'url pour la connexion à la base de données MySQL
+        // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
+        // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
+        this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD + "?useSSL=false";
+        connecter();
+!!!146730.java!!!	BaseDeDonnees(in nomBase : String, in identifiant : String, in motDePasse : String, in hostName : String, in port : int)
+        Log.d(TAG,
+              "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
+                " - motDePasse = " + motDePasse + " - hostName = " + hostName);
+        this.nomBDD      = nomBase;
+        this.identifiant = identifiant;
+        this.motDePasse  = motDePasse;
+        this.hostName    = hostName;
+        this.port        = port;
+        this.handler     = handler;
+        this.salles      = new Vector<Salle>();
+        // Initialise l'url pour la connexion à la base de données MySQL
+        // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
+        // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
+        this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD + "?useSSL=false";
+        connecter();
+!!!146858.java!!!	BaseDeDonnees(in nomBase : String, in identifiant : String, in motDePasse : String, in hostName : String, in port : int, inout handler : Handler)
+        Log.d(TAG,
+              "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
+                " - motDePasse = " + motDePasse + " - hostName = " + hostName);
+        this.nomBDD      = nomBase;
+        this.identifiant = identifiant;
+        this.motDePasse  = motDePasse;
+        this.hostName    = hostName;
+        this.port        = port;
+        this.handler     = handler;
+        this.salles      = new Vector<Salle>();
+        // Initialise l'url pour la connexion à la base de données MySQL
+        // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
+        // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
+        this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD + "?useSSL=false";
+        connecter();
+!!!146986.java!!!	setHandler(inout handler : Handler) : void
+        this.handler = handler;
+!!!147114.java!!!	connecter() : boolean
+        if(!BaseDeDonnees.active)
+            return false;
+
+        try
+        {
+            if(!estConnecte())
+            {
+                ConnexionMySql connexionMySql = new ConnexionMySql();
+                connexionMySql.execute();
+                Log.d(TAG, "connecter() retour = " + connexionMySql.get());
+                return connexionMySql.get();
+            }
+            return true;
+        }
+        catch(InterruptedException e)
+        {
+            // e.printStackTrace();
+            Log.e(TAG, "connecter() InterruptedException = " + e.toString());
+            return false;
+        }
+        catch(ExecutionException e)
+        {
+            // e.printStackTrace();
+            Log.e(TAG, "connecter() ExecutionException = " + e.toString());
+            return false;
+        }
+!!!147242.java!!!	reconnecter() : boolean
+        if(!BaseDeDonnees.active)
+            return false;
+        deconnecter();
+        return connecter();
+!!!147370.java!!!	deconnecter() : boolean
+        if(!BaseDeDonnees.active)
+            return false;
+
+        try
+        {
+            if(connexion != null)
+            {
+                connexion.close();
+                Log.d(TAG, "deconnecter() retour = " + connexion.isClosed());
+                if(connexion.isClosed())
+                {
+                    Message message = new Message();
+                    message.what    = DECONNEXION_OK;
+                    message.obj     = "";
+                    if(handler != null)
+                        handler.sendMessage(message);
+                }
+                else
+                {
+                    Message message = new Message();
+                    message.what    = DECONNEXION_ERREUR;
+                    message.obj     = "";
+                    if(handler != null)
+                        handler.sendMessage(message);
+                }
+                return connexion.isClosed();
+            }
+            return true;
+        }
+        catch(SQLException e)
+        {
+            // e.printStackTrace();
+            Log.e(TAG, "deconnecter() ExecutionException = " + e.toString());
+            Message message = new Message();
+            message.what    = DECONNEXION_ERREUR;
+            message.obj     = "";
+            if(handler != null)
+                handler.sendMessage(message);
+            return false;
+        }
+!!!147498.java!!!	estConnecte() : boolean
+        if(!BaseDeDonnees.active)
+            return false;
+
+        try
+        {
+            if(connexion != null)
+                return !connexion.isClosed();
+            else
+                return false;
+        }
+        catch(SQLException e)
+        {
+            // e.printStackTrace();
+            Log.e(TAG, "estConnecte() ExecutionException = " + e.toString());
+            return false;
+        }
+!!!148010.java!!!	executerRequete(in requete : String) : void
+        if(!BaseDeDonnees.active)
+            return;
+
+        if(estConnecte())
+        {
+            // Seulement pour les requêtes UPDATE, INSERT ou DELETE
+            if(!requete.contains("UPDATE") && !requete.contains("INSERT") &&
+               !requete.contains("DELETE"))
+                return;
+
+            // Exécute la requête dans un thread
+            Thread requeteBDD = new Thread(new Runnable() {
+                public void run()
+                {
+                    mutex.lock();
+                    try
+                    {
+                        Log.d(TAG, "executerRequete() requete = " + requete);
+                        Statement statement = connexion.createStatement();
+                        int       nb        = statement.executeUpdate(requete);
+                        if(nb > 0)
+                        {
+                            Message message = new Message();
+                            message.what    = REQUETE_SQL_OK;
+                            message.obj     = Integer.toString(nb);
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                        else
+                        {
+                            Message message = new Message();
+                            message.what    = REQUETE_SQL_ERREUR;
+                            message.obj     = "";
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        // e.printStackTrace();
+                        Log.e(TAG, "executerRequete() Exception = " + e.toString());
+                    }
+                    finally
+                    {
+                        mutex.unlock();
+                    }
+                }
+            });
+
+            // Démarrage de l'exécution de la requête
+            requeteBDD.start();
+        }
+        else
+        {
+            Log.w(TAG, "executerRequete() Pas de connexion MySQL !");
+        }
+!!!148138.java!!!	selectionner(in requeteSELECT : String) : void
+        if(!BaseDeDonnees.active)
+            return;
+
+        // Seulement pour les requêtes SELECT
+        if(!requeteSELECT.contains("SELECT"))
+            return;
+
+        if(bdd.estConnecte())
+        {
+            Thread requeteBDD = new Thread(new Runnable() {
+                public void run()
+                {
+                    bdd.mutex.lock();
+                    try
+                    {
+                        Log.d(TAG, "Requête : " + requeteSELECT);
+                        Statement statement       = bdd.connexion.createStatement();
+                        ResultSet resultatRequete = statement.executeQuery(requeteSELECT);
+                        Message   message         = new Message();
+                        message.what              = REQUETE_SQL_SELECT;
+                        message.obj               = resultatRequete;
+                        if(handler != null)
+                            handler.sendMessage(message);
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                        Log.e(TAG, "BDD -> exception : " + e.toString());
+                    }
+                    finally
+                    {
+                        bdd.mutex.unlock();
+                    }
+                }
+            });
+
+            // Démarrage
+            requeteBDD.start();
+        }
+        else
+        {
+            Log.w(TAG, "Pas de connexion MySQL !");
+        }
+!!!148266.java!!!	chargerSalles() : void
+        if(BaseDeDonnees.active)
+        {
+            /**
+             * @todo récupérer les informations des salles sur la base de données
+             */
+            if(estConnecte())
+            {
+                Thread requeteBDD = new Thread(new Runnable() {
+                    public void run()
+                    {
+                        mutex.lock();
+                        try
+                        {
+                            String requeteSQL = "SELECT * FROM Salle INNER JOIN Seuils ON Seuils.idSalle=Salle.idSalle;";
+                            Log.d(TAG, "chargerSalles() requeteSQL = " + requeteSQL);
+                            Statement statement =
+                              connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                                        ResultSet.CONCUR_READ_ONLY);
+                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+                            salles.clear();
+                            while(resultatRequete.next())
+                            {
+                                // Log.v(TAG, "chargerSalles() numéro = " +
+                                // resultatRequete.getRow());
+                                Log.v(
+                                  TAG,
+                                  "chargerSalles() idSalle = " + resultatRequete.getInt("idSalle") +
+                                    " - nom = " + resultatRequete.getString(CHAMP_NOM_SALLE) +
+                                    " - superficie = " +
+                                    resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE) +
+                                    " - description = " +
+                                    resultatRequete.getString(CHAMP_DESCRIPTION_SALLE));
+                                Salle salle = new Salle(resultatRequete.getString(CHAMP_NOM_SALLE),
+                                        resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE),
+                                        resultatRequete.getString(CHAMP_DESCRIPTION_SALLE));
+                                salle.setEstOccupe((resultatRequete.getInt("estOccupe") == 1));
+                                salle.setEtatFenetre((resultatRequete.getInt("etatFenetres") == 1));
+                                salle.setEtatLumiere((resultatRequete.getInt("etatLumieres") == 1));
+                                salle.setConfortThermique(resultatRequete.getInt("idIndiceConfortTHI"));
+                                salle.setQualiteAir(resultatRequete.getInt("idIndiceQualiteAir"));
+                                Seuils seuils = new Seuils(resultatRequete.getDouble("temperatureMin"), resultatRequete.getDouble("temperatureMax"),
+                                        resultatRequete.getInt("luminositeMin"),
+                                        resultatRequete.getInt("eclairementMoyen"),
+                                        resultatRequete.getInt("humiditeMin"),
+                                        resultatRequete.getInt("humiditeMax"),
+                                        resultatRequete.getInt("co2Max"),
+                                        resultatRequete.getInt("indiceConfinement"));
+                                salle.setSeuils(seuils);
+                                salles.add(salle);
+                            }
+                            Message message = new Message();
+                            message.what    = REQUETE_SQL_SELECT_SALLES;
+                            message.obj     = salles;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                        catch(Exception e)
+                        {
+                            // e.printStackTrace();
+                            Log.e(TAG, "chargerSalles() Exception = " + e.toString());
+                        }
+                        finally
+                        {
+                            mutex.unlock();
+                        }
+                    }
+                });
+
+                // Démarrage
+                requeteBDD.start();
+            }
+            else
+            {
+                Log.w(TAG, "Pas de connexion MySQL !");
+            }
+        }
+        else
+        {
+            salles.clear();
+            salles.add(new Salle("B11", 18, "Salle de cours"));
+            salles.add(new Salle("B20", 65, "Salle de TP"));
+            salles.add(new Salle("B21", 40, "Salle de Physiques"));
+
+            // Pour les tests
+            for(int i = 0; i < salles.size(); i++)
+            {
+                if(i > 0)
+                {
+                    salles.get(i).setTemperature(19.);
+                    salles.get(i).setHumidite(49);
+                }
+                else
+                {
+                    salles.get(i).setTemperature(13.);
+                    salles.get(i).setHumidite(45);
+                }
+                if(i % 2 == 0)
+                {
+                    salles.get(i).setEstOccupe(true);
+                }
+            }
+
+            Message message = new Message();
+            message.what    = REQUETE_SQL_SELECT_SALLES;
+            message.obj     = salles;
+            if(handler != null)
+                handler.sendMessage(message);
+        }

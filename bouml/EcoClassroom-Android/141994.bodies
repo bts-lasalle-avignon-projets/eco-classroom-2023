@@ -1,0 +1,62 @@
+class ConnexionMySql
+!!!147626.java!!!	doInBackground(inout  : Void...unused) : Boolean
+            try
+            {
+                // chargement du pilote JDBC MySQL
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+            }
+            catch(Exception e)
+            {
+                // e.printStackTrace();
+                Log.e(TAG, "doInBackground() Exception = " + e.toString());
+                messageConnexion = "Erreur connexion MySQL !";
+                Message message  = new Message();
+                message.what     = CONNEXION_ERREUR;
+                message.obj      = messageConnexion;
+                if(handler != null)
+                    handler.sendMessage(message);
+            }
+            try
+            {
+                if(!estConnecte())
+                {
+                    Log.d(TAG,
+                          "DriverManager.getConnection(" + url + ", " + identifiant + ", " +
+                            motDePasse + ")");
+                    connexion = DriverManager.getConnection(url, identifiant, motDePasse);
+                }
+                // Log.d(TAG, "doInBackground -> connecte : " + !connexion.isClosed());
+                if(!connexion.isClosed())
+                {
+                    messageConnexion = "Connexion MySQL réussie";
+                    Message message  = new Message();
+                    message.what     = CONNEXION_OK;
+                    message.obj      = messageConnexion;
+                    if(handler != null)
+                        handler.sendMessage(message);
+                }
+                return !connexion.isClosed();
+            }
+            catch(SQLException e)
+            {
+                // e.printStackTrace();
+                Log.e(TAG, "doInBackground() SQLException = " + e.getMessage());
+                Log.e(TAG, "doInBackground() SQLState = " + e.getSQLState());
+                Log.e(TAG, "doInBackground() VendorError = " + e.getErrorCode());
+                messageConnexion = "Erreur connexion MySQL !";
+                Message message  = new Message();
+                message.what     = CONNEXION_ERREUR;
+                message.obj      = messageConnexion;
+                if(handler != null)
+                    handler.sendMessage(message);
+                return false;
+            }
+!!!147754.java!!!	onProgressUpdate(inout  : Integer...progress) : void
+            // Log.v(TAG, "onProgressUpdate() progression = " + progress[0]);
+            //  Ici on pourrait accéder à la partie UI d'une activité
+            //  et/ou appeler une méthode d'une activité
+!!!147882.java!!!	onPostExecute(inout result : Boolean) : void
+            // Log.d(TAG, "onPostExecute() result = " + result);
+            // Log.d(TAG, "onPostExecute()) message = " + messageConnexion);
+            //  Ici on pourrait accéder à la partie UI d'une activité
+            //  et/ou appeler une méthode d'une activité
