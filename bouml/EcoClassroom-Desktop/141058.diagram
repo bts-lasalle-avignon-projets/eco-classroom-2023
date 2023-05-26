@@ -1,0 +1,67 @@
+format 224
+
+deploymentnodecanvas 128002 deploymentnode_ref 128002 // PC
+  xyzwh 955 56 2000 201 121
+end
+deploymentnodecanvas 128130 deploymentnode_ref 128130 // Tablette
+  xyzwh 969 231 2000 199 133
+end
+deploymentnodecanvas 128770 deploymentnode_ref 128770 // moduleSonde
+  xyzwh 125 147 2000 133 33
+end
+deploymentnodecanvas 128898 deploymentnode_ref 128898 // moduleDetection
+  xyzwh 121 251 2000 132 32
+end
+artifactcanvas 130818 artifact_ref 134826 // eco-classroom-android
+  xyz 975 282 2006
+end
+textcanvas 131074 "*"
+  xyzwh 263 158 2006 16 19
+textcanvas 131202 "*
+"
+  xyzwh 243 233 2006 37 31
+textcanvas 131330 "1"
+  xyzwh 429 187 2006 16 15
+deploymentnodecanvas 133378 deploymentnode_ref 135554 // esp32
+  xyzwh 441 190 2011 62 32
+end
+deploymentnodecanvas 135810 deploymentnode_ref 135682 // Raspberry Pi Zero
+  xyzwh 589 117 2005 227 179
+end
+artifactcanvas 136066 artifact_ref 135082 // Mosquitto
+  xyz 611 161 2010
+end
+artifactcanvas 136194 artifact_ref 134570 // mysqld
+  xyz 613 231 2010
+end
+artifactcanvas 136322 artifact_ref 135338 // eco-classroom-desktop
+  xyz 960 103 2005
+end
+textcanvas 136834 "1"
+  xyzwh 506 187.5 2006 36 15
+textcanvas 136962 "1"
+  xyzwh 577 188.5 2006 16 15
+textcanvas 137090 "1"
+  xyzwh 816 160.5 2006 16 15
+textcanvas 137218 "1"
+  xyzwh 816 244.5 2006 16 15
+textcanvas 137346 "*
+"
+  xyzwh 959.5 274.5 2006 30 22
+textcanvas 137474 "*
+"
+  xyzwh 940.5 127.5 2006 23 38
+line 133506 ----
+  from ref 128770 z 2012 to point 253 167
+  line 135042 z 2012 to point 328 201
+  line 133634 z 2012 label "LoRa" max_width 255 xyz 368 188.5 3000 to ref 133378
+line 134786 ---- decenter_begin 931
+  from ref 128898 z 2012 to point 326 201
+  line 134914 z 2012 to ref 133378
+line 136450 ----
+  from ref 133378 z 2012 label "MQTT" max_width 255 xyz 524 190 3000 stereotype "<<WIFI>>" xyz 513 205 3000 to ref 135810
+line 136578 ----
+  from ref 135810 z 2006 label "MQTT" max_width 255 xyz 856 138 3000 stereotype "<<Ethernet>>" xyz 834 167 3000 to ref 128002
+line 136706 ----
+  from ref 135810 z 2006 label "MQTT" max_width 255 xyz 870 231 3000 stereotype "<<WIFI>>" xyz 858 258 3000 to ref 128130
+end

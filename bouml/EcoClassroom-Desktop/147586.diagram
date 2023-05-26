@@ -1,0 +1,54 @@
+format 224
+
+classcanvas 128130 class_ref 135170 // Personnel
+  simpleclassdiagramsettings end
+  xyz 152 101 2000
+end
+usecasecanvas 129410 usecase_ref 128386 // Afficher les données
+  xyzwh 601 189 3005 64 32 label_xy 569 231
+end
+usecasecanvas 129794 usecase_ref 128514 // Visualiser la liste des salles
+  xyzwh 319 116 3005 64 32 label_xy 256 161
+end
+usecasecanvas 130050 usecase_ref 128130 // Afficher les détails d'une salle
+  xyzwh 517 16 3005 64 32 label_xy 453 48
+end
+usecasecanvas 130178 usecase_ref 128002 // Rechercher avec des critères
+  xyzwh 593 94 3005 64 32 label_xy 530 126
+end
+classcanvas 132354 class_ref 135554 // moduleSonde
+  simpleclassdiagramsettings end
+  xyz 473 506 2000
+end
+classcanvas 132482 class_ref 135682 // moduleDetection
+  simpleclassdiagramsettings end
+  xyz 702 511 2000
+end
+usecasecanvas 136194 usecase_ref 128642 // Calculer les indices
+  xyzwh 603 305 3005 64 32 label_xy 572 337
+end
+usecasecanvas 137602 usecase_ref 129026 // Récuperer les données
+  xyzwh 600 395 3005 64 32 label_xy 556 427
+end
+line 129922 ----
+  from ref 128130 z 3006 to ref 129794
+simplerelationcanvas 130434 simplerelation_ref 128002
+  from ref 130050 z 3006 stereotype "<<extend>>" xyz 408 86 3000 to ref 129794
+end
+simplerelationcanvas 130562 simplerelation_ref 128130
+  from ref 130178 z 3006 stereotype "<<extend>>" xyz 449.5 127.5 3000 to ref 129794
+end
+simplerelationcanvas 132098 simplerelation_ref 128258
+  from ref 129794 z 3006 stereotype "<<include>>" xyz 452 174 3000 to ref 129410
+end
+simplerelationcanvas 136578 simplerelation_ref 128898
+  from ref 129410 z 3006 stereotype "<<include>>" xyz 592 262 3000 to ref 136194
+end
+line 138242 ----
+  from ref 132354 z 3006 to ref 137602
+line 138370 ----
+  from ref 132482 z 3006 to ref 137602
+simplerelationcanvas 138498 simplerelation_ref 129154
+  from ref 136194 z 3006 stereotype "<<include>>" xyz 592 365 3000 to ref 137602
+end
+end
