@@ -5,6 +5,7 @@
 #include "ecoclassroom.h"
 #include "salle.h"
 #include "communicationmqtt.h"
+#include "basededonnees.h"
 
 /**
  * @fn EcoClassroom::EcoClassroom
@@ -13,9 +14,11 @@
  */
 EcoClassroom::EcoClassroom(QWidget* parent) :
     QMainWindow(parent), nbLignesSalles(0),
-    communicationMQTT(new CommunicationMQTT(this))
+    communicationMQTT(new CommunicationMQTT(this)),
+    baseDeDonnees(BaseDeDonnees::getInstance())
 {
     qDebug() << Q_FUNC_INFO;
+    baseDeDonnees->connecter();
     instancierWidgets();
     initialiserGUI();
     installerGestionEvenements();
@@ -30,6 +33,7 @@ EcoClassroom::EcoClassroom(QWidget* parent) :
 EcoClassroom::~EcoClassroom()
 {
     qDebug() << Q_FUNC_INFO;
+    BaseDeDonnees::detruireInstance();
 }
 
 // Méthodes publiques
@@ -263,14 +267,63 @@ void EcoClassroom::chargerSalles()
     qDebug() << Q_FUNC_INFO;
     salles.clear();
 
+#ifdef AVEC_BDD
+    QVector<QStringList> sallesBDD;
+    QString              requete = "SELECT * FROM Salle";
+    bool                 retour;
+
+    retour = baseDeDonnees->recuperer(requete, sallesBDD);
+    if(retour)
+    {
+        qDebug() << Q_FUNC_INFO << sallesBDD;
+        for(int i = 0; i < sallesBDD.size(); ++i)
+        {
+            qDebug() << Q_FUNC_INFO << sallesBDD[i];
+            salles[sallesBDD[i][Salle::TableSalle::CHAMP_NOM]] = new Salle(
+              sallesBDD[i][Salle::TableSalle::CHAMP_NOM],
+              sallesBDD[i][Salle::TableSalle::CHAMP_SUPERFICIE].toInt(),
+              sallesBDD[i][Salle::TableSalle::CHAMP_DESCRIPTION]);
+        }
+    }
+    else
+    {
+        QMessageBox::critical(0, "Erreur BDD", "Aucune salle chargée !");
+    }
+#else
     // Pour les tests
     // Exemple simple (si pas de base de données)
     salles["B11"] = new Salle("B11", 18, "Salle de TD");
     salles["B20"] = new Salle("B20", 65, "Atelier");
     salles["B21"] = new Salle("B21", 35, "Salle de TP");
     salles["B22"] = new Salle("B22", 80, "Salle de cours");
+#endif
+
+    qDebug() << Q_FUNC_INFO << salles;
+    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
 
 #ifdef SIMULATION_ICONE
+    simulerMesureICONE();
+#endif
+
+    effacerSalles();
+
+    QMapIterator<QString, Salle*> salle(salles);
+    while(salle.hasNext())
+    {
+        salle.next();
+        qDebug() << Q_FUNC_INFO << "Salle" << salle.key();
+        afficherSalleTable(*salle.value());
+    }
+}
+
+#ifdef SIMULATION_ICONE
+/**
+ * @fn EcoClassroom::simulerMesureICONE
+ * @brief Permet de simuler les mesures de CO2 pour les salles
+ * et donc simuler la mesure de l'indice ICONE
+ */
+void EcoClassroom::simulerMesureICONE()
+{
     // différentes mesures
     // échantillons (5 h de mesures - 1 mesure toutes les 10 minutes)
     QVector<unsigned int> mesuresCO2DeLaB11(
@@ -290,67 +343,51 @@ void EcoClassroom::chargerSalles()
         1702, 1798, 1805, 1850, 1730, 1896, 1355, 1755, 1704, 1940,
         1922, 1869, 1702, 1698, 1712, 1755, 1780, 1758, 1789, 1705 }); // en ppm
 
-    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB11" << mesuresCO2DeLaB11;
-    for(int i = 0; i < mesuresCO2DeLaB11.size(); ++i)
+    if(salles.contains("B11"))
     {
-        salles["B11"]->setCO2(mesuresCO2DeLaB11[i]);
+        qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB11" << mesuresCO2DeLaB11;
+        for(int i = 0; i < mesuresCO2DeLaB11.size(); ++i)
+        {
+            salles["B11"]->setCO2(mesuresCO2DeLaB11[i]);
+        }
+        qDebug() << Q_FUNC_INFO << salles["B11"]->getNom() << "indiceICONE"
+                 << salles["B11"]->getIndiceICONE();
     }
-    qDebug() << Q_FUNC_INFO << salles["B11"]->getNom() << "indiceICONE"
-             << salles["B11"]->getIndiceICONE();
 
-    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB20" << mesuresCO2DeLaB20;
-    for(int i = 0; i < mesuresCO2DeLaB20.size(); ++i)
+    if(salles.contains("B20"))
     {
-        salles["B20"]->setCO2(mesuresCO2DeLaB20[i]);
+        qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB20" << mesuresCO2DeLaB20;
+        for(int i = 0; i < mesuresCO2DeLaB20.size(); ++i)
+        {
+            salles["B20"]->setCO2(mesuresCO2DeLaB20[i]);
+        }
+        qDebug() << Q_FUNC_INFO << salles["B20"]->getNom() << "indiceICONE"
+                 << salles["B20"]->getIndiceICONE();
     }
-    qDebug() << Q_FUNC_INFO << salles["B20"]->getNom() << "indiceICONE"
-             << salles["B20"]->getIndiceICONE();
 
-    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB21" << mesuresCO2DeLaB21;
-    for(int i = 0; i < mesuresCO2DeLaB21.size(); ++i)
+    if(salles.contains("B21"))
     {
-        salles["B21"]->setCO2(mesuresCO2DeLaB21[i]);
+        qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB21" << mesuresCO2DeLaB21;
+        for(int i = 0; i < mesuresCO2DeLaB21.size(); ++i)
+        {
+            salles["B21"]->setCO2(mesuresCO2DeLaB21[i]);
+        }
+        qDebug() << Q_FUNC_INFO << salles["B21"]->getNom() << "indiceICONE"
+                 << salles["B21"]->getIndiceICONE();
     }
-    qDebug() << Q_FUNC_INFO << salles["B21"]->getNom() << "indiceICONE"
-             << salles["B21"]->getIndiceICONE();
 
-    qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB22" << mesuresCO2DeLaB22;
-    for(int i = 0; i < mesuresCO2DeLaB22.size(); ++i)
+    if(salles.contains("B22"))
     {
-        salles["B22"]->setCO2(mesuresCO2DeLaB22[i]);
-    }
-    qDebug() << Q_FUNC_INFO << salles["B22"]->getNom() << "indiceICONE"
-             << salles["B22"]->getIndiceICONE();
-#endif
-
-    // Exemple avec une base de données SQLite
-    /*
-    QVector<QStringList> sallesBDD;
-    QString requete = "SELECT * FROM Salle";
-    bool    retour;
-
-    retour = baseDeDonnees->recuperer(requete, sallesBDD);
-    if(retour)
-    {
-        qDebug() << Q_FUNC_INFO << sallesBDD;
-        for(int i = 0; i < sallesBDD.size(); ++i)
-            qDebug() << Q_FUNC_INFO << sallesBDD[i];
-    }
-    else
-    {
-        QMessageBox::critical(0, "Erreur BDD", "Aucune salle chargée !");
-    }*/
-
-    effacerSalles();
-    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
-    QMapIterator<QString, Salle*> salle(salles);
-    while(salle.hasNext())
-    {
-        salle.next();
-        qDebug() << Q_FUNC_INFO << "Salle" << salle.key();
-        afficherSalleTable(*salle.value());
+        qDebug() << Q_FUNC_INFO << "mesuresCO2DeLaB22" << mesuresCO2DeLaB22;
+        for(int i = 0; i < mesuresCO2DeLaB22.size(); ++i)
+        {
+            salles["B22"]->setCO2(mesuresCO2DeLaB22[i]);
+        }
+        qDebug() << Q_FUNC_INFO << salles["B22"]->getNom() << "indiceICONE"
+                 << salles["B22"]->getIndiceICONE();
     }
 }
+#endif
 
 /**
  * @fn EcoClassroom::creerElementsTexteCellule

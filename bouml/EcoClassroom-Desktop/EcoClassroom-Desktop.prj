@@ -1,7 +1,12 @@
 format 224
 "EcoClassroom-Desktop"
+<<<<<<< HEAD
   revision 13
   modified_by 2 "btssn2"
+=======
+  revision 11
+  modified_by 23 "tvaira"
+>>>>>>> 75c25acef1f3386c940634050cb4fe811330859c
   cpp_root_dir "../../"
 
 
@@ -608,6 +613,7 @@ ${members}};
     end
 
     deploymentnode 128130 "Tablette"
+      stereotype "Android"
     end
 
     deploymentnode 128258 "serveurMySQL"
@@ -619,7 +625,7 @@ ${members}};
     deploymentnode 128514 "brokerMQTT"
     end
 
-    deploymentnode 128642 "passerelle"
+    deploymentnode 128642 "esp32"
     end
 
     deploymentnode 128770 "moduleSonde"
@@ -628,6 +634,7 @@ ${members}};
     deploymentnode 128898 "moduleDetection"
     end
 
+<<<<<<< HEAD
     deploymentnode 135554 "esp32"
     end
 
@@ -903,5 +910,33 @@ ${inlines}
       activitydiagramsettings
        end
     end
+=======
+    deploymentnode 134551 "Raspberry Pi Zero"
+    end
+
+    artifact 134551 "Mosquitto"
+      stereotype "broker MQTT"
+      associated_artifacts
+      end
+    end
+
+    artifact 134679 "mysqld"
+      stereotype "serveur bdd"
+      associated_artifacts
+      end
+    end
+
+    artifact 134807 "eco-classroom-desktop"
+      stereotype "executable"
+      associated_artifacts
+      end
+    end
+
+    artifact 134935 "eco-classroom-android"
+      stereotype "executable"
+      associated_artifacts
+      end
+    end
+>>>>>>> 75c25acef1f3386c940634050cb4fe811330859c
   end
 end

@@ -11,6 +11,7 @@
 #include <QtMqtt/QMqttTopicName>
 
 class CommunicationMQTT;
+class BaseDeDonnees;
 
 /**
  * @def DUREE_NOTIFICATION
@@ -30,6 +31,12 @@ class CommunicationMQTT;
  * @brief Pour simuler des mesures de CO2 afin de déterminer l'indice ICONE
  */
 #define SIMULATION_ICONE
+
+/**
+ * @def AVEC_BDD
+ * @brief Pour utiliser les données qui sont dans la Base de données
+ */
+#define AVEC_BDD
 
 class Salle;
 
@@ -79,7 +86,8 @@ class EcoClassroom : public QMainWindow
     CommunicationMQTT*
       communicationMQTT;          //!< Relation entre la classe EcoClassroom et
                                   //!< CommunicationMQTT (association)
-    QStringList nomColonnesTable; //!< Le nom des colonnes de la table
+    BaseDeDonnees* baseDeDonnees; //!< Base de données
+    QStringList    nomColonnesTable; //!< Le nom des colonnes de la table
     // Widgets
     QWidget*          gui;               //!< Le widget central
     QStackedWidget*   fenetres;          //!< Pile de fenêtres
@@ -110,6 +118,9 @@ class EcoClassroom : public QMainWindow
     void initialiserGUI();
     void installerGestionEvenements();
     void chargerSalles();
+#ifdef SIMULATION_ICONE
+    void simulerMesureICONE();
+#endif
     void creerElementsTexteCellule(const Salle& salle);
     void creerElementsImageCellule(const Salle& salle);
     void personnaliserElementsTexte();

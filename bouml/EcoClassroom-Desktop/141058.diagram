@@ -1,5 +1,6 @@
 format 224
 
+<<<<<<< HEAD
 deploymentnodecanvas 128002 deploymentnode_ref 128002 // PC
   xyzwh 955 56 2000 201 121
 end
@@ -64,4 +65,49 @@ line 136578 ----
   from ref 135810 z 2006 label "MQTT" max_width 255 xyz 856 138 3000 stereotype "<<Ethernet>>" xyz 834 167 3000 to ref 128002
 line 136706 ----
   from ref 135810 z 2006 label "MQTT" max_width 255 xyz 870 231 3000 stereotype "<<WIFI>>" xyz 858 258 3000 to ref 128130
+=======
+deploymentnodecanvas 128023 deploymentnode_ref 128642 // esp32
+  xyzwh 214 124 2000 89 32
+end
+deploymentnodecanvas 128279 deploymentnode_ref 128130 // Tablette
+  xyzwh 731 190 1995 223 111
+end
+deploymentnodecanvas 128407 deploymentnode_ref 128002 // PC
+  xyzwh 742 12 2000 201 103
+end
+deploymentnodecanvas 128535 deploymentnode_ref 128770 // moduleSonde
+  xyzwh 21 57 2000 113 32
+end
+deploymentnodecanvas 128663 deploymentnode_ref 128898 // moduleDetection
+  xyzwh 11 192 2000 132 32
+end
+deploymentnodecanvas 128919 deploymentnode_ref 134551 // Raspberry Pi Zero
+  xyzwh 363 57 2000 243 167
+end
+artifactcanvas 129047 artifact_ref 134551 // Mosquitto
+  xyz 391 95 2005
+end
+artifactcanvas 129175 artifact_ref 134679 // mysqld
+  xyz 396 161 2005
+end
+artifactcanvas 129943 artifact_ref 134807 // eco-classroom-desktop
+  xyz 754 50 2000
+end
+artifactcanvas 130071 artifact_ref 134935 // eco-classroom-android
+  xyz 758 239 2000
+end
+hubcanvas 130199 xyz 144 139 3005
+line 129303 ----
+  from ref 128407 z 2001 label "MQTT" max_width 255 xyz 652 82 3000 stereotype "<<Ethernet>>" xyz 628 97 3000 to ref 128919
+line 129431 ----
+  from ref 128279 z 2001 label "MQTT" max_width 255 xyz 646.5 177 3000 stereotype "<<WiFi>>" xyz 635.5 192 3000 to ref 128919
+line 129815 ----
+  from ref 128023 z 2001 label "MQTT" max_width 255 xyz 311 123.5 3000 stereotype "<<WiFi>>" xyz 300 138.5 3000 to ref 128919
+line 130327 ----
+  from ref 128663 z 3006 to ref 130199
+line 130583 ----
+  from ref 128535 z 3006 to ref 130199
+line 130711 ----
+  from ref 130199 z 3006 label "LoRa" max_width 255 xyz 164 124 3000 to ref 128023
+>>>>>>> 75c25acef1f3386c940634050cb4fe811330859c
 end
