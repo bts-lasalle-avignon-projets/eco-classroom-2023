@@ -49,8 +49,8 @@ var files_dup =
       [ "Seuils", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils" ]
     ] ],
     [ "strings.xml", "strings_8xml.html", null ],
-    [ "themes.xml", "themes_8xml.html", null ],
-    [ "night/themes.xml", "night_2themes_8xml.html", null ],
+    [ "values/themes.xml", "values_2themes_8xml.html", null ],
+    [ "values-night/themes.xml", "values-night_2themes_8xml.html", null ],
     [ "VueSalle.java", "_vue_salle_8java.html", [
       [ "VueSalle", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle" ]
     ] ]
