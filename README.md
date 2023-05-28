@@ -16,9 +16,21 @@
 
 ---
 
-Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules connectés afin de détecter et mesurer l’état de celle-ci. Les informations seront accessibles à partir d’une tablette ou d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.
+Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules connectés afin de détecter et mesurer l’état de celle-ci.
+
+![](images/modules.png)
+
+Les informations seront accessibles à partir d’une tablette ou d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.
 
 ![](images/deploiement.png)
+
+- Android :
+
+![](images/uc-android.png)
+
+- Qt :
+
+![](images/uc-qt.png)
 
 ## Documentation du code
 
@@ -256,6 +268,8 @@ ALTER TABLE `Seuils`
 
 ## MQTT
 
+![](images/topic-mqtt.png)
+
 Voir aussi : [modules-lora/README.md](modules-lora/README.md)
 
 ### Qt MQTT
@@ -385,6 +399,26 @@ dependencies {
 
 ![](images/livraisons.png)
 
+### 1.0
+
+- Android :
+
+![](images/screenshot-android-salles-v1.0.png)
+
+![](images/screenshot-android-salle-v1.0.png)
+
+![](images/screenshot-android-choix-v1.0.png)
+
+![](images/screenshot-android-interventions-v1.0.png)
+
+![](images/screenshot-android-libres-v1.0.png)
+
+- PC Desktop Qt :
+
+![](images/screenshot-qt-salles-v1.0.png)
+
+![](images/screenshot-qt-salle-v1.0.png)
+
 ### 0.2
 
 ![](images/jira-tickets-v0.2.png)
@@ -413,13 +447,23 @@ dependencies {
 
 ![](images/screenshot-qt-salles-v0.1.png)
 
+## Diagramme de classes
+
+- Android :
+
+![](images/dc-android.png)
+
+- Qt :
+
+![](images/dc-qt.png)
+
 ## Auteurs
 
 Étudiants IR :
 
-- Jérémy MERCKLEN
-- Baptiste COCHET
-- Célian SUBIRANA
+- Jérémy MERCKLEN <mercklenjeremy@gmail.com>
+- Baptiste COCHET <cochet.baptiste.pro@gmail.com>
+- Célian SUBIRANA <celian.subirana.pro@gmail.com>
 
 ---
 ©️ LaSalle Avignon 2023

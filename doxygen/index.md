@@ -4,7 +4,7 @@
 \author Célian Subirana <<celian.subirana.pro@gmail.com>>
 \author Jérémy Mercklen <<mercklenjeremy@gmail.com>>
 \date 2023
-\version 0.2
+\version 1.0
 \see https://github.com/btssn-lasalle-84/eco-classroom-2023
 
 
