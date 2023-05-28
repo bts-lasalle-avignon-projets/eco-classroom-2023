@@ -6,12 +6,15 @@
 
 - [Le projet eco-classroom 2023](#le-projet-eco-classroom-2023)
   - [Documentation du code](#documentation-du-code)
-  - [Base de données](#base-de-données)
+  - [Base de données](#base-de-donn%C3%A9es)
   - [MQTT](#mqtt)
     - [Qt MQTT](#qt-mqtt)
     - [Paho MQTT (Android)](#paho-mqtt-android)
   - [Versions](#versions)
+    - [1.0](#10)
+    - [0.2](#02)
     - [0.1](#01)
+  - [Diagramme de classes](#diagramme-de-classes)
   - [Auteurs](#auteurs)
 
 ---
