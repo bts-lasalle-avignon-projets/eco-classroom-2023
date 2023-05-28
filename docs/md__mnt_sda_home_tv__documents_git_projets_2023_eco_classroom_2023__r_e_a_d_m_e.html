@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Projet eco-classroom: README</title>
+<title>eco-classroom: README</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Projet eco-classroom
-   &#160;<span id="projectnumber">0.1</span>
+   <div id="projectname">eco-classroom
+   &#160;<span id="projectnumber">1.0</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -88,11 +88,11 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="title">README </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><img src="https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&amp;logoColor=fff&amp;style=plastic" alt="C++ Badge" class="inline"/> <img src="https://img.shields.io/badge/MQTT-606?logo=mqtt&amp;logoColor=fff&amp;style=plastic" alt="MQTT Badge" class="inline"/> <img src="https://badgen.net/badge/Qt/5.12.8/green" alt="" class="inline"/> <img src="https://img.shields.io/badge/Android-3DDC84?logo=android&amp;logoColor=fff&amp;style=plastic" alt="Android Badge" class="inline"/></p>
-<p><a href="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop" alt="pages-build-deployment" style="pointer-events: none;" class="inline"/></a></p>
-<h1>Le projet eco-classroom-2023</h1>
+<div class="textblock"><p><img src="https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&amp;logoColor=fff&amp;style=plastic" alt="C++ Badge" class="inline"/> <img src="https://img.shields.io/badge/Android-3DDC84?logo=android&amp;logoColor=fff&amp;style=plastic" alt="Android Badge" class="inline"/></p>
+<p><img src="https://badgen.net/badge/Qt/5.12.8/green" alt="" class="inline"/> <a href="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/make-qt.yml"><img src="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/make-qt.yml/badge.svg" alt="qt-build" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/android-build.yml"><img src="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/android-build.yml/badge.svg" alt="android-build" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/btssn-lasalle-84/eco-classroom-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop" alt="pages-build-deployment" style="pointer-events: none;" class="inline"/></a></p>
+<h1>Le projet eco-classroom 2023</h1>
 <ul>
-<li><a href="#le-projet-eco-classroom-2023">Le projet eco-classroom-2023</a><ul>
+<li><a href="#le-projet-eco-classroom-2023">Le projet eco-classroom 2023</a><ul>
 <li><a href="#documentation-du-code">Documentation du code</a></li>
 <li><a href="#base-de-données">Base de données</a></li>
 <li><a href="#mqtt">MQTT</a><ul>
@@ -100,16 +100,35 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <li><a href="#paho-mqtt-android">Paho MQTT (Android)</a></li>
 </ul>
 </li>
+<li><a href="#versions">Versions</a><ul>
+<li><a href="#01">0.1</a></li>
+</ul>
+</li>
+<li><a href="#auteurs">Auteurs</a></li>
 </ul>
 </li>
 </ul>
 <hr  />
+<p>Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules connectés afin de détecter et mesurer l’état de celle-ci.</p>
+<p><img src="modules.png" alt="" class="inline"/></p>
+<p>Les informations seront accessibles à partir d’une tablette ou d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.</p>
+<p><img src="deploiement.png" alt="" class="inline"/></p>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="uc-android.png" alt="" class="inline"/></p>
+<ul>
+<li>Qt :</li>
+</ul>
+<p><img src="uc-qt.png" alt="" class="inline"/></p>
 <h2>Documentation du code</h2>
 <p><a href="https://btssn-lasalle-84.github.io/eco-classroom-2023/">https://btssn-lasalle-84.github.io/eco-classroom-2023/</a></p>
 <h2>Base de données</h2>
 <p>Base de données MySQL 8.0 <code>ecoclassroom</code> hébergée sur www.db4free.net (pour les tests) :</p>
-<p><img src="sql/eco-classroom-v0.1.png" alt="" class="inline"/></p>
-<div class="fragment"><div class="line"><span class="comment">--- LDD (langage de définition de données)</span></div>
+<p><img src="sql/eco-classroom-v0.2.png" alt="" class="inline"/></p>
+<div class="fragment"><div class="line"><span class="comment">-- LDD (langage de définition de données)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- Voir aussi : https://www.db4free.net/phpMyAdmin/</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">DROP</span> DATABASE <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> `ecoclassroom`;</div>
 <div class="line"> </div>
@@ -121,7 +140,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"> </div>
 <div class="line">USE ecoclassroom;</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> SeuilsAlerte;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Seuils;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> MesureCo2;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> MesureLuminosite;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> MesureHumidite;</div>
@@ -222,6 +241,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Salle`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `nom` (`nom`);</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">-- ALTER TABLE `Salle` CHANGE `idSalle` `idSalle` INT NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`idSalle`); </span></div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Salle`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Salle_fk_1` <span class="keyword">FOREIGN</span> KEY (`idIndiceConfortTHI`) <span class="keyword">REFERENCES</span> `IndiceConfortTHI` (`idIndiceConfortTHI`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Salle_fk_2` <span class="keyword">FOREIGN</span> KEY (`idIndiceInconfortIADI`) <span class="keyword">REFERENCES</span> `IndiceInconfortIADI` (`idIndiceInconfortIADI`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
@@ -308,28 +329,26 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"> </div>
 <div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">-- Pour chaque salle ou pour toutes ?</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `SeuilsAlerte` (</div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `Seuils` (</div>
 <div class="line">    `idSalle`   <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
-<div class="line">    `temperatureMin`    <span class="keywordtype">double</span>,</div>
-<div class="line">    `temperatureMax`    <span class="keywordtype">double</span>,</div>
-<div class="line">    `luminositeMin` <span class="keywordtype">int</span>,</div>
-<div class="line">    `luminositeMax` <span class="keywordtype">int</span>,</div>
-<div class="line">    `humiditeMin`   <span class="keywordtype">int</span>,</div>
-<div class="line">    `humiditeMax`   <span class="keywordtype">int</span>,</div>
-<div class="line">    `co2Min`    <span class="keywordtype">int</span>,</div>
-<div class="line">    `co2Max`    <span class="keywordtype">int</span></div>
+<div class="line">    `temperatureMin`    <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;14&#39;</span>,</div>
+<div class="line">    `temperatureMax`    <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;30&#39;</span>,</div>
+<div class="line">    `luminositeMin` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;300&#39;</span>,</div>
+<div class="line">    `eclairementMoyen`  <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;500&#39;</span>,</div>
+<div class="line">    `humiditeMin`   <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;45&#39;</span>,</div>
+<div class="line">    `humiditeMax`   <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;55&#39;</span>,</div>
+<div class="line">    `co2Max`    <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;1300&#39;</span>,</div>
+<div class="line">    `indiceConfinement` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;5&#39;</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `SeuilsAlerte`</div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Seuils`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (`idSalle`);</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `SeuilsAlerte`</div>
-<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `SeuilsAlerte_fk_1` <span class="keyword">FOREIGN</span> KEY (`idSalle`) <span class="keyword">REFERENCES</span> `Salle` (`idSalle`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
-<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Seuils`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Seuils_fk_1` <span class="keyword">FOREIGN</span> KEY (`idSalle`) <span class="keyword">REFERENCES</span> `Salle` (`idSalle`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
 <div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
 </div><!-- fragment --><h2>MQTT</h2>
+<p><img src="topic-mqtt.png" alt="" class="inline"/></p>
 <p>Voir aussi : modules-lora/README.md</p>
 <h3>Qt MQTT</h3>
 <p><a href="https://doc.qt.io/QtMQTT/index.html">Qt MQTT</a> fournit une implémentation conforme à la norme MQTT.</p>
@@ -426,7 +445,61 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">    &lt;/<span class="keywordtype">application</span>&gt;</div>
 <div class="line"> </div>
 <div class="line">&lt;/<span class="keywordtype">manifest</span>&gt;</div>
-</div><!-- fragment --><hr  />
+</div><!-- fragment --><h2>Versions</h2>
+<p><img src="livraisons.png" alt="" class="inline"/></p>
+<h3>1.0</h3>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="screenshot-android-salles-v1.0.png" alt="" class="inline"/></p>
+<p><img src="screenshot-android-salle-v1.0.png" alt="" class="inline"/></p>
+<p><img src="screenshot-android-choix-v1.0.png" alt="" class="inline"/></p>
+<p><img src="screenshot-android-interventions-v1.0.png" alt="" class="inline"/></p>
+<p><img src="screenshot-android-libres-v1.0.png" alt="" class="inline"/></p>
+<ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<p><img src="screenshot-qt-salles-v1.0.png" alt="" class="inline"/></p>
+<p><img src="screenshot-qt-salle-v1.0.png" alt="" class="inline"/></p>
+<h3>0.2</h3>
+<p><img src="jira-tickets-v0.2.png" alt="" class="inline"/></p>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="screenshot-android-salles-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-android-interventions-v0.2.png" alt="" class="inline"/></p>
+<ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<p><img src="screenshot-qt-salles-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-qt-salle-v0.2.png" alt="" class="inline"/></p>
+<h3>0.1</h3>
+<p><img src="jira-tickets-v0.1.png" alt="" class="inline"/></p>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="screenshot-android-salles-v0.1.png" alt="" class="inline"/></p>
+<ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<p><img src="screenshot-qt-salles-v0.1.png" alt="" class="inline"/></p>
+<h2>Diagramme de classes</h2>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="dc-android.png" alt="" class="inline"/></p>
+<ul>
+<li>Qt :</li>
+</ul>
+<p><img src="dc-qt.png" alt="" class="inline"/></p>
+<h2>Auteurs</h2>
+<p>Étudiants IR :</p>
+<ul>
+<li>Jérémy MERCKLEN <a href="#" onclick="location.href='mai'+'lto:'+'mer'+'ck'+'len'+'je'+'rem'+'y@'+'gma'+'il'+'.co'+'m'; return false;">merck<span style="display: none;">.nosp@m.</span>lenj<span style="display: none;">.nosp@m.</span>eremy<span style="display: none;">.nosp@m.</span>@gma<span style="display: none;">.nosp@m.</span>il.co<span style="display: none;">.nosp@m.</span>m</a></li>
+<li>Baptiste COCHET <a href="#" onclick="location.href='mai'+'lto:'+'coc'+'he'+'t.b'+'ap'+'tis'+'te'+'.pr'+'o@'+'gma'+'il'+'.co'+'m'; return false;">coche<span style="display: none;">.nosp@m.</span>t.ba<span style="display: none;">.nosp@m.</span>ptist<span style="display: none;">.nosp@m.</span>e.pr<span style="display: none;">.nosp@m.</span>o@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a></li>
+<li>Célian SUBIRANA <a href="#" onclick="location.href='mai'+'lto:'+'cel'+'ia'+'n.s'+'ub'+'ira'+'na'+'.pr'+'o@'+'gma'+'il'+'.co'+'m'; return false;">celia<span style="display: none;">.nosp@m.</span>n.su<span style="display: none;">.nosp@m.</span>biran<span style="display: none;">.nosp@m.</span>a.pr<span style="display: none;">.nosp@m.</span>o@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a></li>
+</ul>
+<hr  />
 <p> ©️ LaSalle Avignon 2023 </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
@@ -435,7 +508,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 22:04:22 pour Projet eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:49:09 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>
