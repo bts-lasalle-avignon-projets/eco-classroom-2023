@@ -57,7 +57,7 @@ public class EcoClassroom extends AppCompatActivity
     private Vector<Salle>       salles          = null;     //!< les salles
     private Vector<Salle>       sallesAffichees = null;     //!< les salles à afficher
     private BaseDeDonnees       baseDeDonnees;              //!< accès à la base de données
-    private ConnexionMQTT       connexionMQTT;              //!< permet la connexion MQTT
+    private ClientMQTT clientMQTT;              //!< permet la connexion MQTT
     private Handler             handler             = null; //<! le handler utilisé par l'activité
     private NotificationManager notificationManager = null; //<! le gestionnaire de notifications
     private int                 idNotification      = 1;    //<! l'identifiant de notification
@@ -85,6 +85,7 @@ public class EcoClassroom extends AppCompatActivity
         initialiserHandler();
         initialiserVueSalles();
         initialiserBaseDeDonnees();
+        initialiserMQTT();
     }
 
     /**
@@ -294,6 +295,12 @@ public class EcoClassroom extends AppCompatActivity
               "filtrerSalles() choix : " + choix +
                 " Nb salles filtrées : " + sallesFiltrees.size());
         afficherSalles(sallesFiltrees);
+    }
+
+    private void initialiserMQTT()
+    {
+        clientMQTT = new ClientMQTT(getApplicationContext(), handler);
+        clientMQTT.connecter();
     }
 
     /**
