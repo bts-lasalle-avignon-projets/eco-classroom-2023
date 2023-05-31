@@ -16,280 +16,153 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-/**
- * @class Communication
- * @brief Déclaration de la classe Communication
- * @details Permet la communication MQTT avec le serveur The Things Network
- * @author Thierry Vaira
- * $LastChangedRevision: 166 $
- * $LastChangedDate: 2021-06-14 09:28:36 +0200 (lun. 14 juin 2021) $
- */
-
-/**
- * @class Communication
- * @brief Classe pour gérer la communication MQTT
- */
 public class ClientMQTT
 {
-    /**
-     * Constantes
-     */
-    private static final String TAG = "_ClientMQTT_";
+    private static final String TAG = "ClientMQTT";
+    Context                     context;
+    private Handler             handler           = null; // pour la communication entre classes
+    public MqttAndroidClient    mqttAndroidClient = null;
+    String                      serverUri         = "tcp://192.168.52.7:1883";
+    String                      clientId          = "client";
+    String                      username          = "";
+    String                      password          = "";
 
-    /**
-     * Attributs
-     */
-    private MqttAndroidClient mqttAndroidClient;
-    private Handler handler = null; // pour la communication entre classes
-
-    /**
-     * Constantes pour le Handler
-     */
-    public static final int TTN_CONNECTE = 1;
-    public static final int TTN_DECONNECTE = 2;
-    public static final int TTN_MESSAGE = 3;
-    private String serverUri = "tcp://192.168.52.7:1883"; //!<  lien vers TTN
-    private String clientId = "client"; //!< Application ID
-    private String username = ""; //!<  nom d'utilisateur
-    private String password = ""; //!<  mot de passe TTN
-
-    /**
-     * @brief Constructeur de la classe Communication
-     *
-     * @fn Communication::Communication(Context context, final Handler handler)
-     * @param context
-     * @param handler
-     */
-    public ClientMQTT(Context context, final Handler handler)
+    public ClientMQTT(Context context, Handler handler)
     {
-        Log.v(TAG, "[Communication()] clientId = " + clientId);
+        this.context = context;
         this.handler = handler;
 
-        creerClientMQTTT(context, handler);
-        //connecter();
+        creer();
+        // connecter();
     }
 
-    private void creerClientMQTTT(Context context, Handler handler)
+    public void creer()
     {
+        Log.w(TAG, "MqttAndroidClient.creer : serverUri -> " + serverUri);
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
-        mqttAndroidClient.setCallback(new MqttCallbackExtended()
-        {
+        mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s)
             {
-                Log.w(TAG, "[connectComplete()] serverUri = " + s + " connecte = " + mqttAndroidClient.isConnected());
-                Message msg = Message.obtain();
-                Bundle bundle = new Bundle();
-                bundle.putInt("etat", TTN_CONNECTE); // clé -> valeur ici etat -> TTN_CONNECTE
-                msg.setData(bundle);
-                handler.sendMessage(msg);
+                Log.w(TAG, "MqttAndroidClient : connectComplete -> " + s + " (" + b + ")");
             }
 
             @Override
             public void connectionLost(Throwable throwable)
             {
-                Log.w(TAG, "[connectionLost()]");
-                Message msg = Message.obtain();
-                Bundle b = new Bundle();
-                b.putInt("etat", TTN_DECONNECTE);
-                msg.setData(b);
-                handler.sendMessage(msg);
+                Log.w(TAG, "MqttAndroidClient : connectionLost");
             }
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception
             {
-                Log.w(TAG, "[messageArrived()] topic = " + topic + " message = " + mqttMessage.toString());
-                Message msg = Message.obtain();
-                Bundle b = new Bundle();
-                b.putInt("etat", TTN_MESSAGE);
-                b.putString("topic", topic);
-                b.putString("message", mqttMessage.toString());
-                msg.setData(b);
-                handler.sendMessage(msg);
+                Log.w(TAG, "MqttAndroidClient : messageArrived -> " + mqttMessage.toString());
+                Message message = Message.obtain();
+                Log.d(TAG, "message : " + message);
+                handler.sendMessage(message);
             }
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken)
             {
-                Log.w(TAG, "[deliveryComplete()]");
+                Log.w(TAG, "MqttAndroidClient : deliveryComplete");
             }
         });
     }
 
-    /**
-     * @brief Installe les fonctions de rappel
-     *
-     * @fn Communication::setCallback(MqttCallbackExtended callback)
-     * @param callback le retour
-     */
-    public void setCallback(MqttCallbackExtended callback)
-    {
-        mqttAndroidClient.setCallback(callback);
-    }
-
-    /**
-     * @brief Connexion au TTN
-     *
-     * @fn Communication::connecter()
-     */
     public void connecter()
     {
+        if(estConnecte())
+            deconnecter();
+        Log.w(TAG, "MqttAndroidClient : connecter() serverUri -> " + serverUri);
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        mqttConnectOptions.setUserName(username);
-        mqttConnectOptions.setPassword(password.toCharArray());
+        // mqttConnectOptions.setUserName(username);
+        // mqttConnectOptions.setPassword(password.toCharArray());
 
         try
         {
-            Log.d(TAG, "[connecter()] serverUri = " + serverUri + " clientId = " + clientId);
-            mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener()
-            {
+            mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken)
                 {
-                    DisconnectedBufferOptions disconnectedBufferOptions = new DisconnectedBufferOptions();
+                    Log.w(TAG, "connecter : onSuccess");
+                    DisconnectedBufferOptions disconnectedBufferOptions =
+                      new DisconnectedBufferOptions();
                     disconnectedBufferOptions.setBufferEnabled(true);
                     disconnectedBufferOptions.setBufferSize(100);
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    Log.d(TAG, "[onSuccess()] serverUri = " + serverUri + " clientId = " + clientId);
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception)
                 {
-                    Log.d(TAG, "[onFailure()] serverUri = " + serverUri + " clientId = " + clientId + " exception = " + exception.toString());
+                    Log.w(TAG, "connecter : onFailure -> " + serverUri + exception.toString());
                 }
             });
         }
-        catch (MqttException e)
+        catch(MqttException ex)
         {
-            e.printStackTrace();
+            ex.printStackTrace();
+            Log.e(TAG, "connecter : exception");
         }
     }
 
-    /**
-     * @brief Deconnexion du TTN
-     *
-     * @fn Communication::deconnecter()
-     */
     public void deconnecter()
     {
-        if(!estConnecte())
-            return;
-        Log.d(TAG, "[deconnecter()] serverUri = " + serverUri + " clientId = " + clientId);
-        try
-        {
-            IMqttToken disconToken = mqttAndroidClient.disconnect();
-            disconToken.setActionCallback(new IMqttActionListener()
+        Log.w(TAG, "MqttAndroidClient : deconnecter");
+        Thread deconnexion = new Thread(new Runnable() {
+            public void run()
             {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken)
+                try
                 {
-                    Log.d(TAG, "[onSuccess()] serverUri = " + serverUri + " clientId = " + clientId);
+                    mqttAndroidClient.disconnect();
                 }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception)
+                catch(MqttException e)
                 {
-                    Log.d(TAG, "[onFailure()] serverUri = " + serverUri + " clientId = " + clientId + " exception = " + exception.toString());
+                    e.printStackTrace();
+                    Log.e(TAG, "MqttAndroidClient : deconnecter -> exception");
                 }
-            });
-        }
-        catch (MqttException e)
-        {
-            e.printStackTrace();
-        }
+            }
+        });
+        // Démarrage
+        deconnexion.start();
     }
 
-    /**
-     * @brief Retourne l'état de connexion au serveur TTN
-     *
-     * @return boolean
-     * @fn Communication::estConnecte()
-     */
     public boolean estConnecte()
     {
-        Log.w(TAG, "[estConnecte()] " + mqttAndroidClient.isConnected());
-
+        Log.w(TAG, "MqttAndroidClient : estConnecte -> " + mqttAndroidClient.isConnected());
         return mqttAndroidClient.isConnected();
     }
 
-    /**
-     * @brief S'abonne à un topic
-     *
-     * @fn Communication::souscrireTopic(String topic)
-     * @param nomSalle le nomSalle dans TTN
-     */
-    public boolean souscrireTopic(String nomSalle)
+    public void souscrire()
     {
-        // Vérifications
-        if(mqttAndroidClient == null && !mqttAndroidClient.isConnected())
-        {
-            return false;
-        }
-
-        final String topicTTN = "salles/" + nomSalle + "/#";
-        Log.w(TAG, "[souscrireTopic()] topic = " + topicTTN);
+        String topic = "salles/#";
         try
         {
-            final boolean[] retour = {false};
-            mqttAndroidClient.subscribe(topicTTN, 0, null, new IMqttActionListener()
-            {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken)
-                {
-                    Log.w(TAG, "[onSuccess()] topic = " + topicTTN);
-                    retour[0] = true;
-                }
+            mqttAndroidClient
+              .subscribe(topic, 0, null, new IMqttActionListener() {
+                  @Override
+                  public void onSuccess(IMqttToken asyncActionToken)
+                  {
+                      Log.w(TAG, "souscrire : onSuccess");
+                      Log.d(TAG, "topic : " + topic);
+                  }
 
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception)
-                {
-                    Log.w(TAG, "[onFailure()] topic = " + topicTTN);
-                    retour[0] = false;
-                }
-            });
-            return retour[0];
+                  @Override
+                  public void onFailure(IMqttToken asyncActionToken, Throwable exception)
+                  {
+                      Log.w(TAG, "souscrire : onFailure");
+                  }
+              });
         }
-        catch (MqttException e)
+        catch(MqttException ex)
         {
-            Log.w(TAG, "Erreur topic = " + topicTTN);
-            e.printStackTrace();
-            return false;
+            Log.e(TAG, "souscrire : exception");
+            ex.printStackTrace();
         }
     }
-
-    /**
-     * @brief S'desabonne à un topic
-     *
-     * @fn Communication::unsubscribe(String nomSalle)
-     * @param nomSalle le nomSalle dans TTN
-     */
-    public boolean unsubscribe(String nomSalle)
-    {
-        if(mqttAndroidClient == null && !mqttAndroidClient.isConnected())
-        {
-            return false;
-        }
-        final String topicTTN = "salles/" + nomSalle + "/#";
-        Log.w(TAG, "[unsouscrireTopic()] topic = " + topicTTN);
-        try
-        {
-            final boolean[] retour = {false};
-            mqttAndroidClient.unsubscribe(topicTTN, null, null);
-
-            return retour[0];
-        }
-        catch (MqttException e)
-        {
-            Log.w(TAG, "Erreur topic = " + topicTTN);
-            e.printStackTrace();
-            return false;
-        }
-    }
-
 }

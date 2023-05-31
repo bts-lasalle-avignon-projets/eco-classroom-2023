@@ -28,6 +28,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
 import java.util.Vector;
 
 /**
@@ -245,6 +249,7 @@ public class EcoClassroom extends AppCompatActivity
     {
         Log.d(TAG, "chargerSalles()");
         baseDeDonnees.chargerSalles();
+        clientMQTT.souscrire();
     }
 
     /**
@@ -300,7 +305,30 @@ public class EcoClassroom extends AppCompatActivity
     private void initialiserMQTT()
     {
         clientMQTT = new ClientMQTT(getApplicationContext(), handler);
-        clientMQTT.connecter();
+        if(clientMQTT != null) {
+            clientMQTT.connecter();
+            clientMQTT.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
+                @Override
+                public void connectComplete(boolean b, String s) {
+                    Log.w(TAG, "connectComplete");
+                }
+
+                @Override
+                public void connectionLost(Throwable throwable) {
+                    Log.w(TAG, "connectionLost");
+                }
+
+                @Override
+                public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+                    Log.w(TAG, "messageArrived : " + mqttMessage.toString());
+                }
+
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+                    Log.w(TAG, "deliveryComplete");
+                }
+            });
+        }
     }
 
     /**
