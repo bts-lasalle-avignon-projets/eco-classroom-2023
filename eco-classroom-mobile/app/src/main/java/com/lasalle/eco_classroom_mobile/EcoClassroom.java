@@ -61,7 +61,7 @@ public class EcoClassroom extends AppCompatActivity
     private Vector<Salle>       salles          = null;     //!< les salles
     private Vector<Salle>       sallesAffichees = null;     //!< les salles à afficher
     private BaseDeDonnees       baseDeDonnees;              //!< accès à la base de données
-    private ClientMQTT clientMQTT;              //!< permet la connexion MQTT
+    private ClientMQTT          clientMQTT;                 //!< permet la connexion MQTT
     private Handler             handler             = null; //<! le handler utilisé par l'activité
     private NotificationManager notificationManager = null; //<! le gestionnaire de notifications
     private int                 idNotification      = 1;    //<! l'identifiant de notification
@@ -249,7 +249,6 @@ public class EcoClassroom extends AppCompatActivity
     {
         Log.d(TAG, "chargerSalles()");
         baseDeDonnees.chargerSalles();
-        clientMQTT.souscrire();
     }
 
     /**
@@ -305,29 +304,9 @@ public class EcoClassroom extends AppCompatActivity
     private void initialiserMQTT()
     {
         clientMQTT = new ClientMQTT(getApplicationContext(), handler);
-        if(clientMQTT != null) {
+        if(clientMQTT != null)
+        {
             clientMQTT.connecter();
-            clientMQTT.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
-                @Override
-                public void connectComplete(boolean b, String s) {
-                    Log.w(TAG, "connectComplete");
-                }
-
-                @Override
-                public void connectionLost(Throwable throwable) {
-                    Log.w(TAG, "connectionLost");
-                }
-
-                @Override
-                public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                    Log.w(TAG, "messageArrived : " + mqttMessage.toString());
-                }
-
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-                    Log.w(TAG, "deliveryComplete");
-                }
-            });
         }
     }
 
@@ -349,7 +328,7 @@ public class EcoClassroom extends AppCompatActivity
             public void handleMessage(@NonNull Message message)
             {
                 Log.d(TAG, "[Handler] id message = " + message.what);
-                Log.d(TAG, "[Handler] message = " + message.obj.toString());
+                // Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 switch(message.what)
                 {
@@ -377,6 +356,35 @@ public class EcoClassroom extends AppCompatActivity
                         afficherSalles((Vector<Salle>)message.obj);
                         filtrerSalles(choixFiltrage);
                         alerterDepassementSeuil();
+                    case ClientMQTT.BROKER_CONNECTE:
+                        Log.d(TAG, "[Handler] BROKER_CONNECTE");
+                        clientMQTT.souscrire(ClientMQTT.TOPIC_ECOCLASSROOM);
+                        /**
+                         * @todo Signaler la connexion au broker dans l'IHM
+                         */
+                        break;
+                    case ClientMQTT.BROKER_DECONNECTE:
+                        Log.d(TAG, "[Handler] BROKER_DECONNECTE");
+                        /**
+                         * @todo Signaler la déconnexion au broker dans l'IHM
+                         */
+                        break;
+                    case ClientMQTT.BROKER_MESSAGE:
+                        Log.d(TAG, "[Handler] BROKER_MESSAGE");
+                        Bundle bundle      = (Bundle)message.obj;
+                        String topicMQTT   = bundle.getString("topic");
+                        String messageMQTT = bundle.getString("message");
+                        Log.d(TAG, "[Handler] " + topicMQTT + " -> " + messageMQTT);
+                        /**
+                         * @todo Gérer les messages MQTT reçus
+                         */
+                        break;
+                    case ClientMQTT.BROKER_ERREUR:
+                        Log.d(TAG, "[Handler] BROKER_ERREUR");
+                        /**
+                         * @todo Signaler l'erreur dû au broker dans l'IHM
+                         */
+                        break;
                 }
             }
         };

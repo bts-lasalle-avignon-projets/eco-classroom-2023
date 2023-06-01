@@ -16,56 +16,84 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+/**
+ * @class ClientMQTT
+ * @brief Classe de communication MQTT
+ */
 public class ClientMQTT
 {
+    /**
+     * Constantes
+     */
     private static final String TAG = "ClientMQTT";
-    Context                     context;
-    private Handler             handler           = null; // pour la communication entre classes
-    public MqttAndroidClient    mqttAndroidClient = null;
-    String                      serverUri         = "tcp://192.168.52.7:1883";
-    String                      clientId          = "client";
-    String                      username          = "";
-    String                      password          = "";
+    // public static final String BROKER             = "192.168.52.7"; // broker mosquitto
+    public static final String BROKER             = "192.168.1.20";
+    public static final String TOPIC_ECOCLASSROOM = "salles/#"; // par défaut
+    public static final int    BROKER_CONNECTE    = 10;
+    public static final int    BROKER_DECONNECTE  = 11;
+    public static final int    BROKER_MESSAGE     = 12;
+    public static final int    BROKER_ERREUR      = 13;
+    /**
+     * Attributs
+     */
+    Context                  context;
+    private Handler          handler           = null; // pour la communication entre classes
+    public MqttAndroidClient mqttAndroidClient = null;
+    String                   serverUri         = "tcp://" + BROKER + ":1883";
+    String                   clientId          = "client";
 
     public ClientMQTT(Context context, Handler handler)
     {
+        Log.d(TAG, "[MqttAndroidClient] ClientMQTT() serverUri -> " + serverUri);
         this.context = context;
         this.handler = handler;
 
         creer();
+        // connexion automatique ?
         // connecter();
     }
 
     public void creer()
     {
-        Log.w(TAG, "MqttAndroidClient.creer : serverUri -> " + serverUri);
+        Log.d(TAG, "[MqttAndroidClient] creer() serverUri -> " + serverUri);
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s)
             {
-                Log.w(TAG, "MqttAndroidClient : connectComplete -> " + s + " (" + b + ")");
+                Log.d(TAG, "[MqttAndroidClient] connectComplete() -> " + s + " (" + b + ")");
             }
 
             @Override
             public void connectionLost(Throwable throwable)
             {
-                Log.w(TAG, "MqttAndroidClient : connectionLost");
+                Log.d(TAG, "[MqttAndroidClient] connectionLost() -> " + throwable.toString());
+                Message message = new Message();
+                message.what    = BROKER_DECONNECTE;
+                if(handler != null)
+                    handler.sendMessage(message);
             }
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception
             {
-                Log.w(TAG, "MqttAndroidClient : messageArrived -> " + mqttMessage.toString());
-                Message message = Message.obtain();
-                Log.d(TAG, "message : " + message);
-                handler.sendMessage(message);
+                Log.d(TAG,
+                      "[MqttAndroidClient] messageArrived() " + topic + " -> " +
+                        mqttMessage.toString());
+                Message message = new Message();
+                message.what    = BROKER_MESSAGE;
+                Bundle b        = new Bundle();
+                b.putString("topic", topic);
+                b.putString("message", mqttMessage.toString());
+                message.obj = b;
+                if(handler != null)
+                    handler.sendMessage(message);
             }
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken)
             {
-                Log.w(TAG, "MqttAndroidClient : deliveryComplete");
+                Log.d(TAG, "[MqttAndroidClient] deliveryComplete()");
             }
         });
     }
@@ -74,12 +102,10 @@ public class ClientMQTT
     {
         if(estConnecte())
             deconnecter();
-        Log.w(TAG, "MqttAndroidClient : connecter() serverUri -> " + serverUri);
+        Log.d(TAG, "[MqttAndroidClient] connecter() serverUri -> " + serverUri);
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        // mqttConnectOptions.setUserName(username);
-        // mqttConnectOptions.setPassword(password.toCharArray());
 
         try
         {
@@ -87,7 +113,7 @@ public class ClientMQTT
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken)
                 {
-                    Log.w(TAG, "connecter : onSuccess");
+                    Log.d(TAG, "[MqttAndroidClient] connecter() onSuccess");
                     DisconnectedBufferOptions disconnectedBufferOptions =
                       new DisconnectedBufferOptions();
                     disconnectedBufferOptions.setBufferEnabled(true);
@@ -95,31 +121,66 @@ public class ClientMQTT
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
+                    Message message = new Message();
+                    message.what    = BROKER_CONNECTE;
+                    if(handler != null)
+                        handler.sendMessage(message);
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception)
                 {
-                    Log.w(TAG, "connecter : onFailure -> " + serverUri + exception.toString());
+                    Log.d(TAG,
+                          "[MqttAndroidClient] connecter() onFailure -> " + exception.toString());
+                    Message message = new Message();
+                    message.what    = BROKER_ERREUR;
+                    if(handler != null)
+                        handler.sendMessage(message);
                 }
             });
         }
         catch(MqttException ex)
         {
+            Log.e(TAG, "[MqttAndroidClient] connecter() exception");
             ex.printStackTrace();
-            Log.e(TAG, "connecter : exception");
         }
     }
 
     public void deconnecter()
     {
-        Log.w(TAG, "MqttAndroidClient : deconnecter");
+        if(!estConnecte())
+            return;
+        Log.d(TAG, "[MqttAndroidClient] deconnecter()");
         Thread deconnexion = new Thread(new Runnable() {
             public void run()
             {
                 try
                 {
                     mqttAndroidClient.disconnect();
+                    IMqttToken disconToken = mqttAndroidClient.disconnect();
+                    disconToken.setActionCallback(new IMqttActionListener() {
+                        @Override
+                        public void onSuccess(IMqttToken asyncActionToken)
+                        {
+                            Log.d(TAG, "[MqttAndroidClient] deconnecter() onSuccess");
+                            Message message = new Message();
+                            message.what    = BROKER_DECONNECTE;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+
+                        @Override
+                        public void onFailure(IMqttToken asyncActionToken, Throwable exception)
+                        {
+                            Log.d(TAG,
+                                  "[MqttAndroidClient] deconnecter() onFailure -> " +
+                                    exception.toString());
+                            Message message = new Message();
+                            message.what    = BROKER_ERREUR;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                    });
                 }
                 catch(MqttException e)
                 {
@@ -134,35 +195,65 @@ public class ClientMQTT
 
     public boolean estConnecte()
     {
-        Log.w(TAG, "MqttAndroidClient : estConnecte -> " + mqttAndroidClient.isConnected());
+        Log.d(TAG, "[MqttAndroidClient] estConnecte() " + mqttAndroidClient.isConnected());
         return mqttAndroidClient.isConnected();
     }
 
-    public void souscrire()
+    public void souscrire(String topic)
     {
-        String topic = "salles/#";
+        if(mqttAndroidClient == null || !mqttAndroidClient.isConnected())
+            return;
+        if(topic.isEmpty())
+            topic = TOPIC_ECOCLASSROOM;
+        Log.d(TAG, "[MqttAndroidClient] souscrire() topic -> " + topic);
         try
         {
-            mqttAndroidClient
-              .subscribe(topic, 0, null, new IMqttActionListener() {
-                  @Override
-                  public void onSuccess(IMqttToken asyncActionToken)
-                  {
-                      Log.w(TAG, "souscrire : onSuccess");
-                      Log.d(TAG, "topic : " + topic);
-                  }
+            mqttAndroidClient.subscribe(topic, 0, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken)
+                {
+                    Log.d(TAG, "[MqttAndroidClient] souscrire() onSuccess");
+                }
 
-                  @Override
-                  public void onFailure(IMqttToken asyncActionToken, Throwable exception)
-                  {
-                      Log.w(TAG, "souscrire : onFailure");
-                  }
-              });
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception)
+                {
+                    Log.d(TAG,
+                          "[MqttAndroidClient] souscrire() onFailure -> " + exception.toString());
+                    Message message = new Message();
+                    message.what    = BROKER_ERREUR;
+                    if(handler != null)
+                        handler.sendMessage(message);
+                }
+            });
         }
         catch(MqttException ex)
         {
-            Log.e(TAG, "souscrire : exception");
+            Log.d(TAG, "[MqttAndroidClient] souscrire() -> exception");
             ex.printStackTrace();
+        }
+    }
+
+    public boolean desabonner(String topic)
+    {
+        if(mqttAndroidClient == null || !mqttAndroidClient.isConnected())
+        {
+            return false;
+        }
+        if(topic.isEmpty())
+            topic = TOPIC_ECOCLASSROOM;
+        Log.d(TAG, "[MqttAndroidClient] desabonner() topic -> " + topic);
+        try
+        {
+            final boolean[] retour = { false };
+            mqttAndroidClient.unsubscribe(topic, null, null);
+            return retour[0];
+        }
+        catch(MqttException e)
+        {
+            Log.d(TAG, "[MqttAndroidClient] desabonner() exception");
+            e.printStackTrace();
+            return false;
         }
     }
 }
