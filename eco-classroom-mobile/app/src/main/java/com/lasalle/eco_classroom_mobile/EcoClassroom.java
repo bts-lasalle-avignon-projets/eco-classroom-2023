@@ -33,6 +33,8 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @class EcoClassroom
@@ -378,6 +380,7 @@ public class EcoClassroom extends AppCompatActivity
                         /**
                          * @todo Gérer les messages MQTT reçus
                          */
+                        traiterMessageMQTT(topicMQTT, messageMQTT);
                         break;
                     case ClientMQTT.BROKER_ERREUR:
                         Log.d(TAG, "[Handler] BROKER_ERREUR");
@@ -415,6 +418,54 @@ public class EcoClassroom extends AppCompatActivity
             {
             }
         });
+    }
+
+    /**
+     * @brief Méthode permettant de mettre les données MQTT recue dans les salles
+     */
+    public void traiterMessageMQTT(String topicMQTT, String messageMQTT)
+    {
+        String nomSalle   = null;
+        String typeModule = null;
+        String grandeur   = null;
+
+        Pattern topicPattern = Pattern.compile("(.+?)/(.+?)/(.+?)/(.+)");
+        Matcher topicMatcher = topicPattern.matcher(topicMQTT);
+        if(topicMatcher.find())
+        {
+            nomSalle   = topicMatcher.group(2);
+            typeModule = topicMatcher.group(3);
+            grandeur   = topicMatcher.group(4);
+            Log.d(TAG,
+                  "nomSalle : " + nomSalle + "; typeModule : " + typeModule +
+                    "; grandeur : " + grandeur);
+        }
+
+        //Grandeur g = Salle.x(grandeur);
+        for(int i = 0; i < salles.size(); ++i)
+        {
+            Log.d(TAG,
+                  "salle : " + salles.elementAt(i).getNom() + "; nomSalle : " + nomSalle +
+                    "; meme nom : " + (nomSalle.compareTo(salles.elementAt(i).getNom()) == 0));
+            if(nomSalle.compareTo(salles.elementAt(i).getNom()) == 0)
+            {
+                switch(grandeur)
+                {
+                    case TEMPERATURE:
+                        salles.elementAt(i).setTemperature(Double.valueOf(messageMQTT));
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; temperature : " + salles.elementAt(i).getTemperature());
+                        break;
+                    case "humidite":
+                        salles.elementAt(i).setHumidite(Integer.valueOf(messageMQTT));
+                        break;
+                    case "co2":
+                        salles.elementAt(i).setCo2(Integer.valueOf(messageMQTT));
+                        break;
+                }
+            }
+        }
     }
 
     /**

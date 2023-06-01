@@ -27,7 +27,7 @@ public class ClientMQTT
      */
     private static final String TAG = "ClientMQTT";
     // public static final String BROKER             = "192.168.52.7"; // broker mosquitto
-    public static final String BROKER             = "192.168.1.20";
+    public static final String BROKER             = "192.168.52.7";
     public static final String TOPIC_ECOCLASSROOM = "salles/#"; // par défaut
     public static final int    BROKER_CONNECTE    = 10;
     public static final int    BROKER_DECONNECTE  = 11;

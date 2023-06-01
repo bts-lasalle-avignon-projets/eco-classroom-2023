@@ -8,6 +8,8 @@ package com.lasalle.eco_classroom_mobile;
 
 import android.util.Log;
 
+import java.util.Vector;
+
 /**
  * @class Salle
  * @brief Le concept de Salle
@@ -33,6 +35,19 @@ public class Salle
     public static final int    CO2_PAR_DEFAUT         = 0;   //!< le CO2 par défaut en ppm
     public static final int    QUALITE_AIR_PAR_DEFAUT = 0;   //!< la qualité de l'air par défaut
     public static final int CONFORT_THERMIQUE_PAR_DEFAUT = -4; //!< le confort thermique par défaut
+
+    /**
+     * @todo Créer un enum Grandeur
+     */
+    private enum Grandeur
+    {
+        PRESENCE,
+        FENETRE,
+        LUMIERE,
+        TEMPEREATURE,
+        HUMIDITE,
+        CO2;
+    }
 
     /**
      * Attributs
@@ -371,5 +386,27 @@ public class Salle
         if(getCo2() >= getSeuils().getCo2Max() && (getCo2() != CO2_PAR_DEFAUT))
             return true;
         return false;
+    }
+
+    /**
+     * @todo Créer une méthode statique qui retrourne l'enum Grandeur à partir du String grandeur
+     * Mettre les chaînes dans un Vector
+     */
+    public static Grandeur retournerGrandeur(String grandeur)
+    {
+        Vector<String> grandeurs = new Vector<String>();
+        grandeurs.addElement("presence");
+        grandeurs.addElement("fenetre");
+        grandeurs.addElement("lumiere");
+        grandeurs.addElement("temperature");
+        grandeurs.addElement("humidite");
+        grandeurs.addElement("co2");
+
+        for(int i = 0; i < grandeurs.size(); ++i)
+        {
+            if(grandeurs.elementAt(i).compareTo(grandeur) == 0)
+            {
+            }
+        }
     }
 }
