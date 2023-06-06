@@ -44,7 +44,7 @@ public class Salle
         PRESENCE,
         FENETRE,
         LUMIERE,
-        TEMPEREATURE,
+        TEMPERATURE,
         HUMIDITE,
         CO2;
     }

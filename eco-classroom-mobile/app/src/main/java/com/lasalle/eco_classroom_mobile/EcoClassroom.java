@@ -154,6 +154,9 @@ public class EcoClassroom extends AppCompatActivity
      */
     private void initialiserActualisationSalles()
     {
+        /**
+         * @todo Modifier pour mettre à jour que les indices
+         */
         actualisationSalles = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
         actualisationSalles.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -451,26 +454,41 @@ public class EcoClassroom extends AppCompatActivity
             {
                 switch(g)
                 {
-                    case TEMPEREATURE:
+                    case TEMPERATURE:
                         salles.elementAt(i).setTemperature(Double.valueOf(messageMQTT));
+                        this.adaptateurSalle.notifyDataSetChanged();
                         Log.d(TAG,
                               "salle : " + salles.elementAt(i).getNom() +
                                 "; temperature : " + salles.elementAt(i).getTemperature());
                         break;
                     case HUMIDITE:
                         salles.elementAt(i).setHumidite(Integer.valueOf(messageMQTT));
+                        this.adaptateurSalle.notifyDataSetChanged();
                         break;
                     case CO2:
                         salles.elementAt(i).setCo2(Integer.valueOf(messageMQTT));
+                        this.adaptateurSalle.notifyDataSetChanged();
                         break;
                     case PRESENCE:
-                        salles.elementAt(i).setEstOccupe(Boolean.valueOf(messageMQTT));
+                        if(messageMQTT.compareTo("0") == 0)
+                            salles.elementAt(i).setEstOccupe(false);
+                        else
+                            salles.elementAt(i).setEstOccupe(true);
+                        this.adaptateurSalle.notifyDataSetChanged();
                         break;
                     case FENETRE:
-                        salles.elementAt(i).setEtatFenetre(Boolean.valueOf(messageMQTT));
+                        if(messageMQTT.compareTo("0") == 0)
+                            salles.elementAt(i).setEtatFenetre(false);
+                        else
+                            salles.elementAt(i).setEtatFenetre(true);
+                        this.adaptateurSalle.notifyDataSetChanged();
                         break;
                     case LUMIERE:
-                        salles.elementAt(i).setEtatLumiere(Boolean.valueOf(messageMQTT));
+                        if(messageMQTT.compareTo("0") == 0)
+                            salles.elementAt(i).setEtatLumiere(false);
+                        else
+                            salles.elementAt(i).setEtatLumiere(true);
+                        this.adaptateurSalle.notifyDataSetChanged();
                         break;
                 }
             }
