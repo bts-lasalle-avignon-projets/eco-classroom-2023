@@ -441,7 +441,7 @@ public class EcoClassroom extends AppCompatActivity
                     "; grandeur : " + grandeur);
         }
 
-        //Grandeur g = Salle.x(grandeur);
+        Salle.Grandeur g = Salle.retournerGrandeur(grandeur);
         for(int i = 0; i < salles.size(); ++i)
         {
             Log.d(TAG,
@@ -449,19 +449,28 @@ public class EcoClassroom extends AppCompatActivity
                     "; meme nom : " + (nomSalle.compareTo(salles.elementAt(i).getNom()) == 0));
             if(nomSalle.compareTo(salles.elementAt(i).getNom()) == 0)
             {
-                switch(grandeur)
+                switch(g)
                 {
-                    case TEMPERATURE:
+                    case TEMPEREATURE:
                         salles.elementAt(i).setTemperature(Double.valueOf(messageMQTT));
                         Log.d(TAG,
                               "salle : " + salles.elementAt(i).getNom() +
                                 "; temperature : " + salles.elementAt(i).getTemperature());
                         break;
-                    case "humidite":
+                    case HUMIDITE:
                         salles.elementAt(i).setHumidite(Integer.valueOf(messageMQTT));
                         break;
-                    case "co2":
+                    case CO2:
                         salles.elementAt(i).setCo2(Integer.valueOf(messageMQTT));
+                        break;
+                    case PRESENCE:
+                        salles.elementAt(i).setEstOccupe(Boolean.valueOf(messageMQTT));
+                        break;
+                    case FENETRE:
+                        salles.elementAt(i).setEtatFenetre(Boolean.valueOf(messageMQTT));
+                        break;
+                    case LUMIERE:
+                        salles.elementAt(i).setEtatLumiere(Boolean.valueOf(messageMQTT));
                         break;
                 }
             }

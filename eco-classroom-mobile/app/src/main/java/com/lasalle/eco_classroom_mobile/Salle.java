@@ -39,7 +39,7 @@ public class Salle
     /**
      * @todo Créer un enum Grandeur
      */
-    private enum Grandeur
+    public enum Grandeur
     {
         PRESENCE,
         FENETRE,
@@ -389,24 +389,11 @@ public class Salle
     }
 
     /**
-     * @todo Créer une méthode statique qui retrourne l'enum Grandeur à partir du String grandeur
-     * Mettre les chaînes dans un Vector
+     *
      */
     public static Grandeur retournerGrandeur(String grandeur)
     {
-        Vector<String> grandeurs = new Vector<String>();
-        grandeurs.addElement("presence");
-        grandeurs.addElement("fenetre");
-        grandeurs.addElement("lumiere");
-        grandeurs.addElement("temperature");
-        grandeurs.addElement("humidite");
-        grandeurs.addElement("co2");
-
-        for(int i = 0; i < grandeurs.size(); ++i)
-        {
-            if(grandeurs.elementAt(i).compareTo(grandeur) == 0)
-            {
-            }
-        }
+        Log.d(TAG, "retournerGrandeur()");
+        return Grandeur.valueOf(grandeur.toUpperCase());
     }
 }
