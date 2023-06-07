@@ -72,7 +72,8 @@ class Salle
     {
         CHAMP_NOM = 1,
         CHAMP_DESCRIPTION,
-        CHAMP_SUPERFICIE
+        CHAMP_SUPERFICIE,
+        CHAMP_THI
     };
     /*
      * @enum IndiceQualiteAir
@@ -93,6 +94,7 @@ class Salle
     unsigned int superficie;  //!< Superficie de la salle
     QString      description; //!< Description de la salle
     int          indiceICONE; //!< indice Confinement de la salle
+    int          indiceTHI;   //!< indice de température et d'humidité
     Mesures*
       mesures; //!<  Relation entre la classe Salle et Mesures (agrégation)
     EtatsSalle*
@@ -113,6 +115,8 @@ class Salle
     QString      getQualiteAir() const;
     void         setCO2(unsigned int co2);
     int          getIndiceICONE();
+    QString      getTHI() const;
+    void         setTHI(int indiceThi);
     QString      afficherNiveauICONE() const;
     bool         getLumiere() const;
     bool         getFenetre() const;

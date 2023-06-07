@@ -176,6 +176,26 @@ int Salle::getIndiceICONE()
 }
 
 /**
+ * @fn Salle::getIndiceICONE
+ * @brief méthode qui calcule l'indice THI(température et humidité) et qui le
+ * retourne
+ * @return
+ */
+QString Salle::getTHI() const
+{
+    return QString::number(indiceTHI);
+}
+
+/**
+ * @brief Setter qui attribut une valeur a l'attribut indiceTHI de l'objet Salle
+ * @param indiceThi
+ */
+void Salle::setTHI(int indiceThi)
+{
+    this->indiceTHI = indiceThi;
+}
+
+/**
  * @fn Salle::afficherNiveauICONE
  * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
  * @return

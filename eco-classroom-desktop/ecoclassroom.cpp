@@ -283,6 +283,9 @@ void EcoClassroom::chargerSalles()
               sallesBDD[i][Salle::TableSalle::CHAMP_NOM],
               sallesBDD[i][Salle::TableSalle::CHAMP_SUPERFICIE].toInt(),
               sallesBDD[i][Salle::TableSalle::CHAMP_DESCRIPTION]);
+
+            salles[sallesBDD[i][Salle::TableSalle::CHAMP_NOM]]->setTHI(
+              sallesBDD[i][Salle::TableSalle::CHAMP_THI].toInt());
         }
     }
     else
@@ -396,7 +399,7 @@ void EcoClassroom::simulerMesureICONE()
 void EcoClassroom::creerElementsTexteCellule(const Salle& salle)
 {
     elementNom   = new QTableWidgetItem(salle.getNom());
-    elementTHI   = new QTableWidgetItem(QString("Inconnu"));
+    elementTHI   = new QTableWidgetItem(QString(salle.getTHI()));
     elementCO2   = new QTableWidgetItem(QString(salle.getQualiteAir()));
     elementICONE = new QTableWidgetItem(QString(salle.afficherNiveauICONE()));
 
