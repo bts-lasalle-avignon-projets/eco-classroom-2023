@@ -1,113 +1,70 @@
 format 224
 
-<<<<<<< HEAD
 deploymentnodecanvas 128002 deploymentnode_ref 128002 // PC
-  xyzwh 955 56 2000 201 121
+  xyzwh 889 5 2000 201 121
 end
 deploymentnodecanvas 128130 deploymentnode_ref 128130 // Tablette
-  xyzwh 969 231 2000 199 133
-end
-deploymentnodecanvas 128770 deploymentnode_ref 128770 // moduleSonde
-  xyzwh 125 147 2000 133 33
-end
-deploymentnodecanvas 128898 deploymentnode_ref 128898 // moduleDetection
-  xyzwh 121 251 2000 132 32
+  xyzwh 890 180 2000 199 133
 end
 artifactcanvas 130818 artifact_ref 134826 // eco-classroom-android
-  xyz 975 282 2006
+  xyz 896 231 2006
 end
 textcanvas 131074 "*"
-  xyzwh 263 158 2006 16 19
+  xyzwh 131 107 2006 16 19
 textcanvas 131202 "*
 "
-  xyzwh 243 233 2006 37 31
+  xyzwh 111 182 2006 37 31
 textcanvas 131330 "1"
-  xyzwh 429 187 2006 16 15
-deploymentnodecanvas 133378 deploymentnode_ref 135554 // esp32
-  xyzwh 441 190 2011 62 32
+  xyzwh 270 136 2006 16 15
+deploymentnodecanvas 133378 deploymentnode_ref 128642 // esp32
+  name "passerelle"
+  xyzwh 282 139 2011 129 32
 end
 deploymentnodecanvas 135810 deploymentnode_ref 135682 // Raspberry Pi Zero
-  xyzwh 589 117 2005 227 179
+  xyzwh 510 66 2005 227 179
 end
 artifactcanvas 136066 artifact_ref 135082 // Mosquitto
-  xyz 611 161 2010
+  xyz 532 110 2010
 end
 artifactcanvas 136194 artifact_ref 134570 // mysqld
-  xyz 613 231 2010
+  xyz 534 180 2010
 end
 artifactcanvas 136322 artifact_ref 135338 // eco-classroom-desktop
-  xyz 960 103 2005
+  xyz 895 52 2005
 end
 textcanvas 136834 "1"
-  xyzwh 506 187.5 2006 36 15
+  xyzwh 412 138 2006 36 15
 textcanvas 136962 "1"
-  xyzwh 577 188.5 2006 16 15
+  xyzwh 498 137 2006 16 15
 textcanvas 137090 "1"
-  xyzwh 816 160.5 2006 16 15
+  xyzwh 739 109 2006 16 15
 textcanvas 137218 "1"
-  xyzwh 816 244.5 2006 16 15
+  xyzwh 738 190 2006 16 15
 textcanvas 137346 "*
 "
-  xyzwh 959.5 274.5 2006 30 22
+  xyzwh 880 223 2006 30 22
 textcanvas 137474 "*
 "
-  xyzwh 940.5 127.5 2006 23 38
-line 133506 ----
-  from ref 128770 z 2012 to point 253 167
-  line 135042 z 2012 to point 328 201
-  line 133634 z 2012 label "LoRa" max_width 255 xyz 368 188.5 3000 to ref 133378
-line 134786 ---- decenter_begin 931
-  from ref 128898 z 2012 to point 326 201
-  line 134914 z 2012 to ref 133378
+  xyzwh 879 77 2006 23 38
+deploymentnodecanvas 137602 deploymentnode_ref 128642 // esp32
+  name "moduleSonde"
+  xyzwh 17 71 2000 153 32
+end
+deploymentnodecanvas 137730 deploymentnode_ref 128642 // esp32
+  name "moduleDetection"
+  xyzwh 7 193 2000 172 32
+end
+hubcanvas 138114 xyz 177 153 2000
 line 136450 ----
-  from ref 133378 z 2012 label "MQTT" max_width 255 xyz 524 190 3000 stereotype "<<WIFI>>" xyz 513 205 3000 to ref 135810
+  from ref 133378 z 2012 label "MQTT" max_width 255 xyz 438 139 2012 stereotype "<<WIFI>>" xyz 427 154 3000 to ref 135810
 line 136578 ----
-  from ref 135810 z 2006 label "MQTT" max_width 255 xyz 856 138 3000 stereotype "<<Ethernet>>" xyz 834 167 3000 to ref 128002
+  from ref 135810 z 2006 label "MQTT" max_width 255 xyz 783.5 88 2006 stereotype "<<Ethernet>>" xyz 761.5 117 3000 to ref 128002
 line 136706 ----
-  from ref 135810 z 2006 label "MQTT" max_width 255 xyz 870 231 3000 stereotype "<<WIFI>>" xyz 858 258 3000 to ref 128130
-=======
-deploymentnodecanvas 128023 deploymentnode_ref 128642 // esp32
-  xyzwh 214 124 2000 89 32
-end
-deploymentnodecanvas 128279 deploymentnode_ref 128130 // Tablette
-  xyzwh 731 190 1995 223 111
-end
-deploymentnodecanvas 128407 deploymentnode_ref 128002 // PC
-  xyzwh 742 12 2000 201 103
-end
-deploymentnodecanvas 128535 deploymentnode_ref 128770 // moduleSonde
-  xyzwh 21 57 2000 113 32
-end
-deploymentnodecanvas 128663 deploymentnode_ref 128898 // moduleDetection
-  xyzwh 11 192 2000 132 32
-end
-deploymentnodecanvas 128919 deploymentnode_ref 134551 // Raspberry Pi Zero
-  xyzwh 363 57 2000 243 167
-end
-artifactcanvas 129047 artifact_ref 134551 // Mosquitto
-  xyz 391 95 2005
-end
-artifactcanvas 129175 artifact_ref 134679 // mysqld
-  xyz 396 161 2005
-end
-artifactcanvas 129943 artifact_ref 134807 // eco-classroom-desktop
-  xyz 754 50 2000
-end
-artifactcanvas 130071 artifact_ref 134935 // eco-classroom-android
-  xyz 758 239 2000
-end
-hubcanvas 130199 xyz 144 139 3005
-line 129303 ----
-  from ref 128407 z 2001 label "MQTT" max_width 255 xyz 652 82 3000 stereotype "<<Ethernet>>" xyz 628 97 3000 to ref 128919
-line 129431 ----
-  from ref 128279 z 2001 label "MQTT" max_width 255 xyz 646.5 177 3000 stereotype "<<WiFi>>" xyz 635.5 192 3000 to ref 128919
-line 129815 ----
-  from ref 128023 z 2001 label "MQTT" max_width 255 xyz 311 123.5 3000 stereotype "<<WiFi>>" xyz 300 138.5 3000 to ref 128919
-line 130327 ----
-  from ref 128663 z 3006 to ref 130199
-line 130583 ----
-  from ref 128535 z 3006 to ref 130199
-line 130711 ----
-  from ref 130199 z 3006 label "LoRa" max_width 255 xyz 164 124 3000 to ref 128023
->>>>>>> 75c25acef1f3386c940634050cb4fe811330859c
+  from ref 135810 z 2006 label "MQTT" max_width 255 xyz 791 180 2006 stereotype "<<WIFI>>" xyz 779 207 3000 to ref 128130
+line 138242 ----
+  from ref 133378 z 2012 label "LoRa" max_width 255 xyz 214 139 3000 to ref 138114
+line 138498 ----
+  from ref 137730 z 2001 to ref 138114
+line 138626 ----
+  from ref 137602 z 2001 to ref 138114
 end

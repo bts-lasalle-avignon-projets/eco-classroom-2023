@@ -1,12 +1,7 @@
 format 224
 "eco-classroom-desktop" // eco-classroom-desktop
-<<<<<<< HEAD
   revision 8
   modified_by 2 "btssn2"
-=======
-  revision 7
-  modified_by 23 "tvaira"
->>>>>>> 75c25acef1f3386c940634050cb4fe811330859c
   // class settings
   
   classdiagramsettings member_max_width 0 end
