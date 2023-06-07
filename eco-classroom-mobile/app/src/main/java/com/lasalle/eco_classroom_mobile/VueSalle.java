@@ -61,15 +61,43 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
             @Override
             public void onClick(View vue)
             {
+                String message = genererDonneesAffichage();
                 new AlertDialog.Builder(itemView.getContext())
                   .setTitle(salle.getNom())
-                  .setMessage(salle.getDescription() + "\nSuperficie : " + salle.getSuperficie() +
-                              "m²\nTempérature : " + salle.getTemperature() +
-                              "°C\nHumidité : " + salle.getHumidite() +
-                              "%\nConcentration de CO₂ : " + salle.getCo2() + "ppm")
+                  .setMessage(message)
                   .show();
             }
         });
+    }
+
+    /**
+     * @brief Méthode permettant de génerer ce qu'il faut afficher dans le AlertDialog
+     * @return message Le message à afficher
+     */
+    private String genererDonneesAffichage() {
+        String message = salle.getDescription() + "\n";
+
+        if(salle.getSuperficie() > Salle.SUPERFICIE_PAR_DEFAUT)
+            message += "Superficie : " + salle.getSuperficie() + "m²\n";
+        else
+            message += "Superficie : non connue\n";
+
+        if(salle.getTemperature() > Salle.TEMPERATURE_PAR_DEFAUT)
+            message += "Température : " + salle.getTemperature() + "°C\n";
+        else
+            message += "Température : non connue\n";
+
+        if(salle.getHumidite() > Salle.HUMIDITE_PAR_DEFAUT)
+            message += "Humidité : " + salle.getHumidite() + "%\n";
+        else
+            message += "Humidité : non connue\n";
+
+        if(salle.getCo2() > Salle.QUALITE_AIR_PAR_DEFAUT)
+            message += "Concentration de CO₂ : " + salle.getCo2() + "ppm\n";
+        else
+            message += "Concentration de CO₂ : non connue\n";
+
+        return message;
     }
 
     /**
