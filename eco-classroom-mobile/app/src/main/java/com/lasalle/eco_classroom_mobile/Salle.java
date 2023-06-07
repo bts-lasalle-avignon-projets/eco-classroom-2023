@@ -291,7 +291,7 @@ public class Salle
      */
     public void setCo2(int co2)
     {
-        if(co2 <= CONCENTRATION_CO2_MIN)
+        if(co2 >= CONCENTRATION_CO2_MIN)
             this.co2 = co2;
     }
 

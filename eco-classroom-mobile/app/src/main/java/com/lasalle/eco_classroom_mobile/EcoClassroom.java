@@ -162,7 +162,7 @@ public class EcoClassroom extends AppCompatActivity
             @Override
             public void onRefresh()
             {
-                chargerSalles();
+                actualiserSalles();
                 actualisationSalles.setRefreshing(false);
                 for(int i = 0; i < salles.size(); i++)
                     recevoirDonneesSalle(salles.elementAt(i));
@@ -256,6 +256,11 @@ public class EcoClassroom extends AppCompatActivity
         baseDeDonnees.chargerSalles();
     }
 
+    public void actualiserSalles()
+    {
+        baseDeDonnees.actualiserSalles();
+    }
+
     /**
      * @brief Méthode qui permet de filtrer les salles à afficher
      */
@@ -306,6 +311,9 @@ public class EcoClassroom extends AppCompatActivity
         afficherSalles(sallesFiltrees);
     }
 
+    /**
+     * @brief Méthode permettant d'initialiser la liaison avec le broker MQTT
+     */
     private void initialiserMQTT()
     {
         clientMQTT = new ClientMQTT(getApplicationContext(), handler);
@@ -447,9 +455,6 @@ public class EcoClassroom extends AppCompatActivity
         Salle.Grandeur g = Salle.retournerGrandeur(grandeur);
         for(int i = 0; i < salles.size(); ++i)
         {
-            Log.d(TAG,
-                  "salle : " + salles.elementAt(i).getNom() + "; nomSalle : " + nomSalle +
-                    "; meme nom : " + (nomSalle.compareTo(salles.elementAt(i).getNom()) == 0));
             if(nomSalle.compareTo(salles.elementAt(i).getNom()) == 0)
             {
                 switch(g)
@@ -457,6 +462,7 @@ public class EcoClassroom extends AppCompatActivity
                     case TEMPERATURE:
                         salles.elementAt(i).setTemperature(Double.valueOf(messageMQTT));
                         this.adaptateurSalle.notifyDataSetChanged();
+                        alerterDepassementSeuil(salles.elementAt(i), g);
                         Log.d(TAG,
                               "salle : " + salles.elementAt(i).getNom() +
                                 "; temperature : " + salles.elementAt(i).getTemperature());
@@ -464,10 +470,18 @@ public class EcoClassroom extends AppCompatActivity
                     case HUMIDITE:
                         salles.elementAt(i).setHumidite(Integer.valueOf(messageMQTT));
                         this.adaptateurSalle.notifyDataSetChanged();
+                        alerterDepassementSeuil(salles.elementAt(i), g);
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; humidité : " + salles.elementAt(i).getHumidite());
                         break;
                     case CO2:
                         salles.elementAt(i).setCo2(Integer.valueOf(messageMQTT));
                         this.adaptateurSalle.notifyDataSetChanged();
+                        alerterDepassementSeuil(salles.elementAt(i), g);
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; CO2 : " + salles.elementAt(i).getCo2());
                         break;
                     case PRESENCE:
                         if(messageMQTT.compareTo("0") == 0)
@@ -475,6 +489,9 @@ public class EcoClassroom extends AppCompatActivity
                         else
                             salles.elementAt(i).setEstOccupe(true);
                         this.adaptateurSalle.notifyDataSetChanged();
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; est occupé : " + salles.elementAt(i).getEstOccupe());
                         break;
                     case FENETRE:
                         if(messageMQTT.compareTo("0") == 0)
@@ -482,6 +499,9 @@ public class EcoClassroom extends AppCompatActivity
                         else
                             salles.elementAt(i).setEtatFenetre(true);
                         this.adaptateurSalle.notifyDataSetChanged();
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; état fenêtre : " + salles.elementAt(i).getEtatFenetre());
                         break;
                     case LUMIERE:
                         if(messageMQTT.compareTo("0") == 0)
@@ -489,6 +509,9 @@ public class EcoClassroom extends AppCompatActivity
                         else
                             salles.elementAt(i).setEtatLumiere(true);
                         this.adaptateurSalle.notifyDataSetChanged();
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; état lumière : " + salles.elementAt(i).getEtatLumiere());
                         break;
                 }
             }
@@ -503,7 +526,6 @@ public class EcoClassroom extends AppCompatActivity
     {
         for(int i = 0; i < salles.size(); i++)
         {
-            Log.d(TAG, "alerterDepassementSeuil() salle : " + salles.get(i).getNom());
             Salle salle = salles.get(i);
             if(salle.estSeuilTemperatureDepasse())
             {
@@ -517,6 +539,29 @@ public class EcoClassroom extends AppCompatActivity
             {
                 notifierDepassement(salle, DEPASSEMENT_CO2);
             }
+        }
+    }
+
+    /**
+     * @brief Méthode permettant de vérifier si une grandeur d'une salle dépasse le seuil
+     * @param salle La salle à vérifier
+     * @param grandeur La grandeur à vérifier
+     */
+    public void alerterDepassementSeuil(Salle salle, Salle.Grandeur grandeur)
+    {
+        switch(grandeur)
+        {
+            case TEMPERATURE:
+                if(salle.estSeuilTemperatureDepasse())
+                    notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
+                break;
+            case HUMIDITE:
+                if(salle.estSeuilHumiditeDepasse())
+                    notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
+                break;
+            case CO2:
+                if(salle.estSeuilCo2Depasse())
+                    notifierDepassement(salle, DEPASSEMENT_CO2);
         }
     }
 
