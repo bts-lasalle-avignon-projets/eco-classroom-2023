@@ -105,6 +105,10 @@ class EcoClassroom : public QMainWindow
     QLabel* labelIndiceICONE;      //!< le label pour l'indice ICONE
     QLabel* indiceICONE; //!< l'indice ICONE (confinement d'une salle due à
                          //!< l'excès de co2)
+    QLabel* labelTemperatureSalle; //!< le label pour la température de la salle
+    QLabel*      temperatureSalle;    //!< la temperature de la salle
+    QLabel*      labelHumiditeSalle;  //!< le label pour l'humidité de la salle
+    QLabel*      humiditeSalle;       //!< l'humidité de la salle
     QPushButton* boutonRafraichir;           //!< Bouton de rafraichissement
     QPushButton* boutonRetourAccueil;        //!< Bouton de retour
     QLabel*      labelIndiceQualiteAirSalle; //!< Le label pour l'indice de la
