@@ -363,8 +363,8 @@ void EcoClassroom::simulerMesureCO2()
         {
             salles["B11"]->setCO2(mesuresCO2DeLaB11[i]);
         }
-        qDebug() << Q_FUNC_INFO << salles["B11"]->getNom() << "indiceICONE"
-                 << salles["B11"]->getIndiceICONE();
+        qDebug() << Q_FUNC_INFO << salles["B11"]->getNom();
+        salles["B11"]->calculerIndiceICONE();
         enregistrerICONEDansBDD(salles["B11"]);
         enregistrerQualiteAirDansBDD(salles["B11"]);
     }
@@ -376,8 +376,8 @@ void EcoClassroom::simulerMesureCO2()
         {
             salles["B20"]->setCO2(mesuresCO2DeLaB20[i]);
         }
-        qDebug() << Q_FUNC_INFO << salles["B20"]->getNom() << "indiceICONE"
-                 << salles["B20"]->getIndiceICONE();
+        qDebug() << Q_FUNC_INFO << salles["B20"]->getNom();
+        salles["B20"]->calculerIndiceICONE();
         enregistrerICONEDansBDD(salles["B20"]);
         enregistrerQualiteAirDansBDD(salles["B20"]);
     }
@@ -389,8 +389,8 @@ void EcoClassroom::simulerMesureCO2()
         {
             salles["B21"]->setCO2(mesuresCO2DeLaB21[i]);
         }
-        qDebug() << Q_FUNC_INFO << salles["B21"]->getNom() << "indiceICONE"
-                 << salles["B21"]->getIndiceICONE();
+        qDebug() << Q_FUNC_INFO << salles["B21"]->getNom();
+        salles["B21"]->calculerIndiceICONE();
         enregistrerICONEDansBDD(salles["B21"]);
         enregistrerQualiteAirDansBDD(salles["B21"]);
     }
@@ -402,8 +402,8 @@ void EcoClassroom::simulerMesureCO2()
         {
             salles["B22"]->setCO2(mesuresCO2DeLaB22[i]);
         }
-        qDebug() << Q_FUNC_INFO << salles["B22"]->getNom() << "indiceICONE"
-                 << salles["B22"]->getIndiceICONE();
+        qDebug() << Q_FUNC_INFO << salles["B22"]->getNom();
+        salles["B22"]->calculerIndiceICONE();
         enregistrerICONEDansBDD(salles["B22"]);
         enregistrerQualiteAirDansBDD(salles["B22"]);
     }
@@ -419,8 +419,9 @@ void EcoClassroom::creerElementsTexteCellule(const Salle& salle)
     elementNom = new QTableWidgetItem(salle.getNom());
     elementTHI = new QTableWidgetItem(QString("Inconnu"));
     elementCO2 = new QTableWidgetItem(
-      QString(salle.afficherNiveauQualiteAir(salle.getIndiceQualiteAir())));
-    elementICONE = new QTableWidgetItem(QString(salle.afficherNiveauICONE()));
+      QString(afficherNiveauQualiteAir(salle.getIndiceQualiteAir())));
+    elementICONE = new QTableWidgetItem(
+      QString(afficherNiveauICONE(salle.getIndiceICONE())));
 
     personnaliserElementsTexte();
 }
@@ -522,9 +523,9 @@ void EcoClassroom::afficherSalleTable(const Salle& salle)
     qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "temperature"
              << salle.getTemperature() << "humidite" << salle.getHumidite()
              << "CO2" << salle.getCO2() << "Indice ICONE"
-             << salle.afficherNiveauICONE() << "lumiere" << salle.getLumiere()
-             << "fenetre" << salle.getFenetre() << "occupation"
-             << salle.getOccupation();
+             << afficherNiveauICONE(salle.getIndiceICONE()) << "lumiere"
+             << salle.getLumiere() << "fenetre" << salle.getFenetre()
+             << "occupation" << salle.getOccupation();
 
     // créer des élements de cellule
     creerElementsTexteCellule(salle);
@@ -556,9 +557,9 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
                              " m<sup>2</sup>");
     descriptionSalle->setText(salle.getDescription());
     indiceQualiteAirSalle->setText(
-      salle.afficherNiveauQualiteAir(salle.getIndiceQualiteAir()) + " (" +
+      afficherNiveauQualiteAir(salle.getIndiceQualiteAir()) + " (" +
       QString::number(salle.getCO2()) + "ppm) ");
-    indiceICONE->setText(salle.afficherNiveauICONE());
+    indiceICONE->setText(afficherNiveauICONE(salle.getIndiceICONE()));
     temperatureSalle->setText(QString::number(salle.getTemperature()) + " °C");
     humiditeSalle->setText(QString::number(salle.getHumidite()) + " %");
     afficherFenetreInformations();
@@ -799,4 +800,49 @@ void EcoClassroom::enregistrerQualiteAirDansBDD(Salle* salle)
       "' WHERE nom = " + "'" + salle->getNom() + "'" + ";";
     qDebug() << Q_FUNC_INFO << "requete" << requeteQualiteAir;
     baseDeDonnees->executer(requeteQualiteAir);
+}
+/**
+ * @fn EcoClassroom::afficherNiveauICONE
+ * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
+ * @return
+ */
+QString EcoClassroom::afficherNiveauICONE(int indiceIcone) const
+{
+    if(indiceIcone == CONFINEMENT_NUL)
+        return "Nul";
+    if(indiceIcone == CONFINEMENT_FAIBLE)
+        return "Faible";
+    if(indiceIcone == CONFINEMENT_MOYEN)
+        return "Moyen";
+    if(indiceIcone == CONFINEMENT_ELEVE)
+        return "Élevé";
+    if(indiceIcone == CONFINEMENT_TRES_ELEVE)
+        return "Très Élevé";
+    if(indiceIcone == CONFINEMENT_EXTREME)
+        return "Extrême";
+    else
+        return QString::number(indiceIcone);
+}
+
+/**
+ *@fn EcoClassroom::afficherNiveauQualiteAir(int indiceQualiteAir) const
+ * @brief Méthode qui affiche le niveau de la Qualité de l'Air en fonction de
+ *l'indice Qualité de L'Air
+ * @param indiceQualiteAir
+ * @return QString
+ */
+QString EcoClassroom::afficherNiveauQualiteAir(int indiceQualiteAir) const
+{
+    if(indiceQualiteAir == Salle::IndiceQualiteAir::Excellente)
+        return "Excellente";
+    else if(indiceQualiteAir == Salle::IndiceQualiteAir::Tres_Bien)
+        return "Très Bien";
+    else if(indiceQualiteAir == Salle::IndiceQualiteAir::Modere)
+        return "Modéré";
+    else if(indiceQualiteAir == Salle::IndiceQualiteAir::Mauvais)
+        return "Mauvais";
+    else if(indiceQualiteAir == Salle::IndiceQualiteAir::Tres_Mauvais)
+        return "Très Mauvais";
+    else
+        return "Sévère";
 }
