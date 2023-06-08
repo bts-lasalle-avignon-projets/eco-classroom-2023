@@ -124,9 +124,9 @@ class Salle
   public:
     Salle();
     Salle(QString nom, unsigned int superficie, QString description);
-    int          getIndiceQualiteAir() const;
-    QString      afficherNiveauQualiteAir(int indiceQualiteAir) const;
-    int          getIndiceICONE();
+    int     getIndiceQualiteAir() const;
+    QString afficherNiveauQualiteAir(int indiceQualiteAir) const;
+    int     getIndiceICONE();
     static Salle::TypeMessage getTypeMessage(QString typeDonnee);
     QString                   getNom() const;
     unsigned int              getSuperficie() const;
@@ -135,7 +135,7 @@ class Salle
     unsigned int              getHumidite() const;
     unsigned int              getCO2() const;
     QString                   afficherNiveauICONE() const;
-    QString                   getTHI();
+    QString                   getTHI() const;
     bool                      getLumiere() const;
     bool                      getFenetre() const;
     bool                      getOccupation() const;
