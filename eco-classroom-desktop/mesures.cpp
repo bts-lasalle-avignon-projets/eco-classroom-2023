@@ -197,3 +197,10 @@ int Mesures::determinerIndiceICONE(int indiceBrute)
     else
         return -1;
 }
+
+double Mesures::calculerTHI()
+{
+    double thom = getTemperature() - ((0.55 - 0.0055 * getHumidite()));
+    qDebug() << Q_FUNC_INFO << "thom" << thom;
+    return thom;
+}

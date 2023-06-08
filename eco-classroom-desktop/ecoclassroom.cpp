@@ -648,13 +648,16 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
     }
 
     Salle::TypeMessage type = Salle::getTypeMessage(typeDonnee);
-    qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "type" << type;
+    qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "type" << type
+             << "message" << message;
     switch(type)
     {
         case Salle::TypeMessage::INCONNU:
             qDebug() << "donnée inconnue";
             break;
         case Salle::TypeMessage::TEMPERATURE:
+            qDebug() << Q_FUNC_INFO << "type" << type << "message" << message
+                     << "salle" << salle;
             salles[salle]->setTemperature(message.toDouble());
             break;
         case Salle::TypeMessage::HUMIDITE:

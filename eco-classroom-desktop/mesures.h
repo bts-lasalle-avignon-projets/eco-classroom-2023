@@ -51,6 +51,7 @@ class Mesures
     double       calculerProportionSeuilN2();
     int calculerIndiceBrute(double proportionSeuilN1, double proportionSeuilN2);
     int determinerIndiceICONE(int indiceBrute);
+    double calculerTHI();
 };
 
 #endif // MESURES_H

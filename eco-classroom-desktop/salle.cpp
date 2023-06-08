@@ -195,6 +195,45 @@ QString Salle::afficherNiveauICONE() const
 }
 
 /**
+ * @brief Salle::getTHI
+ * @return les différents niveaux après le calcul du THI
+ */
+QString Salle::getTHI()
+{
+    double thom = mesures->calculerTHI();
+    if(thom < SEUIL_THOM_FROID)
+    {
+        return FROID;
+    }
+    else if(thom >= SEUIL_THOM_FROID && thom < SEUIL_THOM_FRAIS)
+    {
+        return FRAIS;
+    }
+    else if(thom >= SEUIL_THOM_FRAIS && thom < SEUIL_THOM_LEGEREMENT_FRAIS)
+    {
+        return LEGEREMENT_FRAIS;
+    }
+    else if(thom >= SEUIL_THOM_LEGEREMENT_FRAIS && thom < SEUIL_THOM_NEUTRE)
+    {
+        return NEUTRE;
+    }
+    else if(thom >= SEUIL_THOM_NEUTRE && thom < SEUIL_THOM_LEGEREMENT_TIEDE)
+    {
+        return TIEDE;
+    }
+    else if(thom >= SEUIL_THOM_LEGEREMENT_TIEDE && thom < SEUIL_THOM_TIEDE)
+    {
+        return LEGEREMENT_TIEDE;
+    }
+    else if(thom >= SEUIL_THOM_TIEDE)
+    {
+        return CHAUD;
+    }
+    else
+        return THI_INCONNU;
+}
+
+/**
  * @fn Salle::getLumiere()
  * @brief Getter qui récupère l'etat de la lumiere
  */
