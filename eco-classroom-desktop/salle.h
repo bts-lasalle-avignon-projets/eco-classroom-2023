@@ -47,6 +47,20 @@ class Salle
 {
   public:
     /**
+     * @enum TypeMessage
+     * @brief Les diffents type de données pouvant être reçu
+     */
+    enum TypeMessage
+    {
+        INCONNU = -1,
+        TEMPERATURE,
+        HUMIDITE,
+        CO2,
+        LUMIERE,
+        FENETRE,
+        OCCUPATION
+    };
+    /**
      * @enum ChampsTopic
      * @brief Les différents champs d'un topic MQTT
      */
@@ -67,7 +81,7 @@ class Salle
         CHAMP_DESCRIPTION,
         CHAMP_SUPERFICIE
     };
-    /*
+    /**
      * @enum IndiceQualiteAir
      * @brief Définit les différentes colonne du tableau
      */
@@ -94,25 +108,31 @@ class Salle
   public:
     Salle();
     Salle(QString nom, unsigned int superficie, QString description);
-    QString      getNom() const;
-    unsigned int getSuperficie() const;
-    QString      getDescription() const;
-    void         setNom(QString nom);
-    void         setSuperficie(unsigned int superficie);
-    void         setDescription(QString description);
-    unsigned int getTemperature() const;
-    unsigned int getHumidite() const;
-    unsigned int getCO2() const;
     int          getIndiceQualiteAir() const;
     QString      afficherNiveauQualiteAir(int indiceQualiteAir) const;
-    void         setCO2(unsigned int co2);
     int          getIndiceICONE();
-    QString      afficherNiveauICONE() const;
-    bool         getLumiere() const;
-    bool         getFenetre() const;
-    bool         getOccupation() const;
-    void         calculerTHI();
-    void         calculerIADI();
+    static Salle::TypeMessage getTypeMessage(QString typeDonnee);
+    QString                   getNom() const;
+    unsigned int              getSuperficie() const;
+    QString                   getDescription() const;
+    unsigned int              getTemperature() const;
+    unsigned int              getHumidite() const;
+    unsigned int              getCO2() const;
+    QString                   afficherNiveauICONE() const;
+    bool                      getLumiere() const;
+    bool                      getFenetre() const;
+    bool                      getOccupation() const;
+    void                      setNom(QString nom);
+    void                      setSuperficie(unsigned int superficie);
+    void                      setDescription(QString description);
+    void                      setTemperature(unsigned int temperature);
+    void                      setHumidite(unsigned int humidite);
+    void                      setCO2(unsigned int co2);
+    void                      setOccupation(bool occupation) const;
+    void                      setLumiere(bool lumiere) const;
+    void                      setFenetre(bool fenetre) const;
+    void                      calculerTHI();
+    void                      calculerIADI();
 };
 
 #endif // SALLE_H
