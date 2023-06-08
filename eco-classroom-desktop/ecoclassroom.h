@@ -27,10 +27,10 @@ class BaseDeDonnees;
 #define TITRE_NOTIFICATION_CO2 "ALERTE CO2 !"
 
 /**
- * @def SIMULATION_ICONE
- * @brief Pour simuler des mesures de CO2 afin de déterminer l'indice ICONE
+ * @def SIMULATION_CO2
+ * @brief Pour simuler des mesures de CO2
  */
-#define SIMULATION_ICONE
+//#define SIMULATION_CO2
 
 /**
  * @def AVEC_BDD
@@ -123,8 +123,8 @@ class EcoClassroom : public QMainWindow
     void initialiserGUI();
     void installerGestionEvenements();
     void chargerSalles();
-#ifdef SIMULATION_ICONE
-    void simulerMesureICONE();
+#ifdef SIMULATION_CO2
+    void simulerMesureCO2();
 #endif
     void creerElementsTexteCellule(const Salle& salle);
     void creerElementsImageCellule(const Salle& salle);
@@ -139,6 +139,8 @@ class EcoClassroom : public QMainWindow
     void alerterDepassementSeuilCO2(const Salle& salle);
     void notifierSignalementConfinement(const QString& titre,
                                         const QString& message);
+    void enregistrerICONEDansBDD(Salle* salle);
+    void enregistrerQualiteAirDansBDD(Salle* salle);
 
     // Pour le QTableWidget
     void coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur);
