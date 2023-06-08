@@ -43,6 +43,22 @@
 #define CONFINEMENT_TRES_ELEVE 4
 #define CONFINEMENT_EXTREME    5
 
+#define SEUIL_THOM_FROID            -1.7
+#define SEUIL_THOM_FRAIS            13.
+#define SEUIL_THOM_LEGEREMENT_FRAIS 15.
+#define SEUIL_THOM_NEUTRE           20.
+#define SEUIL_THOM_LEGEREMENT_TIEDE 26.5
+#define SEUIL_THOM_TIEDE            30.
+
+#define THI_INCONNU      "Inconnu"
+#define FROID            "Froid"
+#define FRAIS            "Frais"
+#define LEGEREMENT_FRAIS "Légèrement frais"
+#define NEUTRE           "Neutre"
+#define LEGEREMENT_TIEDE "Légèrement tiède"
+#define TIEDE            "Tiède"
+#define CHAUD            "Chaud"
+
 class Mesures;
 class EtatsSalle;
 
@@ -125,6 +141,7 @@ class Salle
     QString                   getQualiteAir() const;
     int                       getIndiceICONE();
     QString                   afficherNiveauICONE() const;
+    QString                   getTHI();
     bool                      getLumiere() const;
     bool                      getFenetre() const;
     bool                      getOccupation() const;
@@ -137,8 +154,6 @@ class Salle
     void                      setOccupation(bool occupation) const;
     void                      setLumiere(bool lumiere) const;
     void                      setFenetre(bool fenetre) const;
-    void                      calculerTHI();
-    void                      calculerIADI();
 };
 
 #endif // SALLE_H
