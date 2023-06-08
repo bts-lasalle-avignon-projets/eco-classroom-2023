@@ -549,7 +549,7 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
     qDebug() << "nom " << salle.getNom() << "superficie "
              << salle.getSuperficie() << "description "
              << salle.getDescription() << "qualite air "
-             << salle.getQualiteAir() << "temperature "
+             << salle.getIndiceQualiteAir() << "temperature "
              << salle.getTemperature() << "humidité " << salle.getHumidite();
     nomSalle->setText(salle.getNom());
     superficieSalle->setText(QString::number(salle.getSuperficie()) +

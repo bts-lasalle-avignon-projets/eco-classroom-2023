@@ -159,7 +159,7 @@ QString Salle::afficherNiveauQualiteAir(int indiceQualiteAir) const
     else
         return "Sévère";
 }
-
+/**
  * @fn Salle::getIndiceICONE
  * @brief méthode qui calcule l'indice ICONE(indice de confinement) et qui le
  * retourne
