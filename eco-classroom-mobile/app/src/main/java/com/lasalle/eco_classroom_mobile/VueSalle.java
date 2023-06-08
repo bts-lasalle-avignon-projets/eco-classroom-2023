@@ -78,22 +78,22 @@ public class VueSalle extends RecyclerView.ViewHolder implements View.OnClickLis
         String message = salle.getDescription() + "\n";
 
         if(salle.getSuperficie() > Salle.SUPERFICIE_PAR_DEFAUT)
-            message += "Superficie : " + salle.getSuperficie() + "m²\n";
+            message += "Superficie : " + salle.getSuperficie() + " m²\n";
         else
             message += "Superficie : non connue\n";
 
         if(salle.getTemperature() > Salle.TEMPERATURE_PAR_DEFAUT)
-            message += "Température : " + salle.getTemperature() + "°C\n";
+            message += "Température : " + salle.getTemperature() + " °C\n";
         else
             message += "Température : non connue\n";
 
         if(salle.getHumidite() > Salle.HUMIDITE_PAR_DEFAUT)
-            message += "Humidité : " + salle.getHumidite() + "%\n";
+            message += "Humidité : " + salle.getHumidite() + " %\n";
         else
             message += "Humidité : non connue\n";
 
         if(salle.getCo2() > Salle.QUALITE_AIR_PAR_DEFAUT)
-            message += "Concentration de CO₂ : " + salle.getCo2() + "ppm\n";
+            message += "Concentration de CO₂ : " + salle.getCo2() + " ppm\n";
         else
             message += "Concentration de CO₂ : non connue\n";
 
