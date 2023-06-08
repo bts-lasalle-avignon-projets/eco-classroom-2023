@@ -109,7 +109,8 @@ class EcoClassroom : public QMainWindow
     QLabel*      temperatureSalle;    //!< la temperature de la salle
     QLabel*      labelHumiditeSalle;  //!< le label pour l'humidité de la salle
     QLabel*      humiditeSalle;       //!< l'humidité de la salle
-    QPushButton* boutonRetourAccueil; //!< Bouton de retour
+    QPushButton* boutonRafraichir;           //!< Bouton de rafraichissement
+    QPushButton* boutonRetourAccueil;        //!< Bouton de retour
     QLabel*      labelIndiceQualiteAirSalle; //!< Le label pour l'indice de la
                                              //!< qualité d'air
     QLabel* indiceQualiteAirSalle; //!< L'indice de la qualité de l'air

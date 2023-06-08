@@ -13,7 +13,7 @@
  * @param humidite mesure de l'humidite dans la salle
  * @param co2 mesure du co2 dans la salle
  */
-Mesures::Mesures() : temperature(0.), humidite(0), co2(0)
+Mesures::Mesures() : temperature(0.), humidite(0), co2(0), mesuresCO2(0)
 {
 }
 
@@ -90,6 +90,10 @@ void Mesures::setHumidite(unsigned int humidite)
 void Mesures::setCO2(unsigned int mesureCo2)
 {
     co2.push_back(mesureCo2);
+    /**
+     * @todo Et l'horodatage ?
+     */
+    // mesuresCO2.push_back({mesureCo2, QDateTime::currentDateTime()});
 }
 
 /**

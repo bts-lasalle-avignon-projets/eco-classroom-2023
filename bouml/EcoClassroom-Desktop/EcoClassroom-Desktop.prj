@@ -1,7 +1,7 @@
 format 224
 "EcoClassroom-Desktop"
-  revision 11
-  modified_by 23 "tvaira"
+  revision 14
+  modified_by 2 "btssn2"
   cpp_root_dir "../../"
 
 
@@ -591,6 +591,318 @@ ${members}};
     sequencediagram 141098 "Visualiser la liste des salles"
       sequencediagramsettings end
       overlapping_bars size A0
+    end
+  end
+
+  deploymentview 128002 "eco-classroom-deploiement"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    deploymentdiagram 141058 "eco-classroom-deploiement"
+      deploymentdiagramsettings
+       end
+      size A0
+    end
+
+    deploymentnode 128002 "PC"
+    end
+
+    deploymentnode 128130 "Tablette"
+      stereotype "Android"
+    end
+
+    deploymentnode 128258 "serveurMySQL"
+    end
+
+    deploymentnode 128386 "baseDeDonnees"
+    end
+
+    deploymentnode 128514 "brokerMQTT"
+    end
+
+    deploymentnode 128642 "esp32"
+    end
+
+    deploymentnode 128770 "moduleSonde"
+    end
+
+    deploymentnode 128898 "moduleDetection"
+    end
+
+    deploymentnode 135554 "esp32"
+    end
+
+    deploymentnode 135682 "Raspberry Pi Zero"
+    end
+  end
+
+  usecaseview 128002 "Visualiser les salles"
+    
+    usecasediagramsettings end
+    
+    sequencediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    activitydiagramsettings
+     end
+    usecasediagram 147586 "Visualiser les salles"
+      usecasediagramsettings draw_all_relations no end
+      size A0
+    end
+
+    class 135170 "Personnel"
+      visibility package stereotype "actor"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    usecase 128002 "Rechercher avec des critères"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128130
+	-_->
+	  stereotype "extend"
+	  on usecase_ref 128514 // Visualiser la liste des salles
+      end
+    end
+
+    usecase 128130 "Afficher les détails d'une salle"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128002
+	-_->
+	  stereotype "extend"
+	  on usecase_ref 128514 // Visualiser la liste des salles
+      end
+    end
+
+    usecase 128258 "Affiche listes salles"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+    end
+
+    usecase 128386 "Afficher les données"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128898
+	-_->
+	  stereotype "include"
+	  on usecase_ref 128642 // Calculer les indices
+      end
+    end
+
+    usecase 128514 "Visualiser la liste des salles"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128258
+	-_->
+	  stereotype "include"
+	  on usecase_ref 128386 // Afficher les données
+      end
+    end
+
+    usecase 128642 "Calculer les indices"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128770
+	-_->
+	  on usecase_ref 128386 // Afficher les données
+      end
+
+      simplerelation 129154
+	-_->
+	  stereotype "include"
+	  on usecase_ref 129026 // Récuperer les données
+      end
+    end
+
+    class 135554 "moduleSonde"
+      visibility package stereotype "actor"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141698 // <dependency>
+	relation 141570 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 141698 // <dependency>
+	  b parent class_ref 135554 // moduleSonde
+      end
+    end
+
+    class 135682 "moduleDetection"
+      visibility package stereotype "actor"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    usecase 129026 "Récuperer les données"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
     end
   end
 end

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file ecoclassroom.cpp
  * @brief Définition de la classe EcoClassroom
  */
@@ -246,6 +246,7 @@ void EcoClassroom::initialiserGUI()
     /*setFixedSize(qApp->desktop()->availableGeometry(this).width(),
                  qApp->desktop()->availableGeometry(this).height());*/
     showMaximized();
+    Salle::TypeMessage getTypeMessage(QString typeDonnee);
     afficherFenetreAcceuil();
 }
 
@@ -536,11 +537,11 @@ void EcoClassroom::afficherSalleTable(const Salle& salle)
  */
 void EcoClassroom::afficherInformationsSalle(const Salle& salle)
 {
-    qInfo() << " Nom : " << salle.getNom() << "\n"
-            << "Superficie : " << salle.getSuperficie() << "\n"
-            << "Description : " << salle.getDescription() << "\n"
-            << "Qualité de l'air : "
-            << salle.getQualiteAir() + " " + salle.getCO2();
+    qDebug() << "nom " << salle.getNom() << "superficie "
+             << salle.getSuperficie() << "description "
+             << salle.getDescription() << "qualite air "
+             << salle.getQualiteAir() << "temperature "
+             << salle.getTemperature() << "humidité " << salle.getHumidite();
     nomSalle->setText(salle.getNom());
     superficieSalle->setText(QString::number(salle.getSuperficie()) +
                              " m<sup>2</sup>");
@@ -583,6 +584,7 @@ void EcoClassroom::effacerSalles()
 
 /**
  * @fn EcoClassroom::recevoirMessage
+ * @brief Permet de recevoir le message MQTT
  * @param message
  * @param topic
  */
@@ -607,6 +609,7 @@ void EcoClassroom::recevoirMessageMQTT(const QByteArray&     message,
 
 /**
  * @fn EcoClassroom::traiterNouveauMessageMQTT
+ * @brief permet de traiter le message MQTT qui vient d'être reçu
  * @param salle
  * @param module
  * @param typeDonnee
@@ -618,8 +621,48 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
                                              QString message)
 {
     qDebug() << Q_FUNC_INFO << QDateTime::currentDateTime().toString()
-             << "salle" << salle << "typeDonnee" << typeDonnee << "message"
-             << message;
+             << "salle" << salle << "module" << module << "typeDonnee"
+             << typeDonnee << "message" << message;
+
+    // est-ce que c'est une salle "inconnue" ?
+    if(!salles.contains(salle))
+    {
+        // nouvelle salle !
+        // 1. instancier cette nouvelle salle et l'insérer dans salles
+        salles[salle] = new Salle(salle, 0, "");
+        /**
+         * @todo Comment obtenir la superficie et la description de cette
+         * nouvelle salle ?
+         */
+        // 2. "stocker" dans la base de données (INSERT)
+    }
+
+    Salle::TypeMessage type = Salle::getTypeMessage(typeDonnee);
+    qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "type" << type;
+    switch(type)
+    {
+        case Salle::TypeMessage::INCONNU:
+            qDebug() << "donnée inconnue";
+            break;
+        case Salle::TypeMessage::TEMPERATURE:
+            salles[salle]->setTemperature(message.toDouble());
+            break;
+        case Salle::TypeMessage::HUMIDITE:
+            salles[salle]->setHumidite(message.toUInt());
+            break;
+        case Salle::TypeMessage::CO2:
+            salles[salle]->setCO2(message.toUInt());
+            break;
+        case Salle::TypeMessage::OCCUPATION:
+            salles[salle]->setOccupation(message.toInt());
+            break;
+        case Salle::TypeMessage::FENETRE:
+            salles[salle]->setFenetre(message.toInt());
+            break;
+        case Salle::TypeMessage::LUMIERE:
+            salles[salle]->setLumiere(message.toInt());
+            break;
+    }
 }
 
 /**

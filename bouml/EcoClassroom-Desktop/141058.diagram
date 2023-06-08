@@ -1,0 +1,70 @@
+format 224
+
+deploymentnodecanvas 128002 deploymentnode_ref 128002 // PC
+  xyzwh 889 5 2000 201 121
+end
+deploymentnodecanvas 128130 deploymentnode_ref 128130 // Tablette
+  xyzwh 890 180 2000 199 133
+end
+artifactcanvas 130818 artifact_ref 134826 // eco-classroom-android
+  xyz 896 231 2006
+end
+textcanvas 131074 "*"
+  xyzwh 131 107 2006 16 19
+textcanvas 131202 "*
+"
+  xyzwh 111 182 2006 37 31
+textcanvas 131330 "1"
+  xyzwh 270 136 2006 16 15
+deploymentnodecanvas 133378 deploymentnode_ref 128642 // esp32
+  name "passerelle"
+  xyzwh 282 139 2011 129 32
+end
+deploymentnodecanvas 135810 deploymentnode_ref 135682 // Raspberry Pi Zero
+  xyzwh 510 66 2005 227 179
+end
+artifactcanvas 136066 artifact_ref 135082 // Mosquitto
+  xyz 532 110 2010
+end
+artifactcanvas 136194 artifact_ref 134570 // mysqld
+  xyz 534 180 2010
+end
+artifactcanvas 136322 artifact_ref 135338 // eco-classroom-desktop
+  xyz 895 52 2005
+end
+textcanvas 136834 "1"
+  xyzwh 412 138 2006 36 15
+textcanvas 136962 "1"
+  xyzwh 498 137 2006 16 15
+textcanvas 137090 "1"
+  xyzwh 739 109 2006 16 15
+textcanvas 137218 "1"
+  xyzwh 738 190 2006 16 15
+textcanvas 137346 "*
+"
+  xyzwh 880 223 2006 30 22
+textcanvas 137474 "*
+"
+  xyzwh 879 77 2006 23 38
+deploymentnodecanvas 137602 deploymentnode_ref 128642 // esp32
+  name "moduleSonde"
+  xyzwh 17 71 2000 153 32
+end
+deploymentnodecanvas 137730 deploymentnode_ref 128642 // esp32
+  name "moduleDetection"
+  xyzwh 7 193 2000 172 32
+end
+hubcanvas 138114 xyz 177 153 2000
+line 136450 ----
+  from ref 133378 z 2012 label "MQTT" max_width 255 xyz 438 139 2012 stereotype "<<WIFI>>" xyz 427 154 3000 to ref 135810
+line 136578 ----
+  from ref 135810 z 2006 label "MQTT" max_width 255 xyz 783.5 88 2006 stereotype "<<Ethernet>>" xyz 761.5 117 3000 to ref 128002
+line 136706 ----
+  from ref 135810 z 2006 label "MQTT" max_width 255 xyz 791 180 2006 stereotype "<<WIFI>>" xyz 779 207 3000 to ref 128130
+line 138242 ----
+  from ref 133378 z 2012 label "LoRa" max_width 255 xyz 214 139 3000 to ref 138114
+line 138498 ----
+  from ref 137730 z 2001 to ref 138114
+line 138626 ----
+  from ref 137602 z 2001 to ref 138114
+end
