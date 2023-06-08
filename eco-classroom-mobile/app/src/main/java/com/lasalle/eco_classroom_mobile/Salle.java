@@ -8,6 +8,8 @@ package com.lasalle.eco_classroom_mobile;
 
 import android.util.Log;
 
+import java.util.Vector;
+
 /**
  * @class Salle
  * @brief Le concept de Salle
@@ -33,6 +35,19 @@ public class Salle
     public static final int    CO2_PAR_DEFAUT         = 0;   //!< le CO2 par défaut en ppm
     public static final int    QUALITE_AIR_PAR_DEFAUT = 0;   //!< la qualité de l'air par défaut
     public static final int CONFORT_THERMIQUE_PAR_DEFAUT = -4; //!< le confort thermique par défaut
+
+    /**
+     * @todo Créer un enum Grandeur
+     */
+    public enum Grandeur
+    {
+        PRESENCE,
+        FENETRE,
+        LUMIERE,
+        TEMPERATURE,
+        HUMIDITE,
+        CO2;
+    }
 
     /**
      * Attributs
@@ -276,7 +291,7 @@ public class Salle
      */
     public void setCo2(int co2)
     {
-        if(co2 <= CONCENTRATION_CO2_MIN)
+        if(co2 >= CONCENTRATION_CO2_MIN)
             this.co2 = co2;
     }
 
@@ -371,5 +386,14 @@ public class Salle
         if(getCo2() >= getSeuils().getCo2Max() && (getCo2() != CO2_PAR_DEFAUT))
             return true;
         return false;
+    }
+
+    /**
+     *
+     */
+    public static Grandeur retournerGrandeur(String grandeur)
+    {
+        Log.d(TAG, "retournerGrandeur()");
+        return Grandeur.valueOf(grandeur.toUpperCase());
     }
 }
