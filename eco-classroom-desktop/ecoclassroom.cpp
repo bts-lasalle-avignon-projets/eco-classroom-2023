@@ -134,6 +134,10 @@ void EcoClassroom::instancierWidgets()
     layoutF2Informations->addWidget(indiceQualiteAirSalle, 3, 1);
     layoutF2Informations->addWidget(labelIndiceICONE, 4, 0);
     layoutF2Informations->addWidget(indiceICONE, 4, 1);
+    layoutF2Informations->addWidget(labelTemperatureSalle, 5, 0);
+    layoutF2Informations->addWidget(temperatureSalle, 5, 1);
+    layoutF2Informations->addWidget(labelHumiditeSalle, 6, 0);
+    layoutF2Informations->addWidget(humiditeSalle, 6, 1);
     layoutF2Boutons->addStretch();
     layoutF2Boutons->addWidget(boutonRetourAccueil);
     layoutF2Principal->addLayout(layoutF2Informations);
@@ -204,6 +208,8 @@ void EcoClassroom::initialiserFenetreInformations()
     labelDescriptionSalle      = new QLabel(this);
     labelIndiceQualiteAirSalle = new QLabel(this);
     labelIndiceICONE           = new QLabel(this);
+    labelTemperatureSalle      = new QLabel(this);
+    labelHumiditeSalle         = new QLabel(this);
 
     // affichage du widget
     labelNomSalle->setText("Nom :");
@@ -220,6 +226,12 @@ void EcoClassroom::initialiserFenetreInformations()
 
     labelIndiceICONE->setText("Indice ICONE :");
     indiceICONE = new QLabel(this);
+
+    labelTemperatureSalle->setText("Température :");
+    temperatureSalle = new QLabel(this);
+
+    labelHumiditeSalle->setText("Humidité :");
+    humiditeSalle = new QLabel(this);
 
     // bouton pour quitter la fênetre
     boutonRetourAccueil = new QPushButton("Ok", this);
@@ -534,8 +546,10 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
                              " m<sup>2</sup>");
     descriptionSalle->setText(salle.getDescription());
     indiceQualiteAirSalle->setText(salle.getQualiteAir() + " (" +
-                                   QString::number(salle.getCO2()) + "ppm) ");
+                                   QString::number(salle.getCO2()) + " ppm) ");
     indiceICONE->setText(salle.afficherNiveauICONE());
+    temperatureSalle->setText(QString::number(salle.getTemperature()) + " °C");
+    humiditeSalle->setText(QString::number(salle.getHumidite()) + " %");
     afficherFenetreInformations();
 }
 
