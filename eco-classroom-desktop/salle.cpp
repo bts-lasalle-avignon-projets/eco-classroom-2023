@@ -120,40 +120,54 @@ unsigned int Salle::getCO2() const
 }
 
 /**
- * @brief Méthode qui évalue la qualité d'air grâce a l'attribut Co2 de l'objet
- * Salle
+ * @fn Salle::getIndiceQualiteAir() const
+ * @brief Méthode qui récupère l'indice de la Qualité de l'Air grâce a
+ * l'attribut Co2 de l'objet Salle
+ * @return int
  */
-QString Salle::getQualiteAir() const
+int Salle::getIndiceQualiteAir() const
 {
     unsigned int valeurCO2 = getCO2();
     if(valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_EXCELLENTE)
-    {
-        return EXCELLENTE;
-    }
+        return IndiceQualiteAir::Excellente;
     else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_BIEN &&
             valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_BIEN)
-    {
-        return TRES_BIEN;
-    }
+        return IndiceQualiteAir::Tres_Bien;
     else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MODERE &&
             valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MODERE)
-    {
-        return MODERE;
-    }
+        return IndiceQualiteAir::Modere;
     else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MAUVAIS &&
             valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MAUVAIS)
-    {
-        return MAUVAIS;
-    }
+        return IndiceQualiteAir::Mauvais;
     else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS &&
             valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS)
-    {
-        return TRES_MAUVAIS;
-    }
+        return IndiceQualiteAir::Tres_Mauvais;
     else
-        return SEVERE;
+        return IndiceQualiteAir::Severe;
 }
 
+/**
+ *@fn Salle::afficherNiveauQualiteAir(int indiceQualiteAir) const
+ * @brief Méthode qui affiche le niveau de la Qualité de l'Air en fonction de
+ *l'indice Qualité de L'Air
+ * @param indiceQualiteAir
+ * @return QString
+ */
+QString Salle::afficherNiveauQualiteAir(int indiceQualiteAir) const
+{
+    if(indiceQualiteAir == IndiceQualiteAir::Excellente)
+        return "Excellente";
+    else if(indiceQualiteAir == IndiceQualiteAir::Tres_Bien)
+        return "Très Bien";
+    else if(indiceQualiteAir == IndiceQualiteAir::Modere)
+        return "Modéré";
+    else if(indiceQualiteAir == IndiceQualiteAir::Mauvais)
+        return "Mauvais";
+    else if(indiceQualiteAir == IndiceQualiteAir::Tres_Mauvais)
+        return "Très Mauvais";
+    else
+        return "Sévère";
+}
 /**
  * @brief Setter qui attribut une valeur a l'attribut Co2 de l'objet Salle
  * @param co2

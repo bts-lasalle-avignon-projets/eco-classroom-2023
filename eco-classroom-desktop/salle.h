@@ -29,13 +29,6 @@
 #define SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS 5000
 #define SEUIL_BAS_QUALITE_AIR_SEVERE        5001
 
-#define EXCELLENTE   "Excellente"
-#define TRES_BIEN    "Très Bien"
-#define MODERE       "Modéré"
-#define MAUVAIS      "Mauvais"
-#define TRES_MAUVAIS "Très Mauvais"
-#define SEVERE       "Sévère"
-
 #define CONFINEMENT_NUL        0
 #define CONFINEMENT_FAIBLE     1
 #define CONFINEMENT_MOYEN      2
@@ -80,7 +73,7 @@ class Salle
      */
     enum IndiceQualiteAir
     {
-        Excellente,
+        Excellente = 1,
         Tres_Bien,
         Modere,
         Mauvais,
@@ -110,7 +103,8 @@ class Salle
     unsigned int getTemperature() const;
     unsigned int getHumidite() const;
     unsigned int getCO2() const;
-    QString      getQualiteAir() const;
+    int          getIndiceQualiteAir() const;
+    QString      afficherNiveauQualiteAir(int indiceQualiteAir) const;
     void         setCO2(unsigned int co2);
     int          getIndiceICONE();
     QString      afficherNiveauICONE() const;
