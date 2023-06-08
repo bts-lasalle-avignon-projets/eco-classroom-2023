@@ -76,7 +76,7 @@ class Salle
         if(humidite >= TAUX_HUMIDITE_MIN && humidite <= TAUX_HUMIDITE_MAX)
             this.humidite = humidite;
 !!!149802.java!!!	setCo2(in co2 : int) : void
-        if(co2 <= CONCENTRATION_CO2_MIN)
+        if(co2 >= CONCENTRATION_CO2_MIN)
             this.co2 = co2;
 !!!138026.java!!!	setQualiteAir(in qualiteAir : int) : void
         if(qualiteAir >= INDICE_QUALITE_AIR_MIN && qualiteAir <= INDICE_QUALITE_AIR_MAX)
@@ -108,3 +108,6 @@ class Salle
         if(getCo2() >= getSeuils().getCo2Max() && (getCo2() != CO2_PAR_DEFAUT))
             return true;
         return false;
+!!!136194.java!!!	retournerGrandeur(in grandeur : String) : Salle::Grandeur
+        Log.d(TAG, "retournerGrandeur()");
+        return Grandeur.valueOf(grandeur.toUpperCase());
