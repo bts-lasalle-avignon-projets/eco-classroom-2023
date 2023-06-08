@@ -1,7 +1,7 @@
 format 224
 "eco-classroom-desktop" // eco-classroom-desktop
-  revision 7
-  modified_by 23 "tvaira"
+  revision 8
+  modified_by 2 "btssn2"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -3038,36 +3038,9 @@ ${body}}
     //deployment diagram settings
     deploymentdiagramsettings
      end
-    artifact 134570 "basededonnees"
-      stereotype "source"
-      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
-#define ${NAMESPACE}_${NAME}_H
-
-${comment}
-${includes}
-${declarations}
-${namespace_start}
-${definition}
-${namespace_end}
-#endif
-"
-      cpp_src "${comment}
-${includes}
-${namespace_start}
-${members}
-${namespace_end}"
-      idl_src "#ifndef ${MODULE}_${NAME}_H
-#define ${MODULE}_${NAME}_H
-
-${comment}
-${includes}
-${module_start}
-${definition}
-${module_end}
-#endif
-"
-      associated_elems
-	class_ref 134570 // BaseDeDonnees
+    artifact 134570 "mysqld"
+      stereotype "serveur bdd"
+      associated_artifacts
       end
     end
 
@@ -3094,49 +3067,15 @@ ${namespace_end}"
       end
     end
 
-    artifact 134826 "ecoclassroom"
-      stereotype "source"
-      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
-#define ${NAMESPACE}_${NAME}_H
-
-${comment}
-${includes}
-${declarations}
-${namespace_start}
-${definition}
-${namespace_end}
-#endif
-"
-      cpp_src "${comment}
-${includes}
-${namespace_start}
-${members}
-${namespace_end}"
-      associated_elems
-	class_ref 134954 // EcoClassroom
+    artifact 134826 "eco-classroom-android"
+      stereotype "executable"
+      associated_artifacts
       end
     end
 
-    artifact 135082 "mesures"
-      stereotype "source"
-      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
-#define ${NAMESPACE}_${NAME}_H
-
-${comment}
-${includes}
-${declarations}
-${namespace_start}
-${definition}
-${namespace_end}
-#endif
-"
-      cpp_src "${comment}
-${includes}
-${namespace_start}
-${members}
-${namespace_end}"
-      associated_elems
-	class_ref 135594 // Mesures
+    artifact 135082 "Mosquitto"
+      stereotype "broker MQTT"
+      associated_artifacts
       end
     end
 
@@ -3163,23 +3102,9 @@ ${namespace_end}"
       end
     end
 
-    artifact 135338 "main"
-      stereotype "source"
-      cpp_src "//
-//@fn main
-//@brief Programme principal
-//@details Crée et affiche la fenêtre principale de l'application
-//
-
-int main(int argc, char* argv[])
-{
-    QApplication a(argc, argv);
-    EcoClassroom ecoClassroom;
-    ecoClassroom.show();
-    return a.exec();
-}
-"
-      associated_elems
+    artifact 135338 "eco-classroom-desktop"
+      stereotype "executable"
+      associated_artifacts
       end
     end
   end

@@ -4,7 +4,9 @@
  */
 #ifndef MESURES_H
 #define MESURES_H
+
 #include <QVector>
+#include <QDateTime>
 
 #define CONFINEMENT_NUL        0
 #define CONFINEMENT_FAIBLE     1
@@ -15,6 +17,13 @@
 
 #define SEUIL_BAS_CO2_DEFINI  1000
 #define SEUIL_HAUT_CO2_DEFINI 1700
+
+struct MesureCO2
+{
+    unsigned int co2;
+    QDateTime    horodatage;
+};
+
 /**
  * @class Mesures
  * @brief Classe permettant de gérer les mesures d'une salle
@@ -25,6 +34,7 @@ class Mesures
     double                temperature; //!< Temperature dans la salle
     unsigned int          humidite;    //!< Humidite dans la salle
     QVector<unsigned int> co2;         //!< Taux de CO2 dans la salle
+    QVector<MesureCO2>    mesuresCO2;  //!< Taux de CO2 dans la salle
 
   public:
     Mesures();
