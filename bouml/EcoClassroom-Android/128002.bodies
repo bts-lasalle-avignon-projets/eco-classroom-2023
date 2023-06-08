@@ -1,0 +1,195 @@
+class ClientMQTT
+!!!134658.java!!!	ClientMQTT(inout context : Context, inout handler : Handler)
+        Log.d(TAG, "[MqttAndroidClient] ClientMQTT() serverUri -> " + serverUri);
+        this.context = context;
+        this.handler = handler;
+
+        creer();
+        // connexion automatique ?
+        // connecter();
+!!!134786.java!!!	creer() : void
+        Log.d(TAG, "[MqttAndroidClient] creer() serverUri -> " + serverUri);
+        mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
+        mqttAndroidClient.setCallback(new MqttCallbackExtended() {
+            @Override
+            public void connectComplete(boolean b, String s)
+            {
+                Log.d(TAG, "[MqttAndroidClient] connectComplete() -> " + s + " (" + b + ")");
+            }
+
+            @Override
+            public void connectionLost(Throwable throwable)
+            {
+                Log.d(TAG, "[MqttAndroidClient] connectionLost() -> " + throwable.toString());
+                Message message = new Message();
+                message.what    = BROKER_DECONNECTE;
+                if(handler != null)
+                    handler.sendMessage(message);
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception
+            {
+                Log.d(TAG,
+                      "[MqttAndroidClient] messageArrived() " + topic + " -> " +
+                        mqttMessage.toString());
+                Message message = new Message();
+                message.what    = BROKER_MESSAGE;
+                Bundle b        = new Bundle();
+                b.putString("topic", topic);
+                b.putString("message", mqttMessage.toString());
+                message.obj = b;
+                if(handler != null)
+                    handler.sendMessage(message);
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken)
+            {
+                Log.d(TAG, "[MqttAndroidClient] deliveryComplete()");
+            }
+        });
+!!!134914.java!!!	connecter() : void
+        if(estConnecte())
+            deconnecter();
+        Log.d(TAG, "[MqttAndroidClient] connecter() serverUri -> " + serverUri);
+        MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
+        mqttConnectOptions.setAutomaticReconnect(true);
+        mqttConnectOptions.setCleanSession(false);
+
+        try
+        {
+            mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken)
+                {
+                    Log.d(TAG, "[MqttAndroidClient] connecter() onSuccess");
+                    DisconnectedBufferOptions disconnectedBufferOptions =
+                      new DisconnectedBufferOptions();
+                    disconnectedBufferOptions.setBufferEnabled(true);
+                    disconnectedBufferOptions.setBufferSize(100);
+                    disconnectedBufferOptions.setPersistBuffer(false);
+                    disconnectedBufferOptions.setDeleteOldestMessages(false);
+                    mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
+                    Message message = new Message();
+                    message.what    = BROKER_CONNECTE;
+                    if(handler != null)
+                        handler.sendMessage(message);
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception)
+                {
+                    Log.d(TAG,
+                          "[MqttAndroidClient] connecter() onFailure -> " + exception.toString());
+                    Message message = new Message();
+                    message.what    = BROKER_ERREUR;
+                    if(handler != null)
+                        handler.sendMessage(message);
+                }
+            });
+        }
+        catch(MqttException ex)
+        {
+            Log.e(TAG, "[MqttAndroidClient] connecter() exception");
+            ex.printStackTrace();
+        }
+!!!135042.java!!!	deconnecter() : void
+        if(!estConnecte())
+            return;
+        Log.d(TAG, "[MqttAndroidClient] deconnecter()");
+        Thread deconnexion = new Thread(new Runnable() {
+            public void run()
+            {
+                try
+                {
+                    mqttAndroidClient.disconnect();
+                    IMqttToken disconToken = mqttAndroidClient.disconnect();
+                    disconToken.setActionCallback(new IMqttActionListener() {
+                        @Override
+                        public void onSuccess(IMqttToken asyncActionToken)
+                        {
+                            Log.d(TAG, "[MqttAndroidClient] deconnecter() onSuccess");
+                            Message message = new Message();
+                            message.what    = BROKER_DECONNECTE;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+
+                        @Override
+                        public void onFailure(IMqttToken asyncActionToken, Throwable exception)
+                        {
+                            Log.d(TAG,
+                                  "[MqttAndroidClient] deconnecter() onFailure -> " +
+                                    exception.toString());
+                            Message message = new Message();
+                            message.what    = BROKER_ERREUR;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                    });
+                }
+                catch(MqttException e)
+                {
+                    e.printStackTrace();
+                    Log.e(TAG, "MqttAndroidClient : deconnecter -> exception");
+                }
+            }
+        });
+        // Démarrage
+        deconnexion.start();
+!!!135170.java!!!	estConnecte() : boolean
+        Log.d(TAG, "[MqttAndroidClient] estConnecte() " + mqttAndroidClient.isConnected());
+        return mqttAndroidClient.isConnected();
+!!!135298.java!!!	souscrire(in topic : String) : void
+        if(mqttAndroidClient == null || !mqttAndroidClient.isConnected())
+            return;
+        if(topic.isEmpty())
+            topic = TOPIC_ECOCLASSROOM;
+        Log.d(TAG, "[MqttAndroidClient] souscrire() topic -> " + topic);
+        try
+        {
+            mqttAndroidClient.subscribe(topic, 0, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken)
+                {
+                    Log.d(TAG, "[MqttAndroidClient] souscrire() onSuccess");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception)
+                {
+                    Log.d(TAG,
+                          "[MqttAndroidClient] souscrire() onFailure -> " + exception.toString());
+                    Message message = new Message();
+                    message.what    = BROKER_ERREUR;
+                    if(handler != null)
+                        handler.sendMessage(message);
+                }
+            });
+        }
+        catch(MqttException ex)
+        {
+            Log.d(TAG, "[MqttAndroidClient] souscrire() -> exception");
+            ex.printStackTrace();
+        }
+!!!135426.java!!!	desabonner(in topic : String) : boolean
+        if(mqttAndroidClient == null || !mqttAndroidClient.isConnected())
+        {
+            return false;
+        }
+        if(topic.isEmpty())
+            topic = TOPIC_ECOCLASSROOM;
+        Log.d(TAG, "[MqttAndroidClient] desabonner() topic -> " + topic);
+        try
+        {
+            final boolean[] retour = { false };
+            mqttAndroidClient.unsubscribe(topic, null, null);
+            return retour[0];
+        }
+        catch(MqttException e)
+        {
+            Log.d(TAG, "[MqttAndroidClient] desabonner() exception");
+            e.printStackTrace();
+            return false;
+        }

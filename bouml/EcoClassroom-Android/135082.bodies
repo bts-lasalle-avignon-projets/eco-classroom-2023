@@ -8,6 +8,7 @@ class EcoClassroom
         initialiserHandler();
         initialiserVueSalles();
         initialiserBaseDeDonnees();
+        initialiserMQTT();
 !!!135210.java!!!	onStart() : void
         super.onStart();
         Log.d(TAG, "onStart()");
@@ -26,13 +27,18 @@ class EcoClassroom
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
 !!!171946.java!!!	initialiserActualisationSalles() : void
+        /**
+         * @todo Modifier pour mettre à jour que les indices
+         */
         actualisationSalles = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
         actualisationSalles.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
             {
-                chargerSalles();
+                actualiserSalles();
                 actualisationSalles.setRefreshing(false);
+                for(int i = 0; i < salles.size(); i++)
+                    recevoirDonneesSalle(salles.elementAt(i));
             }
         });
 !!!135850.java!!!	initialiserVueSalles() : void
@@ -45,6 +51,8 @@ class EcoClassroom
         vueSalles.setLayoutManager(layoutVueSalles);
 
         initialiserListeDeroulante();
+!!!135554.java!!!	recevoirDonneesSalle(inout salle : Salle) : void
+        String donneesSalle;
 !!!164266.java!!!	setSalles(inout salles : Vector<Salle>) : void
         this.salles.clear();
         this.salles.addAll(salles);
@@ -71,6 +79,8 @@ class EcoClassroom
 !!!136234.java!!!	chargerSalles() : void
         Log.d(TAG, "chargerSalles()");
         baseDeDonnees.chargerSalles();
+!!!135682.java!!!	actualiserSalles() : void
+        baseDeDonnees.actualiserSalles();
 !!!164522.java!!!	filtrerSalles(in choix : int) : void
         if(salles != null)
             Log.d(TAG,
@@ -115,6 +125,12 @@ class EcoClassroom
               "filtrerSalles() choix : " + choix +
                 " Nb salles filtrées : " + sallesFiltrees.size());
         afficherSalles(sallesFiltrees);
+!!!135810.java!!!	initialiserMQTT() : void
+        clientMQTT = new ClientMQTT(getApplicationContext(), handler);
+        if(clientMQTT != null)
+        {
+            clientMQTT.connecter();
+        }
 !!!148394.java!!!	initialiserBaseDeDonnees() : void
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
 !!!148522.java!!!	initialiserHandler() : void
@@ -123,7 +139,7 @@ class EcoClassroom
             public void handleMessage(@NonNull Message message)
             {
                 Log.d(TAG, "[Handler] id message = " + message.what);
-                Log.d(TAG, "[Handler] message = " + message.obj.toString());
+                // Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 switch(message.what)
                 {
@@ -151,6 +167,36 @@ class EcoClassroom
                         afficherSalles((Vector<Salle>)message.obj);
                         filtrerSalles(choixFiltrage);
                         alerterDepassementSeuil();
+                    case ClientMQTT.BROKER_CONNECTE:
+                        Log.d(TAG, "[Handler] BROKER_CONNECTE");
+                        clientMQTT.souscrire(ClientMQTT.TOPIC_ECOCLASSROOM);
+                        /**
+                         * @todo Signaler la connexion au broker dans l'IHM
+                         */
+                        break;
+                    case ClientMQTT.BROKER_DECONNECTE:
+                        Log.d(TAG, "[Handler] BROKER_DECONNECTE");
+                        /**
+                         * @todo Signaler la déconnexion au broker dans l'IHM
+                         */
+                        break;
+                    case ClientMQTT.BROKER_MESSAGE:
+                        Log.d(TAG, "[Handler] BROKER_MESSAGE");
+                        Bundle bundle      = (Bundle)message.obj;
+                        String topicMQTT   = bundle.getString("topic");
+                        String messageMQTT = bundle.getString("message");
+                        Log.d(TAG, "[Handler] " + topicMQTT + " -> " + messageMQTT);
+                        /**
+                         * @todo Gérer les messages MQTT reçus
+                         */
+                        traiterMessageMQTT(topicMQTT, messageMQTT);
+                        break;
+                    case ClientMQTT.BROKER_ERREUR:
+                        Log.d(TAG, "[Handler] BROKER_ERREUR");
+                        /**
+                         * @todo Signaler l'erreur dû au broker dans l'IHM
+                         */
+                        break;
                 }
             }
         };
@@ -175,10 +221,90 @@ class EcoClassroom
             {
             }
         });
+!!!135938.java!!!	traiterMessageMQTT(in topicMQTT : String, in messageMQTT : String) : void
+        String nomSalle   = null;
+        String typeModule = null;
+        String grandeur   = null;
+
+        Pattern topicPattern = Pattern.compile("(.+?)/(.+?)/(.+?)/(.+)");
+        Matcher topicMatcher = topicPattern.matcher(topicMQTT);
+        if(topicMatcher.find())
+        {
+            nomSalle   = topicMatcher.group(2);
+            typeModule = topicMatcher.group(3);
+            grandeur   = topicMatcher.group(4);
+            Log.d(TAG,
+                  "nomSalle : " + nomSalle + "; typeModule : " + typeModule +
+                    "; grandeur : " + grandeur);
+        }
+
+        Salle.Grandeur g = Salle.retournerGrandeur(grandeur);
+        for(int i = 0; i < salles.size(); ++i)
+        {
+            if(nomSalle.compareTo(salles.elementAt(i).getNom()) == 0)
+            {
+                switch(g)
+                {
+                    case TEMPERATURE:
+                        salles.elementAt(i).setTemperature(Double.valueOf(messageMQTT));
+                        this.adaptateurSalle.notifyDataSetChanged();
+                        alerterDepassementSeuil(salles.elementAt(i), g);
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; temperature : " + salles.elementAt(i).getTemperature());
+                        break;
+                    case HUMIDITE:
+                        salles.elementAt(i).setHumidite(Integer.valueOf(messageMQTT));
+                        this.adaptateurSalle.notifyDataSetChanged();
+                        alerterDepassementSeuil(salles.elementAt(i), g);
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; humidité : " + salles.elementAt(i).getHumidite());
+                        break;
+                    case CO2:
+                        salles.elementAt(i).setCo2(Integer.valueOf(messageMQTT));
+                        this.adaptateurSalle.notifyDataSetChanged();
+                        alerterDepassementSeuil(salles.elementAt(i), g);
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; CO2 : " + salles.elementAt(i).getCo2());
+                        break;
+                    case PRESENCE:
+                        if(messageMQTT.compareTo("0") == 0)
+                            salles.elementAt(i).setEstOccupe(false);
+                        else
+                            salles.elementAt(i).setEstOccupe(true);
+                        this.adaptateurSalle.notifyDataSetChanged();
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; est occupé : " + salles.elementAt(i).getEstOccupe());
+                        break;
+                    case FENETRE:
+                        if(messageMQTT.compareTo("0") == 0)
+                            salles.elementAt(i).setEtatFenetre(false);
+                        else
+                            salles.elementAt(i).setEtatFenetre(true);
+                        this.adaptateurSalle.notifyDataSetChanged();
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; état fenêtre : " + salles.elementAt(i).getEtatFenetre());
+                        break;
+                    case LUMIERE:
+                        if(messageMQTT.compareTo("0") == 0)
+                            salles.elementAt(i).setEtatLumiere(false);
+                        else
+                            salles.elementAt(i).setEtatLumiere(true);
+                        this.adaptateurSalle.notifyDataSetChanged();
+                        Log.d(TAG,
+                              "salle : " + salles.elementAt(i).getNom() +
+                                "; état lumière : " + salles.elementAt(i).getEtatLumiere());
+                        break;
+                }
+            }
+        }
 !!!148650.java!!!	alerterDepassementSeuil() : void
         for(int i = 0; i < salles.size(); i++)
         {
-            Log.d(TAG, "alerterDepassementSeuil() salle : " + salles.get(i).getNom());
             Salle salle = salles.get(i);
             if(salle.estSeuilTemperatureDepasse())
             {
@@ -192,6 +318,21 @@ class EcoClassroom
             {
                 notifierDepassement(salle, DEPASSEMENT_CO2);
             }
+        }
+!!!136066.java!!!	alerterDepassementSeuil(inout salle : Salle, inout grandeur : Salle::Grandeur) : void
+        switch(grandeur)
+        {
+            case TEMPERATURE:
+                if(salle.estSeuilTemperatureDepasse())
+                    notifierDepassement(salle, DEPASSEMENT_TEMPERATURE);
+                break;
+            case HUMIDITE:
+                if(salle.estSeuilHumiditeDepasse())
+                    notifierDepassement(salle, DEPASSEMENT_HUMIDITE);
+                break;
+            case CO2:
+                if(salle.estSeuilCo2Depasse())
+                    notifierDepassement(salle, DEPASSEMENT_CO2);
         }
 !!!148778.java!!!	notifierDepassement(inout salle : Salle, in typeDepassement : int) : void
         Log.d(TAG,

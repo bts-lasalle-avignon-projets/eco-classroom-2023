@@ -11,15 +11,37 @@ class VueSalle
             @Override
             public void onClick(View vue)
             {
+                String message = genererDonneesAffichage();
                 new AlertDialog.Builder(itemView.getContext())
                   .setTitle(salle.getNom())
-                  .setMessage(salle.getDescription() + "\nSuperficie : " + salle.getSuperficie() +
-                              "m²\nTempérature : " + salle.getTemperature() +
-                              "°C\nHumidité : " + salle.getHumidite() +
-                              "%\nConcentration de CO₂ : " + salle.getCo2() + "ppm")
+                  .setMessage(message)
                   .show();
             }
         });
+!!!136322.java!!!	genererDonneesAffichage() : String
+        String message = salle.getDescription() + "\n";
+
+        if(salle.getSuperficie() > Salle.SUPERFICIE_PAR_DEFAUT)
+            message += "Superficie : " + salle.getSuperficie() + " m²\n";
+        else
+            message += "Superficie : non connue\n";
+
+        if(salle.getTemperature() > Salle.TEMPERATURE_PAR_DEFAUT)
+            message += "Température : " + salle.getTemperature() + " °C\n";
+        else
+            message += "Température : non connue\n";
+
+        if(salle.getHumidite() > Salle.HUMIDITE_PAR_DEFAUT)
+            message += "Humidité : " + salle.getHumidite() + " %\n";
+        else
+            message += "Humidité : non connue\n";
+
+        if(salle.getCo2() > Salle.QUALITE_AIR_PAR_DEFAUT)
+            message += "Concentration de CO₂ : " + salle.getCo2() + " ppm\n";
+        else
+            message += "Concentration de CO₂ : non connue\n";
+
+        return message;
 !!!138794.java!!!	initialiserWidgets(in vueSalle : View) : void
         this.nom              = ((TextView)vueSalle.findViewById(R.id.nom));
         this.qualiteAir       = ((TextView)vueSalle.findViewById(R.id.qualiteAir));
@@ -50,16 +72,8 @@ class VueSalle
         Log.d(TAG, "afficher(Salle salle) nom = " + salle.getNom());
         this.salle = salle;
         nom.setText(salle.getNom());
-        if(salle.getQualiteAir() >= Salle.INDICE_QUALITE_AIR_MIN &&
-           salle.getQualiteAir() <= Salle.INDICE_QUALITE_AIR_MAX)
-            qualiteAir.setText(Integer.toString(salle.getQualiteAir()));
-        else
-            qualiteAir.setText("Inconnue");
-        if(salle.getConfortThermique() >= Salle.INDICE_CONFORT_THERMIQUE_MIN &&
-           salle.getConfortThermique() <= Salle.INDICE_CONFORT_THERMIQUE_MAX)
-            confortThermique.setText(Integer.toString(salle.getConfortThermique()));
-        else
-            confortThermique.setText("Inconnu");
+        qualiteAir.setText(interpreterIndiceQualiteAir(salle.getQualiteAir()));
+        confortThermique.setText(interpreterIndiceConfort(salle.getConfortThermique()));
         if(salle.getEtatFenetre())
             etatFenetre.setImageResource(R.drawable.led_rouge);
         else
@@ -72,3 +86,39 @@ class VueSalle
             estOccupe.setImageResource(R.drawable.led_rouge);
         else
             estOccupe.setImageResource(R.drawable.led_verte);
+!!!136450.java!!!	interpreterIndiceConfort(in indice : int) : String
+        switch(indice)
+        {
+            case CONFORT_FROID:
+                return "Froid";
+            case CONFORT_FRAIS:
+                return "Frais";
+            case CONFORT_LEGEREMENT_FRAIS:
+                return "Légérement frais";
+            case CONFORT_NEUTRE:
+                return "Neutre";
+            case CONFORT_LEGEREMENT_TIEDE:
+                return "Légérement tiède";
+            case CONFORT_TIEDE:
+                return "Tiède";
+            case CONFORT_CHAUD:
+                return "Chaud";
+        }
+        return "Inconnue";
+!!!136578.java!!!	interpreterIndiceQualiteAir(in indice : int) : String
+        switch(indice)
+        {
+            case AIR_EXCELLENT:
+                return "Excellent";
+            case AIR_TRES_BIEN:
+                return "Très bien";
+            case AIR_MODERE:
+                return "Modéré";
+            case AIR_MAUVAIS:
+                return "Mauvais";
+            case AIR_TRES_MAUVAIS:
+                return "Très mauvais";
+            case AIR_SEVERE:
+                return "Sévère";
+        }
+        return "Inconnu";
