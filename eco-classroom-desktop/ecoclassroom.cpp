@@ -670,14 +670,14 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
         case Salle::TypeMessage::CO2:
             salles[salle]->setCO2(message.toUInt());
             break;
-        case Salle::TypeMessage::OCCUPATION:
-            salles[salle]->setOccupation(message.toInt());
+        case Salle::TypeMessage::LUMIERE:
+            salles[salle]->setLumiere(message.toInt());
             break;
         case Salle::TypeMessage::FENETRE:
             salles[salle]->setFenetre(message.toInt());
             break;
-        case Salle::TypeMessage::LUMIERE:
-            salles[salle]->setLumiere(message.toInt());
+        case Salle::TypeMessage::OCCUPATION:
+            salles[salle]->setOccupation(message.toInt());
             break;
     }
 
@@ -717,11 +717,15 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
             break;
         }
 
+        qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i << "lumiere"
+                 << salles[salle]->getLumiere() << "occupation"
+                 << salles[salle]->getOccupation() << "fenetre"
+                 << salles[salle]->getFenetre();
         // 4b. mettre à jour l'affichage "widget" de la donnée de la salle
         if(elementNom->data(0).toString() == salle && typeDonnee == "lumiere")
         {
-            qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i << "lumiere"
-                     << salles[salle]->getLumiere();
+            qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i
+                     << "lumiere";
             QLabel* nouvelElementLumiere = new QLabel(this);
             nouvelElementLumiere->setAlignment(Qt::AlignHCenter |
                                                Qt::AlignVCenter);
@@ -744,6 +748,8 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
         else if(elementNom->data(0).toString() == salle &&
                 typeDonnee == "presence")
         {
+            qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i
+                     << "presence";
             QLabel* nouvelElementOccupation = new QLabel(this);
             nouvelElementOccupation->setAlignment(Qt::AlignHCenter |
                                                   Qt::AlignVCenter);
@@ -769,6 +775,8 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
         else if(elementNom->data(0).toString() == salle &&
                 typeDonnee == "fenetre")
         {
+            qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i
+                     << "fenetre";
             QLabel* nouvelElementFenetre = new QLabel(this);
             nouvelElementFenetre->setAlignment(Qt::AlignHCenter |
                                                Qt::AlignVCenter);

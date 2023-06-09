@@ -43,7 +43,7 @@ Salle::Salle(QString nom, unsigned int superficie, QString description) :
 Salle::TypeMessage Salle::getTypeMessage(QString typeDonnee)
 {
     QVector<QString> typesMessage = { "temperature", "humidite", "co2",
-                                      "lumiere",     "presence", "fenetre" };
+                                      "lumiere",     "fenetre",  "presence" };
 
     for(int i = 0; i < typesMessage.size(); i++)
     {
