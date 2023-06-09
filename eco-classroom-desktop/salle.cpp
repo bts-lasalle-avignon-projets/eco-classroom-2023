@@ -138,60 +138,20 @@ int Salle::getIndiceQualiteAir() const
 }
 
 /**
- *@fn Salle::afficherNiveauQualiteAir(int indiceQualiteAir) const
- * @brief Méthode qui affiche le niveau de la Qualité de l'Air en fonction de
- *l'indice Qualité de L'Air
- * @param indiceQualiteAir
- * @return QString
- */
-QString Salle::afficherNiveauQualiteAir(int indiceQualiteAir) const
-{
-    if(indiceQualiteAir == IndiceQualiteAir::Excellente)
-        return "Excellente";
-    else if(indiceQualiteAir == IndiceQualiteAir::Tres_Bien)
-        return "Très Bien";
-    else if(indiceQualiteAir == IndiceQualiteAir::Modere)
-        return "Modéré";
-    else if(indiceQualiteAir == IndiceQualiteAir::Mauvais)
-        return "Mauvais";
-    else if(indiceQualiteAir == IndiceQualiteAir::Tres_Mauvais)
-        return "Très Mauvais";
-    else
-        return "Sévère";
-}
-/**
  * @fn Salle::getIndiceICONE
  * @brief méthode qui calcule l'indice ICONE(indice de confinement) et qui le
  * retourne
  * @return
  */
-int Salle::getIndiceICONE()
+int Salle::getIndiceICONE() const
 {
-    indiceICONE = mesures->calculerIndiceICONE();
     return indiceICONE;
 }
 
-/**
- * @fn Salle::afficherNiveauICONE
- * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
- * @return
- */
-QString Salle::afficherNiveauICONE() const
+void Salle::calculerIndiceICONE()
 {
-    if(indiceICONE == CONFINEMENT_NUL)
-        return "Nul";
-    if(indiceICONE == CONFINEMENT_FAIBLE)
-        return "Faible";
-    if(indiceICONE == CONFINEMENT_MOYEN)
-        return "Moyen";
-    if(indiceICONE == CONFINEMENT_ELEVE)
-        return "Élevé";
-    if(indiceICONE == CONFINEMENT_TRES_ELEVE)
-        return "Très Élevé";
-    if(indiceICONE == CONFINEMENT_EXTREME)
-        return "Extrême";
-    else
-        return QString::number(indiceICONE);
+    indiceICONE = mesures->calculerIndiceICONE();
+    qDebug() << "indiceICONE" << indiceICONE;
 }
 
 /**

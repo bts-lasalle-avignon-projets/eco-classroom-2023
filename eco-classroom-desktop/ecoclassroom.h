@@ -30,7 +30,7 @@ class BaseDeDonnees;
  * @def SIMULATION_CO2
  * @brief Pour simuler des mesures de CO2
  */
-//#define SIMULATION_CO2
+#define SIMULATION_CO2
 
 /**
  * @def AVEC_BDD
@@ -109,8 +109,8 @@ class EcoClassroom : public QMainWindow
     QLabel*      temperatureSalle;    //!< la temperature de la salle
     QLabel*      labelHumiditeSalle;  //!< le label pour l'humidité de la salle
     QLabel*      humiditeSalle;       //!< l'humidité de la salle
-    QPushButton* boutonRafraichir;           //!< Bouton de rafraichissement
-    QPushButton* boutonRetourAccueil;        //!< Bouton de retour
+    QPushButton* boutonRafraichir;    //!< Bouton de rafraichissement
+    QPushButton* boutonRetourAccueil; //!< Bouton de retour
     QLabel*      labelIndiceQualiteAirSalle; //!< Le label pour l'indice de la
                                              //!< qualité d'air
     QLabel* indiceQualiteAirSalle; //!< L'indice de la qualité de l'air
@@ -126,21 +126,23 @@ class EcoClassroom : public QMainWindow
 #ifdef SIMULATION_CO2
     void simulerMesureCO2();
 #endif
-    void creerElementsTexteCellule(const Salle& salle);
-    void creerElementsImageCellule(const Salle& salle);
-    void personnaliserElementsTexte();
-    void personnaliserElementsImage();
-    void insererElementsCellule();
-    void redimensionnerHauteurTable();
-    void afficherSalleTable(const Salle& salle);
-    void afficherInformationsSalle(const Salle& salle);
-    void effacerTableauSalles();
-    void effacerSalles();
-    void alerterDepassementSeuilCO2(const Salle& salle);
-    void notifierSignalementConfinement(const QString& titre,
-                                        const QString& message);
-    void enregistrerICONEDansBDD(Salle* salle);
-    void enregistrerQualiteAirDansBDD(Salle* salle);
+    void    creerElementsTexteCellule(const Salle& salle);
+    void    creerElementsImageCellule(const Salle& salle);
+    void    personnaliserElementsTexte();
+    void    personnaliserElementsImage();
+    void    insererElementsCellule();
+    void    redimensionnerHauteurTable();
+    void    afficherSalleTable(const Salle& salle);
+    void    afficherInformationsSalle(const Salle& salle);
+    void    effacerTableauSalles();
+    void    effacerSalles();
+    void    alerterDepassementSeuilCO2(const Salle& salle);
+    void    notifierSignalementConfinement(const QString& titre,
+                                           const QString& message);
+    void    enregistrerICONEDansBDD(Salle* salle);
+    void    enregistrerQualiteAirDansBDD(Salle* salle);
+    QString afficherNiveauICONE(int indiceIcone) const;
+    QString afficherNiveauQualiteAir(int indiceQualiteAir) const;
 
     // Pour le QTableWidget
     void coloriserFondCellule(QTableWidgetItem* cellule, const QColor& couleur);
