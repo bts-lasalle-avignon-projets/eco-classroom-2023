@@ -90,10 +90,6 @@ void Mesures::setHumidite(unsigned int humidite)
 void Mesures::setCO2(unsigned int mesureCo2)
 {
     co2.push_back(mesureCo2);
-    /**
-     * @todo Et l'horodatage ?
-     */
-    // mesuresCO2.push_back({mesureCo2, QDateTime::currentDateTime()});
 }
 
 /**
