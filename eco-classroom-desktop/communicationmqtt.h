@@ -26,8 +26,8 @@
  * @def TOPIC_RACINE
  * @brief La racine des topics pour l'abonnement
  */
-//#define TOPIC_RACINE       "salles/#"
-#define TOPIC_SONDE_SALLES "salles/+/sonde/#"
+#define TOPIC_RACINE "salles/#"
+//#define TOPIC_SONDE_SALLES "salles/+/sonde/#"
 
 /**
  * @class CommunicationMQTT

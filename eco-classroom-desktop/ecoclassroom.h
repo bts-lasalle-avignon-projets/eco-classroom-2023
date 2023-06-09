@@ -70,9 +70,9 @@ class EcoClassroom : public QMainWindow
         COLONNE_SALLE_CONFORT_THERMIQUE, //!< Le confort thermique
         COLONNE_SALLE_QUALITE_AIR,       //!< La qualité de l'air
         COLONNE_SALLE_ICONE,             //!< Le confinement
-        COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
         COLONNE_SALLE_LUMIERES,          //!< L'état des lumières
-        COLONNE_SALLE_OCCUPATION,        //!< L'état d'occupation
+        COLONNE_SALLE_PRESENCE,          //!< L'état de la présence
+        COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
         NB_COLONNES_TABLEAU
     };
 

@@ -497,7 +497,7 @@ void EcoClassroom::insererElementsCellule()
                                      COLONNE_SALLE_FENETRES,
                                      elementFenetre);
     tableWidgetSalles->setCellWidget(nb - 1,
-                                     COLONNE_SALLE_OCCUPATION,
+                                     COLONNE_SALLE_PRESENCE,
                                      elementOccupation);
 }
 
@@ -650,6 +650,7 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
                          salles[salle]->getSuperficie());
     }
 
+    // 3. mettre à jour la donnée de la salle
     Salle::TypeMessage type = Salle::getTypeMessage(typeDonnee);
     qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "type" << type
              << "message" << message;
@@ -680,11 +681,12 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
             break;
     }
 
+    // 4a. mettre à jour l'affichage "textuel" de la donnée de la salle
     for(int i = 0; i < tableWidgetSalles->rowCount(); i++)
     {
         QTableWidgetItem* elementNom =
           tableWidgetSalles->item(i, COLONNE_SALLE_NOM);
-        // est-ce notre salle ?
+        // type de donnée ?
         if(elementNom->data(0).toString() == salle && typeDonnee == "co2")
         {
             salles[salle]->calculerIndiceICONE();
@@ -704,21 +706,89 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
 
             enregistrerICONEDansBDD(salles[salle]);
             enregistrerQualiteAirDansBDD(salles[salle]);
+            break;
         }
-
-        if(elementNom->data(0).toString() == salle &&
-           typeDonnee == "temperature")
+        else if(elementNom->data(0).toString() == salle &&
+                (typeDonnee == "temperature" || typeDonnee == "humidite"))
         {
             QTableWidgetItem* elementTHI =
               tableWidgetSalles->item(i, COLONNE_SALLE_CONFORT_THERMIQUE);
             elementTHI->setData(Qt::DisplayRole, salles[salle]->getTHI());
+            break;
         }
 
-        /**
-         *@todo
-         * changement de l'affichage présence, fenêtres, lumières pour
-         *l'étudiant IR 1 module détection
-         */
+        // 4b. mettre à jour l'affichage "widget" de la donnée de la salle
+        if(elementNom->data(0).toString() == salle && typeDonnee == "lumiere")
+        {
+            qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i << "lumiere"
+                     << salles[salle]->getLumiere();
+            QLabel* nouvelElementLumiere = new QLabel(this);
+            nouvelElementLumiere->setAlignment(Qt::AlignHCenter |
+                                               Qt::AlignVCenter);
+            if(!salles[salle]->getLumiere())
+            {
+                nouvelElementLumiere->setPixmap(QPixmap(":/images/led-verte"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_LUMIERES,
+                                                 nouvelElementLumiere);
+            }
+            else
+            {
+                nouvelElementLumiere->setPixmap(QPixmap(":/images/led-rouge"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_LUMIERES,
+                                                 nouvelElementLumiere);
+            }
+            break;
+        }
+        else if(elementNom->data(0).toString() == salle &&
+                typeDonnee == "presence")
+        {
+            QLabel* nouvelElementOccupation = new QLabel(this);
+            nouvelElementOccupation->setAlignment(Qt::AlignHCenter |
+                                                  Qt::AlignVCenter);
+
+            if(!salles[salle]->getOccupation())
+            {
+                nouvelElementOccupation->setPixmap(
+                  QPixmap(":/images/led-verte"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_PRESENCE,
+                                                 nouvelElementOccupation);
+            }
+            else
+            {
+                nouvelElementOccupation->setPixmap(
+                  QPixmap(":/images/led-rouge"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_PRESENCE,
+                                                 nouvelElementOccupation);
+            }
+            break;
+        }
+        else if(elementNom->data(0).toString() == salle &&
+                typeDonnee == "fenetre")
+        {
+            QLabel* nouvelElementFenetre = new QLabel(this);
+            nouvelElementFenetre->setAlignment(Qt::AlignHCenter |
+                                               Qt::AlignVCenter);
+
+            if(!salles[salle]->getFenetre())
+            {
+                nouvelElementFenetre->setPixmap(QPixmap(":/images/led-verte"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_FENETRES,
+                                                 nouvelElementFenetre);
+            }
+            else
+            {
+                nouvelElementFenetre->setPixmap(QPixmap(":/images/led-rouge"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_FENETRES,
+                                                 nouvelElementFenetre);
+            }
+            break;
+        }
     }
 }
 
@@ -729,30 +799,41 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
 void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
 {
     qDebug() << Q_FUNC_INFO << salle.getNom() << "CO2" << salle.getCO2();
-    // Test du dépassement seuil CO2
-    if(salle.getCO2() >= SEUIL_ALERTE_CO2)
+    for(int i = 0; i < tableWidgetSalles->rowCount(); i++)
     {
-        // Fond de la cellule en rouge
-        coloriserFondCellule(elementCO2, QColor(255, 0, 0));
-        // ou :
-        /*coloriserFondCellule(tableWidgetSalles,
-                             nb - 1,
-                             COLONNE_SALLE_QUALITE_AIR,
-                             QString("#ff0000"));*/
-        notifierSignalementConfinement(TITRE_NOTIFICATION_CO2,
-                                       "Confinement de la salle " +
-                                         salle.getNom());
-    }
-    else
-    {
-        // Fond de la cellule normal
-        coloriserFondCellule(elementCO2, QColor(0, 150, 0));
+        QTableWidgetItem* elementNom =
+          tableWidgetSalles->item(i, COLONNE_SALLE_NOM);
+        if(elementNom->data(0).toString() == salle.getNom())
+        {
+            QTableWidgetItem* nouvelElementCO2 =
+              tableWidgetSalles->item(i, COLONNE_SALLE_QUALITE_AIR);
+            // Test du dépassement seuil CO2
+            if(salle.getCO2() >= SEUIL_ALERTE_CO2)
+            {
+                // Fond de la cellule en rouge
+                coloriserFondCellule(nouvelElementCO2, QColor(255, 0, 0));
+                // ou :
+                /*coloriserFondCellule(tableWidgetSalles,
+                                     nb - 1,
+                                     COLONNE_SALLE_QUALITE_AIR,
+                                     QString("#ff0000"));*/
+                notifierSignalementConfinement(TITRE_NOTIFICATION_CO2,
+                                               "Confinement de la salle " +
+                                                 salle.getNom());
+            }
+            else
+            {
+                // Fond de la cellule normal
+                coloriserFondCellule(nouvelElementCO2, QColor(0, 150, 0));
+            }
+        }
     }
 }
 
 /**
  * @fn EcoClassroom::notifierSignalementConfinement
- * @brief Signale le confinement d'une salle grâce à une notification système
+ * @brief Signale le confinement d'une salle grâce à une notification
+ * système
  */
 void EcoClassroom::notifierSignalementConfinement(const QString& titre,
                                                   const QString& message)
@@ -881,8 +962,8 @@ QString EcoClassroom::afficherNiveauICONE(int indiceIcone) const
 
 /**
  *@fn EcoClassroom::afficherNiveauQualiteAir(int indiceQualiteAir) const
- * @brief Méthode qui affiche le niveau de la Qualité de l'Air en fonction de
- *l'indice Qualité de L'Air
+ * @brief Méthode qui affiche le niveau de la Qualité de l'Air en fonction
+ *de l'indice Qualité de L'Air
  * @param indiceQualiteAir
  * @return QString
  */
