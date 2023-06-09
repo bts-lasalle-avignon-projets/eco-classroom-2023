@@ -158,7 +158,7 @@ void Salle::calculerIndiceICONE()
  * @brief Salle::getTHI
  * @return les différents niveaux après le calcul du THI
  */
-QString Salle::getTHI()
+QString Salle::getTHI() const
 {
     double thom = mesures->calculerTHI();
     if(thom < SEUIL_THOM_FROID)

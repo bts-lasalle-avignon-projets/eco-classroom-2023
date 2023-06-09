@@ -417,7 +417,7 @@ void EcoClassroom::simulerMesureCO2()
 void EcoClassroom::creerElementsTexteCellule(const Salle& salle)
 {
     elementNom = new QTableWidgetItem(salle.getNom());
-    elementTHI = new QTableWidgetItem(QString("Inconnu"));
+    elementTHI = new QTableWidgetItem(salle.getTHI());
     elementCO2 = new QTableWidgetItem(
       QString(afficherNiveauQualiteAir(salle.getIndiceQualiteAir())));
     elementICONE = new QTableWidgetItem(
