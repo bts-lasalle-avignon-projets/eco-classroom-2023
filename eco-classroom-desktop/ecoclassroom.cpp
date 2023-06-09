@@ -484,7 +484,6 @@ void EcoClassroom::insererElementsCellule()
     int nb = tableWidgetSalles->rowCount();
     ++nb;
     tableWidgetSalles->setRowCount(nb);
-
     tableWidgetSalles->setItem(nb - 1, COLONNE_SALLE_NOM, elementNom);
     tableWidgetSalles->setItem(nb - 1,
                                COLONNE_SALLE_CONFORT_THERMIQUE,
@@ -641,11 +640,14 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
         // nouvelle salle !
         // 1. instancier cette nouvelle salle et l'insérer dans salles
         salles[salle] = new Salle(salle, 0, "");
-        /**
-         * @todo Comment obtenir la superficie et la description de cette
-         * nouvelle salle ?
-         */
+        salles[salle]->getDescription();
+        salles[salle]->getSuperficie();
+        Salle salleSelectionner = *salles[salle];
+        afficherSalleTable(salleSelectionner);
         // 2. "stocker" dans la base de données (INSERT)
+        enregistrerSalle(salles[salle]->getNom(),
+                         salles[salle]->getDescription(),
+                         salles[salle]->getSuperficie());
     }
 
     Salle::TypeMessage type = Salle::getTypeMessage(typeDonnee);
@@ -676,6 +678,47 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
         case Salle::TypeMessage::LUMIERE:
             salles[salle]->setLumiere(message.toInt());
             break;
+    }
+
+    for(int i = 0; i < tableWidgetSalles->rowCount(); i++)
+    {
+        QTableWidgetItem* elementNom =
+          tableWidgetSalles->item(i, COLONNE_SALLE_NOM);
+        // est-ce notre salle ?
+        if(elementNom->data(0).toString() == salle && typeDonnee == "co2")
+        {
+            salles[salle]->calculerIndiceICONE();
+            QTableWidgetItem* elementIcone =
+              tableWidgetSalles->item(i, COLONNE_SALLE_ICONE);
+            elementIcone->setData(
+              Qt::DisplayRole,
+              afficherNiveauICONE(salles[salle]->getIndiceICONE()));
+
+            QTableWidgetItem* elementQualiteAir =
+              tableWidgetSalles->item(i, COLONNE_SALLE_QUALITE_AIR);
+            elementQualiteAir->setData(
+              Qt::DisplayRole,
+              afficherNiveauQualiteAir(salles[salle]->getIndiceQualiteAir()));
+            Salle salleSelectionner = *salles[salle];
+            alerterDepassementSeuilCO2(salleSelectionner);
+
+            enregistrerICONEDansBDD(salles[salle]);
+            enregistrerQualiteAirDansBDD(salles[salle]);
+        }
+
+        if(elementNom->data(0).toString() == salle &&
+           typeDonnee == "temperature")
+        {
+            QTableWidgetItem* elementTHI =
+              tableWidgetSalles->item(i, COLONNE_SALLE_CONFORT_THERMIQUE);
+            elementTHI->setData(Qt::DisplayRole, salles[salle]->getTHI());
+        }
+
+        /**
+         *@todo
+         * changement de l'affichage présence, fenêtres, lumières pour
+         *l'étudiant IR 1 module détection
+         */
     }
 }
 
@@ -798,8 +841,20 @@ void EcoClassroom::enregistrerQualiteAirDansBDD(Salle* salle)
       "UPDATE Salle SET idIndiceQualiteAir = '" +
       QString::number(salles[salle->getNom()]->getIndiceQualiteAir()) +
       "' WHERE nom = " + "'" + salle->getNom() + "'" + ";";
-    qDebug() << Q_FUNC_INFO << "requete" << requeteQualiteAir;
+    qDebug() << Q_FUNC_INFO << "requeteQualiteAir" << requeteQualiteAir;
     baseDeDonnees->executer(requeteQualiteAir);
+}
+
+void EcoClassroom::enregistrerSalle(QString      nomDeLaSalle,
+                                    QString      descriptionDeLaSalle,
+                                    unsigned int superficieDeLaSalle)
+{
+    QString requeteSalle =
+      "INSERT INTO Salle (nom, description, superficie) VALUES (" +
+      nomDeLaSalle + "," + descriptionDeLaSalle + "," + superficieDeLaSalle +
+      ")";
+    qDebug() << Q_FUNC_INFO << "requeteSalle" << requeteSalle;
+    // baseDeDonnees->executer(requeteSalle);
 }
 /**
  * @fn EcoClassroom::afficherNiveauICONE

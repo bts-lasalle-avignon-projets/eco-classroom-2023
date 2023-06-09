@@ -30,7 +30,7 @@ class BaseDeDonnees;
  * @def SIMULATION_CO2
  * @brief Pour simuler des mesures de CO2
  */
-#define SIMULATION_CO2
+//#define SIMULATION_CO2
 
 /**
  * @def AVEC_BDD
@@ -141,6 +141,9 @@ class EcoClassroom : public QMainWindow
                                            const QString& message);
     void    enregistrerICONEDansBDD(Salle* salle);
     void    enregistrerQualiteAirDansBDD(Salle* salle);
+    void    enregistrerSalle(QString      nomDeLaSalle,
+                             QString      descriptionDeLaSalle,
+                             unsigned int superficieDeLaSalle);
     QString afficherNiveauICONE(int indiceIcone) const;
     QString afficherNiveauQualiteAir(int indiceQualiteAir) const;
 

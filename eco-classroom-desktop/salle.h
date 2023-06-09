@@ -134,7 +134,7 @@ class Salle
     unsigned int              getTemperature() const;
     unsigned int              getHumidite() const;
     unsigned int              getCO2() const;
-    QString                   getTHI();
+    QString                   getTHI() const;
     bool                      getLumiere() const;
     bool                      getFenetre() const;
     bool                      getOccupation() const;
