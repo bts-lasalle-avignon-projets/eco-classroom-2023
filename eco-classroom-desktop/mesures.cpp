@@ -54,7 +54,6 @@ unsigned int Mesures::getCO2() const
 {
     if(co2.size() > 0)
     {
-        qDebug() << Q_FUNC_INFO << "co2" << co2.back();
         // la dernière mesure
         return co2.back();
     }

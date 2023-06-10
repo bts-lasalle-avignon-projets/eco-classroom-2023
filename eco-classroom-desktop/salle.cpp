@@ -151,7 +151,7 @@ int Salle::getIndiceICONE() const
 void Salle::calculerIndiceICONE()
 {
     indiceICONE = mesures->calculerIndiceICONE();
-    qDebug() << "indiceICONE" << indiceICONE;
+    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
 }
 
 /**

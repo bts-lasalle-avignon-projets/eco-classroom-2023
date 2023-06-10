@@ -544,9 +544,15 @@ void EcoClassroom::afficherSalleTable(const Salle& salle)
  * @fn EcoClassroom::afficherInformationsSalle(const Salle& salle)
  * @brief Affiche les informations d'une salle
  */
-void EcoClassroom::afficherInformationsSalle(const Salle& salle)
+void EcoClassroom::afficherInformationsSalle(const Salle& salle, bool affichage)
 {
-    qDebug() << "nom " << salle.getNom() << "superficie "
+    if(!affichage)
+    {
+        qDebug() << Q_FUNC_INFO << nomSalle->text() << " vs " << salle.getNom();
+        if(nomSalle->text() != salle.getNom())
+            return;
+    }
+    qDebug() << Q_FUNC_INFO << "nom " << salle.getNom() << "superficie "
              << salle.getSuperficie() << "description "
              << salle.getDescription() << "qualite air "
              << salle.getIndiceQualiteAir() << "temperature "
@@ -561,7 +567,8 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
     indiceICONE->setText(afficherNiveauICONE(salle.getIndiceICONE()));
     temperatureSalle->setText(QString::number(salle.getTemperature()) + " °C");
     humiditeSalle->setText(QString::number(salle.getHumidite()) + " %");
-    afficherFenetreInformations();
+    if(affichage)
+        afficherFenetreInformations();
 }
 
 /**
@@ -652,16 +659,14 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
 
     // 3. mettre à jour la donnée de la salle
     Salle::TypeMessage type = Salle::getTypeMessage(typeDonnee);
-    qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "type" << type
-             << "message" << message;
+    qDebug() << Q_FUNC_INFO << "salle" << salle << "typeDonnee" << typeDonnee
+             << "type" << type << "message" << message;
     switch(type)
     {
         case Salle::TypeMessage::INCONNU:
             qDebug() << "donnée inconnue";
             break;
         case Salle::TypeMessage::TEMPERATURE:
-            qDebug() << Q_FUNC_INFO << "type" << type << "message" << message
-                     << "salle" << salle;
             salles[salle]->setTemperature(message.toDouble());
             break;
         case Salle::TypeMessage::HUMIDITE:
@@ -678,6 +683,16 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
             break;
         case Salle::TypeMessage::OCCUPATION:
             salles[salle]->setOccupation(message.toInt());
+            break;
+    }
+
+    // 5. Mettre à jour l'affichage détaillé d'une salle
+    switch(type)
+    {
+        case Salle::TypeMessage::TEMPERATURE:
+        case Salle::TypeMessage::HUMIDITE:
+        case Salle::TypeMessage::CO2:
+            afficherInformationsSalle(*salles[salle], false);
             break;
     }
 
@@ -717,15 +732,9 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
             break;
         }
 
-        qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i << "lumiere"
-                 << salles[salle]->getLumiere() << "occupation"
-                 << salles[salle]->getOccupation() << "fenetre"
-                 << salles[salle]->getFenetre();
         // 4b. mettre à jour l'affichage "widget" de la donnée de la salle
         if(elementNom->data(0).toString() == salle && typeDonnee == "lumiere")
         {
-            qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i
-                     << "lumiere";
             QLabel* nouvelElementLumiere = new QLabel(this);
             nouvelElementLumiere->setAlignment(Qt::AlignHCenter |
                                                Qt::AlignVCenter);
@@ -748,8 +757,6 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
         else if(elementNom->data(0).toString() == salle &&
                 typeDonnee == "presence")
         {
-            qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i
-                     << "presence";
             QLabel* nouvelElementOccupation = new QLabel(this);
             nouvelElementOccupation->setAlignment(Qt::AlignHCenter |
                                                   Qt::AlignVCenter);
@@ -775,8 +782,6 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
         else if(elementNom->data(0).toString() == salle &&
                 typeDonnee == "fenetre")
         {
-            qDebug() << Q_FUNC_INFO << "salle" << salle << "i" << i
-                     << "fenetre";
             QLabel* nouvelElementFenetre = new QLabel(this);
             nouvelElementFenetre->setAlignment(Qt::AlignHCenter |
                                                Qt::AlignVCenter);
@@ -945,6 +950,7 @@ void EcoClassroom::enregistrerSalle(QString      nomDeLaSalle,
     qDebug() << Q_FUNC_INFO << "requeteSalle" << requeteSalle;
     // baseDeDonnees->executer(requeteSalle);
 }
+
 /**
  * @fn EcoClassroom::afficherNiveauICONE
  * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
