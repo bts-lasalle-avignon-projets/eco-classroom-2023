@@ -325,6 +325,7 @@ echo "*******************************************************************"
 echo -ne "\033[0m"
 
 heure=0
+MINUTE=0
 heureActuelle=$(date +%k)
 modulo=$((60/$PERIODE))
 while ((1))
@@ -332,10 +333,15 @@ do
     for((n=1;n<=$NB_MESURES;n++))
     do
         # changement d'heure ?
-        changement=$(($n%$modulo))
-        if [ "$changement" -eq "1" -a "$heure" -ne "0" ]
+        changement=$((($PERIODE*$MINUTE)%60))
+        if [ "$changement" -eq "50" ]
         then
             heureActuelle=$(($heureActuelle+1))
+        fi
+        # changement de minute ?
+        changement=$(($n%$modulo))
+        if [ "$changement" -eq "1" ]
+        then
             MINUTE=0
         else
             MINUTE=$(($n-1))
