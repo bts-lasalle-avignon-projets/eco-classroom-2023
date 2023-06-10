@@ -337,6 +337,7 @@ do
         if [ "$changement" -eq "50" ]
         then
             heureActuelle=$(($heureActuelle+1))
+            heure=0
         fi
         # changement de minute ?
         changement=$(($n%$modulo))
