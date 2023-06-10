@@ -324,7 +324,7 @@ echo "Attention : 1 seconde = 1 minute"
 echo "*******************************************************************"
 echo -ne "\033[0m"
 
-heure=13
+heure=0
 heureActuelle=$(date +%k)
 modulo=$((60/$PERIODE))
 while ((1))
