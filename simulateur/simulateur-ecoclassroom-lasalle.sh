@@ -113,10 +113,10 @@ declare -A mesuresTemperature=(
 )
 
 declare -A mesuresHumidite=(
-    ["B11"]="54 54 55 54 55 56 57 58 59 60 59 58 57 56 55 54 55 54 54 44 44 45 44 45 46 47 48 49 50"
-    ["B20"]="44 44 45 44 45 46 47 48 49 48 47 46 45 44 43 42 41 40 39 38 39 40 41 42 43 44 45 46 47"
-    ["B21"]="45 44 45 46 47 48 49 51 51 52 54 54 55 54 55 56 57 58 59 60 60 61 62 63 64 65 66 67 68"
-    ["B22"]="56 57 58 59 60 61 62 63 64 65 65 66 67 68 65 66 67 68 65 66 67 68 65 66 67 68 65 66 67"
+    ["B11"]="54 54 55 54 55 56 57 58 59 60 59 58 57 56 55 54 55 54 54 44 44 45 44 45 46 47 48 49 50 51"
+    ["B20"]="44 44 45 44 45 46 47 48 49 48 47 46 45 44 43 42 41 40 39 38 39 40 41 42 43 44 45 46 47 48"
+    ["B21"]="45 44 45 46 47 48 49 51 51 52 54 54 55 54 55 56 57 58 59 60 60 61 62 63 64 65 66 67 68 70"
+    ["B22"]="56 57 58 59 60 61 62 63 64 65 65 66 67 68 65 66 67 68 65 66 67 68 65 66 67 68 65 66 67 66"
 )
 
 declare -A mesuresCO2=(
@@ -324,25 +324,28 @@ echo "Attention : 1 seconde = 1 minute"
 echo "*******************************************************************"
 echo -ne "\033[0m"
 
-heure=0
+heure=13
 heureActuelle=$(date +%k)
 modulo=$((60/$PERIODE))
 while ((1))
 do
-    changementHeure=$((($heureActuelle+$heure)%24))
-    if [ $changementHeure -eq "0" ]
-    then
-        heure=0
-    fi
     for((n=1;n<=$NB_MESURES;n++))
     do
+        # changement d'heure ?
         changement=$(($n%$modulo))
-        if [ $changement -eq "1" ]
+        if [ "$changement" -eq "1" -a "$heure" -ne "0" ]
         then
             heureActuelle=$(($heureActuelle+1))
             MINUTE=0
         else
             MINUTE=$(($n-1))
+        fi
+        # changement de journée ?
+        changementHeure=$((($heureActuelle+$heure)%24))
+        if [ "$changementHeure" -eq "0" ]
+        then
+            heureActuelle=0
+            heure=0
         fi
         printf "Il est %dh%02d (mesure n°%d)\n" "$(($heureActuelle+$heure))" "$((($PERIODE*$MINUTE)%60))" "$n"
 
