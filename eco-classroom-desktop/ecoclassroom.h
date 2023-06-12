@@ -126,24 +126,28 @@ class EcoClassroom : public QMainWindow
 #ifdef SIMULATION_CO2
     void simulerMesureCO2();
 #endif
-    void creerElementsTexteCellule(const Salle& salle);
-    void creerElementsImageCellule(const Salle& salle);
-    void personnaliserElementsTexte();
-    void personnaliserElementsImage();
-    void insererElementsCellule();
-    void redimensionnerHauteurTable();
-    void afficherSalleTable(const Salle& salle);
-    void afficherInformationsSalle(const Salle& salle, bool affichage = true);
-    void effacerTableauSalles();
-    void effacerSalles();
-    void alerterDepassementSeuilCO2(const Salle& salle);
-    void notifierSignalementConfinement(const QString& titre,
-                                        const QString& message);
-    void enregistrerICONEDansBDD(Salle* salle);
-    void enregistrerQualiteAirDansBDD(Salle* salle);
-    void enregistrerSalle(QString      nomDeLaSalle,
-                          QString      descriptionDeLaSalle,
-                          unsigned int superficieDeLaSalle);
+    void    creerElementsTexteCellule(const Salle& salle);
+    void    creerElementsImageCellule(const Salle& salle);
+    void    personnaliserElementsTexte();
+    void    personnaliserElementsImage();
+    void    insererElementsCellule();
+    void    redimensionnerHauteurTable();
+    void    afficherSalleTable(const Salle& salle);
+    void    afficherInformationsSalle(Salle& salle, bool affichage = true);
+    void    effacerTableauSalles();
+    void    effacerSalles();
+    void    alerterDepassementSeuilCO2(const Salle& salle);
+    void    notifierSignalementConfinement(const QString& titre,
+                                           const QString& message);
+    void    enregistrerICONEDansBDD(Salle* salle);
+    void    enregistrerQualiteAirDansBDD(Salle* salle);
+    void    enregistrerTHIDansBDD(Salle* salle);
+    void    enregistrerEtatFenetreDansBDD(Salle* salle);
+    void    enregistrerEtatLumiereDansBDD(Salle* salle);
+    void    enregistrerEtatPresenceDansBDD(Salle* salle);
+    void    enregistrerSalle(QString      nomDeLaSalle,
+                             QString      descriptionDeLaSalle,
+                             unsigned int superficieDeLaSalle);
     QString afficherNiveauICONE(int indiceIcone) const;
     QString afficherNiveauQualiteAir(int indiceQualiteAir) const;
 
