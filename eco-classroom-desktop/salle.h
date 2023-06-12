@@ -95,7 +95,14 @@ class Salle
     {
         CHAMP_NOM = 1,
         CHAMP_DESCRIPTION,
-        CHAMP_SUPERFICIE
+        CHAMP_SUPERFICIE,
+        CHAMP_IndiceConfortTHI,
+        CHAMP_IndiceInconfortIADI,
+        CHAMP_IndiceQualiteAir,
+        CHAMP_IndiceConfinement,
+        CHAMP_EtatFenetres,
+        CHAMP_EtatLumieres,
+        CHAMP_EstOccupe
     };
     /**
      * @enum IndiceQualiteAir
@@ -110,6 +117,21 @@ class Salle
         Tres_Mauvais,
         Severe
     };
+    /**
+     * @enum IndiceTHI
+     * @brief Définit les différentes colonne du tableau
+     */
+    enum IndiceTHI
+    {
+        Inconnu = -4,
+        Froid,
+        Frais,
+        LegerementFrais,
+        Neutre,
+        LegerementTiede,
+        Tiede,
+        Chaud
+    };
 
   private:
     QString      nom;         //!< Nom de la salle
@@ -119,7 +141,9 @@ class Salle
     Mesures*
       mesures; //!<  Relation entre la classe Salle et Mesures (agrégation)
     EtatsSalle*
-      etats; //!< Relation entre la classe Salle et EtatsSalle (agrégation)
+        etats; //!< Relation entre la classe Salle et EtatsSalle (agrégation)
+    int indiceConfortTHI;
+    int indiceQualiteAir;
 
   public:
     Salle();
@@ -147,6 +171,12 @@ class Salle
     void                      setOccupation(bool occupation) const;
     void                      setLumiere(bool lumiere) const;
     void                      setFenetre(bool fenetre) const;
+    void                      setIndiceTHI(int indiceTHI);
+    void                      setIndiceQualiteAir(int indiceQualiteAir);
+    void                      setIndiceICONE(int indiceICONE);
+    void                      determinerIndiceQualiteAir();
+    void                      determinerIndiceTHI();
+    int                       getIndiceTHI() const;
 };
 
 #endif // SALLE_H

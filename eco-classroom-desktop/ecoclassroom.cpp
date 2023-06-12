@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file ecoclassroom.cpp
  * @brief Définition de la classe EcoClassroom
  */
@@ -296,6 +296,21 @@ void EcoClassroom::chargerSalles()
               sallesBDD[i][Salle::TableSalle::CHAMP_NOM],
               sallesBDD[i][Salle::TableSalle::CHAMP_SUPERFICIE].toInt(),
               sallesBDD[i][Salle::TableSalle::CHAMP_DESCRIPTION]);
+            salles[sallesBDD[i][Salle::TableSalle::CHAMP_NOM]]->setOccupation(
+              sallesBDD[i][Salle::TableSalle::CHAMP_EstOccupe].toInt());
+            salles[sallesBDD[i][Salle::TableSalle::CHAMP_NOM]]->setLumiere(
+              sallesBDD[i][Salle::TableSalle::CHAMP_EtatLumieres].toInt());
+            salles[sallesBDD[i][Salle::TableSalle::CHAMP_NOM]]->setFenetre(
+              sallesBDD[i][Salle::TableSalle::CHAMP_EtatFenetres].toInt());
+
+            salles[sallesBDD[i][Salle::TableSalle::CHAMP_NOM]]->setIndiceTHI(
+              sallesBDD[i][Salle::TableSalle::CHAMP_IndiceConfortTHI].toInt());
+            salles[sallesBDD[i][Salle::TableSalle::CHAMP_NOM]]->setIndiceICONE(
+              sallesBDD[i][Salle::TableSalle::CHAMP_IndiceConfinement].toInt());
+            salles[sallesBDD[i][Salle::TableSalle::CHAMP_NOM]]
+              ->setIndiceQualiteAir(
+                sallesBDD[i][Salle::TableSalle::CHAMP_IndiceQualiteAir]
+                  .toInt());
         }
     }
     else
@@ -497,7 +512,7 @@ void EcoClassroom::insererElementsCellule()
                                      COLONNE_SALLE_FENETRES,
                                      elementFenetre);
     tableWidgetSalles->setCellWidget(nb - 1,
-                                     COLONNE_SALLE_OCCUPATION,
+                                     COLONNE_SALLE_PRESENCE,
                                      elementOccupation);
 }
 
@@ -544,9 +559,16 @@ void EcoClassroom::afficherSalleTable(const Salle& salle)
  * @fn EcoClassroom::afficherInformationsSalle(const Salle& salle)
  * @brief Affiche les informations d'une salle
  */
-void EcoClassroom::afficherInformationsSalle(const Salle& salle)
+void EcoClassroom::afficherInformationsSalle(Salle& salle, bool affichage)
 {
-    qDebug() << "nom " << salle.getNom() << "superficie "
+    if(!affichage)
+    {
+        qDebug() << Q_FUNC_INFO << nomSalle->text() << " vs " << salle.getNom();
+        if(nomSalle->text() != salle.getNom())
+            return;
+    }
+    salle.determinerIndiceQualiteAir();
+    qDebug() << Q_FUNC_INFO << "nom " << salle.getNom() << "superficie "
              << salle.getSuperficie() << "description "
              << salle.getDescription() << "qualite air "
              << salle.getIndiceQualiteAir() << "temperature "
@@ -561,7 +583,8 @@ void EcoClassroom::afficherInformationsSalle(const Salle& salle)
     indiceICONE->setText(afficherNiveauICONE(salle.getIndiceICONE()));
     temperatureSalle->setText(QString::number(salle.getTemperature()) + " °C");
     humiditeSalle->setText(QString::number(salle.getHumidite()) + " %");
-    afficherFenetreInformations();
+    if(affichage)
+        afficherFenetreInformations();
 }
 
 /**
@@ -650,17 +673,16 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
                          salles[salle]->getSuperficie());
     }
 
+    // 3. mettre à jour la donnée de la salle
     Salle::TypeMessage type = Salle::getTypeMessage(typeDonnee);
-    qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "type" << type
-             << "message" << message;
+    qDebug() << Q_FUNC_INFO << "salle" << salle << "typeDonnee" << typeDonnee
+             << "type" << type << "message" << message;
     switch(type)
     {
         case Salle::TypeMessage::INCONNU:
             qDebug() << "donnée inconnue";
             break;
         case Salle::TypeMessage::TEMPERATURE:
-            qDebug() << Q_FUNC_INFO << "type" << type << "message" << message
-                     << "salle" << salle;
             salles[salle]->setTemperature(message.toDouble());
             break;
         case Salle::TypeMessage::HUMIDITE:
@@ -669,22 +691,33 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
         case Salle::TypeMessage::CO2:
             salles[salle]->setCO2(message.toUInt());
             break;
-        case Salle::TypeMessage::OCCUPATION:
-            salles[salle]->setOccupation(message.toInt());
+        case Salle::TypeMessage::LUMIERE:
+            salles[salle]->setLumiere(message.toInt());
             break;
         case Salle::TypeMessage::FENETRE:
             salles[salle]->setFenetre(message.toInt());
             break;
-        case Salle::TypeMessage::LUMIERE:
-            salles[salle]->setLumiere(message.toInt());
+        case Salle::TypeMessage::OCCUPATION:
+            salles[salle]->setOccupation(message.toInt());
             break;
     }
 
+    // 5. Mettre à jour l'affichage détaillé d'une salle
+    switch(type)
+    {
+        case Salle::TypeMessage::TEMPERATURE:
+        case Salle::TypeMessage::HUMIDITE:
+        case Salle::TypeMessage::CO2:
+            afficherInformationsSalle(*salles[salle], false);
+            break;
+    }
+
+    // 4a. mettre à jour l'affichage "textuel" de la donnée de la salle
     for(int i = 0; i < tableWidgetSalles->rowCount(); i++)
     {
         QTableWidgetItem* elementNom =
           tableWidgetSalles->item(i, COLONNE_SALLE_NOM);
-        // est-ce notre salle ?
+        // type de donnée ?
         if(elementNom->data(0).toString() == salle && typeDonnee == "co2")
         {
             salles[salle]->calculerIndiceICONE();
@@ -694,6 +727,7 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
               Qt::DisplayRole,
               afficherNiveauICONE(salles[salle]->getIndiceICONE()));
 
+            salles[salle]->determinerIndiceQualiteAir();
             QTableWidgetItem* elementQualiteAir =
               tableWidgetSalles->item(i, COLONNE_SALLE_QUALITE_AIR);
             elementQualiteAir->setData(
@@ -701,24 +735,94 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
               afficherNiveauQualiteAir(salles[salle]->getIndiceQualiteAir()));
             Salle salleSelectionner = *salles[salle];
             alerterDepassementSeuilCO2(salleSelectionner);
-
             enregistrerICONEDansBDD(salles[salle]);
             enregistrerQualiteAirDansBDD(salles[salle]);
+            break;
         }
-
-        if(elementNom->data(0).toString() == salle &&
-           typeDonnee == "temperature")
+        else if(elementNom->data(0).toString() == salle &&
+                (typeDonnee == "temperature" || typeDonnee == "humidite"))
         {
+            salles[salle]->determinerIndiceTHI();
             QTableWidgetItem* elementTHI =
               tableWidgetSalles->item(i, COLONNE_SALLE_CONFORT_THERMIQUE);
             elementTHI->setData(Qt::DisplayRole, salles[salle]->getTHI());
+            enregistrerTHIDansBDD(salles[salle]);
+            break;
         }
 
-        /**
-         *@todo
-         * changement de l'affichage présence, fenêtres, lumières pour
-         *l'étudiant IR 1 module détection
-         */
+        // 4b. mettre à jour l'affichage "widget" de la donnée de la salle
+        if(elementNom->data(0).toString() == salle && typeDonnee == "lumiere")
+        {
+            QLabel* nouvelElementLumiere = new QLabel(this);
+            nouvelElementLumiere->setAlignment(Qt::AlignHCenter |
+                                               Qt::AlignVCenter);
+            if(!salles[salle]->getLumiere())
+            {
+                nouvelElementLumiere->setPixmap(QPixmap(":/images/led-verte"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_LUMIERES,
+                                                 nouvelElementLumiere);
+            }
+            else
+            {
+                nouvelElementLumiere->setPixmap(QPixmap(":/images/led-rouge"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_LUMIERES,
+                                                 nouvelElementLumiere);
+            }
+            enregistrerEtatLumiereDansBDD(salles[salle]);
+            break;
+        }
+        else if(elementNom->data(0).toString() == salle &&
+                typeDonnee == "presence")
+        {
+            QLabel* nouvelElementOccupation = new QLabel(this);
+            nouvelElementOccupation->setAlignment(Qt::AlignHCenter |
+                                                  Qt::AlignVCenter);
+
+            if(!salles[salle]->getOccupation())
+            {
+                nouvelElementOccupation->setPixmap(
+                  QPixmap(":/images/led-verte"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_PRESENCE,
+                                                 nouvelElementOccupation);
+            }
+            else
+            {
+                nouvelElementOccupation->setPixmap(
+                  QPixmap(":/images/led-rouge"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_PRESENCE,
+                                                 nouvelElementOccupation);
+            }
+            enregistrerEtatPresenceDansBDD(salles[salle]);
+            break;
+        }
+        else if(elementNom->data(0).toString() == salle &&
+                typeDonnee == "fenetre")
+        {
+            QLabel* nouvelElementFenetre = new QLabel(this);
+            nouvelElementFenetre->setAlignment(Qt::AlignHCenter |
+                                               Qt::AlignVCenter);
+
+            if(!salles[salle]->getFenetre())
+            {
+                nouvelElementFenetre->setPixmap(QPixmap(":/images/led-verte"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_FENETRES,
+                                                 nouvelElementFenetre);
+            }
+            else
+            {
+                nouvelElementFenetre->setPixmap(QPixmap(":/images/led-rouge"));
+                tableWidgetSalles->setCellWidget(i,
+                                                 COLONNE_SALLE_FENETRES,
+                                                 nouvelElementFenetre);
+            }
+            enregistrerEtatFenetreDansBDD(salles[salle]);
+            break;
+        }
     }
 }
 
@@ -729,30 +833,41 @@ void EcoClassroom::traiterNouveauMessageMQTT(QString salle,
 void EcoClassroom::alerterDepassementSeuilCO2(const Salle& salle)
 {
     qDebug() << Q_FUNC_INFO << salle.getNom() << "CO2" << salle.getCO2();
-    // Test du dépassement seuil CO2
-    if(salle.getCO2() >= SEUIL_ALERTE_CO2)
+    for(int i = 0; i < tableWidgetSalles->rowCount(); i++)
     {
-        // Fond de la cellule en rouge
-        coloriserFondCellule(elementCO2, QColor(255, 0, 0));
-        // ou :
-        /*coloriserFondCellule(tableWidgetSalles,
-                             nb - 1,
-                             COLONNE_SALLE_QUALITE_AIR,
-                             QString("#ff0000"));*/
-        notifierSignalementConfinement(TITRE_NOTIFICATION_CO2,
-                                       "Confinement de la salle " +
-                                         salle.getNom());
-    }
-    else
-    {
-        // Fond de la cellule normal
-        coloriserFondCellule(elementCO2, QColor(0, 150, 0));
+        QTableWidgetItem* elementNom =
+          tableWidgetSalles->item(i, COLONNE_SALLE_NOM);
+        if(elementNom->data(0).toString() == salle.getNom())
+        {
+            QTableWidgetItem* nouvelElementCO2 =
+              tableWidgetSalles->item(i, COLONNE_SALLE_QUALITE_AIR);
+            // Test du dépassement seuil CO2
+            if(salle.getCO2() >= SEUIL_ALERTE_CO2)
+            {
+                // Fond de la cellule en rouge
+                coloriserFondCellule(nouvelElementCO2, QColor(255, 0, 0));
+                // ou :
+                /*coloriserFondCellule(tableWidgetSalles,
+                                     nb - 1,
+                                     COLONNE_SALLE_QUALITE_AIR,
+                                     QString("#ff0000"));*/
+                notifierSignalementConfinement(TITRE_NOTIFICATION_CO2,
+                                               "Confinement de la salle " +
+                                                 salle.getNom());
+            }
+            else
+            {
+                // Fond de la cellule normal
+                coloriserFondCellule(nouvelElementCO2, QColor(0, 150, 0));
+            }
+        }
     }
 }
 
 /**
  * @fn EcoClassroom::notifierSignalementConfinement
- * @brief Signale le confinement d'une salle grâce à une notification système
+ * @brief Signale le confinement d'une salle grâce à une notification
+ * système
  */
 void EcoClassroom::notifierSignalementConfinement(const QString& titre,
                                                   const QString& message)
@@ -837,12 +952,61 @@ void EcoClassroom::enregistrerICONEDansBDD(Salle* salle)
  */
 void EcoClassroom::enregistrerQualiteAirDansBDD(Salle* salle)
 {
+    salle->determinerIndiceQualiteAir();
+    qDebug() << Q_FUNC_INFO << "indiceQualiteAir"
+             << salles[salle->getNom()]->getIndiceQualiteAir();
     QString requeteQualiteAir =
       "UPDATE Salle SET idIndiceQualiteAir = '" +
       QString::number(salles[salle->getNom()]->getIndiceQualiteAir()) +
       "' WHERE nom = " + "'" + salle->getNom() + "'" + ";";
     qDebug() << Q_FUNC_INFO << "requeteQualiteAir" << requeteQualiteAir;
     baseDeDonnees->executer(requeteQualiteAir);
+}
+
+void EcoClassroom::enregistrerTHIDansBDD(Salle* salle)
+{
+    salle->determinerIndiceTHI();
+    qDebug() << Q_FUNC_INFO << "THI" << salles[salle->getNom()]->getIndiceTHI();
+    QString requeteTHI =
+      "UPDATE Salle SET idIndiceConfortTHI = '" +
+      QString::number(salles[salle->getNom()]->getIndiceTHI()) +
+      "' WHERE nom = " + "'" + salle->getNom() + "'" + ";";
+    qDebug() << Q_FUNC_INFO << "requeteTHI" << requeteTHI;
+    baseDeDonnees->executer(requeteTHI);
+}
+
+void EcoClassroom::enregistrerEtatFenetreDansBDD(Salle* salle)
+{
+    qDebug() << Q_FUNC_INFO << "etatFenetre"
+             << salles[salle->getNom()]->getFenetre();
+    QString requete = "UPDATE Salle SET etatFenetres = '" +
+                      QString::number(salles[salle->getNom()]->getFenetre()) +
+                      "' WHERE nom = " + "'" + salle->getNom() + "'" + ";";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->executer(requete);
+}
+
+void EcoClassroom::enregistrerEtatLumiereDansBDD(Salle* salle)
+{
+    qDebug() << Q_FUNC_INFO << "etatLumiere"
+             << salles[salle->getNom()]->getLumiere();
+    QString requete = "UPDATE Salle SET etatLumieres = '" +
+                      QString::number(salles[salle->getNom()]->getLumiere()) +
+                      "' WHERE nom = " + "'" + salle->getNom() + "'" + ";";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->executer(requete);
+}
+
+void EcoClassroom::enregistrerEtatPresenceDansBDD(Salle* salle)
+{
+    qDebug() << Q_FUNC_INFO << "occupation"
+             << salles[salle->getNom()]->getOccupation();
+    QString requete =
+      "UPDATE Salle SET estOccupe = '" +
+      QString::number(salles[salle->getNom()]->getOccupation()) +
+      "' WHERE nom = " + "'" + salle->getNom() + "'" + ";";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->executer(requete);
 }
 
 void EcoClassroom::enregistrerSalle(QString      nomDeLaSalle,
@@ -856,6 +1020,7 @@ void EcoClassroom::enregistrerSalle(QString      nomDeLaSalle,
     qDebug() << Q_FUNC_INFO << "requeteSalle" << requeteSalle;
     // baseDeDonnees->executer(requeteSalle);
 }
+
 /**
  * @fn EcoClassroom::afficherNiveauICONE
  * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
@@ -881,8 +1046,8 @@ QString EcoClassroom::afficherNiveauICONE(int indiceIcone) const
 
 /**
  *@fn EcoClassroom::afficherNiveauQualiteAir(int indiceQualiteAir) const
- * @brief Méthode qui affiche le niveau de la Qualité de l'Air en fonction de
- *l'indice Qualité de L'Air
+ * @brief Méthode qui affiche le niveau de la Qualité de l'Air en fonction
+ *de l'indice Qualité de L'Air
  * @param indiceQualiteAir
  * @return QString
  */

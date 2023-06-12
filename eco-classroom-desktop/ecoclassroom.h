@@ -70,9 +70,9 @@ class EcoClassroom : public QMainWindow
         COLONNE_SALLE_CONFORT_THERMIQUE, //!< Le confort thermique
         COLONNE_SALLE_QUALITE_AIR,       //!< La qualité de l'air
         COLONNE_SALLE_ICONE,             //!< Le confinement
-        COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
         COLONNE_SALLE_LUMIERES,          //!< L'état des lumières
-        COLONNE_SALLE_OCCUPATION,        //!< L'état d'occupation
+        COLONNE_SALLE_PRESENCE,          //!< L'état de la présence
+        COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
         NB_COLONNES_TABLEAU
     };
 
@@ -133,7 +133,7 @@ class EcoClassroom : public QMainWindow
     void    insererElementsCellule();
     void    redimensionnerHauteurTable();
     void    afficherSalleTable(const Salle& salle);
-    void    afficherInformationsSalle(const Salle& salle);
+    void    afficherInformationsSalle(Salle& salle, bool affichage = true);
     void    effacerTableauSalles();
     void    effacerSalles();
     void    alerterDepassementSeuilCO2(const Salle& salle);
@@ -141,6 +141,10 @@ class EcoClassroom : public QMainWindow
                                            const QString& message);
     void    enregistrerICONEDansBDD(Salle* salle);
     void    enregistrerQualiteAirDansBDD(Salle* salle);
+    void    enregistrerTHIDansBDD(Salle* salle);
+    void    enregistrerEtatFenetreDansBDD(Salle* salle);
+    void    enregistrerEtatLumiereDansBDD(Salle* salle);
+    void    enregistrerEtatPresenceDansBDD(Salle* salle);
     void    enregistrerSalle(QString      nomDeLaSalle,
                              QString      descriptionDeLaSalle,
                              unsigned int superficieDeLaSalle);

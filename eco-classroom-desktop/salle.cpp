@@ -43,7 +43,7 @@ Salle::Salle(QString nom, unsigned int superficie, QString description) :
 Salle::TypeMessage Salle::getTypeMessage(QString typeDonnee)
 {
     QVector<QString> typesMessage = { "temperature", "humidite", "co2",
-                                      "lumiere",     "presence", "fenetre" };
+                                      "lumiere",     "fenetre",  "presence" };
 
     for(int i = 0; i < typesMessage.size(); i++)
     {
@@ -118,23 +118,7 @@ unsigned int Salle::getCO2() const
  */
 int Salle::getIndiceQualiteAir() const
 {
-    unsigned int valeurCO2 = getCO2();
-    if(valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_EXCELLENTE)
-        return IndiceQualiteAir::Excellente;
-    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_BIEN &&
-            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_BIEN)
-        return IndiceQualiteAir::Tres_Bien;
-    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MODERE &&
-            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MODERE)
-        return IndiceQualiteAir::Modere;
-    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MAUVAIS &&
-            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MAUVAIS)
-        return IndiceQualiteAir::Mauvais;
-    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS &&
-            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS)
-        return IndiceQualiteAir::Tres_Mauvais;
-    else
-        return IndiceQualiteAir::Severe;
+    return indiceQualiteAir;
 }
 
 /**
@@ -151,7 +135,7 @@ int Salle::getIndiceICONE() const
 void Salle::calculerIndiceICONE()
 {
     indiceICONE = mesures->calculerIndiceICONE();
-    qDebug() << "indiceICONE" << indiceICONE;
+    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
 }
 
 /**
@@ -160,37 +144,37 @@ void Salle::calculerIndiceICONE()
  */
 QString Salle::getTHI() const
 {
-    double thom = mesures->calculerTHI();
-    if(thom < SEUIL_THOM_FROID)
+    switch(indiceConfortTHI)
     {
-        return FROID;
+        case IndiceTHI::Inconnu:
+            return THI_INCONNU;
+            break;
+        case IndiceTHI::Froid:
+            return FROID;
+            break;
+        case IndiceTHI::Frais:
+            return FRAIS;
+            break;
+        case IndiceTHI::LegerementFrais:
+            return LEGEREMENT_FRAIS;
+            break;
+        case IndiceTHI::Neutre:
+            return NEUTRE;
+            break;
+        case IndiceTHI::LegerementTiede:
+            return LEGEREMENT_TIEDE;
+
+            break;
+        case IndiceTHI::Tiede:
+            return TIEDE;
+            break;
+        case IndiceTHI::Chaud:
+            return CHAUD;
+            break;
+        default:
+            return THI_INCONNU;
+            break;
     }
-    else if(thom >= SEUIL_THOM_FROID && thom < SEUIL_THOM_FRAIS)
-    {
-        return FRAIS;
-    }
-    else if(thom >= SEUIL_THOM_FRAIS && thom < SEUIL_THOM_LEGEREMENT_FRAIS)
-    {
-        return LEGEREMENT_FRAIS;
-    }
-    else if(thom >= SEUIL_THOM_LEGEREMENT_FRAIS && thom < SEUIL_THOM_NEUTRE)
-    {
-        return NEUTRE;
-    }
-    else if(thom >= SEUIL_THOM_NEUTRE && thom < SEUIL_THOM_LEGEREMENT_TIEDE)
-    {
-        return TIEDE;
-    }
-    else if(thom >= SEUIL_THOM_LEGEREMENT_TIEDE && thom < SEUIL_THOM_TIEDE)
-    {
-        return LEGEREMENT_TIEDE;
-    }
-    else if(thom >= SEUIL_THOM_TIEDE)
-    {
-        return CHAUD;
-    }
-    else
-        return THI_INCONNU;
 }
 
 /**
@@ -306,4 +290,83 @@ void Salle::setLumiere(bool lumiere) const
 void Salle::setFenetre(bool fenetre) const
 {
     etats->setFenetre(fenetre);
+}
+
+void Salle::setIndiceTHI(int indiceTHI)
+{
+    this->indiceConfortTHI = indiceTHI;
+}
+
+void Salle::setIndiceQualiteAir(int indiceQualiteAir)
+{
+    this->indiceQualiteAir = indiceQualiteAir;
+}
+
+void Salle::setIndiceICONE(int indiceICONE)
+{
+    this->indiceICONE = indiceICONE;
+}
+
+void Salle::determinerIndiceQualiteAir()
+{
+    unsigned int valeurCO2 = getCO2();
+    if(valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_EXCELLENTE)
+        indiceQualiteAir = IndiceQualiteAir::Excellente;
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_BIEN &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_BIEN)
+        indiceQualiteAir = IndiceQualiteAir::Tres_Bien;
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MODERE &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MODERE)
+        indiceQualiteAir = IndiceQualiteAir::Modere;
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MAUVAIS)
+        indiceQualiteAir = IndiceQualiteAir::Mauvais;
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS)
+        indiceQualiteAir = IndiceQualiteAir::Tres_Mauvais;
+    else
+        indiceQualiteAir = IndiceQualiteAir::Severe;
+}
+
+void Salle::determinerIndiceTHI()
+{
+    double thom = mesures->calculerTHI();
+    qDebug() << Q_FUNC_INFO << "thom" << thom;
+    if(thom < SEUIL_THOM_FROID)
+    {
+        indiceConfortTHI = IndiceTHI::Froid;
+    }
+    else if(thom >= SEUIL_THOM_FROID && thom < SEUIL_THOM_FRAIS)
+    {
+        indiceConfortTHI = IndiceTHI::Frais;
+    }
+    else if(thom >= SEUIL_THOM_FRAIS && thom < SEUIL_THOM_LEGEREMENT_FRAIS)
+    {
+        indiceConfortTHI = IndiceTHI::LegerementFrais;
+    }
+    else if(thom >= SEUIL_THOM_LEGEREMENT_FRAIS && thom < SEUIL_THOM_NEUTRE)
+    {
+        indiceConfortTHI = IndiceTHI::Neutre;
+    }
+    else if(thom >= SEUIL_THOM_NEUTRE && thom < SEUIL_THOM_LEGEREMENT_TIEDE)
+    {
+        indiceConfortTHI = IndiceTHI::Tiede;
+    }
+    else if(thom >= SEUIL_THOM_LEGEREMENT_TIEDE && thom < SEUIL_THOM_TIEDE)
+    {
+        indiceConfortTHI = IndiceTHI::LegerementTiede;
+    }
+    else if(thom >= SEUIL_THOM_TIEDE)
+    {
+        indiceConfortTHI = IndiceTHI::Chaud;
+    }
+    else
+        indiceConfortTHI = IndiceTHI::Inconnu;
+    qDebug() << Q_FUNC_INFO << "indiceConfortTHI" << indiceConfortTHI
+             << getTHI();
+}
+
+int Salle::getIndiceTHI() const
+{
+    return indiceConfortTHI;
 }
