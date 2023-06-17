@@ -78,7 +78,8 @@ void envoyerMessageMQTT(String messageLoRa)
     else
     {
 #ifdef DEBUG_MQTT
-        Serial.println("Erreur topic !");
+        Serial.print("Erreur topic : ");
+        Serial.print(messageLoRa);
         Serial.println("");
 #endif
         return;
@@ -90,8 +91,8 @@ void envoyerMessageMQTT(String messageLoRa)
         topic = topicPrincipal + String("/") + sousTopic;
 #ifdef DEBUG_MQTT
         Serial.print("Topic : ");
-        Serial.println(topic);
-        Serial.print("Message MQTT : ");
+        Serial.print(topic);
+        Serial.print(" -> ");
         Serial.println(messageMQTT);
         Serial.println("");
 #endif
