@@ -80,7 +80,7 @@ void envoyerMessageMQTT(String messageLoRa)
 #ifdef DEBUG_MQTT
         Serial.print("Erreur topic : ");
         Serial.print(messageLoRa);
-        Serial.println("");
+        // Serial.println("");
 #endif
         return;
     }
@@ -94,7 +94,7 @@ void envoyerMessageMQTT(String messageLoRa)
         Serial.print(topic);
         Serial.print(" -> ");
         Serial.println(messageMQTT);
-        Serial.println("");
+        // Serial.println("");
 #endif
         if(estConnecteMQTT())
         {
@@ -105,7 +105,7 @@ void envoyerMessageMQTT(String messageLoRa)
     {
 #ifdef DEBUG_MQTT
         Serial.println("Topic manquant !");
-        Serial.println("");
+        // Serial.println("");
 #endif
         return;
     }

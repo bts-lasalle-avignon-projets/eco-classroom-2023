@@ -35,8 +35,8 @@
 // GATEWAY : configurer le SSID et le broker MQTT, et l'adresse du module
 // #define NODE
 #define GATEWAY
-//  Simule une salle ou toutes les salles
-#define SALLE Salle::B_11
+//   Simule une salle ou toutes les salles : B_11, B_20, B_21 ou B_22
+#define SALLE Salle::B_22
 char prefixeSalle = 'B';
 // #define TOUTES_LES_SALLES
 
@@ -252,7 +252,7 @@ void loop()
             }
         }
         numeroMesure = ++numeroMesure % NB_MESURES;
-// delay(PERIODE);
+        delay(PERIODE);
 #ifdef TOUTES_LES_SALLES
     }
 #endif

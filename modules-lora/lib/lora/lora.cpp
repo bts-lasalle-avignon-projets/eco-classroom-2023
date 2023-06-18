@@ -18,6 +18,9 @@ void configurer(byte               ADDL,
     configuration.ADDL                     = ADDL;
     configuration.ADDH                     = ADDH;
     configuration.CHAN                     = channel;
+    configuration.SPED.airDataRate         = 2; // bit 0-2 : 2.4kbps
+    configuration.SPED.uartBaudRate        = 3; // bit 3-5 : 9600bps
+    configuration.SPED.uartParity          = 0; // bit 6-7 : 8N1
     configuration.OPTION.fixedTransmission = typeTransmission;
     // conserver les paramètres au redémarrage ?
     if(maintien)
@@ -47,10 +50,10 @@ int traiterMessage()
 #ifdef DEBUG_LORA
         // Serial.print("Etat : ");
         // Serial.println(rs.status.getResponseDescription());
+        Serial.print("Reception : ");
+        Serial.println(message);
         Serial.print("Nb messages : ");
         Serial.println(nbMessages);
-        Serial.print("Message : ");
-        Serial.println(message);
 #endif
         String messageMQTT;
         for(int i = 0; i < nbMessages; ++i)
