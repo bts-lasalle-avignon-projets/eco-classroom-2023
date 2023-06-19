@@ -388,9 +388,6 @@ public class EcoClassroom extends AppCompatActivity
                         String topicMQTT   = bundle.getString("topic");
                         String messageMQTT = bundle.getString("message");
                         Log.d(TAG, "[Handler] " + topicMQTT + " -> " + messageMQTT);
-                        /**
-                         * @todo Gérer les messages MQTT reçus
-                         */
                         traiterMessageMQTT(topicMQTT, messageMQTT);
                         break;
                     case ClientMQTT.BROKER_ERREUR:
@@ -516,6 +513,7 @@ public class EcoClassroom extends AppCompatActivity
                 }
             }
         }
+        filtrerSalles(choixFiltrage);
     }
 
     /**
