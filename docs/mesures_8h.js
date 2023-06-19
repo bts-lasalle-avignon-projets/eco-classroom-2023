@@ -1,5 +1,6 @@
 var mesures_8h =
 [
+    [ "MesureCO2", "struct_mesure_c_o2.html", "struct_mesure_c_o2" ],
     [ "Mesures", "class_mesures.html", "class_mesures" ],
     [ "CONFINEMENT_ELEVE", "mesures_8h.html#a976702a250b5382d33e82be312ae0544", null ],
     [ "CONFINEMENT_EXTREME", "mesures_8h.html#a85aa8f35951bd3a8ee688af6dd79bf69", null ],

@@ -1,5 +1,6 @@
 var classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle =
 [
+    [ "Grandeur", "enumcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle_1_1_grandeur.html", "enumcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle_1_1_grandeur" ],
     [ "Salle", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aba9fe7fc464cfa0879a17199d8a39415", null ],
     [ "Salle", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#afa4ae1e9bcd4c600342259f941bc1fe0", null ],
     [ "Salle", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#af693d2295f3bfc0c8d8118647b4fbffe", null ],
@@ -18,6 +19,7 @@ var classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle =
     [ "getSeuils", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a0488972932fb40ebeb41e501debaa340", null ],
     [ "getSuperficie", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ad45fcfb39b19d11c977bf4ed7dc98dcd", null ],
     [ "getTemperature", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a3d8e2ddddaf8418d733ce81b64416e59", null ],
+    [ "retournerGrandeur", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a1c06de35d9441d4408a133b1f9747f62", null ],
     [ "setCo2", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aaac5cbbd9a249d1054413f90d4982069", null ],
     [ "setConfortThermique", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a2805eebddd160be8b8ffb88e9e0e78b7", null ],
     [ "setDescription", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a9a7096b1260d4a2424f7778fd2e117f5", null ],

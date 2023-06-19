@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">eco-classroom
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -95,43 +95,45 @@ $(document).ready(function(){initNavTree('communicationmqtt_8h_source.html','');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QtMqtt/QtMqtt&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="communicationmqtt_8h.html#a43ded576a96ae2a71b71262007641317">   16</a></span>&#160;<span class="preprocessor">#define IP_BROKER_MQTT &quot;192.168.52.7&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//#define IP_BROKER_MQTT &quot;127.0.0.1&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="communicationmqtt_8h.html#a8e969a68ad44d7e011280550a380d7a1">   23</a></span>&#160;<span class="preprocessor">#define PORT_BROKER_MQTT 1883</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="communicationmqtt_8h.html#a3aad8b10725fd6638ace70ed2a922642">   29</a></span>&#160;<span class="preprocessor">#define TOPIC_RACINE &quot;salles/#&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_communication_m_q_t_t.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_communication_m_q_t_t.html">CommunicationMQTT</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_communication_m_q_t_t.html#a7a411ac53e1a014c941d0684c2cced2e">CommunicationMQTT</a>(<a class="code" href="class_q_object.html">QObject</a>* parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_communication_m_q_t_t.html#aa87d3ee77f58d5508b235c00d67278fd">~CommunicationMQTT</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    QMqttClient* <a class="code" href="class_communication_m_q_t_t.html#aecfa296bf002b9896b530cc7dd702f6b">getClient</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//#define IP_BROKER_MQTT &quot;192.168.52.7&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="communicationmqtt_8h.html#a43ded576a96ae2a71b71262007641317">   17</a></span>&#160;<span class="preprocessor">#define IP_BROKER_MQTT &quot;192.168.1.20&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//#define IP_BROKER_MQTT &quot;127.0.0.1&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="communicationmqtt_8h.html#a8e969a68ad44d7e011280550a380d7a1">   24</a></span>&#160;<span class="preprocessor">#define PORT_BROKER_MQTT 1883</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="communicationmqtt_8h.html#a3aad8b10725fd6638ace70ed2a922642">   30</a></span>&#160;<span class="preprocessor">#define TOPIC_RACINE &quot;salles/#&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//#define TOPIC_SONDE_SALLES &quot;salles/+/sonde/#&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_communication_m_q_t_t.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_communication_m_q_t_t.html">CommunicationMQTT</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_communication_m_q_t_t.html#a7a411ac53e1a014c941d0684c2cced2e">CommunicationMQTT</a>(<a class="code" href="class_q_object.html">QObject</a>* parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_communication_m_q_t_t.html#aa87d3ee77f58d5508b235c00d67278fd">~CommunicationMQTT</a>();</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_communication_m_q_t_t.html#a9f3c0737406d19c85f175e1785cf3fae">   45</a></span>&#160;    QMqttClient*       <a class="code" href="class_communication_m_q_t_t.html#a9f3c0737406d19c85f175e1785cf3fae">client</a>;       </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_communication_m_q_t_t.html#a993e7e9c31d705bd726a8120a0c44303">   46</a></span>&#160;    QMqttSubscription* <a class="code" href="class_communication_m_q_t_t.html#a993e7e9c31d705bd726a8120a0c44303">subscription</a>; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#ae685693177ee02a7bafd1379b7da4abf">seConnecter</a>();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#a960f346a3e13f53d7522058e4f980914">seDeconnecter</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#acd455d9897cb24d84a24724d5423891b">sAbonner</a>(QString topic);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#a6d3f7a65eb225f6a941c0c5d064663f5">demarrer</a>();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#ac07d3d720cf47165ec46ba1814aafdba">arreter</a>();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// COMMUNICATIONMQTT_H</span></div>
-<div class="ttc" id="aclass_communication_m_q_t_t_html"><div class="ttname"><a href="class_communication_m_q_t_t.html">CommunicationMQTT</a></div><div class="ttdoc">Classe permettant de gérer la communication MQTT.</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8h_source.html#l00035">communicationmqtt.h:36</a></div></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    QMqttClient* <a class="code" href="class_communication_m_q_t_t.html#aecfa296bf002b9896b530cc7dd702f6b">getClient</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_communication_m_q_t_t.html#a9f3c0737406d19c85f175e1785cf3fae">   47</a></span>&#160;    QMqttClient*       <a class="code" href="class_communication_m_q_t_t.html#a9f3c0737406d19c85f175e1785cf3fae">client</a>;       </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_communication_m_q_t_t.html#a993e7e9c31d705bd726a8120a0c44303">   48</a></span>&#160;    QMqttSubscription* <a class="code" href="class_communication_m_q_t_t.html#a993e7e9c31d705bd726a8120a0c44303">subscription</a>; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#ae685693177ee02a7bafd1379b7da4abf">seConnecter</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#a960f346a3e13f53d7522058e4f980914">seDeconnecter</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#acd455d9897cb24d84a24724d5423891b">sAbonner</a>(QString topic);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#a6d3f7a65eb225f6a941c0c5d064663f5">demarrer</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_communication_m_q_t_t.html#ac07d3d720cf47165ec46ba1814aafdba">arreter</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// COMMUNICATIONMQTT_H</span></div>
+<div class="ttc" id="aclass_communication_m_q_t_t_html"><div class="ttname"><a href="class_communication_m_q_t_t.html">CommunicationMQTT</a></div><div class="ttdoc">Classe permettant de gérer la communication MQTT.</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8h_source.html#l00037">communicationmqtt.h:38</a></div></div>
 <div class="ttc" id="aclass_communication_m_q_t_t_html_a6d3f7a65eb225f6a941c0c5d064663f5"><div class="ttname"><a href="class_communication_m_q_t_t.html#a6d3f7a65eb225f6a941c0c5d064663f5">CommunicationMQTT::demarrer</a></div><div class="ttdeci">void demarrer()</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00077">communicationmqtt.cpp:77</a></div></div>
 <div class="ttc" id="aclass_communication_m_q_t_t_html_a7a411ac53e1a014c941d0684c2cced2e"><div class="ttname"><a href="class_communication_m_q_t_t.html#a7a411ac53e1a014c941d0684c2cced2e">CommunicationMQTT::CommunicationMQTT</a></div><div class="ttdeci">CommunicationMQTT(QObject *parent=nullptr)</div><div class="ttdoc">Constructeur par défaut de la classe CommunicationMQTT.</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00012">communicationmqtt.cpp:12</a></div></div>
 <div class="ttc" id="aclass_communication_m_q_t_t_html_a960f346a3e13f53d7522058e4f980914"><div class="ttname"><a href="class_communication_m_q_t_t.html#a960f346a3e13f53d7522058e4f980914">CommunicationMQTT::seDeconnecter</a></div><div class="ttdeci">void seDeconnecter()</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00052">communicationmqtt.cpp:52</a></div></div>
-<div class="ttc" id="aclass_communication_m_q_t_t_html_a993e7e9c31d705bd726a8120a0c44303"><div class="ttname"><a href="class_communication_m_q_t_t.html#a993e7e9c31d705bd726a8120a0c44303">CommunicationMQTT::subscription</a></div><div class="ttdeci">QMqttSubscription * subscription</div><div class="ttdoc">Subscription.</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8h_source.html#l00046">communicationmqtt.h:46</a></div></div>
-<div class="ttc" id="aclass_communication_m_q_t_t_html_a9f3c0737406d19c85f175e1785cf3fae"><div class="ttname"><a href="class_communication_m_q_t_t.html#a9f3c0737406d19c85f175e1785cf3fae">CommunicationMQTT::client</a></div><div class="ttdeci">QMqttClient * client</div><div class="ttdoc">Client MQTT.</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8h_source.html#l00045">communicationmqtt.h:45</a></div></div>
+<div class="ttc" id="aclass_communication_m_q_t_t_html_a993e7e9c31d705bd726a8120a0c44303"><div class="ttname"><a href="class_communication_m_q_t_t.html#a993e7e9c31d705bd726a8120a0c44303">CommunicationMQTT::subscription</a></div><div class="ttdeci">QMqttSubscription * subscription</div><div class="ttdoc">Subscription.</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8h_source.html#l00048">communicationmqtt.h:48</a></div></div>
+<div class="ttc" id="aclass_communication_m_q_t_t_html_a9f3c0737406d19c85f175e1785cf3fae"><div class="ttname"><a href="class_communication_m_q_t_t.html#a9f3c0737406d19c85f175e1785cf3fae">CommunicationMQTT::client</a></div><div class="ttdeci">QMqttClient * client</div><div class="ttdoc">Client MQTT.</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8h_source.html#l00047">communicationmqtt.h:47</a></div></div>
 <div class="ttc" id="aclass_communication_m_q_t_t_html_aa87d3ee77f58d5508b235c00d67278fd"><div class="ttname"><a href="class_communication_m_q_t_t.html#aa87d3ee77f58d5508b235c00d67278fd">CommunicationMQTT::~CommunicationMQTT</a></div><div class="ttdeci">~CommunicationMQTT()</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00029">communicationmqtt.cpp:29</a></div></div>
-<div class="ttc" id="aclass_communication_m_q_t_t_html_ac07d3d720cf47165ec46ba1814aafdba"><div class="ttname"><a href="class_communication_m_q_t_t.html#ac07d3d720cf47165ec46ba1814aafdba">CommunicationMQTT::arreter</a></div><div class="ttdeci">void arreter()</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00086">communicationmqtt.cpp:86</a></div></div>
+<div class="ttc" id="aclass_communication_m_q_t_t_html_ac07d3d720cf47165ec46ba1814aafdba"><div class="ttname"><a href="class_communication_m_q_t_t.html#ac07d3d720cf47165ec46ba1814aafdba">CommunicationMQTT::arreter</a></div><div class="ttdeci">void arreter()</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00087">communicationmqtt.cpp:87</a></div></div>
 <div class="ttc" id="aclass_communication_m_q_t_t_html_acd455d9897cb24d84a24724d5423891b"><div class="ttname"><a href="class_communication_m_q_t_t.html#acd455d9897cb24d84a24724d5423891b">CommunicationMQTT::sAbonner</a></div><div class="ttdeci">void sAbonner(QString topic)</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00062">communicationmqtt.cpp:62</a></div></div>
 <div class="ttc" id="aclass_communication_m_q_t_t_html_ae685693177ee02a7bafd1379b7da4abf"><div class="ttname"><a href="class_communication_m_q_t_t.html#ae685693177ee02a7bafd1379b7da4abf">CommunicationMQTT::seConnecter</a></div><div class="ttdeci">void seConnecter()</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00043">communicationmqtt.cpp:43</a></div></div>
 <div class="ttc" id="aclass_communication_m_q_t_t_html_aecfa296bf002b9896b530cc7dd702f6b"><div class="ttname"><a href="class_communication_m_q_t_t.html#aecfa296bf002b9896b530cc7dd702f6b">CommunicationMQTT::getClient</a></div><div class="ttdeci">QMqttClient * getClient() const</div><div class="ttdef"><b>Definition:</b> <a href="communicationmqtt_8cpp_source.html#l00035">communicationmqtt.cpp:35</a></div></div>
@@ -143,7 +145,7 @@ $(document).ready(function(){initNavTree('communicationmqtt_8h_source.html','');
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_bc7f3c21278e60441a8650a1b23bb4dd.html">eco-classroom-desktop</a></li><li class="navelem"><a class="el" href="communicationmqtt_8h.html">communicationmqtt.h</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:49:09 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 13:52:48 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

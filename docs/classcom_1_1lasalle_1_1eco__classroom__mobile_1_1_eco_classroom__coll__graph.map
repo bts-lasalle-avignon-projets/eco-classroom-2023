@@ -1,4 +1,5 @@
 <map id="com.lasalle.eco_classroom_mobile.EcoClassroom" name="com.lasalle.eco_classroom_mobile.EcoClassroom">
-<area shape="rect" id="node1" title="L&#39;activité principale." alt="" coords="5,791,236,1411"/>
-<area shape="rect" id="node2" href="$classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html" title="Classe BaseDeDonnees." alt="" coords="7,5,234,728"/>
+<area shape="rect" id="node1" title="L&#39;activité principale." alt="" coords="47,805,277,1499"/>
+<area shape="rect" id="node2" href="$classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_client_m_q_t_t.html" title="Classe de communication MQTT." alt="" coords="5,203,204,545"/>
+<area shape="rect" id="node3" href="$classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html" title="Classe BaseDeDonnees." alt="" coords="229,5,455,743"/>
 </map>

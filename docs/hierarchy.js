@@ -5,9 +5,12 @@ var hierarchy =
     ] ],
     [ "BaseDeDonnees", "class_base_de_donnees.html", null ],
     [ "com.lasalle.eco_classroom_mobile.BaseDeDonnees", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html", null ],
+    [ "com.lasalle.eco_classroom_mobile.ClientMQTT", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_client_m_q_t_t.html", null ],
     [ "EtatsSalle", "class_etats_salle.html", null ],
     [ "com.lasalle.eco_classroom_mobile.ExampleInstrumentedTest", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_example_instrumented_test.html", null ],
     [ "com.lasalle.eco_classroom_mobile.ExampleUnitTest", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_example_unit_test.html", null ],
+    [ "com.lasalle.eco_classroom_mobile.Salle.Grandeur", "enumcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle_1_1_grandeur.html", null ],
+    [ "MesureCO2", "struct_mesure_c_o2.html", null ],
     [ "Mesures", "class_mesures.html", null ],
     [ "View.OnClickListener", null, [
       [ "com.lasalle.eco_classroom_mobile.VueSalle", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html", null ]
