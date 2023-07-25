@@ -5,33 +5,39 @@
 # Le projet eco-classroom 2023
 
 - [Le projet eco-classroom 2023](#le-projet-eco-classroom-2023)
+  - [Fonctionnalités](#fonctionnalit%C3%A9s)
   - [Documentation du code](#documentation-du-code)
+  - [Présentations](#pr%C3%A9sentations)
+  - [Vidéo](#vid%C3%A9o)
+  - [Diagramme de classes](#diagramme-de-classes)
+  - [Screenshots](#screenshots)
+  - [Historique des versions](#historique-des-versions)
+    - [1.0](#10)
+    - [0.2](#02)
+    - [0.1](#01)
   - [Base de données](#base-de-donn%C3%A9es)
   - [MQTT](#mqtt)
     - [Qt MQTT](#qt-mqtt)
     - [Paho MQTT (Android)](#paho-mqtt-android)
-  - [Versions](#versions)
-    - [1.0](#10)
-    - [0.2](#02)
-    - [0.1](#01)
-  - [Diagramme de classes](#diagramme-de-classes)
   - [Auteurs](#auteurs)
 
 ---
 
-Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules connectés afin de détecter et mesurer l’état de celle-ci.
+Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules (sonde et détection) connectés afin de détecter (fenêtre, lumière et présence) et mesurer (température, hygrométrie et co2) l’état de celle-ci.
 
 ![](images/modules.png)
 
-Les informations seront accessibles à partir d’une tablette ou d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.
+Les informations seront accessibles à partir d’une tablette et d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.
 
 ![](images/deploiement.png)
 
-- Android :
+## Fonctionnalités
+
+- Version Android
 
 ![](images/uc-android.png)
 
-- Qt :
+- Version Qt
 
 ![](images/uc-qt.png)
 
@@ -39,9 +45,62 @@ Les informations seront accessibles à partir d’une tablette ou d’une applic
 
 https://btssn-lasalle-84.github.io/eco-classroom-2023/
 
+## Présentations
+
+Diaporamas étudiants IR :
+
+- Android :
+    - Jérémy MERCKLEN : [Revue finale - Mercklen.pptx](./diaporamas/Revue%20finale%20-%20Mercklen.pptx)
+
+- Qt :
+    - Baptiste COCHET : [Revue finale - Cochet.pptx](./diaporamas/Revue%20finale%20-%20Cochet.pptx)
+    - Célian SUBIRANA : [Revue finale - Subirana.pptx](./diaporamas/Revue%20finale%20-%20Subirana.pptx)
+
+## Vidéo
+
+https://www.youtube.com/@projets-btssn-lasalle84
+
+## Diagramme de classes
+
+- Android :
+
+![](images/dc-android.png)
+
+- Qt :
+
+![](images/dc-qt.png)
+
+## Screenshots
+
+- Android :
+
+![](images/screenshot-android.gif)
+
+- PC Desktop Qt :
+
+![](images/screenshot-qt-salles-v1.1.png)
+
+![](images/screenshot-qt-salle-v1.0.png)
+
+## Historique des versions
+
+![](images/livraisons.png)
+
+### 1.0
+
+![](images/jira-tickets-v1.0.png)
+
+### 0.2
+
+![](images/jira-tickets-v0.2.png)
+
+### 0.1
+
+![](images/jira-tickets-v0.1.png)
+
 ## Base de données
 
-Base de données MySQL 8.0 `ecoclassroom` hébergée sur www.db4free.net (pour les tests) :
+Base de données MySQL 8.0 `ecoclassroom` hébergée sur www.db4free.net (pour les tests) et en local (pour la phase de production) :
 
 ![](sql/eco-classroom-v0.2.png)
 
@@ -397,68 +456,6 @@ dependencies {
 
 </manifest>
 ```
-
-## Versions
-
-![](images/livraisons.png)
-
-### 1.0
-
-- Android :
-
-![](images/screenshot-android-salles-v1.0.png)
-
-![](images/screenshot-android-salle-v1.0.png)
-
-![](images/screenshot-android-choix-v1.0.png)
-
-![](images/screenshot-android-interventions-v1.0.png)
-
-![](images/screenshot-android-libres-v1.0.png)
-
-- PC Desktop Qt :
-
-![](images/screenshot-qt-salles-v1.0.png)
-
-![](images/screenshot-qt-salle-v1.0.png)
-
-### 0.2
-
-![](images/jira-tickets-v0.2.png)
-
-- Android :
-
-![](images/screenshot-android-salles-v0.2.png)
-
-![](images/screenshot-android-interventions-v0.2.png)
-
-- PC Desktop Qt :
-
-![](images/screenshot-qt-salles-v0.2.png)
-
-![](images/screenshot-qt-salle-v0.2.png)
-
-### 0.1
-
-![](images/jira-tickets-v0.1.png)
-
-- Android :
-
-![](images/screenshot-android-salles-v0.1.png)
-
-- PC Desktop Qt :
-
-![](images/screenshot-qt-salles-v0.1.png)
-
-## Diagramme de classes
-
-- Android :
-
-![](images/dc-android.png)
-
-- Qt :
-
-![](images/dc-qt.png)
 
 ## Auteurs
 

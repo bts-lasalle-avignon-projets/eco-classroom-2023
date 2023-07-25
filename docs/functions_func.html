@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">eco-classroom
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -87,6 +87,10 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 &#160;
 
 <h3><a id="index_a"></a>- a -</h3><ul>
+<li>actualiserSalles()
+: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a7a6cbdfc6b283392a7b4d598797103e2">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
+, <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5180e99528935a9703666d67b50b67de">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
+</li>
 <li>AdaptateurSalle()
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle.html#a81d14fe9e714f8c7654460f24faab756">com.lasalle.eco_classroom_mobile.AdaptateurSalle</a>
 </li>
@@ -106,10 +110,13 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 : <a class="el" href="class_eco_classroom.html#a76885b772d26d3ab992640e66d19935c">EcoClassroom</a>
 </li>
 <li>afficherInformationsSalle()
-: <a class="el" href="class_eco_classroom.html#a21d6124160dfe86724bdf522bfcd703b">EcoClassroom</a>
+: <a class="el" href="class_eco_classroom.html#afa910dff30ea20191f0f9211a5dcfa9c">EcoClassroom</a>
 </li>
 <li>afficherNiveauICONE()
-: <a class="el" href="class_salle.html#ae30b58295e77a504728f0a4dad764196">Salle</a>
+: <a class="el" href="class_eco_classroom.html#ae131e5f0b91bb02d9ced1de3511d36d4">EcoClassroom</a>
+</li>
+<li>afficherNiveauQualiteAir()
+: <a class="el" href="class_eco_classroom.html#ab7695cb6fc0104af54b38bd60ec3f850">EcoClassroom</a>
 </li>
 <li>afficherSalles()
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ab5c656d3ebc4ced0212c6188154e93aa">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
@@ -121,7 +128,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#acdf0e523df458377f2aafafc3232cc89">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
 </li>
 <li>alerterDepassementSeuil()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a4ee07b83a7a5815737ebba3099da7334">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
+: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a87dffda02875150c7e9ca4d9057acc7e">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
 </li>
 <li>alerterDepassementSeuilCO2()
 : <a class="el" href="class_eco_classroom.html#a2ed1b225651a29b05ceda8df32376531">EcoClassroom</a>
@@ -130,496 +137,13 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 : <a class="el" href="class_communication_m_q_t_t.html#ac07d3d720cf47165ec46ba1814aafdba">CommunicationMQTT</a>
 </li>
 </ul>
-
-
-<h3><a id="index_b"></a>- b -</h3><ul>
-<li>BaseDeDonnees()
-: <a class="el" href="class_base_de_donnees.html#ac4d0c514f439b3a19dc35c159955373a">BaseDeDonnees</a>
-, <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a0ff6f3e0e35af981863a47a90a3c8440">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-</ul>
-
-
-<h3><a id="index_c"></a>- c -</h3><ul>
-<li>calculerIADI()
-: <a class="el" href="class_salle.html#a93caa14375771fc7eb74d89988d8149e">Salle</a>
-</li>
-<li>calculerIndiceBrute()
-: <a class="el" href="class_mesures.html#a79a0503072c90963090685296cabb8e9">Mesures</a>
-</li>
-<li>calculerIndiceICONE()
-: <a class="el" href="class_mesures.html#a794612ebb5a3658cbe84f258f69929e0">Mesures</a>
-</li>
-<li>calculerProportionSeuilN1()
-: <a class="el" href="class_mesures.html#a21f2e4a60e2b2494d5e9fdc98a642dc1">Mesures</a>
-</li>
-<li>calculerProportionSeuilN2()
-: <a class="el" href="class_mesures.html#a9e0dc137d650a76c77ac5b2e9d1a32dc">Mesures</a>
-</li>
-<li>calculerTHI()
-: <a class="el" href="class_salle.html#ad0b3e59bda949445ad8896576dcfd2e8">Salle</a>
-</li>
-<li>chargerSalles()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#ac0cedd80d69c8a161332e91197f4825a">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-, <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8969226479c4b78e867d9f4413126723">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-, <a class="el" href="class_eco_classroom.html#a4ed720d5e5f5eb570973fd2979f74600">EcoClassroom</a>
-</li>
-<li>coloriserFondCellule()
-: <a class="el" href="class_eco_classroom.html#a8ee3b09cbc6d93a69aca6c321ebf2878">EcoClassroom</a>
-</li>
-<li>CommunicationMQTT()
-: <a class="el" href="class_communication_m_q_t_t.html#a7a411ac53e1a014c941d0684c2cced2e">CommunicationMQTT</a>
-</li>
-<li>configurerElementImage()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#ac5cdb06b5ee59fa599f6b1089f0b1013">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-<li>configurerElementsImage()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a7e88dcad5aa11ee9aa5dc4e74391862c">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-<li>configurerElementsTexte()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a7cedef6ea9233ceb6914c01f5a26ff02">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-<li>configurerElementTexte()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#af327f39dd4ccb7a2ff6533f7c940a087">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-<li>connecter()
-: <a class="el" href="class_base_de_donnees.html#a6a3823ef2aa71eb4ea079a1a14585403">BaseDeDonnees</a>
-, <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a08564ea7dccde161d6eac4b8879401bb">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-<li>creerElementsImageCellule()
-: <a class="el" href="class_eco_classroom.html#a7202d1269288577637289d47cd51aac8">EcoClassroom</a>
-</li>
-<li>creerElementsTexteCellule()
-: <a class="el" href="class_eco_classroom.html#aa88022dd5c6edb85177cd9ee5d433d7e">EcoClassroom</a>
-</li>
-</ul>
-
-
-<h3><a id="index_d"></a>- d -</h3><ul>
-<li>deconnecter()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#ae022ff0b4923d637f8d392cb908aa252">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-<li>demarrer()
-: <a class="el" href="class_communication_m_q_t_t.html#a6d3f7a65eb225f6a941c0c5d064663f5">CommunicationMQTT</a>
-</li>
-<li>determinerIndiceICONE()
-: <a class="el" href="class_mesures.html#a74bac008e7b5e069e800128ed8a1cdf7">Mesures</a>
-</li>
-<li>detruireInstance()
-: <a class="el" href="class_base_de_donnees.html#a457401c0816b888c77ce915997545f4e">BaseDeDonnees</a>
-</li>
-<li>doInBackground()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees_1_1_connexion_my_sql.html#aa225016e39fd5e581ebf940f933d4645">com.lasalle.eco_classroom_mobile.BaseDeDonnees.ConnexionMySql</a>
-</li>
-</ul>
-
-
-<h3><a id="index_e"></a>- e -</h3><ul>
-<li>EcoClassroom()
-: <a class="el" href="class_eco_classroom.html#a1e5388a69dbcbc05a0fa02461e330b18">EcoClassroom</a>
-</li>
-<li>effacerSalles()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a9560339cbc6d40155db4f3444c410b56">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-, <a class="el" href="class_eco_classroom.html#a52a65283c9dc06dd2fc433b1e13f0db1">EcoClassroom</a>
-</li>
-<li>effacerTableauSalles()
-: <a class="el" href="class_eco_classroom.html#ae16556db78a2a0c75434e1cf34d927d2">EcoClassroom</a>
-</li>
-<li>estConnecte()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a735f54c2c183a595c9a9a5ba947491f5">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-<li>estConnectee()
-: <a class="el" href="class_base_de_donnees.html#a41e8dae338932b87ad54477b86abc261">BaseDeDonnees</a>
-</li>
-<li>estSeuilCo2Depasse()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a6602b752487f9b5d5b2fc5c7202d3dd1">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>estSeuilHumiditeDepasse()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a3c6b45c5a1d5296f43546a1cf83f9876">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>estSeuilTemperatureDepasse()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a8e01f76beb2faccdcbef0f1f982c1394">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>EtatsSalle()
-: <a class="el" href="class_etats_salle.html#a14e5994507157abeaec98ab1f90eede6">EtatsSalle</a>
-</li>
-<li>executer()
-: <a class="el" href="class_base_de_donnees.html#aa8de5f8f8bb17edc43f5c0ee33712081">BaseDeDonnees</a>
-</li>
-<li>executerRequete()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a421bffe6f14c01bee64695e7b6a9745d">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-</ul>
-
-
-<h3><a id="index_f"></a>- f -</h3><ul>
-<li>filtrerSalles()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a3f2a6e866dcfa73d34693025f193aa98">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-</ul>
-
-
-<h3><a id="index_g"></a>- g -</h3><ul>
-<li>getClient()
-: <a class="el" href="class_communication_m_q_t_t.html#aecfa296bf002b9896b530cc7dd702f6b">CommunicationMQTT</a>
-</li>
-<li>getCo2()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a73bdca9948d6787220ed252e467e3a41">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>getCO2()
-: <a class="el" href="class_mesures.html#a64d21412e2f682f67e494bd0d9c60f4e">Mesures</a>
-, <a class="el" href="class_salle.html#a73304c00e15c61643ab603ca6e1be3e7">Salle</a>
-</li>
-<li>getCo2Max()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#afd0ed0f9fada0a0742fdd90c045ca1f5">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-<li>getConfortThermique()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a76f6f9c5627220ec63f561a5dd9313de">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>getDescription()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#af45b1b3939c288866ed4c63a9c00a92a">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#a24ee6382d9a0c25211ab576ab6ce4a1d">Salle</a>
-</li>
-<li>getEclairementMoyen()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a211ae092ab08a644f3e579efcf20aa03">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-<li>getEstOccupe()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a8a2ff88ae400dc410b9824c84b8c9bb4">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>getEtatFenetre()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a919ba325ff6babec6d92b4d6597475ad">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>getEtatLumiere()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a031cba9f171b039af6f66658623b5bb4">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>getFenetre()
-: <a class="el" href="class_etats_salle.html#a4989a8900d08559072fd1d90f7eced67">EtatsSalle</a>
-, <a class="el" href="class_salle.html#ae2c66520fb7f7865086e5d9b94b8b286">Salle</a>
-</li>
-<li>getHumidite()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aa0069058d0d574cddb4407d01cd7ff62">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_mesures.html#aa2dfd2bef81f5cc6be1bbd77f704a2e5">Mesures</a>
-, <a class="el" href="class_salle.html#a41062541db89e8b6e5f13a26553b0c13">Salle</a>
-</li>
-<li>getHumiditeMax()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a951b2005cc6f77ea84039f46e657de27">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-<li>getHumiditeMin()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#ae39cbf84798dd1c50f7ade82f22914ce">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-<li>getIndiceConfinement()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#aef6c23d0a00831160ff8302a9e2ba814">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-<li>getIndiceICONE()
-: <a class="el" href="class_salle.html#a5194a05f4938770fa994407e08c9b37b">Salle</a>
-</li>
-<li>getInstance()
-: <a class="el" href="class_base_de_donnees.html#a1cea5a739386ba076c7f265205e82608">BaseDeDonnees</a>
-, <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a9c2484cfb87f90e46cf878eb7803abb2">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-<li>getItemCount()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle.html#a8cd49ac2a9df666ee33cd54117ac7d04">com.lasalle.eco_classroom_mobile.AdaptateurSalle</a>
-</li>
-<li>getLumiere()
-: <a class="el" href="class_etats_salle.html#a50b018b56f584c291f74f8f7da5411a4">EtatsSalle</a>
-, <a class="el" href="class_salle.html#ab9788caa3624b9e548382fac0222cc6e">Salle</a>
-</li>
-<li>getLuminositeMin()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a913cc224f9fb8769947288c366c49c0c">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-<li>getNom()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a57828ffa9993506a30c303e4e58d5cee">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#a1f7660202a3d41158770f3411ab86f59">Salle</a>
-</li>
-<li>getOccupation()
-: <a class="el" href="class_etats_salle.html#a0e6027f16193ec7a987f4e15e2aaa378">EtatsSalle</a>
-, <a class="el" href="class_salle.html#a3c2bd67f09e408c24c5ed537a1d1a0f5">Salle</a>
-</li>
-<li>getQualiteAir()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ae10ab9f29a61642a1cc3071906b74055">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#a962b0e0b549182a045cc1b66ea8b1344">Salle</a>
-</li>
-<li>getSeuils()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a0488972932fb40ebeb41e501debaa340">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>getSuperficie()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ad45fcfb39b19d11c977bf4ed7dc98dcd">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#a5db7cabc69dec0642da5fb0a0d6b81e7">Salle</a>
-</li>
-<li>getTemperature()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a3d8e2ddddaf8418d733ce81b64416e59">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_mesures.html#a38f36883f3abd9e00b86825330e8564e">Mesures</a>
-, <a class="el" href="class_salle.html#a01d0cd328d66db3162e0f81a8186eb76">Salle</a>
-</li>
-<li>getTemperatureMax()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a2b1649b6269c5cc45898c31fc3e9f948">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-<li>getTemperatureMin()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a5e5098d357666b52b2a386e310761170">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-</ul>
-
-
-<h3><a id="index_i"></a>- i -</h3><ul>
-<li>initialiserActualisationSalles()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a1b819adb2d00a60fefb8ce91c75cc348">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>initialiserBaseDeDonnees()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a7577dbb1fdc7c7926e48181a0dc2265f">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>initialiserFenetreInformations()
-: <a class="el" href="class_eco_classroom.html#af6c941b62c224401d7cdbd6d9782143b">EcoClassroom</a>
-</li>
-<li>initialiserGUI()
-: <a class="el" href="class_eco_classroom.html#a2b89b9a96c8bec69d565608da23bd7fc">EcoClassroom</a>
-</li>
-<li>initialiserHandler()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a09664767e201df417e37f6b2a0cc7046">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>initialiserListeDeroulante()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a47fcd5de1d545b82cccc5a9f9d8f6689">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>initialiserTable()
-: <a class="el" href="class_eco_classroom.html#a12a0119129135f8407bfef87dffc375e">EcoClassroom</a>
-</li>
-<li>initialiserVueSalles()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5958f50aab2512f6a0d4b0861a149a77">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>initialiserWidgets()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a239eb44e0e69020a27b30411e8735a24">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-<li>insererElementsCellule()
-: <a class="el" href="class_eco_classroom.html#a5ea01aa6635cd50a3cb227cc20e153f2">EcoClassroom</a>
-</li>
-<li>installerGestionEvenements()
-: <a class="el" href="class_eco_classroom.html#a213a38cecb1a12a1dff6655586fa63f1">EcoClassroom</a>
-</li>
-<li>instancierWidgets()
-: <a class="el" href="class_eco_classroom.html#acc910ea6a9a7a5f055f9ee67cebbe7f4">EcoClassroom</a>
-</li>
-<li>interpreterIndiceConfort()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a9c18f44ecd5afcaa6b491a630e302c9c">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-<li>interpreterIndiceQualiteAir()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#ae2c05e5b8ab298a6e65bca7af7a902cb">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-</ul>
-
-
-<h3><a id="index_m"></a>- m -</h3><ul>
-<li>Mesures()
-: <a class="el" href="class_mesures.html#a72e91c28750f75eb318cbda07acb6832">Mesures</a>
-</li>
-</ul>
-
-
-<h3><a id="index_n"></a>- n -</h3><ul>
-<li>notifierDepassement()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a6736d34e9c7ce8f27014e088be6212e8">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>notifierSignalementConfinement()
-: <a class="el" href="class_eco_classroom.html#a4c2dc3ed7e0f70b04c78f8488308aac0">EcoClassroom</a>
-</li>
-</ul>
-
-
-<h3><a id="index_o"></a>- o -</h3><ul>
-<li>onBindViewHolder()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle.html#aa68245a8d41c859527fa345d905d0b2a">com.lasalle.eco_classroom_mobile.AdaptateurSalle</a>
-</li>
-<li>onClick()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a4f3746c4cfbc8beff28bd0f78958b477">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-<li>onCreate()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a8f6624adefb30169b64d06a35946f378">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>onCreateViewHolder()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle.html#ab2c24a0fb4b88c477523a2a5dbb04225">com.lasalle.eco_classroom_mobile.AdaptateurSalle</a>
-</li>
-<li>onDestroy()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a36a9d74e45c8aaeafc5e85a2ac33927e">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>onPause()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ac6063dce1a6ab47dab4b3be2ab0cf652">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>onPostExecute()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees_1_1_connexion_my_sql.html#a39eba5c33b2cb74fc489439f7de96f76">com.lasalle.eco_classroom_mobile.BaseDeDonnees.ConnexionMySql</a>
-</li>
-<li>onProgressUpdate()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees_1_1_connexion_my_sql.html#a950817ed799ff39968d73893746d4037">com.lasalle.eco_classroom_mobile.BaseDeDonnees.ConnexionMySql</a>
-</li>
-<li>onResume()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a5cacf28f3daf2f28e2b37e8d0500d9d7">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>onStart()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a7edde7f43ff9355604e2d7e57c9381ce">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>onStop()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a1d3377bb625ea8274784c428406583a7">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-</ul>
-
-
-<h3><a id="index_p"></a>- p -</h3><ul>
-<li>personnaliserElementsImage()
-: <a class="el" href="class_eco_classroom.html#ac41b125d389ce8d072a2c3e1d18503e8">EcoClassroom</a>
-</li>
-<li>personnaliserElementsTexte()
-: <a class="el" href="class_eco_classroom.html#a6d1b5c2ab19b0f07b8954bffd711ed9f">EcoClassroom</a>
-</li>
-</ul>
-
-
-<h3><a id="index_r"></a>- r -</h3><ul>
-<li>recevoirMessageMQTT()
-: <a class="el" href="class_eco_classroom.html#a9163a8a6ca6aa6d8135309b6c435b3a7">EcoClassroom</a>
-</li>
-<li>reconnecter()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a89357a1cc8a3648400df37a8bfe95958">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-<li>recuperer()
-: <a class="el" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">BaseDeDonnees</a>
-</li>
-<li>redimensionnerHauteurTable()
-: <a class="el" href="class_eco_classroom.html#a10bde24012d3119c1fa8d080c8adac91">EcoClassroom</a>
-</li>
-</ul>
-
-
-<h3><a id="index_s"></a>- s -</h3><ul>
-<li>sAbonner()
-: <a class="el" href="class_communication_m_q_t_t.html#acd455d9897cb24d84a24724d5423891b">CommunicationMQTT</a>
-</li>
-<li>Salle()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#af693d2295f3bfc0c8d8118647b4fbffe">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#a4cb05b76fb2b5430ac2bf903b8f75906">Salle</a>
-</li>
-<li>seConnecter()
-: <a class="el" href="class_communication_m_q_t_t.html#ae685693177ee02a7bafd1379b7da4abf">CommunicationMQTT</a>
-</li>
-<li>seDeconnecter()
-: <a class="el" href="class_communication_m_q_t_t.html#a960f346a3e13f53d7522058e4f980914">CommunicationMQTT</a>
-</li>
-<li>selectionner()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a370be4f2d2fe855df312b13c571ac050">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-<li>selectionnerSalle()
-: <a class="el" href="class_eco_classroom.html#a21e3febf07b09a89f7e9902ddb0d85b8">EcoClassroom</a>
-</li>
-<li>setCo2()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aaac5cbbd9a249d1054413f90d4982069">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>setCO2()
-: <a class="el" href="class_mesures.html#a10996035a4b02757fd1f521aca5026ba">Mesures</a>
-, <a class="el" href="class_salle.html#a1d11e3f9d4cd0f11d8f0148d4dd29ab9">Salle</a>
-</li>
-<li>setConfortThermique()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a2805eebddd160be8b8ffb88e9e0e78b7">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>setDescription()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a9a7096b1260d4a2424f7778fd2e117f5">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#ab72ef4bfcfe50c6f04f691311c1bbe28">Salle</a>
-</li>
-<li>setEstOccupe()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ac77c6f105d19778002db2ed96abf9c7b">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>setEtatFenetre()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aa6727da3c9ae1dd373f933b0089e459d">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>setEtatLumiere()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ae9392cec2bbf9bae10266905fb046f9f">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>setFenetre()
-: <a class="el" href="class_etats_salle.html#adb6b50fb5c20dcd864fb1b2123282216">EtatsSalle</a>
-</li>
-<li>setHandler()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#aab78293f5d7f46d89cad90b076bc5715">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
-</li>
-<li>setHumidite()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a3d3b8c137ab73f68187d6affd2331012">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_mesures.html#aee61e9e7108b1a9b9057cc5a17b4516f">Mesures</a>
-</li>
-<li>setLumiere()
-: <a class="el" href="class_etats_salle.html#a2a3aa29a3ffd115fc72e43672c9870c3">EtatsSalle</a>
-</li>
-<li>setNom()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a8a12664303171c55e273edfc9e4aa2c6">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#a9640a07eaa76b4e280b3f6d4c900f17c">Salle</a>
-</li>
-<li>setOccupation()
-: <a class="el" href="class_etats_salle.html#a58f6bbffeceaf795ad5290be9f63c079">EtatsSalle</a>
-</li>
-<li>setQualiteAir()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#aa505d6a2ac8a7a4588a453814394a06c">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>setSalles()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a14742de19f29a8a23c06fb1dd4e5b608">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
-</li>
-<li>setSeuils()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a02fbe904c17af9c013af7e7de2237b47">com.lasalle.eco_classroom_mobile.Salle</a>
-</li>
-<li>setSuperficie()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ad274ee4ef5e989a763e25e261510bccd">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#aff2ba088d51acf6f82649898a8662baf">Salle</a>
-</li>
-<li>setTemperature()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#afb1c8b6a0a864b9d091c0b66ed77df54">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_mesures.html#a6370bd7152282bf33e106bf223d5d9c5">Mesures</a>
-</li>
-<li>Seuils()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a1246cfa52dac559e81e738b233d0eda1">com.lasalle.eco_classroom_mobile.Seuils</a>
-</li>
-<li>simulerMesureICONE()
-: <a class="el" href="class_eco_classroom.html#a0448d409a3e866019027f586c9005b1c">EcoClassroom</a>
-</li>
-</ul>
-
-
-<h3><a id="index_t"></a>- t -</h3><ul>
-<li>traiterNouveauMessageMQTT()
-: <a class="el" href="class_eco_classroom.html#a7ab2f2ba5b3bcacca0e755fd2106b6ea">EcoClassroom</a>
-</li>
-</ul>
-
-
-<h3><a id="index_u"></a>- u -</h3><ul>
-<li>useAppContext()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_example_instrumented_test.html#ac6b25ab12fec360593007f1aae9f1b75">com.lasalle.eco_classroom_mobile.ExampleInstrumentedTest</a>
-</li>
-</ul>
-
-
-<h3><a id="index_v"></a>- v -</h3><ul>
-<li>VueSalle()
-: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a0321460683d5ec135aec6efc40566153">com.lasalle.eco_classroom_mobile.VueSalle</a>
-</li>
-</ul>
-
-
-<h3><a id="index__7E"></a>- ~ -</h3><ul>
-<li>~BaseDeDonnees()
-: <a class="el" href="class_base_de_donnees.html#a5dc474cdbe003644fb0ca7b8f2ec6b93">BaseDeDonnees</a>
-</li>
-<li>~CommunicationMQTT()
-: <a class="el" href="class_communication_m_q_t_t.html#aa87d3ee77f58d5508b235c00d67278fd">CommunicationMQTT</a>
-</li>
-<li>~EcoClassroom()
-: <a class="el" href="class_eco_classroom.html#af5c927831b4afe8a57e270fa816fbfdc">EcoClassroom</a>
-</li>
-<li>~EtatsSalle()
-: <a class="el" href="class_etats_salle.html#a82f0e0a01c5b55207310133028365f25">EtatsSalle</a>
-</li>
-<li>~Mesures()
-: <a class="el" href="class_mesures.html#a4bb192b80fbf2c0f9aea5911ce29c652">Mesures</a>
-</li>
-</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:49:10 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 13:52:49 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

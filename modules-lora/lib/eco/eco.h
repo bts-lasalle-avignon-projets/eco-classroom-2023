@@ -5,11 +5,14 @@
 
 #define DEBUG_ECO
 
+// #define SIMULATION_ALEATOIRE
+
 /**
  * @def PERIODE
- * @brief La période d'envoi en ms des messages LoRa pour une salle
+ * @brief La période d'envoi en ms des messages LoRa pour une salle (1s = 1
+ * minute)
  */
-#define PERIODE 5000 // en ms
+#define PERIODE 4000 // en ms
 
 /**
  * @def NB_SALLES
@@ -23,18 +26,41 @@
  */
 enum TypeMesure
 {
-    Inconnu = -1,
+    MesureInconnue = -1,
     Temperature,
     Humidite,
-    Confort,
-    Luminosite,
     CO2,
-    Air,
+    NB_TYPES_MESURE
+};
+
+/**
+ * @enum TypeDetection
+ * @brief Les differents types de détection
+ */
+enum TypeDetection
+{
+    DetectionInconnu = -1,
     Fenetres,
     Lumieres,
     Occupation,
-    NB_TYPES_MESURE
+    NB_TYPES_DETECTION
 };
+
+/**
+ * @enum Salle
+ * @brief Les differents salles
+ */
+enum Salle
+{
+    Inconnue = -1,
+    B_11,
+    B_20,
+    B_21,
+    B_22,
+    NB_SALLES_ECO
+};
+
+#define NB_MESURES 30
 
 /**
  * @struct Message
@@ -59,17 +85,23 @@ extern bool     etatLumieres;
 extern bool     etatFenetres;
 extern bool     etatOccupation;
 
-String simulerMesure(char prefixeSalle = 'C');
-String getMesure(TypeMesure typeMesure);
-String getTemperature();
-String getHumidite();
-String getLuminosite();
-String getCO2();
-String getEtatFenetres();
-String getEtatLumieres();
-String getEtatOccupation();
+String simulerMesure(char       prefixeSalle,
+                     String     numeroSalle,
+                     TypeMesure typeMesure);
+String simulerDetection(char          prefixeSalle,
+                        String        numeroSalle,
+                        TypeDetection typeDetection);
+String getMesure(String nomSalle, TypeMesure typeMesure);
+String getDetection(String nomSalle, TypeDetection typeDetection);
+String getTemperature(Salle salle);
+String getHumidite(Salle salle);
+String getLuminosite(Salle salle);
+String getCO2(Salle salle);
+String getEtatFenetres(Salle salle);
+String getEtatLumieres(Salle salle);
+String getEtatOccupation(Salle salle);
 String getIndiceNiveauConfort();
 String getIndiceQualiteAir();
-bool   runEvery(unsigned long interval);
+Salle  getSalle(String nomSalle);
 
 #endif

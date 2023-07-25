@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tres_5fbien_755',['Tres_Bien',['../class_salle.html#a83d51b5dc34b7fb62d4a2e3f56cff0c0aef7a939feb438bc97980ded79ba27a0a',1,'Salle']]],
-  ['tres_5fmauvais_756',['Tres_Mauvais',['../class_salle.html#a83d51b5dc34b7fb62d4a2e3f56cff0c0a3321d71aa0337e23ecdbe25d35c4ab7a',1,'Salle']]],
-  ['type_5fdonnee_757',['TYPE_DONNEE',['../class_salle.html#a3e550af30ca5dff1be3ad7f653103073a738be22523b189c646e8945560890350',1,'Salle']]]
+  ['nb_5fcolonnes_5ftableau_902',['NB_COLONNES_TABLEAU',['../class_eco_classroom.html#a230901c498c09cb6e3a7b3c24f7ea11ca8e6dfb584593591802b2f84baf7b5870',1,'EcoClassroom']]],
+  ['nbfenetres_903',['NbFenetres',['../class_eco_classroom.html#a572cd6878afabdd8218c7c09bda30996a0f4ce2a6d238737a140d89a670c18f17',1,'EcoClassroom']]],
+  ['neutre_904',['Neutre',['../class_salle.html#a30bcb5654f7996a5fff16f2984d028b7a53df976bf761830e9de4116b6d3507a2',1,'Salle']]]
 ];

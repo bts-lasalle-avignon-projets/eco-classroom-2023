@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">eco-classroom
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -93,15 +93,22 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <h1>Le projet eco-classroom 2023</h1>
 <ul>
 <li><a href="#le-projet-eco-classroom-2023">Le projet eco-classroom 2023</a><ul>
+<li><a href="#fonctionnalit%C3%A9s">Fonctionnalités</a></li>
 <li><a href="#documentation-du-code">Documentation du code</a></li>
-<li><a href="#base-de-données">Base de données</a></li>
+<li><a href="#pr%C3%A9sentations">Présentations</a></li>
+<li><a href="#vid%C3%A9o">Vidéo</a></li>
+<li><a href="#diagramme-de-classes">Diagramme de classes</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+<li><a href="#historique-des-versions">Historique des versions</a><ul>
+<li><a href="#10">1.0</a></li>
+<li><a href="#02">0.2</a></li>
+<li><a href="#01">0.1</a></li>
+</ul>
+</li>
+<li><a href="#base-de-donn%C3%A9es">Base de données</a></li>
 <li><a href="#mqtt">MQTT</a><ul>
 <li><a href="#qt-mqtt">Qt MQTT</a></li>
 <li><a href="#paho-mqtt-android">Paho MQTT (Android)</a></li>
-</ul>
-</li>
-<li><a href="#versions">Versions</a><ul>
-<li><a href="#01">0.1</a></li>
 </ul>
 </li>
 <li><a href="#auteurs">Auteurs</a></li>
@@ -109,22 +116,65 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 </li>
 </ul>
 <hr  />
-<p>Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules connectés afin de détecter et mesurer l’état de celle-ci.</p>
+<p>Le système assure une supervision de salles dans un établissement scolaire. Chaque salle sera équipée de deux modules (sonde et détection) connectés afin de détecter (fenêtre, lumière et présence) et mesurer (température, hygrométrie et co2) l’état de celle-ci.</p>
 <p><img src="modules.png" alt="" class="inline"/></p>
-<p>Les informations seront accessibles à partir d’une tablette ou d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.</p>
+<p>Les informations seront accessibles à partir d’une tablette et d’une application PC permettant aux personnels d’assurer un suivi et d’intervenir en conséquence.</p>
 <p><img src="deploiement.png" alt="" class="inline"/></p>
+<h2>Fonctionnalités</h2>
 <ul>
-<li>Android :</li>
+<li>Version Android</li>
 </ul>
 <p><img src="uc-android.png" alt="" class="inline"/></p>
 <ul>
-<li>Qt :</li>
+<li>Version Qt</li>
 </ul>
 <p><img src="uc-qt.png" alt="" class="inline"/></p>
 <h2>Documentation du code</h2>
 <p><a href="https://btssn-lasalle-84.github.io/eco-classroom-2023/">https://btssn-lasalle-84.github.io/eco-classroom-2023/</a></p>
+<h2>Présentations</h2>
+<p>Diaporamas étudiants IR :</p>
+<ul>
+<li>Android :<ul>
+<li>Jérémy MERCKLEN : <a href="./diaporamas/Revue%20finale%20-%20Mercklen.pptx">Revue finale - Mercklen.pptx</a></li>
+</ul>
+</li>
+<li>Qt :<ul>
+<li>Baptiste COCHET : <a href="./diaporamas/Revue%20finale%20-%20Cochet.pptx">Revue finale - Cochet.pptx</a></li>
+<li>Célian SUBIRANA : <a href="./diaporamas/Revue%20finale%20-%20Subirana.pptx">Revue finale - Subirana.pptx</a></li>
+</ul>
+</li>
+</ul>
+<h2>Vidéo</h2>
+<p><a href="https://www.youtube.com/@projets-btssn-lasalle84">https://www.youtube.com/@projets-btssn-lasalle84</a></p>
+<h2>Diagramme de classes</h2>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="dc-android.png" alt="" class="inline"/></p>
+<ul>
+<li>Qt :</li>
+</ul>
+<p><img src="dc-qt.png" alt="" class="inline"/></p>
+<h2>Screenshots</h2>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="screenshot-android.gif" alt="" class="inline"/></p>
+<ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<p><img src="screenshot-qt-salles-v1.1.png" alt="" class="inline"/></p>
+<p><img src="screenshot-qt-salle-v1.0.png" alt="" class="inline"/></p>
+<h2>Historique des versions</h2>
+<p><img src="livraisons.png" alt="" class="inline"/></p>
+<h3>1.0</h3>
+<p><img src="jira-tickets-v1.0.png" alt="" class="inline"/></p>
+<h3>0.2</h3>
+<p><img src="jira-tickets-v0.2.png" alt="" class="inline"/></p>
+<h3>0.1</h3>
+<p><img src="jira-tickets-v0.1.png" alt="" class="inline"/></p>
 <h2>Base de données</h2>
-<p>Base de données MySQL 8.0 <code>ecoclassroom</code> hébergée sur www.db4free.net (pour les tests) :</p>
+<p>Base de données MySQL 8.0 <code>ecoclassroom</code> hébergée sur www.db4free.net (pour les tests) et en local (pour la phase de production) :</p>
 <p><img src="sql/eco-classroom-v0.2.png" alt="" class="inline"/></p>
 <div class="fragment"><div class="line"><span class="comment">-- LDD (langage de définition de données)</span></div>
 <div class="line"> </div>
@@ -445,54 +495,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">    &lt;/<span class="keywordtype">application</span>&gt;</div>
 <div class="line"> </div>
 <div class="line">&lt;/<span class="keywordtype">manifest</span>&gt;</div>
-</div><!-- fragment --><h2>Versions</h2>
-<p><img src="livraisons.png" alt="" class="inline"/></p>
-<h3>1.0</h3>
-<ul>
-<li>Android :</li>
-</ul>
-<p><img src="screenshot-android-salles-v1.0.png" alt="" class="inline"/></p>
-<p><img src="screenshot-android-salle-v1.0.png" alt="" class="inline"/></p>
-<p><img src="screenshot-android-choix-v1.0.png" alt="" class="inline"/></p>
-<p><img src="screenshot-android-interventions-v1.0.png" alt="" class="inline"/></p>
-<p><img src="screenshot-android-libres-v1.0.png" alt="" class="inline"/></p>
-<ul>
-<li>PC Desktop Qt :</li>
-</ul>
-<p><img src="screenshot-qt-salles-v1.0.png" alt="" class="inline"/></p>
-<p><img src="screenshot-qt-salle-v1.0.png" alt="" class="inline"/></p>
-<h3>0.2</h3>
-<p><img src="jira-tickets-v0.2.png" alt="" class="inline"/></p>
-<ul>
-<li>Android :</li>
-</ul>
-<p><img src="screenshot-android-salles-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-android-interventions-v0.2.png" alt="" class="inline"/></p>
-<ul>
-<li>PC Desktop Qt :</li>
-</ul>
-<p><img src="screenshot-qt-salles-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-qt-salle-v0.2.png" alt="" class="inline"/></p>
-<h3>0.1</h3>
-<p><img src="jira-tickets-v0.1.png" alt="" class="inline"/></p>
-<ul>
-<li>Android :</li>
-</ul>
-<p><img src="screenshot-android-salles-v0.1.png" alt="" class="inline"/></p>
-<ul>
-<li>PC Desktop Qt :</li>
-</ul>
-<p><img src="screenshot-qt-salles-v0.1.png" alt="" class="inline"/></p>
-<h2>Diagramme de classes</h2>
-<ul>
-<li>Android :</li>
-</ul>
-<p><img src="dc-android.png" alt="" class="inline"/></p>
-<ul>
-<li>Qt :</li>
-</ul>
-<p><img src="dc-qt.png" alt="" class="inline"/></p>
-<h2>Auteurs</h2>
+</div><!-- fragment --><h2>Auteurs</h2>
 <p>Étudiants IR :</p>
 <ul>
 <li>Jérémy MERCKLEN <a href="#" onclick="location.href='mai'+'lto:'+'mer'+'ck'+'len'+'je'+'rem'+'y@'+'gma'+'il'+'.co'+'m'; return false;">merck<span style="display: none;">.nosp@m.</span>lenj<span style="display: none;">.nosp@m.</span>eremy<span style="display: none;">.nosp@m.</span>@gma<span style="display: none;">.nosp@m.</span>il.co<span style="display: none;">.nosp@m.</span>m</a></li>
@@ -508,7 +511,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:49:09 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 13:52:48 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>
