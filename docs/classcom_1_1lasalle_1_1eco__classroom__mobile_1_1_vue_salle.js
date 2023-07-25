@@ -6,6 +6,7 @@ var classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle =
     [ "configurerElementsImage", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a7e88dcad5aa11ee9aa5dc4e74391862c", null ],
     [ "configurerElementsTexte", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a7cedef6ea9233ceb6914c01f5a26ff02", null ],
     [ "configurerElementTexte", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#af327f39dd4ccb7a2ff6533f7c940a087", null ],
+    [ "genererDonneesAffichage", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#ab8dbfd1c535228e179063299d5bef389", null ],
     [ "initialiserWidgets", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a239eb44e0e69020a27b30411e8735a24", null ],
     [ "interpreterIndiceConfort", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#a9c18f44ecd5afcaa6b491a630e302c9c", null ],
     [ "interpreterIndiceQualiteAir", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#ae2c05e5b8ab298a6e65bca7af7a902cb", null ],

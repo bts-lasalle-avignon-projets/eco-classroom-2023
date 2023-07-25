@@ -5,6 +5,7 @@ var classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees =
     [ "BaseDeDonnees", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#ac8866ce550ffc5cc705c49c014a55934", null ],
     [ "BaseDeDonnees", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#ae4315339267bf9e03709c4e5d49a50ae", null ],
     [ "BaseDeDonnees", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a4b0cc3fdb00b664709b91a79e4027aa5", null ],
+    [ "actualiserSalles", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a7a6cbdfc6b283392a7b4d598797103e2", null ],
     [ "chargerSalles", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#ac0cedd80d69c8a161332e91197f4825a", null ],
     [ "connecter", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a08564ea7dccde161d6eac4b8879401bb", null ],
     [ "deconnecter", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#ae022ff0b4923d637f8d392cb908aa252", null ],

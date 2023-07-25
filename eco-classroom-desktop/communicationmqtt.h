@@ -13,7 +13,8 @@
  * @def IP_BROKER_MQTT
  * @brief L'ip du broker MQTT (raspeberry pi zero)
  */
-#define IP_BROKER_MQTT "192.168.52.7"
+//#define IP_BROKER_MQTT "192.168.52.7"
+#define IP_BROKER_MQTT "192.168.1.20"
 //#define IP_BROKER_MQTT "127.0.0.1"
 
 /**
@@ -27,6 +28,7 @@
  * @brief La racine des topics pour l'abonnement
  */
 #define TOPIC_RACINE "salles/#"
+//#define TOPIC_SONDE_SALLES "salles/+/sonde/#"
 
 /**
  * @class CommunicationMQTT

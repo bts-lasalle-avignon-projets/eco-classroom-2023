@@ -78,6 +78,7 @@ void CommunicationMQTT::demarrer()
 {
     qDebug() << Q_FUNC_INFO;
     sAbonner(TOPIC_RACINE);
+    // sAbonner(TOPIC_SONDE_SALLES);
 }
 
 /**

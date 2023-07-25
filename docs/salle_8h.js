@@ -1,15 +1,18 @@
 var salle_8h =
 [
     [ "Salle", "class_salle.html", "class_salle" ],
+    [ "CHAUD", "salle_8h.html#a57228531780f9e479ed3f10dbde5204c", null ],
     [ "CONFINEMENT_ELEVE", "salle_8h.html#a976702a250b5382d33e82be312ae0544", null ],
     [ "CONFINEMENT_EXTREME", "salle_8h.html#a85aa8f35951bd3a8ee688af6dd79bf69", null ],
     [ "CONFINEMENT_FAIBLE", "salle_8h.html#a61ffb685ec026646cec7aacac3126148", null ],
     [ "CONFINEMENT_MOYEN", "salle_8h.html#a730bb0b470fb261a27508b0ce54db65f", null ],
     [ "CONFINEMENT_NUL", "salle_8h.html#aa400a4fd186bc4c69993d81cf5f5e025", null ],
     [ "CONFINEMENT_TRES_ELEVE", "salle_8h.html#aafcfdb2f03422bfef8cb71c588ed0ce1", null ],
-    [ "EXCELLENTE", "salle_8h.html#a6e0abf517d9796f236b49a329bca7a51", null ],
-    [ "MAUVAIS", "salle_8h.html#a290848e3a764857b26432c8c9d20399b", null ],
-    [ "MODERE", "salle_8h.html#ab843b79692ceef98f4b1dbb677fe7ae4", null ],
+    [ "FRAIS", "salle_8h.html#ad325d4097b014a7e86191e0a960a0133", null ],
+    [ "FROID", "salle_8h.html#ae2f5dbf446c075ebb3de98ddd5b51580", null ],
+    [ "LEGEREMENT_FRAIS", "salle_8h.html#a561cfa7e717295059342bf62ff646983", null ],
+    [ "LEGEREMENT_TIEDE", "salle_8h.html#a6067203c44f7b1f5817a4f6be1e73bdb", null ],
+    [ "NEUTRE", "salle_8h.html#a2388a496d52da687be6b20295c47664e", null ],
     [ "RACINE_TOPIC", "salle_8h.html#ab4a36d2487b75207233a1c05d8ccb331", null ],
     [ "SEUIL_ALERTE_CO2", "salle_8h.html#ad439d1891f2b3720ecd4e219abb34768", null ],
     [ "SEUIL_BAS_QUALITE_AIR_EXCELLENTE", "salle_8h.html#a473158666527326b875a559106ab59e8", null ],
@@ -23,7 +26,12 @@ var salle_8h =
     [ "SEUIL_HAUT_QUALITE_AIR_MODERE", "salle_8h.html#ada330a4eaa9bba561b9c03f1ebbfafe8", null ],
     [ "SEUIL_HAUT_QUALITE_AIR_TRES_BIEN", "salle_8h.html#a01e4ef4b377b00907d32ee92008e3951", null ],
     [ "SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS", "salle_8h.html#aa7033a8ef6e2f1f1ac51aebbdfca503f", null ],
-    [ "SEVERE", "salle_8h.html#a1c1d27fb75024a35fc7c65bdcfbd7b5b", null ],
-    [ "TRES_BIEN", "salle_8h.html#a28241868287535282961e3b52cbca4f4", null ],
-    [ "TRES_MAUVAIS", "salle_8h.html#ae87b724491f3bf6303fe4f699f357fbd", null ]
+    [ "SEUIL_THOM_FRAIS", "salle_8h.html#a22be07e4e26888c65e27d11441ff8ca6", null ],
+    [ "SEUIL_THOM_FROID", "salle_8h.html#aadd32369da3c542e2198ff1e7eac3292", null ],
+    [ "SEUIL_THOM_LEGEREMENT_FRAIS", "salle_8h.html#a7688db477f0fdf5349dd2a4cc9b94a74", null ],
+    [ "SEUIL_THOM_LEGEREMENT_TIEDE", "salle_8h.html#ab089c97a1fd8d340c4911ffa0c61eb88", null ],
+    [ "SEUIL_THOM_NEUTRE", "salle_8h.html#a90ebda5ad957a9aee405d02f4d722733", null ],
+    [ "SEUIL_THOM_TIEDE", "salle_8h.html#a0b3ba2f0ec76a2db70d570fe054f1ab9", null ],
+    [ "THI_INCONNU", "salle_8h.html#ae28ef1c2dcd9ade7481b491b745e97da", null ],
+    [ "TIEDE", "salle_8h.html#a4bbfaf25d1a51deaf0c266534a210a52", null ]
 ];

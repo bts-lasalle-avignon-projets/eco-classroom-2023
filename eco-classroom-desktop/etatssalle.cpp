@@ -60,7 +60,7 @@ bool EtatsSalle::getFenetre() const
     return fenetre;
 }
 
-/**
+/**mesures
  * @fn EtatsSalle::getOccupation
  * @brief Getter de l'attribut occupation
  * @return bool l'état de l'occupation dans la salle (true : Occupé)

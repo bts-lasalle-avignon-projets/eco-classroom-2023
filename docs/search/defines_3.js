@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['excellente_767',['EXCELLENTE',['../salle_8h.html#a6e0abf517d9796f236b49a329bca7a51',1,'salle.h']]]
+  ['frais_924',['FRAIS',['../salle_8h.html#ad325d4097b014a7e86191e0a960a0133',1,'salle.h']]],
+  ['froid_925',['FROID',['../salle_8h.html#ae2f5dbf446c075ebb3de98ddd5b51580',1,'salle.h']]]
 ];

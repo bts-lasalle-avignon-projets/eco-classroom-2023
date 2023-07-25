@@ -5,7 +5,7 @@
 #include "PubSubClient.h"
 
 #define DEBUG_MQTT
-#define NB_TENTATIVES_MQTT_MAX 3
+#define NB_TENTATIVES_MQTT_MAX 6
 #define ATTENTE_CONNEXION_MQTT 2000
 
 extern const char* mqttServer;

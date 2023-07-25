@@ -36,6 +36,24 @@ Salle::Salle(QString nom, unsigned int superficie, QString description) :
 }
 
 /**
+ * @brief Salle::getTypeMessage
+ * @param typeDonnee
+ * @return
+ */
+Salle::TypeMessage Salle::getTypeMessage(QString typeDonnee)
+{
+    QVector<QString> typesMessage = { "temperature", "humidite", "co2",
+                                      "lumiere",     "fenetre",  "presence" };
+
+    for(int i = 0; i < typesMessage.size(); i++)
+    {
+        if(typeDonnee == typesMessage[i])
+            return Salle::TypeMessage(i);
+    }
+    return Salle::TypeMessage::INCONNU;
+}
+
+/**
  * @brief Getter de l'attribut nom
  * @return string le nom de la salle
  */
@@ -60,33 +78,6 @@ unsigned int Salle::getSuperficie() const
 QString Salle::getDescription() const
 {
     return description;
-}
-
-/**
- * @brief Setter de l'attribut nom
- * @param nom
- */
-void Salle::setNom(QString nom)
-{
-    this->nom = nom;
-}
-
-/**
- * @brief Setter de l'attribut superficie
- * @param superficie
- */
-void Salle::setSuperficie(unsigned int superficie)
-{
-    this->superficie = superficie;
-}
-
-/**
- * @brief Setter de l'attribut description
- * @param description
- */
-void Salle::setDescription(QString description)
-{
-    this->description = description;
 }
 
 /**
@@ -120,38 +111,148 @@ unsigned int Salle::getCO2() const
 }
 
 /**
- * @brief Méthode qui évalue la qualité d'air grâce a l'attribut Co2 de l'objet
- * Salle
+ * @fn Salle::getIndiceQualiteAir() const
+ * @brief Méthode qui récupère l'indice de la Qualité de l'Air grâce a
+ * l'attribut Co2 de l'objet Salle
+ * @return int
  */
-QString Salle::getQualiteAir() const
+int Salle::getIndiceQualiteAir() const
 {
-    unsigned int valeurCO2 = getCO2();
-    if(valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_EXCELLENTE)
+    return indiceQualiteAir;
+}
+
+/**
+ * @fn Salle::getIndiceICONE
+ * @brief méthode qui calcule l'indice ICONE(indice de confinement) et qui le
+ * retourne
+ * @return
+ */
+int Salle::getIndiceICONE() const
+{
+    return indiceICONE;
+}
+
+void Salle::calculerIndiceICONE()
+{
+    indiceICONE = mesures->calculerIndiceICONE();
+    qDebug() << Q_FUNC_INFO << "indiceICONE" << indiceICONE;
+}
+
+/**
+ * @brief Salle::getTHI
+ * @return les différents niveaux après le calcul du THI
+ */
+QString Salle::getTHI() const
+{
+    switch(indiceConfortTHI)
     {
-        return EXCELLENTE;
+        case IndiceTHI::Inconnu:
+            return THI_INCONNU;
+            break;
+        case IndiceTHI::Froid:
+            return FROID;
+            break;
+        case IndiceTHI::Frais:
+            return FRAIS;
+            break;
+        case IndiceTHI::LegerementFrais:
+            return LEGEREMENT_FRAIS;
+            break;
+        case IndiceTHI::Neutre:
+            return NEUTRE;
+            break;
+        case IndiceTHI::LegerementTiede:
+            return LEGEREMENT_TIEDE;
+
+            break;
+        case IndiceTHI::Tiede:
+            return TIEDE;
+            break;
+        case IndiceTHI::Chaud:
+            return CHAUD;
+            break;
+        default:
+            return THI_INCONNU;
+            break;
     }
-    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_BIEN &&
-            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_BIEN)
-    {
-        return TRES_BIEN;
-    }
-    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MODERE &&
-            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MODERE)
-    {
-        return MODERE;
-    }
-    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MAUVAIS &&
-            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MAUVAIS)
-    {
-        return MAUVAIS;
-    }
-    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS &&
-            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS)
-    {
-        return TRES_MAUVAIS;
-    }
-    else
-        return SEVERE;
+}
+
+/**
+ * @fn Salle::getLumiere()
+ * @brief Getter qui récupère l'etat de la lumiere
+ */
+bool Salle::getLumiere() const
+{
+    if(etats != nullptr)
+        return etats->getLumiere();
+    return false;
+}
+
+/**
+ * @fn Salle::getFenetre()
+ * @brief Getter qui récupère l'etat de la fenetre
+ */
+bool Salle::getFenetre() const
+{
+    if(etats != nullptr)
+        return etats->getFenetre();
+    return false;
+}
+
+/**
+ * @fn Salle::getOccupation()
+ * @brief Getter qui récupère l'etat de l'occupation de la salle
+ */
+bool Salle::getOccupation() const
+{
+    if(etats != nullptr)
+        return etats->getOccupation();
+    return false;
+}
+
+/**
+ * @brief Setter de l'attribut nom
+ * @param nom
+ */
+void Salle::setNom(QString nom)
+{
+    this->nom = nom;
+}
+
+/**
+ * @brief Setter de l'attribut superficie
+ * @param superficie
+ */
+void Salle::setSuperficie(unsigned int superficie)
+{
+    this->superficie = superficie;
+}
+
+/**
+ * @brief Setter de l'attribut description
+ * @param description
+ */
+void Salle::setDescription(QString description)
+{
+    this->description = description;
+}
+
+/**
+ * @brief Salle::setTemperature
+ * @param temperature
+ */
+void Salle::setTemperature(unsigned int temperature)
+{
+    mesures->setTemperature(temperature);
+}
+
+/**
+ * @brief Salle::setHumidite
+ * @param humidite
+ */
+void Salle::setHumidite(unsigned int humidite)
+{
+    mesures->setHumidite(humidite);
 }
 
 /**
@@ -164,66 +265,108 @@ void Salle::setCO2(unsigned int co2)
 }
 
 /**
- * @fn Salle::getIndiceICONE
- * @brief méthode qui calcule l'indice ICONE(indice de confinement) et qui le
- * retourne
- * @return
+ * @fn Salle::setOccupation()
+ * @brief Setter qui attribut une valeur a l'attribut occupation de l'objet
+ * Salle
  */
-int Salle::getIndiceICONE()
+void Salle::setOccupation(bool occupation) const
 {
-    indiceICONE = mesures->calculerIndiceICONE();
-    return indiceICONE;
+    etats->setOccupation(occupation);
 }
 
 /**
- * @fn Salle::afficherNiveauICONE
- * @brief permet d'afficher le niveau ICONE par rapport à l'indice ICONE
- * @return
+ * @fn Salle::setOccupation()
+ * @brief Setter qui attribut une valeur a l'attribut lumiere de l'objet Salle
  */
-QString Salle::afficherNiveauICONE() const
+void Salle::setLumiere(bool lumiere) const
 {
-    if(indiceICONE == CONFINEMENT_NUL)
-        return "Nul";
-    if(indiceICONE == CONFINEMENT_FAIBLE)
-        return "Faible";
-    if(indiceICONE == CONFINEMENT_MOYEN)
-        return "Moyen";
-    if(indiceICONE == CONFINEMENT_ELEVE)
-        return "Élevé";
-    if(indiceICONE == CONFINEMENT_TRES_ELEVE)
-        return "Très Élevé";
-    if(indiceICONE == CONFINEMENT_EXTREME)
-        return "Extrême";
+    etats->setLumiere(lumiere);
+}
+
+/**
+ * @fn Salle::setOccupation()
+ * @brief Setter qui attribut une valeur a l'attribut fenetre de l'objet Salle
+ */
+void Salle::setFenetre(bool fenetre) const
+{
+    etats->setFenetre(fenetre);
+}
+
+void Salle::setIndiceTHI(int indiceTHI)
+{
+    this->indiceConfortTHI = indiceTHI;
+}
+
+void Salle::setIndiceQualiteAir(int indiceQualiteAir)
+{
+    this->indiceQualiteAir = indiceQualiteAir;
+}
+
+void Salle::setIndiceICONE(int indiceICONE)
+{
+    this->indiceICONE = indiceICONE;
+}
+
+void Salle::determinerIndiceQualiteAir()
+{
+    unsigned int valeurCO2 = getCO2();
+    if(valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_EXCELLENTE)
+        indiceQualiteAir = IndiceQualiteAir::Excellente;
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_BIEN &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_BIEN)
+        indiceQualiteAir = IndiceQualiteAir::Tres_Bien;
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MODERE &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MODERE)
+        indiceQualiteAir = IndiceQualiteAir::Modere;
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_MAUVAIS)
+        indiceQualiteAir = IndiceQualiteAir::Mauvais;
+    else if(valeurCO2 >= SEUIL_BAS_QUALITE_AIR_TRES_MAUVAIS &&
+            valeurCO2 <= SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS)
+        indiceQualiteAir = IndiceQualiteAir::Tres_Mauvais;
     else
-        return QString::number(indiceICONE);
+        indiceQualiteAir = IndiceQualiteAir::Severe;
 }
 
-/**
- * @brief Getter qui récupère l'etat de la lumiere
- */
-bool Salle::getLumiere() const
+void Salle::determinerIndiceTHI()
 {
-    if(etats != nullptr)
-        return etats->getLumiere();
-    return false;
+    double thom = mesures->calculerTHI();
+    qDebug() << Q_FUNC_INFO << "thom" << thom;
+    if(thom < SEUIL_THOM_FROID)
+    {
+        indiceConfortTHI = IndiceTHI::Froid;
+    }
+    else if(thom >= SEUIL_THOM_FROID && thom < SEUIL_THOM_FRAIS)
+    {
+        indiceConfortTHI = IndiceTHI::Frais;
+    }
+    else if(thom >= SEUIL_THOM_FRAIS && thom < SEUIL_THOM_LEGEREMENT_FRAIS)
+    {
+        indiceConfortTHI = IndiceTHI::LegerementFrais;
+    }
+    else if(thom >= SEUIL_THOM_LEGEREMENT_FRAIS && thom < SEUIL_THOM_NEUTRE)
+    {
+        indiceConfortTHI = IndiceTHI::Neutre;
+    }
+    else if(thom >= SEUIL_THOM_NEUTRE && thom < SEUIL_THOM_LEGEREMENT_TIEDE)
+    {
+        indiceConfortTHI = IndiceTHI::Tiede;
+    }
+    else if(thom >= SEUIL_THOM_LEGEREMENT_TIEDE && thom < SEUIL_THOM_TIEDE)
+    {
+        indiceConfortTHI = IndiceTHI::LegerementTiede;
+    }
+    else if(thom >= SEUIL_THOM_TIEDE)
+    {
+        indiceConfortTHI = IndiceTHI::Chaud;
+    }
+    else
+        indiceConfortTHI = IndiceTHI::Inconnu;
+    qDebug() << Q_FUNC_INFO << "indiceConfortTHI" << indiceConfortTHI
+             << getTHI();
 }
 
-/**
- * @brief Getter qui récupère l'etat de la fenetre
- */
-bool Salle::getFenetre() const
+int Salle::getIndiceTHI() const
 {
-    if(etats != nullptr)
-        return etats->getFenetre();
-    return false;
-}
-
-/**
- * @brief Getter qui récupère l'etat de l'occupation de la salle
- */
-bool Salle::getOccupation() const
-{
-    if(etats != nullptr)
-        return etats->getOccupation();
-    return false;
+    return indiceConfortTHI;
 }

@@ -1,7 +1,7 @@
 format 224
 "eco_classroom_mobile" // eco_classroom_mobile
-  revision 7
-  modified_by 42 "tv"
+  revision 8
+  modified_by 2 "btssn2"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -238,6 +238,184 @@ ${members}}
 	comment "<! constante de poids pour les paramètres du TextView dans le TableRow"
       end
 
+      attribute 136706 "CONFORT_FROID"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " -3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! indice correspondant au froid pour le THI"
+      end
+
+      attribute 136834 "CONFORT_FRAIS"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " -2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! indice correspondant au frais pour le THI"
+      end
+
+      attribute 136962 "CONFORT_LEGEREMENT_FRAIS"
+	class_attribute const_attribute private explicit_type "int"
+	init_value "
+      -1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! indice correspondant au légérement frais pour le THI"
+      end
+
+      attribute 137090 "CONFORT_NEUTRE"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! indice correspondant au neutre pour le THI"
+      end
+
+      attribute 137218 "CONFORT_LEGEREMENT_TIEDE"
+	class_attribute const_attribute private explicit_type "int"
+	init_value "
+      1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! indice correspondant au légérement tiède pour le THI"
+      end
+
+      attribute 137346 "CONFORT_TIEDE"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! indice correspondant au tiède pour le THI"
+      end
+
+      attribute 137474 "CONFORT_CHAUD"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! indice correspondant au chaud pour le THI"
+      end
+
+      attribute 137602 "AIR_EXCELLENT"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137730 "AIR_TRES_BIEN"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137858 "AIR_MODERE"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137986 "AIR_MAUVAIS"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 138114 "AIR_TRES_MAUVAIS"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 5"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 138242 "AIR_SEVERE"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 6"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
       classrelation 135210 // salle (<unidirectional association>)
 	relation 135210 --->
 	  a role_name "salle" private
@@ -344,6 +522,21 @@ Attributs
 	
 	comment "@brief Constructeur d'initialisation
 @param vueSalle La vue de la salle
+"
+      end
+
+      operation 136322 "genererDonneesAffichage"
+	private explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de génerer ce qu'il faut afficher dans le AlertDialog
+@return message Le message à afficher
 "
       end
 
@@ -454,6 +647,36 @@ Attributs
 	
 	comment "@brief Méthode permettant de gérer les clics sur les objets de la vue
 @param vue La vue où l'événement va arriver
+"
+      end
+
+      operation 136450 "interpreterIndiceConfort"
+	public explicit_return_type "String"
+	nparams 1
+	  param in name "indice" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode renvoyant à quoi correspond l'indice de confort
+"
+      end
+
+      operation 136578 "interpreterIndiceQualiteAir"
+	public explicit_return_type "String"
+	nparams 1
+	  param in name "indice" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode renvoyant à quoi correspond l'indice de qualitée de l'air
 "
       end
     end
@@ -670,6 +893,86 @@ ${members}}
 	mysql_decl ""
 	MysqlColumn
 	comment "!< le confort thermique par défaut"
+      end
+
+      class 128130 "Grandeur"
+	visibility public stereotype "enum"
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 135938 "PRESENCE"
+	  public type class_ref 128130 // Grandeur
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 136066 "FENETRE"
+	  public type class_ref 128130 // Grandeur
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 136194 "LUMIERE"
+	  public type class_ref 128130 // Grandeur
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 136322 "TEMPERATURE"
+	  public type class_ref 128130 // Grandeur
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 136450 "HUMIDITE"
+	  public type class_ref 128130 // Grandeur
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 136578 "CO2"
+	  public type class_ref 128130 // Grandeur
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
       end
 
       attribute 135594 "nom"
@@ -1299,6 +1602,19 @@ ${members}}
 @return boolean le seuil de CO2 est dépassé (oui/non)
 "
       end
+
+      operation 136194 "retournerGrandeur"
+	class_operation public return_type class_ref 128130 // Grandeur
+	nparams 1
+	  param in name "grandeur" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 135082 "EcoClassroom"
@@ -1481,6 +1797,16 @@ ${members}};
 "
 	    classrelation_ref 148650 // baseDeDonnees (<unidirectional association>)
 	  b parent class_ref 141866 // BaseDeDonnees
+      end
+
+      classrelation 134658 // clientMQTT (<unidirectional association>)
+	relation 134658 --->
+	  a role_name "clientMQTT" private
+	    comment "!< permet la connexion MQTT"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134658 // clientMQTT (<unidirectional association>)
+	  b parent class_ref 128002 // ClientMQTT
       end
 
       classrelation 162090 // handler (<unidirectional association>)
@@ -1714,6 +2040,22 @@ et détruite par le système Android)
 "
       end
 
+      operation 135554 "recevoirDonneesSalle"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "salle" type class_ref 134954 // Salle
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de mettre à jours les mesures et états de la salle
+@param salle La salle dont on veut les mesures et états
+"
+      end
+
       operation 164266 "setSalles"
 	public explicit_return_type "void"
 	nparams 1
@@ -1794,6 +2136,18 @@ et détruite par le système Android)
 "
       end
 
+      operation 135682 "actualiserSalles"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
       operation 164522 "filtrerSalles"
 	public explicit_return_type "void"
 	nparams 1
@@ -1806,6 +2160,20 @@ et détruite par le système Android)
 	
 	
 	comment "@brief Méthode qui permet de filtrer les salles à afficher
+"
+      end
+
+      operation 135810 "initialiserMQTT"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant d'initialiser la liaison avec le broker MQTT
 "
       end
 
@@ -1851,6 +2219,22 @@ et détruite par le système Android)
 "
       end
 
+      operation 135938 "traiterMessageMQTT"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "topicMQTT" explicit_type "String"
+	  param in name "messageMQTT" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de mettre les données MQTT recue dans les salles
+"
+      end
+
       operation 148650 "alerterDepassementSeuil"
 	public explicit_return_type "void"
 	nparams 0
@@ -1863,6 +2247,24 @@ et détruite par le système Android)
 	
 	comment "@brief Méthode permettant de vérifier et de notifier lors d'un dépassement de seuil dans une
 salle
+"
+      end
+
+      operation 136066 "alerterDepassementSeuil"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "salle" type class_ref 134954 // Salle
+	  param inout name "grandeur" type class_ref 128130 // Grandeur
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode permettant de vérifier si une grandeur d'une salle dépasse le seuil
+@param salle La salle à vérifier
+@param grandeur La grandeur à vérifier
 "
       end
 
@@ -1883,10 +2285,9 @@ salle
 @param typeDepassement Indique le type de dépassement de seuil
 "
       end
-
     end
 
-    classdiagram 134570 "diagramme de classes 0.2"
+    classdiagram 134570 "diagramme de classes 1.1"
       classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_multiplicity yes member_max_width 0 show_relation_visibility yes end
       size A0
     end
@@ -2694,6 +3095,19 @@ traitement ce qui aura pour effet d'appeler automatiquement onProgressUpdate()
 "
       end
 
+      operation 134530 "actualiserSalles"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui actualise les salles par rapport à la BDD.
+"
+      end
     end
 
     class 142250 "Seuils"
@@ -3116,6 +3530,271 @@ ${members}}
       mysql_decl ""
       
     end
+
+    class 128002 "ClientMQTT"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class ClientMQTT
+@brief Classe de communication MQTT
+"
+      attribute 134530 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"ClientMQTT\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+"
+      end
+
+      attribute 134658 "BROKER"
+	class_attribute const_attribute public explicit_type "String"
+	init_value " \"192.168.52.7\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " public static final String BROKER             = \"192.168.52.7\"; // broker mosquitto
+"
+      end
+
+      attribute 134786 "TOPIC_ECOCLASSROOM"
+	class_attribute const_attribute public explicit_type "String"
+	init_value " \"salles/#\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " par défaut"
+      end
+
+      attribute 134914 "BROKER_CONNECTE"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 10"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135042 "BROKER_DECONNECTE"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 11"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135170 "BROKER_MESSAGE"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 12"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135298 "BROKER_ERREUR"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 13"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135426 "context"
+	package explicit_type "Context"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attributs
+
+"
+      end
+
+      classrelation 134530 // handler (<unidirectional association>)
+	relation 134530 --->
+	  a role_name "handler" init_value " null" private
+	    comment " pour la communication entre classes"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134530 // handler (<unidirectional association>)
+	  b parent class_ref 148906 // Handler
+      end
+
+      attribute 135554 "mqttAndroidClient"
+	public explicit_type "MqttAndroidClient"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135682 "serverUri"
+	package explicit_type "String"
+	init_value " \"tcp://\" + BROKER + \":1883\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135810 "clientId"
+	package explicit_type "String"
+	init_value " \"client\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 134658 "ClientMQTT"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "context" explicit_type "Context"
+	  param inout name "handler" type class_ref 148906 // Handler
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134786 "creer"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134914 "connecter"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135042 "deconnecter"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135170 "estConnecte"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135298 "souscrire"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "topic" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135426 "desabonner"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param in name "topic" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
   end
 
   deploymentview 134570 "eco_classroom_mobile"
@@ -3185,7 +3864,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 ${definition}"
       php_src "<?php
 ${comment}
@@ -3223,6 +3907,7 @@ ${module_end}
 ${package}
 ${imports}
 import android.util.Log;
+import java.util.Vector;
 ${definition}"
       associated_elems
 	class_ref 134954 // Salle
@@ -3305,6 +3990,31 @@ ${definition}"
 @brief Le concept de Salle
 @author Mercklen Jérémy
 "
+    end
+
+    artifact 128002 "ClientMQTT"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+${definition}"
+      associated_elems
+	class_ref 128002 // ClientMQTT
+      end
     end
   end
 end

@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">eco-classroom
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -96,6 +96,7 @@ $(document).ready(function(){initNavTree('functions_t.html',''); initResizable()
 <li>TAG
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle.html#af8f499f2450ff4cf98484fffae6f5bc2">com.lasalle.eco_classroom_mobile.AdaptateurSalle</a>
 , <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#aeffa161fe1482548bf66fea55e94378b">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
+, <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_client_m_q_t_t.html#a3fd8195f81fe4c0a053c4aad20675cc1">com.lasalle.eco_classroom_mobile.ClientMQTT</a>
 , <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a02f219008563673b9103d80211719839">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
 , <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#abcfc96b246a2ace4eb7330aabdf817a3">com.lasalle.eco_classroom_mobile.Salle</a>
 , <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#ad716c83f212a24ad631f1ea35a0ba34f">com.lasalle.eco_classroom_mobile.Seuils</a>
@@ -107,9 +108,15 @@ $(document).ready(function(){initNavTree('functions_t.html',''); initResizable()
 <li>TAUX_HUMIDITE_MIN
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ae334390eb84e517ea02687cde63f0956">com.lasalle.eco_classroom_mobile.Salle</a>
 </li>
+<li>TEMPERATURE
+: <a class="el" href="enumcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle_1_1_grandeur.html#a4c2577584e41c5bc782165b1d6333bd9">com.lasalle.eco_classroom_mobile.Salle.Grandeur</a>
+</li>
 <li>temperature
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a9876ecaa336a022359e31106118def70">com.lasalle.eco_classroom_mobile.Salle</a>
 , <a class="el" href="class_mesures.html#a2688d0da4acf9d91ea0befd6ed0bd140">Mesures</a>
+</li>
+<li>TEMPERATURE
+: <a class="el" href="class_salle.html#ad6a70fb5e6601136dd58c16b40411e2ba014d5a77009117669097260e39c8c2f5">Salle</a>
 </li>
 <li>TEMPERATURE_MAX
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a915d120d15bfd9633badf3ca8e805d3e">com.lasalle.eco_classroom_mobile.Seuils</a>
@@ -126,8 +133,20 @@ $(document).ready(function(){initNavTree('functions_t.html',''); initResizable()
 <li>temperatureMin
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a88455f9bd40b13eb194981dce6b90850">com.lasalle.eco_classroom_mobile.Seuils</a>
 </li>
+<li>temperatureSalle
+: <a class="el" href="class_eco_classroom.html#a12f0eb41707f6f72fc06cd7210202047">EcoClassroom</a>
+</li>
+<li>Tiede
+: <a class="el" href="class_salle.html#a30bcb5654f7996a5fff16f2984d028b7a0a9ae40d2dfd3dc7b9ce915148037aa2">Salle</a>
+</li>
+<li>TOPIC_ECOCLASSROOM
+: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_client_m_q_t_t.html#a2036ef612b12eeb7239ea7493b3e0da3">com.lasalle.eco_classroom_mobile.ClientMQTT</a>
+</li>
 <li>TOUTES
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#ab6d0f57d7ca7babbae5aad94ef24efde">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
+</li>
+<li>traiterMessageMQTT()
+: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_eco_classroom.html#a66ff070dcba91b06b30da0c748795152">com.lasalle.eco_classroom_mobile.EcoClassroom</a>
 </li>
 <li>traiterNouveauMessageMQTT()
 : <a class="el" href="class_eco_classroom.html#a7ab2f2ba5b3bcacca0e755fd2106b6ea">EcoClassroom</a>
@@ -141,6 +160,9 @@ $(document).ready(function(){initNavTree('functions_t.html',''); initResizable()
 <li>TYPE_DONNEE
 : <a class="el" href="class_salle.html#a3e550af30ca5dff1be3ad7f653103073a738be22523b189c646e8945560890350">Salle</a>
 </li>
+<li>TypeMessage
+: <a class="el" href="class_salle.html#ad6a70fb5e6601136dd58c16b40411e2b">Salle</a>
+</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -148,7 +170,7 @@ $(document).ready(function(){initNavTree('functions_t.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:49:10 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 13:52:49 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

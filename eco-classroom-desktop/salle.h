@@ -29,19 +29,28 @@
 #define SEUIL_HAUT_QUALITE_AIR_TRES_MAUVAIS 5000
 #define SEUIL_BAS_QUALITE_AIR_SEVERE        5001
 
-#define EXCELLENTE   "Excellente"
-#define TRES_BIEN    "Très Bien"
-#define MODERE       "Modéré"
-#define MAUVAIS      "Mauvais"
-#define TRES_MAUVAIS "Très Mauvais"
-#define SEVERE       "Sévère"
-
 #define CONFINEMENT_NUL        0
 #define CONFINEMENT_FAIBLE     1
 #define CONFINEMENT_MOYEN      2
 #define CONFINEMENT_ELEVE      3
 #define CONFINEMENT_TRES_ELEVE 4
 #define CONFINEMENT_EXTREME    5
+
+#define SEUIL_THOM_FROID            -1.7
+#define SEUIL_THOM_FRAIS            13.
+#define SEUIL_THOM_LEGEREMENT_FRAIS 15.
+#define SEUIL_THOM_NEUTRE           20.
+#define SEUIL_THOM_LEGEREMENT_TIEDE 26.5
+#define SEUIL_THOM_TIEDE            30.
+
+#define THI_INCONNU      "Inconnu"
+#define FROID            "Froid"
+#define FRAIS            "Frais"
+#define LEGEREMENT_FRAIS "Légèrement frais"
+#define NEUTRE           "Neutre"
+#define LEGEREMENT_TIEDE "Légèrement tiède"
+#define TIEDE            "Tiède"
+#define CHAUD            "Chaud"
 
 class Mesures;
 class EtatsSalle;
@@ -53,6 +62,20 @@ class EtatsSalle;
 class Salle
 {
   public:
+    /**
+     * @enum TypeMessage
+     * @brief Les diffents type de données pouvant être reçu
+     */
+    enum TypeMessage
+    {
+        INCONNU = -1,
+        TEMPERATURE,
+        HUMIDITE,
+        CO2,
+        LUMIERE,
+        FENETRE,
+        OCCUPATION
+    };
     /**
      * @enum ChampsTopic
      * @brief Les différents champs d'un topic MQTT
@@ -72,20 +95,42 @@ class Salle
     {
         CHAMP_NOM = 1,
         CHAMP_DESCRIPTION,
-        CHAMP_SUPERFICIE
+        CHAMP_SUPERFICIE,
+        CHAMP_IndiceConfortTHI,
+        CHAMP_IndiceInconfortIADI,
+        CHAMP_IndiceQualiteAir,
+        CHAMP_IndiceConfinement,
+        CHAMP_EtatFenetres,
+        CHAMP_EtatLumieres,
+        CHAMP_EstOccupe
     };
-    /*
+    /**
      * @enum IndiceQualiteAir
      * @brief Définit les différentes colonne du tableau
      */
     enum IndiceQualiteAir
     {
-        Excellente,
+        Excellente = 1,
         Tres_Bien,
         Modere,
         Mauvais,
         Tres_Mauvais,
         Severe
+    };
+    /**
+     * @enum IndiceTHI
+     * @brief Définit les différentes colonne du tableau
+     */
+    enum IndiceTHI
+    {
+        Inconnu = -4,
+        Froid,
+        Frais,
+        LegerementFrais,
+        Neutre,
+        LegerementTiede,
+        Tiede,
+        Chaud
     };
 
   private:
@@ -96,29 +141,42 @@ class Salle
     Mesures*
       mesures; //!<  Relation entre la classe Salle et Mesures (agrégation)
     EtatsSalle*
-      etats; //!< Relation entre la classe Salle et EtatsSalle (agrégation)
+        etats; //!< Relation entre la classe Salle et EtatsSalle (agrégation)
+    int indiceConfortTHI;
+    int indiceQualiteAir;
 
   public:
     Salle();
     Salle(QString nom, unsigned int superficie, QString description);
-    QString      getNom() const;
-    unsigned int getSuperficie() const;
-    QString      getDescription() const;
-    void         setNom(QString nom);
-    void         setSuperficie(unsigned int superficie);
-    void         setDescription(QString description);
-    unsigned int getTemperature() const;
-    unsigned int getHumidite() const;
-    unsigned int getCO2() const;
-    QString      getQualiteAir() const;
-    void         setCO2(unsigned int co2);
-    int          getIndiceICONE();
-    QString      afficherNiveauICONE() const;
-    bool         getLumiere() const;
-    bool         getFenetre() const;
-    bool         getOccupation() const;
-    void         calculerTHI();
-    void         calculerIADI();
+    int                       getIndiceQualiteAir() const;
+    int                       getIndiceICONE() const;
+    void                      calculerIndiceICONE();
+    static Salle::TypeMessage getTypeMessage(QString typeDonnee);
+    QString                   getNom() const;
+    unsigned int              getSuperficie() const;
+    QString                   getDescription() const;
+    unsigned int              getTemperature() const;
+    unsigned int              getHumidite() const;
+    unsigned int              getCO2() const;
+    QString                   getTHI() const;
+    bool                      getLumiere() const;
+    bool                      getFenetre() const;
+    bool                      getOccupation() const;
+    void                      setNom(QString nom);
+    void                      setSuperficie(unsigned int superficie);
+    void                      setDescription(QString description);
+    void                      setTemperature(unsigned int temperature);
+    void                      setHumidite(unsigned int humidite);
+    void                      setCO2(unsigned int co2);
+    void                      setOccupation(bool occupation) const;
+    void                      setLumiere(bool lumiere) const;
+    void                      setFenetre(bool fenetre) const;
+    void                      setIndiceTHI(int indiceTHI);
+    void                      setIndiceQualiteAir(int indiceQualiteAir);
+    void                      setIndiceICONE(int indiceICONE);
+    void                      determinerIndiceQualiteAir();
+    void                      determinerIndiceTHI();
+    int                       getIndiceTHI() const;
 };
 
 #endif // SALLE_H

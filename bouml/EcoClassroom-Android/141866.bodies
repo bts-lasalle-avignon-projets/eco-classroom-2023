@@ -383,3 +383,88 @@ class BaseDeDonnees
             if(handler != null)
                 handler.sendMessage(message);
         }
+!!!134530.java!!!	actualiserSalles() : void
+        if (BaseDeDonnees.active) {
+            if (estConnecte()) {
+                Thread requeteBDD = new Thread(new Runnable() {
+                    public void run() {
+                        mutex.lock();
+                        try {
+                            String requeteSQL = "SELECT * FROM Salle INNER JOIN Seuils ON Seuils.idSalle=Salle.idSalle;";
+                            Log.d(TAG, "chargerSalles() requeteSQL = " + requeteSQL);
+                            Statement statement =
+                                    connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                            ResultSet.CONCUR_READ_ONLY);
+                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+                            while (resultatRequete.next()) {
+                                // Log.v(TAG, "actualiserSalles() numéro = " +
+                                // resultatRequete.getRow());
+                                Log.v(
+                                        TAG,
+                                        "chargerSalles() idSalle = " + resultatRequete.getInt("idSalle") +
+                                                " - nom = " + resultatRequete.getString(CHAMP_NOM_SALLE) +
+                                                " - superficie = " +
+                                                resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE) +
+                                                " - description = " +
+                                                resultatRequete.getString(CHAMP_DESCRIPTION_SALLE));
+
+                                boolean estExistante = false;
+                                for(int i = 0; i < salles.size(); ++i)
+                                {
+                                    if(resultatRequete.getString(CHAMP_NOM_SALLE).compareTo(salles.elementAt(i).getNom()) == 0)
+                                    {
+                                        estExistante = true;
+                                        salles.elementAt(i).setConfortThermique(resultatRequete.getInt("idIndiceConfortTHI"));
+                                        salles.elementAt(i).setQualiteAir(resultatRequete.getInt("idIndiceQualiteAir"));
+                                        Seuils seuils = new Seuils(resultatRequete.getDouble("temperatureMin"), resultatRequete.getDouble("temperatureMax"),
+                                                resultatRequete.getInt("luminositeMin"),
+                                                resultatRequete.getInt("eclairementMoyen"),
+                                                resultatRequete.getInt("humiditeMin"),
+                                                resultatRequete.getInt("humiditeMax"),
+                                                resultatRequete.getInt("co2Max"),
+                                                resultatRequete.getInt("indiceConfinement"));
+                                        salles.elementAt(i).setSeuils(seuils);
+                                    }
+                                }
+
+                                if(!estExistante)
+                                {
+                                    Salle salle = new Salle(resultatRequete.getString(CHAMP_NOM_SALLE),
+                                            resultatRequete.getDouble(CHAMP_SUPERFICIE_SALLE),
+                                            resultatRequete.getString(CHAMP_DESCRIPTION_SALLE));
+                                    salle.setEstOccupe((resultatRequete.getInt("estOccupe") == 1));
+                                    salle.setEtatFenetre((resultatRequete.getInt("etatFenetres") == 1));
+                                    salle.setEtatLumiere((resultatRequete.getInt("etatLumieres") == 1));
+                                    salle.setConfortThermique(resultatRequete.getInt("idIndiceConfortTHI"));
+                                    salle.setQualiteAir(resultatRequete.getInt("idIndiceQualiteAir"));
+                                    Seuils seuils = new Seuils(resultatRequete.getDouble("temperatureMin"), resultatRequete.getDouble("temperatureMax"),
+                                            resultatRequete.getInt("luminositeMin"),
+                                            resultatRequete.getInt("eclairementMoyen"),
+                                            resultatRequete.getInt("humiditeMin"),
+                                            resultatRequete.getInt("humiditeMax"),
+                                            resultatRequete.getInt("co2Max"),
+                                            resultatRequete.getInt("indiceConfinement"));
+                                    salle.setSeuils(seuils);
+                                    salles.add(salle);
+                                }
+                            }
+                            Message message = new Message();
+                            message.what = REQUETE_SQL_SELECT_SALLES;
+                            message.obj = salles;
+                            if (handler != null)
+                                handler.sendMessage(message);
+                        } catch (Exception e) {
+                            // e.printStackTrace();
+                            Log.e(TAG, "actualiserSalles() Exception = " + e.toString());
+                        } finally {
+                            mutex.unlock();
+                        }
+                    }
+                });
+
+                // Démarrage
+                requeteBDD.start();
+            } else {
+                Log.w(TAG, "Pas de connexion MySQL !");
+            }
+        }

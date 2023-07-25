@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">eco-classroom
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -87,6 +87,9 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <div class="textblock">Liste de tous les champs de structure et d'union avec des liens vers les structures/unions auxquelles ils appartiennent :</div>
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>genererDonneesAffichage()
+: <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_vue_salle.html#ab8dbfd1c535228e179063299d5bef389">com.lasalle.eco_classroom_mobile.VueSalle</a>
+</li>
 <li>getClient()
 : <a class="el" href="class_communication_m_q_t_t.html#aecfa296bf002b9896b530cc7dd702f6b">CommunicationMQTT</a>
 </li>
@@ -138,11 +141,17 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#aef6c23d0a00831160ff8302a9e2ba814">com.lasalle.eco_classroom_mobile.Seuils</a>
 </li>
 <li>getIndiceICONE()
-: <a class="el" href="class_salle.html#a5194a05f4938770fa994407e08c9b37b">Salle</a>
+: <a class="el" href="class_salle.html#aa404ceb2a8f83ebd97401b8d11fc0c1e">Salle</a>
+</li>
+<li>getIndiceQualiteAir()
+: <a class="el" href="class_salle.html#af0758b7d2840af35e262a8f63486fe8b">Salle</a>
+</li>
+<li>getIndiceTHI()
+: <a class="el" href="class_salle.html#a548109315f972d714fd67b6b5e941751">Salle</a>
 </li>
 <li>getInstance()
 : <a class="el" href="class_base_de_donnees.html#a1cea5a739386ba076c7f265205e82608">BaseDeDonnees</a>
-, <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a9c2484cfb87f90e46cf878eb7803abb2">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
+, <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html#a368f6df928335ab082a0954f78a9fa92">com.lasalle.eco_classroom_mobile.BaseDeDonnees</a>
 </li>
 <li>getItemCount()
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_adaptateur_salle.html#a8cd49ac2a9df666ee33cd54117ac7d04">com.lasalle.eco_classroom_mobile.AdaptateurSalle</a>
@@ -164,7 +173,6 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 </li>
 <li>getQualiteAir()
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#ae10ab9f29a61642a1cc3071906b74055">com.lasalle.eco_classroom_mobile.Salle</a>
-, <a class="el" href="class_salle.html#a962b0e0b549182a045cc1b66ea8b1344">Salle</a>
 </li>
 <li>getSeuils()
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html#a0488972932fb40ebeb41e501debaa340">com.lasalle.eco_classroom_mobile.Salle</a>
@@ -184,6 +192,12 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <li>getTemperatureMin()
 : <a class="el" href="classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_seuils.html#a5e5098d357666b52b2a386e310761170">com.lasalle.eco_classroom_mobile.Seuils</a>
 </li>
+<li>getTHI()
+: <a class="el" href="class_salle.html#a754bc0978f08106be3507fd930901c44">Salle</a>
+</li>
+<li>getTypeMessage()
+: <a class="el" href="class_salle.html#ad4dfcf25f6eeff00c3358fd6c04751e6">Salle</a>
+</li>
 <li>gui
 : <a class="el" href="class_eco_classroom.html#a9ff76057c2154d4af71f84a107b614f0">EcoClassroom</a>
 </li>
@@ -194,7 +208,7 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:49:10 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 13:52:49 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

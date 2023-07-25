@@ -11,6 +11,9 @@ var files_dup =
       [ "BaseDeDonnees", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees.html", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees" ],
       [ "ConnexionMySql", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees_1_1_connexion_my_sql.html", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_base_de_donnees_1_1_connexion_my_sql" ]
     ] ],
+    [ "ClientMQTT.java", "_client_m_q_t_t_8java.html", [
+      [ "ClientMQTT", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_client_m_q_t_t.html", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_client_m_q_t_t" ]
+    ] ],
     [ "colors.xml", "colors_8xml.html", null ],
     [ "communicationmqtt.cpp", "communicationmqtt_8cpp.html", null ],
     [ "communicationmqtt.h", "communicationmqtt_8h.html", "communicationmqtt_8h" ],
@@ -33,7 +36,6 @@ var files_dup =
     ] ],
     [ "ic_launcher.xml", "ic__launcher_8xml.html", null ],
     [ "ic_launcher_background.xml", "ic__launcher__background_8xml.html", null ],
-    [ "ic_launcher_foreground.xml", "ic__launcher__foreground_8xml.html", null ],
     [ "ic_launcher_round.xml", "ic__launcher__round_8xml.html", null ],
     [ "listeChoix.xml", "liste_choix_8xml.html", null ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
@@ -42,6 +44,7 @@ var files_dup =
     [ "salle.cpp", "salle_8cpp.html", null ],
     [ "salle.h", "salle_8h.html", "salle_8h" ],
     [ "Salle.java", "_salle_8java.html", [
+      [ "Grandeur", "enumcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle_1_1_grandeur.html", "enumcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle_1_1_grandeur" ],
       [ "Salle", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle.html", "classcom_1_1lasalle_1_1eco__classroom__mobile_1_1_salle" ]
     ] ],
     [ "salle.xml", "salle_8xml.html", null ],

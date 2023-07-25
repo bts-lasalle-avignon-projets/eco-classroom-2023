@@ -13,7 +13,7 @@
  * @param humidite mesure de l'humidite dans la salle
  * @param co2 mesure du co2 dans la salle
  */
-Mesures::Mesures() : temperature(0.), humidite(0), co2(0)
+Mesures::Mesures() : temperature(0.), humidite(0), co2(0), mesuresCO2(0)
 {
 }
 
@@ -54,7 +54,6 @@ unsigned int Mesures::getCO2() const
 {
     if(co2.size() > 0)
     {
-        qDebug() << Q_FUNC_INFO << "co2" << co2.back();
         // la dernière mesure
         return co2.back();
     }
@@ -192,4 +191,11 @@ int Mesures::determinerIndiceICONE(int indiceBrute)
         return CONFINEMENT_EXTREME;
     else
         return -1;
+}
+
+double Mesures::calculerTHI()
+{
+    double thom = getTemperature() - ((0.55 - 0.0055 * getHumidite()));
+    qDebug() << Q_FUNC_INFO << "thom" << thom;
+    return thom;
 }

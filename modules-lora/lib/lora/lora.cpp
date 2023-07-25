@@ -1,4 +1,5 @@
 #include "lora.h"
+#include "mqtt.h"
 
 bool initialiserLora()
 {
@@ -17,6 +18,9 @@ void configurer(byte               ADDL,
     configuration.ADDL                     = ADDL;
     configuration.ADDH                     = ADDH;
     configuration.CHAN                     = channel;
+    configuration.SPED.airDataRate         = 2; // bit 0-2 : 2.4kbps
+    configuration.SPED.uartBaudRate        = 3; // bit 3-5 : 9600bps
+    configuration.SPED.uartParity          = 0; // bit 6-7 : 8N1
     configuration.OPTION.fixedTransmission = typeTransmission;
     // conserver les paramètres au redémarrage ?
     if(maintien)
@@ -33,22 +37,32 @@ void selectionnerMode(MODE_TYPE mode)
     loraE32.setMode(mode);
 }
 
-bool recevoirMessage(String& message)
+int traiterMessage()
 {
+    String message;
+    int    nbMessages = 0;
     if(loraE32.available())
     {
         message.clear();
         ResponseContainer rs = loraE32.receiveMessage();
         message              = rs.data;
+        nbMessages           = count(message, "B");
 #ifdef DEBUG_LORA
-        Serial.print("Etat : ");
-        Serial.println(rs.status.getResponseDescription());
-        Serial.print("Message : ");
+        // Serial.print("Etat : ");
+        // Serial.println(rs.status.getResponseDescription());
+        Serial.print("Reception : ");
         Serial.println(message);
+        Serial.print("Nb messages : ");
+        Serial.println(nbMessages);
 #endif
-        return true;
+        String messageMQTT;
+        for(int i = 0; i < nbMessages; ++i)
+        {
+            messageMQTT = String("B") + getMessage(message, 'B', i + 1);
+            envoyerMessageMQTT(messageMQTT);
+        }
     }
-    return false;
+    return nbMessages;
 }
 
 bool envoyerMessage(String message)
@@ -68,10 +82,12 @@ bool envoyerMessage(byte ADDH, byte ADDL, byte CHANNEL, String message)
 {
     ResponseStatus rs = loraE32.sendFixedMessage(ADDH, ADDL, CHANNEL, message);
     // loraE32.sendBroadcastFixedMessage(CHANNEL, message);
-#ifdef DEBUG_LORA
-    Serial.print("Etat : ");
-    Serial.println(rs.getResponseDescription());
-#endif
+    /*
+    #ifdef DEBUG_LORA
+        Serial.print("Etat : ");
+        Serial.println(rs.getResponseDescription());
+    #endif
+    */
     if(rs.code == E32_SUCCESS)
         return true;
     else
@@ -135,4 +151,58 @@ void afficherParametres(struct Configuration configuration)
     Serial.print(" -> ");
     Serial.println(configuration.OPTION.getTransmissionPowerDescription());
     Serial.println("----------------------------------------");
+}
+
+String extraireMessage(String& message, char delimiteur, unsigned int numero)
+{
+    String       champ;
+    unsigned int compteurCaractere  = 0;
+    unsigned int compteurDelimiteur = 0;
+
+    for(unsigned int i = 0; i < message.length(); i++)
+    {
+        if(message[i] == delimiteur)
+        {
+            compteurDelimiteur++;
+        }
+        else if(compteurDelimiteur == numero)
+        {
+            champ += message[i];
+            compteurCaractere++;
+        }
+    }
+
+    return champ;
+}
+
+String getMessage(String message, char separateur, int index)
+{
+    int found      = 0;
+    int strIndex[] = { 0, -1 };
+    int maxIndex   = message.length() - 1;
+
+    for(int i = 0; i <= maxIndex && found <= index; i++)
+    {
+        if(message.charAt(i) == separateur || i == maxIndex)
+        {
+            found++;
+            strIndex[0] = strIndex[1] + 1;
+            strIndex[1] = (i == maxIndex) ? i + 1 : i;
+        }
+    }
+
+    return found > index ? message.substring(strIndex[0], strIndex[1]) : "";
+}
+
+int count(const String& str, const String& sub)
+{
+    if(sub.length() == 0)
+        return 0;
+    int count = 0;
+    for(int offset = str.indexOf(sub); offset != -1;
+        offset     = str.indexOf(sub, offset + sub.length()))
+    {
+        ++count;
+    }
+    return count;
 }

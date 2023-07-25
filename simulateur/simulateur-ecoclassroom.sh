@@ -3,7 +3,7 @@
 MOSQUITTO_PUB="mosquitto_pub"
 BROKER_MQTT="192.168.52.7" # raspberry pi zero
 #BROKER_MQTT="127.0.0.1" # localhost
-PERIODE="15"
+PERIODE="30"
 ATTENTE="5"
 PING_BROKER_MQTT="ping -c 1 ${BROKER_MQTT}"
 
@@ -79,8 +79,8 @@ CHAMP_MODULE_TOPIC="3"
 CHAMP_DONNEE_TOPIC="4"
 TEMPERATURE_MIN="10"
 TEMPERATURE_MAX="35"
-HUMIDITE_MIN="0"
-HUMIDITE_MAX="100"
+HUMIDITE_MIN="40"
+HUMIDITE_MAX="60"
 CO2_MIN="100"
 CO2_MAX="1700"
 
@@ -133,10 +133,10 @@ function choisirDonnee()
 {
     donnee=$(echo $1 | cut -d'/' -f${CHAMP_DONNEE_TOPIC})
     case $donnee in
-	"lumiere"|"presence"|"fenetre") etat=$(shuf -i 0-1 -n 1);echo "$etat";;
-	"temperature") mesure=$(shuf -i ${TEMPERATURE_MIN}-${TEMPERATURE_MAX} -n 1);echo "$mesure";;
-    "humidite") mesure=$(shuf -i ${HUMIDITE_MIN}-${HUMIDITE_MAX} -n 1);echo "$mesure";;
-    "co2") mesure=$(shuf -i ${CO2_MIN}-${CO2_MAX} -n 1);echo "$mesure";;
+        "lumiere"|"presence"|"fenetre") etat=$(shuf -i 0-1 -n 1);echo "$etat";;
+        "temperature") mesure=$(shuf -i ${TEMPERATURE_MIN}-${TEMPERATURE_MAX} -n 1);echo "$mesure";;
+        "humidite") mesure=$(shuf -i ${HUMIDITE_MIN}-${HUMIDITE_MAX} -n 1);echo "$mesure";;
+        "co2") mesure=$(shuf -i ${CO2_MIN}-${CO2_MAX} -n 1);echo "$mesure";;
 	#*) echo "donnée inconnue !";;
     esac
 }
